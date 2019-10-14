@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /xizhu
+
+
+spring:
+  application:
+    name: xizhu-service
+  profiles:
+    active: dev
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+logging:
+  level:
+    org:
+      springframework: INFO
+
+mybatis:
+  mapper-locations: classpath:com/tangmo/xizhu/customer/mapper/*.xml
+
+
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://127.0.0.1:1433;Databasename=xizhu
+    username: sa
+    password: 123456
