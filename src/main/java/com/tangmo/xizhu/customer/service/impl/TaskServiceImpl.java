@@ -2,10 +2,13 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
+import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import com.tangmo.xizhu.customer.service.TaskService;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @Author chen bo
@@ -15,6 +18,8 @@ import org.springframework.stereotype.Service;
  **/
 @Service("taskService")
 public class TaskServiceImpl implements TaskService {
+    @Resource
+    private TaskDao taskDao;
     @Override
     public HttpResult createTask(Task task) {
         return null;
