@@ -13,4 +13,100 @@
     <select id="selectTest" resultMap="TaskMap">
       SELECT task_id, task_type from service_task
     </select>
+
+    <insert id="insertTask" parameterType="com.tangmo.xizhu.customer.entity.Task">
+        INSERT INTO task_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="taskNo != null">
+                task_no,
+            </if>
+            <if test="assemblyType != null">
+                assembly_type,
+            </if>
+            <if test="troubleType != null">
+                trouble_type,
+            </if>
+            <if test="taskAssignType != null">
+                task_assign_type,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="isOutservice != null">
+                is_outservice,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="taskStatus != null">
+                task_status,
+            </if>
+            <if test="taskType != null">
+                task_type,
+            </if>
+            <if test="taskCode != null">
+                task_code,
+            </if>
+            <if test="executor != null">
+                executor,
+            </if>
+        </trim>
+        value
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">
+                #{companyId},
+            </if>
+            <if test="taskNo != null">
+                #{taskNo},
+            </if>
+            <if test="assemblyType != null">
+                #{assemblyType},
+            </if>
+            <if test="taskAssignType != null">
+                #{taskAssignType},
+            </if>
+            <if test="detail != null">
+                #{detail},
+            </if>
+            <if test="isOutservice != null">
+                #{isOutservice},
+            </if>
+
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+            <if test="taskStatus != null">
+                #{taskStatus},
+            </if>
+            <if test="taskType != null">
+                #{taskType},
+            </if>
+            <if test="taskCode != null">
+                #{taskCode},
+            </if>
+            <if test="executor != null">
+                #{executor},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByStatus" resultMap="TaskMap">
+        select task_id,company_id,task_status FROM service_task where task_status = #{status}
+        <if test="userId != null">
+            and executor = #{userId}
+        </if>
+    </select>
+
+    <select id="selectUndoTaskCount" resultType="java.lang.Integer">
+        select count(*) from service_task where executor = #{userId} and task_status != 2
+    </select>
+
+    <select id="selectById" resultType="java.lang.Integer">
+        select count(*) from service_task where task_id = #{taskId}
+    </select>
+
+
 </mapper>

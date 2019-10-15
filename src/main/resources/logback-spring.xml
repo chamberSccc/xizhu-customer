@@ -27,7 +27,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <fileNamePattern>${LOG_PATH}/safety-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/xizhu-customer-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!--最大保留天数-->
             <MaxHistory>30</MaxHistory>
         </rollingPolicy>
@@ -41,7 +41,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <fileNamePattern>${LOG_PATH}/safety-db-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/xizhu-customer-db-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!--最大保留天数-->
             <MaxHistory>30</MaxHistory>
         </rollingPolicy>
