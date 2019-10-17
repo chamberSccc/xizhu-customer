@@ -37,17 +37,17 @@ public interface TaskService {
      * @date 2019/10/15
      * @description: 获取未完成任务列表
      */
-    HttpResult getUndoTaskList(String userId, Page page);
+    HttpResult getUndoTaskList(String userId, TaskSearch taskSearch);
 
     /**
      * @param userId
-     * @param page	分页参数
+     * @param taskSearch	分页和查询参数
      * @return com.tangmo.xizhu.customer.common.HttpResult
      * @author chen bo
      * @date 2019/10/15
      * @description: 已完成任务列表
      */
-    HttpResult getDoneTaskList(String userId,Page page);
+    HttpResult getDoneTaskList(String userId,TaskSearch taskSearch);
 
     /**
      * @param userId

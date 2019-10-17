@@ -1,5 +1,6 @@
 package com.tangmo.xizhu.customer.entity.search;
 
+import com.tangmo.xizhu.customer.common.Page;
 import lombok.Data;
 
 import java.sql.Date;
@@ -11,8 +12,10 @@ import java.sql.Date;
  * @Description: 任务搜索条件
  **/
 @Data
-public class TaskSearch {
+public class TaskSearch extends Page {
+
     private Date startDate;
+    private Date endDate;
     private String companyName;
     private String contractNo;
 }

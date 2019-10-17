@@ -2,6 +2,8 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
+import com.tangmo.xizhu.customer.constant.TaskAssignType;
+import com.tangmo.xizhu.customer.constant.TaskStatus;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
@@ -22,7 +24,8 @@ public class TaskServiceImpl implements TaskService {
     private TaskDao taskDao;
     @Override
     public HttpResult createTask(Task task) {
-        return null;
+        taskDao.insertTask(task);
+        return HttpResult.success();
     }
 
     @Override
@@ -31,12 +34,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public HttpResult getUndoTaskList(String userId, Page page) {
-        return null;
+    public HttpResult getUndoTaskList(String userId, TaskSearch taskSearch) {
+        return HttpResult.success(taskDao.selectByStatusAndUser(userId,TaskStatus.DEALING));
     }
 
     @Override
-    public HttpResult getDoneTaskList(String userId, Page page) {
+    public HttpResult getDoneTaskList(String userId, TaskSearch taskSearch) {
         return null;
     }
 

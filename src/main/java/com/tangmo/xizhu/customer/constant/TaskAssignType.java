@@ -9,13 +9,13 @@ package com.tangmo.xizhu.customer.constant;
 public class TaskAssignType {
 
     // 安装设备
-    private static final byte INSTALL_DEVICE = 0;
+    public static final byte INSTALL_DEVICE = 0;
     // 处理问题
-    private static final byte DEAL_DEVICE = 1;
+    public static final byte DEAL_DEVICE = 1;
 
-    private static final String INSTALL_CODE = "安装问题";
+    public static final String INSTALL_CODE = "安装问题";
 
-    private static final String DEAL_CODE = "处理问题";
+    public static final String DEAL_CODE = "处理问题";
 
     /**
      * @param type

@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.dao;
 
 import com.tangmo.xizhu.customer.entity.Task;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -37,9 +38,18 @@ public interface TaskDao {
      * @return list
      * @author chen bo
      * @date 2019/10/15
-     * @description: 根据任务状态查询任务
+     * @description: 根据任务状态和执行人查询任务
      */
-    List<Task> selectByStatus(Byte status);
+    List<Task> selectByStatusAndUser(@Param("userId") String userId, @Param("status") Byte status);
+
+    /**
+     * @param status
+     * @return
+     * @author chen bo
+     * @date 2019/10/17
+     * @description: 查询未完成任务
+     */
+    List<Task> selectByStatus(@Param("status") Byte status);
 
     /**
      * @param userId
