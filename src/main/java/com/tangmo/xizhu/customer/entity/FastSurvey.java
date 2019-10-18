@@ -12,7 +12,7 @@ import java.util.List;
  * @Description: 快速服务满意度调查表
  **/
 @Data
-public class FsSurvey {
+public class FastSurvey {
     private String uuid;
     private String companyName;//用户单位
     private Date applyDate;

@@ -15,8 +15,9 @@ import java.util.List;
 public class FastFeedBack {
     private String uuid;
     private String taskId;
-    private String companyName;//用户单位
+    private String taskNo;
     private Date applyDate;//申请时间
+    private String companyName;//用户单位
     private String deviceType;//设备型号
     private String contactName;//联系人
     private String mobile;//联系电话
@@ -38,8 +39,6 @@ public class FastFeedBack {
     private String solAudioId;
     private String solSpeechId;
     private List<String> solPictureList;
-
-    private Byte satisfaction;//满意度
 
     private String createdBy;
     private String updatedBy;

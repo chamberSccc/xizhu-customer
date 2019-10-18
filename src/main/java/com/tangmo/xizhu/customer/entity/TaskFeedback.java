@@ -15,6 +15,7 @@ import java.util.List;
 public class TaskFeedback {
     private String uuid;
     private String taskId;
+    private String taskNo;
     private String companyName;//用户单位
     private Date applyDate;
     private String deviceType;//设备型号

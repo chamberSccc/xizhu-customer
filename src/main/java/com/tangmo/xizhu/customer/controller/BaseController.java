@@ -1,5 +1,6 @@
 package com.tangmo.xizhu.customer.controller;
 
+import com.tangmo.xizhu.customer.service.FastFeedbackService;
 import com.tangmo.xizhu.customer.service.TaskRequireService;
 import com.tangmo.xizhu.customer.service.TaskService;
 
@@ -16,6 +17,8 @@ public class BaseController {
     protected TaskService taskService;
     @Resource
     protected TaskRequireService taskRequireService;
+    @Resource
+    protected FastFeedbackService fastFeedbackService;
 
     protected String getUserId(){
         return "1";

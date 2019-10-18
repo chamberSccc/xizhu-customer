@@ -51,4 +51,16 @@ public class TaskController extends BaseController{
     public HttpResult getTaskRequire(@PathVariable String taskId){
         return taskRequireService.getDetailByTaskId(taskId);
     }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/18
+     * @description: 获取任务的快速任务反馈单
+     */
+    @GetMapping("/{taskId}/fastFeedback")
+    public HttpResult getFastFeedback(@PathVariable String taskId){
+        return fastFeedbackService.selectByTaskId(taskId);
+    }
 }

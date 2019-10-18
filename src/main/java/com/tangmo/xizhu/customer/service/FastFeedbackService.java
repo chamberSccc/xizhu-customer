@@ -1,16 +1,16 @@
-package com.tangmo.xizhu.customer.dao;
+package com.tangmo.xizhu.customer.service;
 
+import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.FastFeedBack;
-import org.springframework.stereotype.Repository;
 
 /**
  * @Author chen bo
  * @Date 2019/10/18
  * @Version V1.0
- * @Description: 快速服务反馈单dao
+ * @Description: 快速服务反馈单service
  **/
-@Repository
-public interface FastFeedbackDao {
+public interface FastFeedbackService {
+
     /**
      * @param fastFeedBack
      * @return
@@ -18,7 +18,7 @@ public interface FastFeedbackDao {
      * @date 2019/10/18
      * @description: 新增快速服务反馈单
      */
-    void insertFastFeedback(FastFeedBack fastFeedBack);
+    HttpResult addFastFeedback(FastFeedBack fastFeedBack);
 
     /**
      * @param fastFeedBack
@@ -27,14 +27,14 @@ public interface FastFeedbackDao {
      * @date 2019/10/18
      * @description: 修改快速服务反馈单
      */
-    void updateFastFeedback(FastFeedBack fastFeedBack);
+    HttpResult changeFastFeedback(FastFeedBack fastFeedBack);
 
     /**
      * @param taskId
      * @return
      * @author chen bo
      * @date 2019/10/18
-     * @description: 通过任务id查询快速服务反馈单
+     * @description: 查询任务 快速任务反馈单
      */
-    FastFeedBack selectByTaskId(String taskId);
+    HttpResult selectByTaskId(String taskId);
 }
