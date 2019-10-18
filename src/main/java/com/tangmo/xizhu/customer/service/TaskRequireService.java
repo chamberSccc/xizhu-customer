@@ -35,5 +35,5 @@ public interface TaskRequireService {
      * @date 2019/10/18
      * @description: 通过任务id查询服务任务需求单详情
      */
-    HttpResult getDetailByTaskId(String taskId);
+    HttpResult getByTaskId(String taskId);
 }

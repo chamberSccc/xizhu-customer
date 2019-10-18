@@ -1,7 +1,6 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
-import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +48,7 @@ public class TaskController extends BaseController{
      */
     @GetMapping("/{taskId}/require")
     public HttpResult getTaskRequire(@PathVariable String taskId){
-        return taskRequireService.getDetailByTaskId(taskId);
+        return taskRequireService.getByTaskId(taskId);
     }
 
     /**
@@ -61,6 +60,18 @@ public class TaskController extends BaseController{
      */
     @GetMapping("/{taskId}/fastFeedback")
     public HttpResult getFastFeedback(@PathVariable String taskId){
-        return fastFeedbackService.selectByTaskId(taskId);
+        return fastFeedbackService.getByTaskId(taskId);
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/18
+     * @description: 查询任务的现场服务满意度调查表
+     */
+    @GetMapping("/{taskId}/fastSurvey")
+    public HttpResult getFastSurvey(@PathVariable String taskId){
+        return fastSurveyService.getByTaskId(taskId);
     }
 }

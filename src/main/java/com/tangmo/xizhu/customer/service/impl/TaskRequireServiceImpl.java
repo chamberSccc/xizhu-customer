@@ -31,7 +31,7 @@ public class TaskRequireServiceImpl implements TaskRequireService {
     }
 
     @Override
-    public HttpResult getDetailByTaskId(String taskId) {
+    public HttpResult getByTaskId(String taskId) {
         return HttpResult.success(taskRequireDao.selectByTaskId(taskId));
     }
 }

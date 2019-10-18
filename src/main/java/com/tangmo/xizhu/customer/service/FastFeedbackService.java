@@ -36,5 +36,5 @@ public interface FastFeedbackService {
      * @date 2019/10/18
      * @description: 查询任务 快速任务反馈单
      */
-    HttpResult selectByTaskId(String taskId);
+    HttpResult getByTaskId(String taskId);
 }

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.FastSurveyDao">
+    <resultMap id="FastSurveyMap" type="com.tangmo.xizhu.customer.entity.FastSurvey">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="task_no" property="taskNo"/>
+        <result column="apply_date" property="applyDate"/>
+        <result column="company_name" property="companyName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="engineer" property="engineer"/>
+        <result column="service_date" property="serviceDate"/>
+        <result column="task_assign_type" property="taskAssignType"/>
+        <result column="assembly_type" property="assemblyType"/>
+        <result column="trouble_type" property="troubleType"/>
+        <result column="detail" property="detail"/>
+        <result column="solution" property="solution"/>
+        <result column="result" property="result"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="detail_audio_id" property="detailAudioId"/>
+        <result column="detail_speech_id" property="detailSpeechId"/>
+        <result column="sol_audio_id" property="solAudioId"/>
+        <result column="sol_speech_id" property="solSpeechId"/>
+        <result column="satisfaction" property="satisfaction"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="FastSurveyMap">
+      SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,service_date,assembly_type,trouble_type,
+       task_assign_type,detail,solution,result,detail_audio_id,detail_speech_id,sol_audio_id,sol_speech_id,created_by,created_time,satisfaction
+       from fast_survey where task_id = #{taskId}
+    </select>
+
+    <!--    todo 缺少图片id的新增和update-->
+    <insert id="insertFastSurvey" parameterType="com.tangmo.xizhu.customer.entity.FastSurvey">
+        INSERT INTO fast_survey
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="taskNo != null">
+                task_no,
+            </if>
+            <if test="applyDate != null">
+                apply_date,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="engineer != null">
+                engineer,
+            </if>
+            <if test="serviceDate != null">
+                service_date,
+            </if>
+            <if test="assemblyType != null">
+                assembly_type,
+            </if>
+            <if test="troubleType != null">
+                trouble_type,
+            </if>
+            <if test="taskAssignType != null">
+                task_assign_type,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="solution != null">
+                solution,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+            <if test="detailAudioId != null">
+                detail_audio_id,
+            </if>
+            <if test="detailSpeechId != null">
+                detail_speech_id,
+            </if>
+            <if test="solAudioId != null">
+                sol_audio_id,
+            </if>
+            <if test="solSpeechId != null">
+                sol_speech_id,
+            </if>
+            <if test="satisfaction != null">
+                satisfaction,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="taskNo != null">
+                #{taskNo},
+            </if>
+            <if test="applyDate != null">
+                #{applyDate},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="contactName != null">
+                #{contactName},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="engineer != null">
+                #{engineer},
+            </if>
+            <if test="serviceDate != null">
+                #{serviceDate},
+            </if>
+            <if test="assemblyType != null">
+                #{assemblyType},
+            </if>
+            <if test="troubleType != null">
+                #{troubleType},
+            </if>
+            <if test="taskAssignType != null">
+                #{taskAssignType},
+            </if>
+            <if test="detail != null">
+                #{detail},
+            </if>
+            <if test="solution != null">
+                #{solution},
+            </if>
+            <if test="result != null">
+                #{result},
+            </if>
+            <if test="detailAudioId != null">
+                #{detailAudioId},
+            </if>
+            <if test="detailSpeechId != null">
+                #{detailSpeechId},
+            </if>
+            <if test="solAudioId != null">
+                #{solAudioId},
+            </if>
+            <if test="solSpeechId != null">
+                #{solSpeechId},
+            </if>
+            <if test="satisfaction != null">
+                #{satisfaction},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateFastSurvey">
+        UPDATE fast_survey
+        <set>
+            <if test="companyName != null">
+                company_name = #{companyName},
+            </if>
+            <if test="deviceType != null">
+                device_type = #{deviceType},
+            </if>
+            <if test="contactName != null">
+                contact_name = #{contactName},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="engineer != null">
+                engineer = #{engineer},
+            </if>
+            <if test="serviceDate != null">
+                service_date = #{serviceDate},
+            </if>
+            <if test="assemblyType != null">
+                assembly_type = #{assemblyType},
+            </if>
+            <if test="troubleType != null">
+                trouble_type = #{troubleType},
+            </if>
+            <if test="taskAssignType != null">
+                task_assign_type = #{taskAssignType},
+            </if>
+            <if test="detail != null">
+                detail=  #{detail},
+            </if>
+            <if test="solution != null">
+                solution=  #{solution},
+            </if>
+            <if test="result != null">
+                result=  #{result},
+            </if>
+            <if test="detailAudioId != null">
+                detail_audio_id=  #{detailAudioId},
+            </if>
+            <if test="detailSpeechId != null">
+                detail_speech_id=  #{detailSpeechId},
+            </if>
+            <if test="solAudioId != null">
+                sol_audio_id=  #{solAudioId},
+            </if>
+            <if test="solSpeechId != null">
+                sol_speech_id=  #{solSpeechId},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>

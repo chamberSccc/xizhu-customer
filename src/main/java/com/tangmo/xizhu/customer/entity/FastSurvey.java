@@ -14,8 +14,10 @@ import java.util.List;
 @Data
 public class FastSurvey {
     private String uuid;
-    private String companyName;//用户单位
+    private String taskId;
+    private String taskNo;
     private Date applyDate;
+    private String companyName;//用户单位
     private String deviceType;//设备型号
     private String contactName;//联系人
     private String mobile;//联系电话
@@ -37,4 +39,6 @@ public class FastSurvey {
     private String solAudioId;
     private String solSpeechId;
     private List<String> solPictureList;
+
+    private Byte satisfaction;
 }

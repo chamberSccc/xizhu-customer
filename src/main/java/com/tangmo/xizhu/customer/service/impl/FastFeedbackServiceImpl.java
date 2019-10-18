@@ -32,7 +32,7 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
     }
 
     @Override
-    public HttpResult selectByTaskId(String taskId) {
+    public HttpResult getByTaskId(String taskId) {
         return HttpResult.success(fastFeedbackDao.selectByTaskId(taskId));
     }
 }
