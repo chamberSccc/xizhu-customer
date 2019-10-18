@@ -1,9 +1,6 @@
 package com.tangmo.xizhu.customer.controller;
 
-import com.tangmo.xizhu.customer.service.FastFeedbackService;
-import com.tangmo.xizhu.customer.service.FastSurveyService;
-import com.tangmo.xizhu.customer.service.TaskRequireService;
-import com.tangmo.xizhu.customer.service.TaskService;
+import com.tangmo.xizhu.customer.service.*;
 
 import javax.annotation.Resource;
 
@@ -22,6 +19,8 @@ public class BaseController {
     protected FastFeedbackService fastFeedbackService;
     @Resource
     protected FastSurveyService fastSurveyService;
+    @Resource
+    protected FieldApplyService fieldApplyService;
 
     protected String getUserId(){
         return "1";

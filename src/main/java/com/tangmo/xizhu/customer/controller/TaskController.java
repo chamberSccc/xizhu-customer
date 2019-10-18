@@ -74,4 +74,14 @@ public class TaskController extends BaseController{
     public HttpResult getFastSurvey(@PathVariable String taskId){
         return fastSurveyService.getByTaskId(taskId);
     }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/18
+     * @description: 获取任务的现场服务申请单
+     */
+    @GetMapping("/{taskId}/fieldApply")
+    public HttpResult getFieldApply(@PathVariable String taskId){return fieldApplyService.getByTaskId(taskId);}
 }
