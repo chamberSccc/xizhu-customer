@@ -39,4 +39,16 @@ public class TaskController extends BaseController{
     public HttpResult getUndoList(TaskSearch taskSearch){
         return taskService.getUndoTaskList(getUserId(),taskSearch);
     }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/18
+     * @description: 获取任务的服务任务需求单
+     */
+    @GetMapping("/{taskId}/require")
+    public HttpResult getTaskRequire(@PathVariable String taskId){
+        return taskRequireService.getDetailByTaskId(taskId);
+    }
 }

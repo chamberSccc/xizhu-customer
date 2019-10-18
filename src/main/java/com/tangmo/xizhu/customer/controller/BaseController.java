@@ -1,5 +1,6 @@
 package com.tangmo.xizhu.customer.controller;
 
+import com.tangmo.xizhu.customer.service.TaskRequireService;
 import com.tangmo.xizhu.customer.service.TaskService;
 
 import javax.annotation.Resource;
@@ -13,6 +14,8 @@ import javax.annotation.Resource;
 public class BaseController {
     @Resource
     protected TaskService taskService;
+    @Resource
+    protected TaskRequireService taskRequireService;
 
     protected String getUserId(){
         return "1";

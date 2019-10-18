@@ -6,9 +6,10 @@ import java.sql.Date;
 import java.util.List;
 
 @Data
-public class ServiceRequire {
+public class TaskRequire {
 
     private String uuid;
+    private String taskId;
     private Date applyDate;//申请时间
     private String companyName;//用户单位
     private String deviceType;//设备型号
@@ -20,6 +21,10 @@ public class ServiceRequire {
     private String troubleType;//问题类型 机器问题或电气问题
     private String detail;//现场细节文字
 
+    private String createdBy;
+    private String updatedBy;
+    private Date createdTime;
+    private Date updatedTime;
 
     //现场细节附件
     private String detailAudioId;

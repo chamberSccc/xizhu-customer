@@ -12,8 +12,9 @@ import java.util.List;
  * @Description:
  **/
 @Data
-public class FsFeedBack {
+public class FastFeedBack {
     private String uuid;
+    private String taskId;
     private String companyName;//用户单位
     private Date applyDate;//申请时间
     private String deviceType;//设备型号
@@ -39,5 +40,10 @@ public class FsFeedBack {
     private List<String> solPictureList;
 
     private Byte satisfaction;//满意度
+
+    private String createdBy;
+    private String updatedBy;
+    private Date createdTime;
+    private Date updatedTime;
 
 }

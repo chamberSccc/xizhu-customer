@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.TaskRequireDao">
+    <resultMap id="TaskRequireMap" type="com.tangmo.xizhu.customer.entity.TaskRequire">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="apply_date" property="applyDate"/>
+        <result column="company_name" property="companyName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="service_date" property="serviceDate"/>
+        <result column="task_assign_type" property="taskAssignType"/>
+        <result column="assembly_type" property="assemblyType"/>
+        <result column="trouble_type" property="troubleType"/>
+        <result column="detail" property="detail"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="detail_audio_id" property="detailAudioId"/>
+        <result column="detail_speech_id" property="detailSpeechId"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="TaskRequireMap">
+      SELECT uuid, apply_date,company_name,device_type,contact_name,mobile,service_date,assembly_type,trouble_type,
+       task_assign_type,detail,created_by,created_time from task_require where task_id = #{taskId}
+    </select>
+
+    <!--    todo 缺少图片id的新增和update-->
+    <insert id="insertTaskRequire" parameterType="com.tangmo.xizhu.customer.entity.TaskRequire">
+        INSERT INTO task_require
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="applyDate != null">
+                apply_date,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="serviceDate != null">
+                service_date,
+            </if>
+            <if test="assemblyType != null">
+                assembly_type,
+            </if>
+            <if test="troubleType != null">
+                trouble_type,
+            </if>
+            <if test="taskAssignType != null">
+                task_assign_type,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="detailAudioId != null">
+                detail_audio_id,
+            </if>
+            <if test="detailSpeechId != null">
+                detail_speech_id,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="applyDate != null">
+                #{applyDate},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="contactName != null">
+                #{contactName},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="serviceDate != null">
+                #{serviceDate},
+            </if>
+            <if test="assemblyType != null">
+                #{assemblyType},
+            </if>
+            <if test="troubleType != null">
+                #{troubleType},
+            </if>
+            <if test="taskAssignType != null">
+                #{taskAssignType},
+            </if>
+            <if test="detail != null">
+                #{detail},
+            </if>
+            <if test="detailAudioId != null">
+                #{detailAudioId},
+            </if>
+            <if test="detailSpeechId != null">
+                #{detailSpeechId},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateTaskRequire">
+        UPDATE task_require
+        <set>
+            <if test="applyDate != null">
+                apply_date = #{applyDate},
+            </if>
+            <if test="companyName != null">
+                company_name = #{companyName},
+            </if>
+            <if test="deviceType != null">
+                device_type = #{deviceType},
+            </if>
+            <if test="contactName != null">
+                contact_name = #{contactName},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="serviceDate != null">
+                service_date = #{serviceDate},
+            </if>
+            <if test="assemblyType != null">
+                assembly_type = #{assemblyType},
+            </if>
+            <if test="troubleType != null">
+                trouble_type = #{troubleType},
+            </if>
+            <if test="taskAssignType != null">
+                task_assign_type = #{taskAssignType},
+            </if>
+            <if test="detail != null">
+                detail=  #{detail},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>

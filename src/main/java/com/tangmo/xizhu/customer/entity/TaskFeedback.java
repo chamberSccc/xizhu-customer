@@ -12,8 +12,9 @@ import java.util.List;
  * @Description: 现场服务反馈单
  **/
 @Data
-public class ServiceFeedback {
+public class TaskFeedback {
     private String uuid;
+    private String taskId;
     private String companyName;//用户单位
     private Date applyDate;
     private String deviceType;//设备型号
@@ -39,4 +40,9 @@ public class ServiceFeedback {
     private List<String> solPictureList;
 
     private Byte satisfaction;//满意度
+
+    private String createdBy;
+    private String updatedBy;
+    private Date createdTime;
+    private Date updatedTime;
 }

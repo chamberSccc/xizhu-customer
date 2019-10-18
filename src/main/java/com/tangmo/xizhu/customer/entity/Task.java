@@ -7,7 +7,7 @@ public class Task {
 
     //单位信息
     private String uuid;
-    private String companyId;
+    private String companyId;//todo 有疑问
     private String taskNo;
     private String taskCode;
     private String assemblyType;//总成类型
