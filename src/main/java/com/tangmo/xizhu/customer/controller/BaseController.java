@@ -21,6 +21,8 @@ public class BaseController {
     protected FastSurveyService fastSurveyService;
     @Resource
     protected FieldApplyService fieldApplyService;
+    @Resource
+    protected FieldAssignService fieldAssignService;
 
     protected String getUserId(){
         return "1";

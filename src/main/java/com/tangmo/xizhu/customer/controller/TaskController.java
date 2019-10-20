@@ -84,4 +84,14 @@ public class TaskController extends BaseController{
      */
     @GetMapping("/{taskId}/fieldApply")
     public HttpResult getFieldApply(@PathVariable String taskId){return fieldApplyService.getByTaskId(taskId);}
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/20
+     * @description: 获取任务的现场服务指派单
+     */
+    @GetMapping("/{taskId}/fieldAssign")
+    public HttpResult getFileAssign(@PathVariable String taskId){return fieldAssignService.getByTaskId(taskId);}
 }
