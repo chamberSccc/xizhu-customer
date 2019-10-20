@@ -93,5 +93,17 @@ public class TaskController extends BaseController{
      * @description: 获取任务的现场服务指派单
      */
     @GetMapping("/{taskId}/fieldAssign")
-    public HttpResult getFileAssign(@PathVariable String taskId){return fieldAssignService.getByTaskId(taskId);}
+    public HttpResult getFieldAssign(@PathVariable String taskId){return fieldAssignService.getByTaskId(taskId);}
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/20
+     * @description: 获取任务的现场服务反馈单
+     */
+    @GetMapping("/{taskId}/fieldFeedback")
+    public HttpResult getFieldFeedback(@PathVariable String taskId){
+        return fieldFeedbackService.getByTaskId(taskId);
+    }
 }

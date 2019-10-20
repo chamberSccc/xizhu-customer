@@ -3,13 +3,17 @@ package com.tangmo.xizhu.customer.controller;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.FieldAssign;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author chen bo
  * @Date 2019/10/20
  * @Version V1.0
- * @Description: 现场服务指派单相关操作
+ * @Description: 现场服务指派单controller
  **/
+@RestController
+@RequestMapping("/fieldAssign")
 public class FieldAssignController extends BaseController {
 
     /**

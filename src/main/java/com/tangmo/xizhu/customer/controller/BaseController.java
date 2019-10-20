@@ -23,6 +23,8 @@ public class BaseController {
     protected FieldApplyService fieldApplyService;
     @Resource
     protected FieldAssignService fieldAssignService;
+    @Resource
+    protected FieldFeedbackService fieldFeedbackService;
 
     protected String getUserId(){
         return "1";
