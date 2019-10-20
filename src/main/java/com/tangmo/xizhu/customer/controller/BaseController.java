@@ -12,6 +12,8 @@ import javax.annotation.Resource;
  **/
 public class BaseController {
     @Resource
+    protected LoginService loginService;
+    @Resource
     protected TaskService taskService;
     @Resource
     protected TaskRequireService taskRequireService;

@@ -2,6 +2,9 @@ package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.LogInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,30 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version V1.0
  * @Description: 登录controller
  **/
+@Api("用户操作接口")
 @RestController
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController extends BaseController{
 
     /**
      * @param logInfo
      * @return
      * @author chen bo
      * @date 2019/10/15
-     * @description: pc端登录
+     * @description: 登录操作
      */
-    @PostMapping("/pc")
-    public HttpResult pcLogin(LogInfo logInfo){
-        return null;
-    }
-    /**
-     * @param logInfo
-     * @return
-     * @author chen bo
-     * @date 2019/10/15
-     * @description: 移动端登录
-     */
-    @PostMapping("/mobile")
-    public HttpResult mobileLogin(LogInfo logInfo){
-        return null;
+    @ApiOperation(value = "接口说明",httpMethod = "POST",notes = "接口发布说明")
+    @PostMapping("")
+    public HttpResult userLogin(@ApiParam(name="用户对象",value="传入json格式",required=true) LogInfo logInfo){
+        return loginService.userLogin(logInfo);
     }
 }

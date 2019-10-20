@@ -47,7 +47,7 @@ public class JWTUtil {
         try {
             DecodedJWT jwt = com.auth0.jwt.JWT.decode(token);
             TokenBo tokenBo = new TokenBo();
-            tokenBo.setUserId(jwt.getClaim(SessionConst.SESSION_USER_ID).asInt());
+            tokenBo.setUserId(jwt.getClaim(SessionConst.SESSION_USER_ID).asString());
             tokenBo.setEmail(jwt.getClaim(SessionConst.SESSION_EMAIL).asString());
             return tokenBo;
         } catch (JWTDecodeException e) {

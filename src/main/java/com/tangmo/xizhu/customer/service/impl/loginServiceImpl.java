@@ -1,9 +1,12 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.TokenBo;
 import com.tangmo.xizhu.customer.dao.UserDao;
 import com.tangmo.xizhu.customer.entity.LogInfo;
+import com.tangmo.xizhu.customer.entity.User;
 import com.tangmo.xizhu.customer.service.LoginService;
+import com.tangmo.xizhu.customer.util.JWTUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,12 +22,12 @@ public class loginServiceImpl implements LoginService {
     @Resource
     private UserDao userDao;
     @Override
-    public HttpResult pcLogin(LogInfo logInfo) {
-        return null;
-    }
-
-    @Override
-    public HttpResult mobileLogin(LogInfo logInfo) {
-        return null;
+    public HttpResult userLogin(LogInfo logInfo) {
+        User user = new User();
+        TokenBo tokenBo = new TokenBo();
+        tokenBo.setUserId("");
+        tokenBo.setEmail("1");
+        String token = JWTUtil.sign(tokenBo,3000L);
+        return HttpResult.success(token);
     }
 }

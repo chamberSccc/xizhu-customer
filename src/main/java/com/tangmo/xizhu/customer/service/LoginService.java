@@ -18,13 +18,5 @@ public interface LoginService {
      * @date 2019/10/15
      * @description: 电脑登录
      */
-    HttpResult pcLogin(LogInfo logInfo);
-    /**
-     * @param logInfo
-     * @return
-     * @author chen bo
-     * @date 2019/10/15
-     * @description: 移动端登录
-     */
-    HttpResult mobileLogin(LogInfo logInfo);
+    HttpResult userLogin(LogInfo logInfo);
 }

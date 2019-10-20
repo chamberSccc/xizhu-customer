@@ -17,13 +17,13 @@ public class TokenBo implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    private Integer userId;
+    private String userId;
     private String email;
     private Boolean pc;
 
     public TokenBo(DecodedJWT jwt) {
         this.email = jwt.getClaim(SessionConst.SESSION_EMAIL).asString();
         this.pc = jwt.getClaim(SessionConst.IS_PC).asBoolean();
-        this.userId = Integer.parseInt(jwt.getClaim(SessionConst.SESSION_USER_ID).asString());
+        this.userId = jwt.getClaim(SessionConst.SESSION_USER_ID).asString();
     }
 }
