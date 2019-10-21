@@ -13,7 +13,7 @@ import java.util.List;
  * @Description:
  **/
 @Data
-public class FastFeedBack {
+public class    FastFeedBack {
     @ApiModelProperty(value="id",name="uuid",example="")
     private String uuid;
     @ApiModelProperty(value="所属任务id",name="taskId",example="")

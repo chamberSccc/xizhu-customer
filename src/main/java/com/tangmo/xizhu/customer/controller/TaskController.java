@@ -1,11 +1,14 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
-import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -27,7 +30,7 @@ public class TaskController extends BaseController{
      */
     @ApiOperation(value = "发布任务",httpMethod = "POST",notes = "")
     @PostMapping
-    public HttpResult addTask(@RequestBody Task task){
+    public HttpResult addTask(@ApiParam(name="任务对象",value="json格式",required=true) @RequestBody Task task){
         return taskService.createTask(task);
     }
 
@@ -38,9 +41,9 @@ public class TaskController extends BaseController{
      * @date 2019/10/17
      * @description: 获取未完成任务列表，分页
      */
-    @ApiOperation(value = "获取未完成任务列表",httpMethod = "GET",notes = "带分页")
+    @ApiOperation(value = "获取未完成任务列表,分页",httpMethod = "GET",notes = "带分页")
     @GetMapping("/list/undo")
-    public HttpResult getUndoList(TaskSearch taskSearch){
+    public HttpResult<List<Task>> getUndoList(TaskSearch taskSearch){
         return taskService.getUndoTaskList(getUserId(),taskSearch);
     }
 
@@ -51,13 +54,13 @@ public class TaskController extends BaseController{
      * @date 2019/10/21
      * @description: 获取已完成任务列表，分页
      */
-    @ApiOperation(value = "获取已完成任务列表",httpMethod = "GET",notes = "带分页")
+    @ApiOperation(value = "获取已完成任务列表,分页",httpMethod = "GET",notes = "带分页")
     @GetMapping("/list/done")
-    public HttpResult getDoneList(TaskSearch taskSearch){
+    public HttpResult<List<Task>> getDoneList(TaskSearch taskSearch){
         return taskService.getDoneTaskList(getUserId(),taskSearch);
     }
 
-    @ApiOperation(value = "获取我发起的任务列表",httpMethod = "GET",notes = "带分页")
+
     /**
      * @param taskSearch
      * @return
@@ -65,8 +68,9 @@ public class TaskController extends BaseController{
      * @date 2019/10/21
      * @description: 获取我发起的任务列表，分页
      */
+    @ApiOperation(value = "获取我发起的任务列表,分页",httpMethod = "GET",notes = "带分页")
     @GetMapping("/list/launch")
-    public HttpResult getLaunchList(TaskSearch taskSearch){
+    public HttpResult<List<Task>> getLaunchList(TaskSearch taskSearch){
         return taskService.getLaunchTaskList(getUserId(),taskSearch);
     }
 
@@ -78,8 +82,9 @@ public class TaskController extends BaseController{
      * @date 2019/10/18
      * @description: 获取任务的服务任务需求单
      */
+    @ApiOperation(value = "获取任务的服务任务需求单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/require")
-    public HttpResult getTaskRequire(@PathVariable String taskId){
+    public HttpResult<TaskRequire> getTaskRequire(@PathVariable String taskId){
         return taskRequireService.getByTaskId(taskId);
     }
 
@@ -90,8 +95,9 @@ public class TaskController extends BaseController{
      * @date 2019/10/18
      * @description: 获取任务的快速任务反馈单
      */
+    @ApiOperation(value = "获取任务的快速任务反馈单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/fastFeedback")
-    public HttpResult getFastFeedback(@PathVariable String taskId){
+    public HttpResult<FastFeedBack> getFastFeedback(@PathVariable String taskId){
         return fastFeedbackService.getByTaskId(taskId);
     }
 
@@ -102,8 +108,9 @@ public class TaskController extends BaseController{
      * @date 2019/10/18
      * @description: 查询任务的现场服务满意度调查表
      */
+    @ApiOperation(value = "查询任务的现场服务满意度调查表",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/fastSurvey")
-    public HttpResult getFastSurvey(@PathVariable String taskId){
+    public HttpResult<FastSurvey> getFastSurvey(@PathVariable String taskId){
         return fastSurveyService.getByTaskId(taskId);
     }
 
@@ -114,8 +121,9 @@ public class TaskController extends BaseController{
      * @date 2019/10/18
      * @description: 获取任务的现场服务申请单
      */
+    @ApiOperation(value = "获取任务的现场服务申请单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/fieldApply")
-    public HttpResult getFieldApply(@PathVariable String taskId){return fieldApplyService.getByTaskId(taskId);}
+    public HttpResult<FieldApply> getFieldApply(@PathVariable String taskId){return fieldApplyService.getByTaskId(taskId);}
 
     /**
      * @param taskId
@@ -124,8 +132,9 @@ public class TaskController extends BaseController{
      * @date 2019/10/20
      * @description: 获取任务的现场服务指派单
      */
+    @ApiOperation(value = "获取任务的现场服务指派单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/fieldAssign")
-    public HttpResult getFieldAssign(@PathVariable String taskId){return fieldAssignService.getByTaskId(taskId);}
+    public HttpResult<FieldAssign> getFieldAssign(@PathVariable String taskId){return fieldAssignService.getByTaskId(taskId);}
 
     /**
      * @param taskId
@@ -134,8 +143,9 @@ public class TaskController extends BaseController{
      * @date 2019/10/20
      * @description: 获取任务的现场服务反馈单
      */
+    @ApiOperation(value = "获取任务的现场服务反馈单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/fieldFeedback")
-    public HttpResult getFieldFeedback(@PathVariable String taskId){
+    public HttpResult<FieldFeedBack> getFieldFeedback(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
         return fieldFeedbackService.getByTaskId(taskId);
     }
 }

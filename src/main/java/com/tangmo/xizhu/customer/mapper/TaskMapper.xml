@@ -3,7 +3,10 @@
 <mapper namespace="com.tangmo.xizhu.customer.dao.TaskDao">
     <resultMap id="TaskMap" type="com.tangmo.xizhu.customer.entity.Task">
         <id column="uuid" property="uuid"/>
-        <result column="company_id" property="companyId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="mobile" property="mobile"/>
         <result column="task_no" property="taskNo"/>
         <result column="assembly_type" property="assemblyType"/>
         <result column="trouble_type" property="troubleType"/>
@@ -27,8 +30,17 @@
             <if test="uuid != null">
                 uuid,
             </if>
-            <if test="companyId != null">
-                company_id,
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
             </if>
             <if test="taskNo != null">
                 task_no,
@@ -69,8 +81,17 @@
             <if test="uuid != null">
                 #{uuid},
             </if>
-            <if test="companyId != null">
-                #{companyId},
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="contactName != null">
+                #{contactName},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
             </if>
             <if test="taskNo != null">
                 #{taskNo},
