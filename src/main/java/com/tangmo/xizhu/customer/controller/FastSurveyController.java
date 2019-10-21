@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.FastSurvey;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version V1.0
  * @Description:
  **/
+@Api(description="快速服务满意度调查表接口")
 @RestController
 @RequestMapping("/fastSurvey")
 public class FastSurveyController extends BaseController{

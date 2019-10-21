@@ -38,7 +38,7 @@ public class SwaggerConfig {
                 .title("西筑 API")
                 .description("")
                 .termsOfServiceUrl("")
-                .version("1.0")
+                .version("2.7.0")
                 .build();
     }
 }

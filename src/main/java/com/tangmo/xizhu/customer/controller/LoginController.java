@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version V1.0
  * @Description: 登录controller
  **/
-@Api("用户操作接口")
+@Api(description = "登录相关接口")
 @RestController
 @RequestMapping("/login")
 public class LoginController extends BaseController{
@@ -27,7 +27,7 @@ public class LoginController extends BaseController{
      * @date 2019/10/15
      * @description: 登录操作
      */
-    @ApiOperation(value = "接口说明",httpMethod = "POST",notes = "接口发布说明")
+    @ApiOperation(value = "登录接口",httpMethod = "POST",notes = "登录接口")
     @PostMapping("")
     public HttpResult userLogin(@ApiParam(name="用户对象",value="传入json格式",required=true) LogInfo logInfo){
         return loginService.userLogin(logInfo);

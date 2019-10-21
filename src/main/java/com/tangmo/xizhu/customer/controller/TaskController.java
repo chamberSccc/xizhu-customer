@@ -3,6 +3,8 @@ package com.tangmo.xizhu.customer.controller;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @Version V1.0
  * @Description: 任务controller
  **/
+@Api(description="任务相关接口")
 @RestController
 @RequestMapping("/task")
 public class TaskController extends BaseController{
@@ -22,6 +25,7 @@ public class TaskController extends BaseController{
      * @date 2019/10/17
      * @description: 发布任务
      */
+    @ApiOperation(value = "发布任务",httpMethod = "POST",notes = "")
     @PostMapping
     public HttpResult addTask(@RequestBody Task task){
         return taskService.createTask(task);
