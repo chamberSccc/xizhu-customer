@@ -51,6 +51,16 @@ public interface TaskService {
 
     /**
      * @param userId
+     * @param taskSearch
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 我发起的任务列表
+     */
+    HttpResult getLaunchTaskList(String userId,TaskSearch taskSearch);
+
+    /**
+     * @param userId
      * @return com.tangmo.xizhu.customer.common.HttpResult
      * @author chen bo
      * @date 2019/10/15

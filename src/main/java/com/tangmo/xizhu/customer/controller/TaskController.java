@@ -38,10 +38,38 @@ public class TaskController extends BaseController{
      * @date 2019/10/17
      * @description: 获取未完成任务列表，分页
      */
+    @ApiOperation(value = "获取未完成任务列表",httpMethod = "GET",notes = "带分页")
     @GetMapping("/list/undo")
     public HttpResult getUndoList(TaskSearch taskSearch){
         return taskService.getUndoTaskList(getUserId(),taskSearch);
     }
+
+    /**
+     * @param taskSearch
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 获取已完成任务列表，分页
+     */
+    @ApiOperation(value = "获取已完成任务列表",httpMethod = "GET",notes = "带分页")
+    @GetMapping("/list/done")
+    public HttpResult getDoneList(TaskSearch taskSearch){
+        return taskService.getDoneTaskList(getUserId(),taskSearch);
+    }
+
+    @ApiOperation(value = "获取我发起的任务列表",httpMethod = "GET",notes = "带分页")
+    /**
+     * @param taskSearch
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 获取我发起的任务列表，分页
+     */
+    @GetMapping("/list/launch")
+    public HttpResult getLaunchList(TaskSearch taskSearch){
+        return taskService.getLaunchTaskList(getUserId(),taskSearch);
+    }
+
 
     /**
      * @param taskId

@@ -3,6 +3,8 @@ package com.tangmo.xizhu.customer.controller;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.FieldApply;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,8 +25,9 @@ public class FieldApplyController extends BaseController{
      * @date 2019/10/18
      * @description: 新增现场服务申请单
      */
+    @ApiOperation(value = "新增现场服务申请",httpMethod = "POST",notes = "")
     @PostMapping("")
-    public HttpResult addFieldApply(@RequestBody FieldApply fieldApply){
+    public HttpResult addFieldApply(@ApiParam(name="现场服务申请表对象",value="json格式",required=true) @RequestBody FieldApply fieldApply){
         return fieldApplyService.addApply(fieldApply);
     }
     /**
@@ -34,8 +37,9 @@ public class FieldApplyController extends BaseController{
      * @date 2019/10/18
      * @description: 修改现场服务申请单
      */
+    @ApiOperation(value = "修改现场服务申请",httpMethod = "PUT",notes = "")
     @PutMapping("")
-    public HttpResult changeFieldApply(@RequestBody FieldApply fieldApply){
+    public HttpResult changeFieldApply(@ApiParam(name="现场服务申请表对象",value="json格式",required=true) @RequestBody FieldApply fieldApply){
         return fieldApplyService.changeApply(fieldApply);
     }
 }

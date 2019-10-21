@@ -3,9 +3,9 @@ package com.tangmo.xizhu.customer.controller;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.FieldAssign;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author chen bo
@@ -25,7 +25,9 @@ public class FieldAssignController extends BaseController {
      * @date 2019/10/20
      * @description: 新增现场服务指派单
      */
-    public HttpResult addFieldAssign(@RequestBody FieldAssign fieldAssign){
+    @ApiOperation(value = "新增现场服务指派单",httpMethod = "POST",notes = "")
+    @PostMapping("")
+    public HttpResult addFieldAssign(@ApiParam(name="现场服务申请表对象",value="json格式",required=true) @RequestBody FieldAssign fieldAssign){
         return fieldAssignService.addFieldAssign(fieldAssign);
     }
 
@@ -36,7 +38,9 @@ public class FieldAssignController extends BaseController {
      * @date 2019/10/20
      * @description: 修改现场服务指派单
      */
-    public HttpResult changeAssign(@RequestBody FieldAssign fieldAssign){
+    @ApiOperation(value = "修改现场服务指派单",httpMethod = "PUT",notes = "")
+    @PutMapping("")
+    public HttpResult changeAssign(@ApiParam(name="现场服务申请表对象",value="json格式",required=true) @RequestBody FieldAssign fieldAssign){
         return fieldAssignService.changeFieldAssign(fieldAssign);
     }
 

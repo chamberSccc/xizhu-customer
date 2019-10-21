@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class LoginController extends BaseController{
      */
     @ApiOperation(value = "登录接口",httpMethod = "POST",notes = "登录接口")
     @PostMapping("")
-    public HttpResult userLogin(@ApiParam(name="用户对象",value="传入json格式",required=true) LogInfo logInfo){
+    public HttpResult userLogin(@ApiParam(name="用户对象",value="json格式",required=true) @RequestBody LogInfo logInfo){
         return loginService.userLogin(logInfo);
     }
 }

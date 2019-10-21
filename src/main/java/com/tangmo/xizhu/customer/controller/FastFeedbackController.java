@@ -3,6 +3,8 @@ package com.tangmo.xizhu.customer.controller;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.FastFeedBack;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,8 +25,9 @@ public class FastFeedbackController extends BaseController{
      * @date 2019/10/18
      * @description: 新增快速服务反馈单
      */
+    @ApiOperation(value = "新增快速服务反馈单",httpMethod = "POST",notes = "完成任务时填写")
     @PostMapping("")
-    public HttpResult addFeedBack(@RequestBody FastFeedBack fastFeedBack){
+    public HttpResult addFeedBack(@ApiParam(name="快速服务反馈单对象",value="json格式",required=true) @RequestBody FastFeedBack fastFeedBack){
         return fastFeedbackService.addFastFeedback(fastFeedBack);
     }
 
@@ -35,8 +38,9 @@ public class FastFeedbackController extends BaseController{
      * @date 2019/10/18
      * @description: 修改快速服务反馈单
      */
+    @ApiOperation(value = "修改快速服务反馈单",httpMethod = "PUT",notes = "完成任务时填写")
     @PutMapping("")
-    public HttpResult changeFeedBack(@RequestBody FastFeedBack fastFeedBack){
+    public HttpResult changeFeedBack(@ApiParam(name="快速服务反馈单对象",value="json格式",required=true) @RequestBody FastFeedBack fastFeedBack){
         return fastFeedbackService.changeFastFeedback(fastFeedBack);
     }
 }

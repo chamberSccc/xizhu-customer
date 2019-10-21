@@ -40,6 +40,11 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public HttpResult getDoneTaskList(String userId, TaskSearch taskSearch) {
+        return HttpResult.success(taskDao.selectByStatusAndUser(userId,TaskStatus.COMPLETE));
+    }
+
+    @Override
+    public HttpResult getLaunchTaskList(String userId, TaskSearch taskSearch) {
         return null;
     }
 
