@@ -144,8 +144,12 @@
         where uuid = #{taskId}
     </update>
 
-    <select id="selectUndoTaskCount" resultType="java.lang.Integer">
+    <select id="selectUndoCountByUser" resultType="java.lang.Integer">
         select count(*) from service_task where executor = #{userId} and task_status = 1
+    </select>
+
+    <select id="selectUndoCountByUser" resultType="java.lang.Integer">
+        select count(*) from service_task where executor = #{userId} and task_status = 0
     </select>
 
     <select id="selectById" resultType="java.lang.Integer">

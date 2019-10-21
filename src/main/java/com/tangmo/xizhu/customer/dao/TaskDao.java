@@ -68,7 +68,7 @@ public interface TaskDao {
      * @return
      * @author chen bo
      * @date 2019/10/17
-     * @description: 查询未完成任务
+     * @description: 根据任务状态查询
      */
     List<Task> selectByStatus(@Param("status") Byte status);
 
@@ -79,7 +79,16 @@ public interface TaskDao {
      * @date 2019/10/15
      * @description: 查询未完成任务数量
      */
-    Integer selectUndoTaskCount(String userId);
+    Integer selectUndoCountByUser(String userId);
+
+    /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 查询未审核任务
+     */
+    Integer selectUnauditCountByUser(String userId);
 
     /**
      * @param taskId

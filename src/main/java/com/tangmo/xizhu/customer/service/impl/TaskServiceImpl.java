@@ -1,8 +1,6 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
-import com.tangmo.xizhu.customer.common.Page;
-import com.tangmo.xizhu.customer.constant.TaskAssignType;
 import com.tangmo.xizhu.customer.constant.TaskStatus;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.Task;
@@ -62,7 +60,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public HttpResult getUndoTaskCount(String userId) {
-        return null;
+        return HttpResult.success(taskDao.selectUndoCountByUser(userId));
+    }
+
+    @Override
+    public HttpResult getUnauditCount(String userId) {
+        return HttpResult.success(taskDao.selectUnauditCountByUser(userId));
     }
 
     @Override

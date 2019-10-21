@@ -33,7 +33,6 @@ public class TaskController extends BaseController{
     public HttpResult addTask(@ApiParam(name="任务对象",value="json格式",required=true) @RequestBody Task task){
         return taskService.createTask(task);
     }
-
     /**
      * @param taskSearch
      * @return
@@ -41,8 +40,8 @@ public class TaskController extends BaseController{
      * @date 2019/10/17
      * @description: 获取未完成任务列表，分页
      */
-    @ApiOperation(value = "获取未完成任务列表,分页",httpMethod = "GET",notes = "带分页")
-    @GetMapping("/list/undo")
+    @ApiOperation(value = "获取未完成任务列表,分页",httpMethod = "POST",notes = "带分页")
+    @PostMapping("/list/undo")
     public HttpResult<List<Task>> getUndoList(TaskSearch taskSearch){
         return taskService.getUndoTaskList(getUserId(),taskSearch);
     }
@@ -54,8 +53,8 @@ public class TaskController extends BaseController{
      * @date 2019/10/21
      * @description: 获取已完成任务列表，分页
      */
-    @ApiOperation(value = "获取已完成任务列表,分页",httpMethod = "GET",notes = "带分页")
-    @GetMapping("/list/done")
+    @ApiOperation(value = "获取已完成任务列表,分页",httpMethod = "POST",notes = "带分页")
+    @PostMapping("/list/done")
     public HttpResult<List<Task>> getDoneList(TaskSearch taskSearch){
         return taskService.getDoneTaskList(getUserId(),taskSearch);
     }
@@ -68,8 +67,8 @@ public class TaskController extends BaseController{
      * @date 2019/10/21
      * @description: 获取我发起的任务列表，分页
      */
-    @ApiOperation(value = "获取我发起的任务列表,分页",httpMethod = "GET",notes = "带分页")
-    @GetMapping("/list/launch")
+    @ApiOperation(value = "获取我发起的任务列表,分页",httpMethod = "POST",notes = "带分页")
+    @PostMapping("/list/launch")
     public HttpResult<List<Task>> getLaunchList(TaskSearch taskSearch){
         return taskService.getLaunchTaskList(getUserId(),taskSearch);
     }
@@ -106,9 +105,9 @@ public class TaskController extends BaseController{
      * @return
      * @author chen bo
      * @date 2019/10/18
-     * @description: 查询任务的现场服务满意度调查表
+     * @description: 获取任务的现场服务满意度调查表
      */
-    @ApiOperation(value = "查询任务的现场服务满意度调查表",httpMethod = "GET",notes = "")
+    @ApiOperation(value = "获取任务的现场服务满意度调查表",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/fastSurvey")
     public HttpResult<FastSurvey> getFastSurvey(@PathVariable String taskId){
         return fastSurveyService.getByTaskId(taskId);

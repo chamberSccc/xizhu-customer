@@ -85,9 +85,18 @@ public interface TaskService {
      * @return com.tangmo.xizhu.customer.common.HttpResult
      * @author chen bo
      * @date 2019/10/15
-     * @description: 获取未完成任务
+     * @description: 获取未完成任务数量
      */
     HttpResult getUndoTaskCount(String userId);
+
+    /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 获取未审核任务数量
+     */
+    HttpResult getUnauditCount(String userId);
 
     /**
      * @param taskSearch
