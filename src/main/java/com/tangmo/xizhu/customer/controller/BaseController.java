@@ -16,6 +16,8 @@ public class BaseController {
     @Resource
     protected TaskService taskService;
     @Resource
+    protected AuditTaskService auditTaskService;
+    @Resource
     protected TaskRequireService taskRequireService;
     @Resource
     protected FastFeedbackService fastFeedbackService;

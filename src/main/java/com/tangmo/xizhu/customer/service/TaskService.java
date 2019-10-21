@@ -31,6 +31,27 @@ public interface TaskService {
     HttpResult changeTask(Task task);
 
     /**
+     * @param taskId
+     * @param userId
+     * @param taskStatus
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 修改任务执行人
+     */
+    HttpResult changeTaskUser(String taskId,String userId,Byte taskStatus);
+
+    /**
+     * @param taskId
+     * @param status
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 修改任务状态
+     */
+    HttpResult changeTaskStatus(String taskId,Byte status);
+
+    /**
      * @param userId
      * @return com.tangmo.xizhu.customer.common.HttpResult
      * @author chen bo

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.AuditTaskDao">
+    <resultMap id="AuditTaskMap" type="com.tangmo.xizhu.customer.entity.AuditTask">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="assign_user" property="assign_user"/>
+        <result column="comment" property="comment"/>
+        <result column="operation" property="operation"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <insert id="insertAuditTask" parameterType="com.tangmo.xizhu.customer.entity.AuditTask">
+        INSERT INTO audit_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="assignUser != null">
+                assign_user,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="operation != null">
+                operation,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="assignUser != null">
+                #{assignUser},
+            </if>
+            <if test="comment != null">
+                #{comment},
+            </if>
+            <if test="operation != null">
+                #{operation},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByTaskId" resultMap="AuditTaskMap">
+        select operation,created_by,created_time FROM audit_task where task_id = #{taskId}
+    </select>
+</mapper>

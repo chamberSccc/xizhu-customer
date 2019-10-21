@@ -136,6 +136,14 @@
         </if>
     </select>
 
+    <update id="updateTaskUser">
+        update service_task set executor = #{userId}
+        <if test="status != null">
+            ,task_status = #{status}
+        </if>
+        where uuid = #{taskId}
+    </update>
+
     <select id="selectUndoTaskCount" resultType="java.lang.Integer">
         select count(*) from service_task where executor = #{userId} and task_status = 1
     </select>

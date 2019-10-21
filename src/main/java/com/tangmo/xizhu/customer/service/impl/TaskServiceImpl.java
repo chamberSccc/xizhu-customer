@@ -34,6 +34,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public HttpResult changeTaskUser(String taskId, String userId, Byte taskStatus) {
+        taskDao.updateTaskUser(taskId, userId, taskStatus);
+        return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult changeTaskStatus(String taskId, Byte status) {
+        taskDao.updateStatus(taskId,status);
+        return HttpResult.success();
+    }
+
+    @Override
     public HttpResult getUndoTaskList(String userId, TaskSearch taskSearch) {
         return HttpResult.success(taskDao.selectByStatusAndUser(userId,TaskStatus.DEALING));
     }

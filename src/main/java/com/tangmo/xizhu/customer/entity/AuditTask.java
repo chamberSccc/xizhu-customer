@@ -10,11 +10,15 @@ import lombok.Data;
  * @Description: 审核信息
  **/
 @Data
-public class AuditInfo {
+public class AuditTask {
+    private String uuid;
     @ApiModelProperty(value="任务id",name="taskId",example="")
     private String taskId;
-    @ApiModelProperty(value="指定人员名称",name="assignName",example="")
-    private String assignName;
+    @ApiModelProperty(value="指定人员Id",name="assignUser",example="")
+    private String assignUser;
     @ApiModelProperty(value="备注",name="comment",example="")
     private String comment;
+    private Byte operation;
+    private String createdBy;
+    private String createdTime;
 }

@@ -34,6 +34,27 @@ public interface TaskDao {
     void updateTask(Task task);
 
     /**
+     * @param taskId 任务id
+     * @param userId 执行人
+     * @param status 要修改的任务状态
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 修改任务执行人
+     */
+    void updateTaskUser(@Param("taskId") String taskId,@Param("userId") String userId,@Param("status") Byte status);
+
+    /**
+     * @param taskId
+     * @param status
+     * @return
+     * @author chen bo
+     * @date 2019/10/21
+     * @description: 修改任务状态
+     */
+    void updateStatus(@Param("taskId") String taskId,@Param("status") Byte status);
+
+    /**
      * @param
      * @return list
      * @author chen bo
