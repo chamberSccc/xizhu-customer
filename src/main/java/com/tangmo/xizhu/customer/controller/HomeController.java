@@ -20,7 +20,7 @@ public class HomeController extends BaseController{
         return taskService.getUndoTaskCount(getUserId());
     }
 
-    @ApiOperation(value = "查询未审批数量",httpMethod = "GET",notes = "")
+    @ApiOperation(value = "查询未审批任务数量",httpMethod = "GET",notes = "")
     @GetMapping("/audit/undo/count")
     public HttpResult<Integer> getUndoAudit(){
         return taskService.getUnauditCount(getUserId());
