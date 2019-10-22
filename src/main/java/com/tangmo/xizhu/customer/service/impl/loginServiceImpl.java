@@ -25,8 +25,11 @@ public class loginServiceImpl implements LoginService {
     public HttpResult userLogin(LogInfo logInfo) {
         User user = new User();
         TokenBo tokenBo = new TokenBo();
-        tokenBo.setUserId("");
-        tokenBo.setEmail("1");
+        tokenBo.setUserId("1");
+        tokenBo.setUserName("测试");
+        tokenBo.setDeptId("1");
+        tokenBo.setDeptName("测试部门");
+        tokenBo.setUserType((byte) 1);
         String token = JWTUtil.sign(tokenBo,3000L);
         return HttpResult.success(token);
     }

@@ -22,7 +22,7 @@ import java.util.Map;
  * @Version V1.0
  * @Description: shiro登录管理
  **/
-//@Configuration
+@Configuration
 public class ShiroConfig {
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {

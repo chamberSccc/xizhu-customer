@@ -55,8 +55,11 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         // 如果没有抛出异常则代表登入成功，返回true
 
         TokenBo tokenBo = JWTUtil.getTokenBO(token.getToken());
-        request.setAttribute(SessionConst.SESSION_EMAIL, tokenBo.getEmail());
         request.setAttribute(SessionConst.SESSION_USER_ID, tokenBo.getUserId());
+        request.setAttribute(SessionConst.SESSION_USER_NAME, tokenBo.getUserName());
+        request.setAttribute(SessionConst.SESSION_DEPT_ID, tokenBo.getDeptId());
+        request.setAttribute(SessionConst.SESSION_DEPT_NAME, tokenBo.getDeptName());
+        request.setAttribute(SessionConst.SESSION_USER_TYPE, tokenBo.getUserType());
         return true;
     }
 

@@ -48,7 +48,10 @@ public class JWTUtil {
             DecodedJWT jwt = com.auth0.jwt.JWT.decode(token);
             TokenBo tokenBo = new TokenBo();
             tokenBo.setUserId(jwt.getClaim(SessionConst.SESSION_USER_ID).asString());
-            tokenBo.setEmail(jwt.getClaim(SessionConst.SESSION_EMAIL).asString());
+            tokenBo.setUserName(jwt.getClaim(SessionConst.SESSION_USER_NAME).asString());
+            tokenBo.setUserType(Byte.valueOf(jwt.getClaim(SessionConst.SESSION_USER_TYPE).asString()));
+            tokenBo.setDeptId(jwt.getClaim(SessionConst.SESSION_DEPT_ID).asString());
+            tokenBo.setDeptName(jwt.getClaim(SessionConst.SESSION_USER_ID).asString());
             return tokenBo;
         } catch (JWTDecodeException e) {
             return null;
@@ -76,8 +79,11 @@ public class JWTUtil {
                 Date exp = new Date(expMillis);
                 builder.withExpiresAt(exp);
             }
-            builder.withClaim(SessionConst.SESSION_EMAIL, tokenBo.getEmail());
+            builder.withClaim(SessionConst.SESSION_USER_NAME, tokenBo.getUserName());
             builder.withClaim(SessionConst.SESSION_USER_ID, tokenBo.getUserId());
+            builder.withClaim(SessionConst.SESSION_USER_TYPE, tokenBo.getUserType().toString());
+            builder.withClaim(SessionConst.SESSION_DEPT_ID, tokenBo.getDeptId());
+            builder.withClaim(SessionConst.SESSION_DEPT_NAME, tokenBo.getDeptName());
             return builder.sign(algorithm);
         } catch (UnsupportedEncodingException e) {
             return null;

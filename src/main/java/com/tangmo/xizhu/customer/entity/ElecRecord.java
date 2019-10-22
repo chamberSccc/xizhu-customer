@@ -6,12 +6,13 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author boge
- * @date 2019/10/21
- * @description 安装工作记录(机械)
- */
+ * @Author chen bo
+ * @Date 2019/10/22
+ * @Version V1.0
+ * @Description: 安装工作记录，电气
+ **/
 @Data
-public class MachineRecord {
+public class ElecRecord {
     @ApiModelProperty(value="id",name="uuid",example="")
     private String uuid;
     @ApiModelProperty(value="任务id",name="taskId",example="")

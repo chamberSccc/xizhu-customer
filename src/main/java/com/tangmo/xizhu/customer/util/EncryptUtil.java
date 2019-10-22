@@ -13,7 +13,7 @@ import java.util.UUID;
 @Slf4j
 public class EncryptUtil {
 
-    public static final String MD5KEY="MOYITECHNOLGY123!@#";
+    public static final String MD5KEY="XIZHU-SERVICE";
 
     /**
      * 获取32位UUID

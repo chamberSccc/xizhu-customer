@@ -17,7 +17,7 @@ import org.apache.shiro.subject.PrincipalCollection;
  */
 public class MyRealm extends AuthorizingRealm {
 
-    private String secret = "XIZHU123";
+    private String secret = "XIZHU-SERVICE";
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -43,9 +43,9 @@ public class MyRealm extends AuthorizingRealm {
 
 //        String oldToken = redisUtils.get(JWTUtil.getTokenBO(token).getEmail() + StringConst.UNDERLINE + SessionConst.TOKEN).toString();
         String oldToken = "";
-        if ( !oldToken.equals(token) ) {
-            throw new AuthenticationException("token replace");
-        }
+//        if ( !oldToken.equals(token) ) {
+//            throw new AuthenticationException("token replace");
+//        }
 
         return new SimpleAuthenticationInfo(token, token, getName());
     }

@@ -13,7 +13,7 @@ public class JWTToken implements AuthenticationToken {
 
     public JWTToken(String token) {
         if (token != null) {
-            this.token = token.split("\\s")[1];
+            this.token = token;
         }
     }
 

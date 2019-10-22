@@ -147,4 +147,69 @@ public class TaskController extends BaseController{
     public HttpResult<FieldFeedBack> getFieldFeedback(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
         return fieldFeedbackService.getByTaskId(taskId);
     }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/22
+     * @description: 获取任务的安全交底表
+     */
+    @ApiOperation(value = "获取任务的安全交底表",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/safeConfide")
+    public HttpResult<SafeConfide>  getSafeConfide(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+        return null;
+    }
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/22
+     * @description: 获取任务的设备档案
+     */
+    @ApiOperation(value = "获取任务的设备档案",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/deviceFile")
+    public HttpResult<DeviceFile> getDeviceFile(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+        return null;
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/22
+     * @description: 获取安装工作记录(机械)
+     */
+    @ApiOperation(value = "获取安装工作记录(机械)",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/machineRecord")
+    public HttpResult<MachineRecord> getMachineRecord(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+        return null;
+    }
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/22
+     * @description: 获取安装工作记录(电气)
+     */
+    @ApiOperation(value = "获取安装工作记录(电气)",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/elecRecord")
+    public HttpResult<ElecRecord> getElecRecord(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+        return null;
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/22
+     * @description: 获取沥青混合料搅拌设备维护保养交底表(1-11)
+     */
+    @ApiOperation(value = "获取沥青混合料搅拌设备维护保养交底表(1-11)",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/maintainConfide")
+    public HttpResult<MaintainConfide> getMaintainConfide(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+        return null;
+    }
+
+
 }
