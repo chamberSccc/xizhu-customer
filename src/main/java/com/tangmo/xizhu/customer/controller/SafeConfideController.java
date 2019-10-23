@@ -28,7 +28,7 @@ public class SafeConfideController extends BaseController{
     @ApiOperation(value = "新增安全交底表",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addSafeConfide(@ApiParam(name="安全交底表对象",value="json格式",required=true) @RequestBody SafeConfide safeConfide){
-        return null;
+        return safeConfideService.addSafeConfide(safeConfide);
     }
     /**
      * @param safeConfide
@@ -40,7 +40,7 @@ public class SafeConfideController extends BaseController{
     @ApiOperation(value = "修改安全交底表",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeSafeConfid(@ApiParam(name="安全交底表对象",value="json格式",required=true) @RequestBody SafeConfide safeConfide){
-        return null;
+        return safeConfideService.changeSafeConfide(safeConfide);
     }
 
 }

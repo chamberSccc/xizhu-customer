@@ -35,6 +35,12 @@ public class BaseController {
     //设备档案表service
     @Resource
     protected DeviceFileService deviceFileService;
+    //机械安装工作记录service
+    @Resource
+    protected MachRecordService machRecordService;
+    //电气安装工作记录service
+    @Resource
+    protected ElecRecordService elecRecordService;
 
     protected String getUserId(){
         return "1";

@@ -28,7 +28,7 @@ public class MachRecordController extends BaseController{
     @ApiOperation(value = "新增安装工作记录(机械)表",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addMachRecord(@ApiParam(name="安装工作记录(机械)表对象",value="json格式",required=true) @RequestBody MachRecord machRecord){
-        return null;
+        return machRecordService.addRecord(machRecord);
     }
 
     /**
@@ -41,6 +41,6 @@ public class MachRecordController extends BaseController{
     @ApiOperation(value = "修改安装工作记录(机械)表",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeMachRecord(@ApiParam(name="安装工作记录(机械)表对象",value="json格式",required=true) @RequestBody MachRecord machRecord){
-        return null;
+        return machRecordService.changeRecord(machRecord);
     }
 }
