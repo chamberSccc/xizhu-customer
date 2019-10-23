@@ -44,9 +44,9 @@ public class SafeConfide {
     private String safe13;//烟道布袋使用
     @ApiModelProperty(value="密闭空间检查作业",name="safe14",example="")
     private String safe14;//密闭空间检查作业
-    @ApiModelProperty(value="创建人",name="createdBy",example="")
+    @ApiModelProperty(value="登录人",name="createdBy",example="")
     private String createdBy;
-    @ApiModelProperty(value="创建时间",name="createdTime",example="")
+    @ApiModelProperty(value="登录时间",name="createdTime",example="")
     private Date createdTime;
 
 }
