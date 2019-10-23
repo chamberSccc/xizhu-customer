@@ -182,7 +182,7 @@ public class TaskController extends BaseController{
      */
     @ApiOperation(value = "获取安装工作记录(机械)",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/machineRecord")
-    public HttpResult<MachineRecord> getMachineRecord(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+    public HttpResult<MachRecord> getMachineRecord(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
         return null;
     }
     /**

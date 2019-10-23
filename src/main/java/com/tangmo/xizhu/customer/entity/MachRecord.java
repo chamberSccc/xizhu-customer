@@ -11,7 +11,7 @@ import java.util.List;
  * @description 安装工作记录(机械)
  */
 @Data
-public class MachineRecord {
+public class MachRecord {
     @ApiModelProperty(value="id",name="uuid",example="")
     private String uuid;
     @ApiModelProperty(value="任务id",name="taskId",example="")
@@ -22,7 +22,7 @@ public class MachineRecord {
     private String deviceType;//设备型号
     @ApiModelProperty(value="带队工程师",name="createdBy",example="")
     private String createdBy;//带队工程师
-    @ApiModelProperty(value="id",name="uuid",example="")
+    @ApiModelProperty(value="填写时间",name="createdTime",example="")
     private String createdTime;//填写时间
     @ApiModelProperty(value="工作记录",name="workList",example="")
     private List<DailyRecord> workList;//工作记录

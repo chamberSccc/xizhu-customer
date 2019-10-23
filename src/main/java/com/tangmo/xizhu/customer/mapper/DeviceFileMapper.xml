@@ -74,6 +74,9 @@
             <if test="companyName != null">
                 #{companyName},
             </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
             <if test="deviceAddress != null">
                 #{deviceAddress},
             </if>

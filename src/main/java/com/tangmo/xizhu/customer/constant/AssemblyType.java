@@ -7,21 +7,21 @@ package com.tangmo.xizhu.customer.constant;
  * @Description:
  **/
 public class AssemblyType {
-    private static final byte LENG_PEI = 0;
-    private static final byte HONG_GAN = 1;
-    private static final byte RE_TI = 2;
-    private static final byte ZHEN_DONG_SHAI = 3;
-    private static final byte RE_LIAO_CANG = 4;
-    private static final byte BAN_GUO = 5;
-    private static final byte CHENG_PIN_CANG = 6;
+    public static final byte LENG_PEI = 0;
+    public static final byte HONG_GAN = 1;
+    public static final byte RE_TI = 2;
+    public static final byte ZHEN_DONG_SHAI = 3;
+    public static final byte RE_LIAO_CANG = 4;
+    public static final byte BAN_GUO = 5;
+    public static final byte CHENG_PIN_CANG = 6;
 
-    private static final String LENG_PEI_CODE = "冷配总成";
-    private static final String HONG_GAN_CODE = "烘干总成";
-    private static final String RE_TI_CODE = "热提总成";
-    private static final String ZHEN_DONG_SHAI_CODE = "振动筛总成";
-    private static final String RE_LIAO_CANG_CODE = "热料仓总成";
-    private static final String BAN_GUO_CODE = "拌锅总成";
-    private static final String CHENG_PIN_CANG_CODE = "成品仓总成";
+    public static final String LENG_PEI_CODE = "冷配总成";
+    public static final String HONG_GAN_CODE = "烘干总成";
+    public static final String RE_TI_CODE = "热提总成";
+    public static final String ZHEN_DONG_SHAI_CODE = "振动筛总成";
+    public static final String RE_LIAO_CANG_CODE = "热料仓总成";
+    public static final String BAN_GUO_CODE = "拌锅总成";
+    public static final String CHENG_PIN_CANG_CODE = "成品仓总成";
 
     public static String getCode(Byte type){
         switch (type){
