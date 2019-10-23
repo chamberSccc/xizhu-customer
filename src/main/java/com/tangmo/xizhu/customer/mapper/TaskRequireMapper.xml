@@ -22,12 +22,12 @@
 
     <select id="selectByTaskId" resultMap="TaskRequireMap">
       SELECT uuid,task_no, apply_date,company_name,device_type,contact_name,mobile,assembly_type,trouble_type,
-       task_assign_type,detail,created_by,created_time,detail_audio_id,detail_speech_id from task_require where task_id = #{taskId}
+       task_assign_type,detail,created_by,created_time,detail_audio_id,detail_speech_id from s_task_require where task_id = #{taskId}
     </select>
 
     <!--    todo 缺少图片id的新增和update-->
     <insert id="insertTaskRequire" parameterType="com.tangmo.xizhu.customer.entity.TaskRequire">
-        INSERT INTO task_require
+        INSERT INTO s_task_require
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
@@ -144,7 +144,7 @@
     </insert>
 
     <update id="updateTaskRequire">
-        UPDATE task_require
+        UPDATE s_task_require
         <set>
             <if test="applyDate != null">
                 apply_date = #{applyDate},

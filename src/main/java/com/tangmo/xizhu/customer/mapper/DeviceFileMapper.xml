@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.DeviceFileDao">
+    <resultMap id="DeviceFileMap" type="com.tangmo.xizhu.customer.entity.DeviceFile">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="file_date" property="fileDate"/>
+        <result column="company_name" property="companyName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="device_address" property="deviceAddress"/>
+        <result column="contract_no" property="contractNo"/>
+        <result column="factory_date" property="factoryDate"/>
+        <result column="factory_no" property="factoryNo"/>
+        <result column="check_date" property="checkDate"/>
+        <result column="device_config" property="deviceConfig"/>
+        <result column="comment" property="comment"/>
+        <result column="created_by" property="createdBy"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="DeviceFileMap">
+      SELECT uuid,task_id,file_date,company_name,device_type,device_address,contract_no,factory_date,factory_no,
+      check_date,device_config,comment,created_by
+       from s_device_file where task_id = #{taskId}
+    </select>
+
+    <insert id="insertDeviceFile" parameterType="com.tangmo.xizhu.customer.entity.DeviceFile" useGeneratedKeys="true" keyProperty="uuid">
+        INSERT INTO s_device_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="deviceAddress != null">
+                device_address,
+            </if>
+            <if test="contractNo != null">
+                contract_no,
+            </if>
+            <if test="factoryDate != null">
+                factory_date,
+            </if>
+            <if test="checkDate != null">
+                check_date,
+            </if>
+            <if test="deviceConfig != null">
+                device_config,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="deviceAddress != null">
+                #{deviceAddress},
+            </if>
+            <if test="contractNo != null">
+                #{contractNo},
+            </if>
+            <if test="factoryDate != null">
+                #{factoryDate},
+            </if>
+            <if test="checkDate != null">
+                #{checkDate},
+            </if>
+            <if test="deviceConfig != null">
+                #{deviceConfig},
+            </if>
+            <if test="comment != null">
+                #{comment},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateDeviceFile">
+        UPDATE s_device_file
+        <set>
+            <if test="companyName != null">
+                company_name = #{companyName},
+            </if>
+            <if test="deviceAddress != null">
+                device_address = #{deviceAddress},
+            </if>
+            <if test="contractNo != null">
+                contract_no = #{contractNo},
+            </if>
+            <if test="factoryDate != null">
+                factory_date = #{factoryDate},
+            </if>
+            <if test="checkDate != null">
+                check_date = #{checkDate},
+            </if>
+            <if test="deviceConfig != null">
+                device_config = #{deviceConfig},
+            </if>
+            <if test="comment != null">
+                comment = #{comment},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>

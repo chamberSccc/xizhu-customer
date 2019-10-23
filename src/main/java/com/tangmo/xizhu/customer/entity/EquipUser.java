@@ -3,8 +3,6 @@ package com.tangmo.xizhu.customer.entity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.sql.Date;
-
 /**
  * @author boge
  * @date 2019/10/21
@@ -19,8 +17,7 @@ public class EquipUser {
     @ApiModelProperty(value="成员人名",name="memberName",example="")
     private String memberName;//成员人名
     @ApiModelProperty(value="成员类型 0:带队工程师,1:组员",name="memberType",example="")
-    private String memberType;//成员类型 0:带队工程师,1:组员
+    private Byte memberType;//成员类型 0:带队工程师,1:组员
     @ApiModelProperty(value="工作内容",name="content",example="")
     private String content;//工作内容
-    private Date createdTime;
 }

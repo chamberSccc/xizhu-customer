@@ -30,12 +30,12 @@
     <select id="selectByTaskId" resultMap="FieldFeedbackMap">
       SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,receive_date,assembly_type,trouble_type,
        task_assign_type,detail,solution,result,detail_audio_id,detail_speech_id,rel_audio_id,rel_speech_id,created_by,created_time
-       from field_feedback where task_id = #{taskId}
+       from s_field_feedback where task_id = #{taskId}
     </select>
 
     <!--    todo 缺少图片id的新增和update-->
     <insert id="insertFieldFeedback" parameterType="com.tangmo.xizhu.customer.entity.FieldFeedBack">
-        INSERT INTO field_feedback
+        INSERT INTO s_field_feedback
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
@@ -188,7 +188,7 @@
     </insert>
 
     <update id="updateFieldFeedback">
-        UPDATE field_feedback
+        UPDATE s_field_feedback
         <set>
             <if test="companyName != null">
                 company_name = #{companyName},

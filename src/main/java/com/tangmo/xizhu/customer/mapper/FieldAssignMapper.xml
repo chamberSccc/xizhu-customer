@@ -28,12 +28,12 @@
     <select id="selectByTaskId" resultMap="FieldAssignMap">
       SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,leadre,assign_date,assembly_type,trouble_type,
        task_assign_type,detail,solution,field_target,detail_audio_id,detail_speech_id,created_by,created_time,satisfaction
-        from field_assign where task_id = #{taskId}
+        from s_field_assign where task_id = #{taskId}
     </select>
 
     <!--    todo 缺少图片id的新增和update-->
     <insert id="insertAssign" parameterType="com.tangmo.xizhu.customer.entity.FieldAssign">
-        INSERT INTO field_assign
+        INSERT INTO s_field_assign
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
@@ -180,7 +180,7 @@
     </insert>
 
     <update id="updateFeedback">
-        UPDATE field_feedback
+        UPDATE s_field_feedback
         <set>
             <if test="companyName != null">
                 company_name = #{companyName},

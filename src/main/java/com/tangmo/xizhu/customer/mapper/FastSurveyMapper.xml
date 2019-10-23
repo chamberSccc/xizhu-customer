@@ -30,12 +30,12 @@
     <select id="selectByTaskId" resultMap="FastSurveyMap">
       SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,service_date,assembly_type,trouble_type,
        task_assign_type,detail,solution,result,detail_audio_id,detail_speech_id,sol_audio_id,sol_speech_id,created_by,created_time,satisfaction
-       from fast_survey where task_id = #{taskId}
+       from s_fast_survey where task_id = #{taskId}
     </select>
 
     <!--    todo 缺少图片id的新增和update-->
     <insert id="insertFastSurvey" parameterType="com.tangmo.xizhu.customer.entity.FastSurvey">
-        INSERT INTO fast_survey
+        INSERT INTO s_fast_survey
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
@@ -194,7 +194,7 @@
     </insert>
 
     <update id="updateFastSurvey">
-        UPDATE fast_survey
+        UPDATE s_fast_survey
         <set>
             <if test="companyName != null">
                 company_name = #{companyName},

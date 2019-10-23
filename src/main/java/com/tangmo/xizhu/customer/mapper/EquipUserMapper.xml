@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.EquipUserDao">
+    <resultMap id="EquipUserMap" type="com.tangmo.xizhu.customer.entity.EquipUser">
+        <id column="uuid" property="uuid"/>
+        <result column="device_file_id" property="deviceFileId"/>
+        <result column="member_name" property="memberName"/>
+        <result column="member_type" property="memberType"/>
+        <result column="content" property="content"/>
+    </resultMap>
+
+    <select id="selectByDeviceFileId" resultMap="EquipUserMap">
+      SELECT uuid,device_file_id,member_name,member_type,content from s_equip_user where device_file_id = #{deviceFileId}
+    </select>
+
+    <delete id="deleteByDeviceFileId">
+        delete from s_equip_user where device_file_id = #{deviceFileId}
+    </delete>
+
+    <insert id="insertBatchUser" parameterType="java.util.List">
+        insert into s_equip_user (device_file_id, member_name,  member_type, content, createdby)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.deviceFileId},
+            #{item.memberName},
+            #{item.memberType},
+            #{item.content}
+            )
+        </foreach>
+    </insert>
+</mapper>

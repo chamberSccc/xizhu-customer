@@ -12,7 +12,7 @@
     </resultMap>
 
     <insert id="insertAuditTask" parameterType="com.tangmo.xizhu.customer.entity.AuditTask">
-        INSERT INTO audit_task
+        INSERT INTO s_audit_task
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
@@ -57,6 +57,6 @@
     </insert>
 
     <select id="selectByTaskId" resultMap="AuditTaskMap">
-        select operation,created_by,created_time FROM audit_task where task_id = #{taskId}
+        select operation,created_by,created_time FROM s_audit_task where task_id = #{taskId}
     </select>
 </mapper>

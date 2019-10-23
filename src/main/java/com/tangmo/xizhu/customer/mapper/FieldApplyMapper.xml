@@ -27,12 +27,12 @@
     <select id="selectByTaskId" resultMap="FieldApplyMap">
       SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,apply_user,field_apply_date,assembly_type,trouble_type,
        task_assign_type,detail,solution,field_target,detail_audio_id,detail_speech_id,created_by,created_time
-       from field_apply where task_id = #{taskId}
+       from s_field_apply where task_id = #{taskId}
     </select>
 
     <!--    todo 缺少图片id的新增和update-->
     <insert id="insertFieldApply" parameterType="com.tangmo.xizhu.customer.entity.FieldApply">
-        INSERT INTO field_apply
+        INSERT INTO s_field_apply
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
@@ -173,7 +173,7 @@
     </insert>
 
     <update id="updateFieldApply">
-        UPDATE field_apply
+        UPDATE s_field_apply
         <set>
             <if test="companyName != null">
                 company_name = #{companyName},

@@ -24,11 +24,11 @@
 
     <select id="selectByTaskId" resultMap="SafeConfideMap">
       SELECT uuid,task_id,safe01,safe02,safe03,safe04,safe05,safe06,safe07,safe08,safe09,safe10,safe11,safe12,safe13,safe14
-       from safe_confide where task_id = #{taskId}
+       from s_safe_confide where task_id = #{taskId}
     </select>
 
     <insert id="insertSafeConfide" parameterType="com.tangmo.xizhu.customer.entity.SafeConfide">
-        INSERT INTO safe_confide
+        INSERT INTO s_safe_confide
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
@@ -145,7 +145,7 @@
     </insert>
 
     <update id="updateSafeConfide">
-        UPDATE safe_confide
+        UPDATE s_safe_confide
         <set>
             <if test="safe01 != null">
                 safe01 = #{safe01},

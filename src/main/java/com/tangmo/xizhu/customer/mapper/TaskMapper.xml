@@ -21,11 +21,11 @@
 
     </resultMap>
     <select id="selectTest" resultMap="TaskMap">
-      SELECT task_id, task_type from service_task
+      SELECT task_id, task_type from s_service_task
     </select>
 
     <insert id="insertTask" parameterType="com.tangmo.xizhu.customer.entity.Task">
-        INSERT INTO service_task
+        INSERT INTO s_service_task
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
@@ -130,14 +130,14 @@
     </insert>
 
     <select id="selectByStatusAndUser" resultMap="TaskMap">
-        select * FROM service_task where task_status = #{status}
+        select * FROM s_service_task where task_status = #{status}
         <if test="userId != null">
             and executor = #{userId}
         </if>
     </select>
 
     <update id="updateTaskUser">
-        update service_task set executor = #{userId}
+        update s_service_task set executor = #{userId}
         <if test="status != null">
             ,task_status = #{status}
         </if>
@@ -145,15 +145,15 @@
     </update>
 
     <select id="selectUndoCountByUser" resultType="java.lang.Integer">
-        select count(*) from service_task where executor = #{userId} and task_status = 1
+        select count(*) from s_service_task where executor = #{userId} and task_status = 1
     </select>
 
     <select id="selectUnauditCountByUser" resultType="java.lang.Integer">
-        select count(*) from service_task where executor = #{userId} and task_status = 0
+        select count(*) from s_service_task where executor = #{userId} and task_status = 0
     </select>
 
     <select id="selectById" resultType="java.lang.Integer">
-        select count(*) from service_task where uuid = #{uuid}
+        select count(*) from s_service_task where uuid = #{uuid}
     </select>
 
 

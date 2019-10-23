@@ -29,9 +29,12 @@ public class BaseController {
     protected FieldAssignService fieldAssignService;
     @Resource
     protected FieldFeedbackService fieldFeedbackService;
-    //安全交底表服务类
+    //安全交底表service
     @Resource
     protected SafeConfideService safeConfideService;
+    //设备档案表service
+    @Resource
+    protected DeviceFileService deviceFileService;
 
     protected String getUserId(){
         return "1";
