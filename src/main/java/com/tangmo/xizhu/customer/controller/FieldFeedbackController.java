@@ -3,10 +3,9 @@ package com.tangmo.xizhu.customer.controller;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.FieldFeedBack;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author chen bo
@@ -26,6 +25,8 @@ public class FieldFeedbackController extends BaseController{
      * @date 2019/10/20
      * @description: 增加现场服务反馈单
      */
+    @ApiOperation(value = "新增现场服务反馈单",httpMethod = "POST",notes = "")
+    @PostMapping("")
     public HttpResult addFeedback(@ApiParam(name="现场服务反馈单对象",value="json格式",required=true) @RequestBody FieldFeedBack fieldFeedBack){
         return fieldFeedbackService.addFeedback(fieldFeedBack);
     }
@@ -35,8 +36,10 @@ public class FieldFeedbackController extends BaseController{
      * @return
      * @author chen bo
      * @date 2019/10/20
-     * @description: 修改快速服务反馈单
+     * @description: 修改现场服务反馈单
      */
+    @ApiOperation(value = "修改现场服务反馈单",httpMethod = "PUT",notes = "")
+    @PutMapping("")
     public HttpResult changeFeedback(@ApiParam(name="现场服务反馈单对象",value="json格式",required=true) @RequestBody FieldFeedBack fieldFeedBack){
         return fieldFeedbackService.changeFeedback(fieldFeedBack);
     }
