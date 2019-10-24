@@ -1,14 +1,24 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
-import com.tangmo.xizhu.customer.constant.TaskStatus;
+import com.tangmo.xizhu.customer.constant.TaskAttachConst;
+import com.tangmo.xizhu.customer.constant.TaskStatusConst;
+import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
+import com.tangmo.xizhu.customer.dao.TaskRequireDao;
 import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.TaskAttach;
+import com.tangmo.xizhu.customer.entity.TaskRequire;
+import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
+import com.tangmo.xizhu.customer.entity.converter.TaskConverter;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import com.tangmo.xizhu.customer.service.TaskService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -20,9 +30,30 @@ import javax.annotation.Resource;
 public class TaskServiceImpl implements TaskService {
     @Resource
     private TaskDao taskDao;
+    @Resource
+    private TaskRequireDao taskRequireDao;
+    @Resource
+    private TaskAttachDao taskAttachDao;
     @Override
+    @Transactional
     public HttpResult createTask(Task task) {
+        //新增任务
+        String uuid = EncryptUtil.get32Uuid();
+        task.setUuid(uuid);
+        task.setTaskStatus(TaskStatusConst.INITIAL);
         taskDao.insertTask(task);
+        //新增任务需求单
+        TaskRequire require = TaskConverter.task2Require(task);
+        String requireId = EncryptUtil.get32Uuid();
+        require.setUuid(requireId);
+        require.setTaskNo("001");
+        taskRequireDao.insertTaskRequire(require);
+        //添加任务需求单图片附件
+        List<TaskAttach> attaches = TaskAttachConverter.String2Entity(require.getDetailPictureList(),requireId,
+                TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.PICTURE);
+        if(attaches != null){
+            taskAttachDao.insertBatchAttach(attaches);
+        }
         return HttpResult.success();
     }
 
@@ -45,12 +76,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public HttpResult getUndoTaskList(String userId, TaskSearch taskSearch) {
-        return HttpResult.success(taskDao.selectByStatusAndUser(userId,TaskStatus.DEALING));
+        return HttpResult.success(taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING));
     }
 
     @Override
     public HttpResult getDoneTaskList(String userId, TaskSearch taskSearch) {
-        return HttpResult.success(taskDao.selectByStatusAndUser(userId,TaskStatus.COMPLETE));
+        return HttpResult.success(taskDao.selectByStatusAndUser(userId, TaskStatusConst.COMPLETE));
     }
 
     @Override

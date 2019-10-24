@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.FieldApply;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(description="现场任务申请人接口")
 @RestController
 @RequestMapping("/fieldApply")
-public class FieldApplyController extends BaseController{
+public class FieldApplyController extends BaseController {
 
     /**
      * @param fieldApply

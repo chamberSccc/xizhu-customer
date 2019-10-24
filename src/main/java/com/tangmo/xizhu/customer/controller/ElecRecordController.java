@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.ElecRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(description="安装工作记录(电气)表接口")
 @RestController
 @RequestMapping("/elecRecord")
-public class ElecRecordController extends BaseController{
+public class ElecRecordController extends BaseController {
 
     /**
      * @param elecRecord

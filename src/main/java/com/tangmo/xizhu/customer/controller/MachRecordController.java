@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.MachRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(description="安装工作记录(机械)表接口")
 @RestController
 @RequestMapping("/machineRecord")
-public class MachRecordController extends BaseController{
+public class MachRecordController extends BaseController {
 
     /**
      * @param machRecord

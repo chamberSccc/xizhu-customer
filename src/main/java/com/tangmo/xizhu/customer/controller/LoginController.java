@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.LogInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "登录相关接口")
 @RestController
 @RequestMapping("/login")
-public class LoginController extends BaseController{
+public class LoginController extends BaseController {
 
     /**
      * @param logInfo

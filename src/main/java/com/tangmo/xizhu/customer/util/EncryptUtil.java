@@ -62,11 +62,4 @@ public class EncryptUtil {
         }
         return val.toString();
     }
-
-    public static void main(String[] args) {
-        System.out.println(DigestUtils.md5Hex("123456"));
-    }
-
-
-
 }

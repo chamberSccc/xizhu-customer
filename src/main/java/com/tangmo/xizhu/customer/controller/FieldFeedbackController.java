@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.FieldFeedBack;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(description="现场服务反馈单接口")
 @RestController
 @RequestMapping("/fieldFeedback")
-public class FieldFeedbackController extends BaseController{
+public class FieldFeedbackController extends BaseController {
 
     /**
      * @param fieldFeedBack

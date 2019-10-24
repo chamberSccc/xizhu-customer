@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.UserDao">
+    <resultMap id="UserMap" type="com.tangmo.xizhu.customer.entity.User">
+        <id column="uuid" property="uuid"/>
+        <result column="user_name" property="userName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="password" property="password"/>
+        <result column="user_type" property="userType"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="avatar" property="avatar"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+    <select id="selectByLogInfo" resultMap="UserMap">
+      SELECT uuid,mobile,password  from s_user where mobile = #{mobile} and password = #{password} and status = 0
+    </select>
+
+    <select id="selectByMobile" resultMap="UserMap">
+      SELECT uuid,mobile,password  from s_user where mobile = #{mobile} and status = 0
+    </select>
+
+    <select id="selectByUserId" resultMap="UserMap">
+      SELECT uuid,mobile,password  from s_user where uuid = #{userId} and status = 0
+    </select>
+
+    <insert id="insertUser" parameterType="com.tangmo.xizhu.customer.entity.User">
+        INSERT INTO s_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="deptId != null">
+                dept_id,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="userName != null">
+                #{userName},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="userType != null">
+                #{userType},
+            </if>
+            <if test="deptId != null">
+                #{deptId},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime},
+            </if>
+            <if test="status != null">
+                0,
+            </if>
+        </trim>
+    </insert>
+
+    <update id="deleteById">
+        update s_user set status = 1 where uuid = #{userId}
+    </update>
+
+    <update id="updatePwd">
+        update s_user set password = #{newPwd} where uuid = #{userId}
+    </update>
+
+    <update id="updateAvatar">
+        update s_user set avatar = #{avatar} where uuid = #{userId}
+    </update>
+</mapper>

@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.SafeConfide;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(description="安全交底表接口")
 @RestController
 @RequestMapping("/safeConfide")
-public class SafeConfideController extends BaseController{
+public class SafeConfideController extends BaseController {
 
     /**
      * @param safeConfide

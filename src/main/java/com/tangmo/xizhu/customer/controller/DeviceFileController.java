@@ -1,8 +1,8 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.DeviceFile;
-import com.tangmo.xizhu.customer.entity.SafeConfide;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(description="设备档案表接口")
 @RestController
 @RequestMapping("/deviceFile")
-public class DeviceFileController extends BaseController{
+public class DeviceFileController extends BaseController {
 
     /**
      * @param deviceFile

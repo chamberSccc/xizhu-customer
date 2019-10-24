@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import io.swagger.annotations.Api;
@@ -19,7 +20,7 @@ import java.util.List;
 @Api(description="任务相关接口")
 @RestController
 @RequestMapping("/task")
-public class TaskController extends BaseController{
+public class TaskController extends BaseController {
 
     /**
      * @param task	任务实体类
@@ -31,6 +32,7 @@ public class TaskController extends BaseController{
     @ApiOperation(value = "发布任务",httpMethod = "POST",notes = "")
     @PostMapping
     public HttpResult addTask(@ApiParam(name="任务对象",value="json格式",required=true) @RequestBody Task task){
+        task.setCreatedBy(getUserId());
         return taskService.createTask(task);
     }
     /**

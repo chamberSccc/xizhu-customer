@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.AuditTask;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description="审批相关接口")
 @RestController
 @RequestMapping("/audit")
-public class AuditTaskController extends BaseController{
+public class AuditTaskController extends BaseController {
     /**
      * @param auditTask
      * @return

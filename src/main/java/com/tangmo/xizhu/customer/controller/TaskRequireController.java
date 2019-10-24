@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.TaskRequire;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(description="任务需求单接口")
 @RestController
 @RequestMapping("/require")
-public class TaskRequireController extends BaseController{
+public class TaskRequireController extends BaseController {
 
     /**
      * @param taskRequire

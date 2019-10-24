@@ -1,8 +1,12 @@
-package com.tangmo.xizhu.customer.controller;
+package com.tangmo.xizhu.customer.controller.base;
 
 import com.tangmo.xizhu.customer.service.*;
+import com.tangmo.xizhu.customer.util.MoblieUtil;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Author chen bo
@@ -42,11 +46,29 @@ public class BaseController {
     @Resource
     protected ElecRecordService elecRecordService;
 
+    public HttpServletRequest getRequest() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    }
+
     protected String getUserId(){
         return "1";
     }
 
     protected Byte getUserType(){
         return 0;
+    }
+
+    protected String getDeptId(){return "1";}
+
+    protected String getDeptName(){return "1";}
+
+    /**
+     * @param
+     * @author chen bo
+     * @date 2019/10/24
+     * @description: 判断是否移动端登录
+     */
+    protected Boolean getAgent(){
+        return MoblieUtil.judgeIsMoblie(getRequest());
     }
 }

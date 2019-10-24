@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.entity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.sql.Date;
 import java.util.List;
 
 @Data
@@ -20,7 +21,6 @@ public class Task {
     @ApiModelProperty(value="联系电话",name="mobile",example="")
     private String mobile;//联系电话
     private String taskNo;
-    private String taskCode;
     @ApiModelProperty(value="任务分配类型 安调设备，处理问题",name="taskAssignType",example="")
     private String taskAssignType;//任务分配类型 安调设备，处理问题
     @ApiModelProperty(value="总成类型，可多选，逗号分隔",name="assemblyType",example="")
@@ -34,7 +34,7 @@ public class Task {
     private Byte taskType;
     private String createdBy;
     private String executor;
-    private String createdTime;
+    private Date createdTime;
 
     //现场细节附件
     @ApiModelProperty(value="细节描述视频文件id，先上传后台返回id",name="detailAudioId",example="")

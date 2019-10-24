@@ -6,7 +6,7 @@ package com.tangmo.xizhu.customer.constant;
  * @Version V1.0
  * @Description: 任务状态
  **/
-public class TaskStatus {
+public class TaskStatusConst {
 
     public static final byte REJECT = -1;// 已拒绝
     public static final byte INITIAL = 0;//已发布，审核中

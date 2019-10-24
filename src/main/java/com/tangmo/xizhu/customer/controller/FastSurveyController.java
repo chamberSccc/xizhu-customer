@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.FastSurvey;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description="快速服务满意度调查表接口")
 @RestController
 @RequestMapping("/fastSurvey")
-public class FastSurveyController extends BaseController{
+public class FastSurveyController extends BaseController {
     /**
      * @param fastSurvey
      * @return

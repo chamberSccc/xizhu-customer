@@ -11,8 +11,8 @@ import lombok.Data;
  **/
 @Data
 public class LogInfo {
-    @ApiModelProperty(value="用户名",name="account",example="")
-    private String account;
+    @ApiModelProperty(value="手机号",name="mobile",example="")
+    private String mobile;
     @ApiModelProperty(value="密码",name="password",example="")
     private String password;
 }
