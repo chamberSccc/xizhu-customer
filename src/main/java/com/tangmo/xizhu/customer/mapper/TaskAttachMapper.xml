@@ -5,21 +5,23 @@
 
     <select id="selectByParentAndType" resultType="java.lang.String">
       select attach_id from s_task_attach where parent_id = #{parentId} and parent_type = #{parentType} and attach_type = #{attachType}
+      and area_type = #{areaType}
     </select>
 
     <delete id="deleteByParentAndType">
-        delete  from s_task_attach where parent_id = #{parentId} and parent_type = #{parentType} and attach_type = #{attachType}
+        delete  from s_task_attach where parent_id = #{parentId} and parent_type = #{parentType} and attach_type = #{attachType} and area_type = #{areaType}
     </delete>
 
     <insert id="insertBatchAttach" parameterType="java.util.List">
-        insert into s_task_attach (attach_id, parent_id,  parent_type, attach_type)
+        insert into s_task_attach (attach_id, parent_id,  parent_type, attach_type,area_type)
         values
         <foreach collection="list" item="item" index="index" separator=",">
             (
             #{item.attachId},
             #{item.parentId},
             #{item.parentType},
-            #{item.attachType}
+            #{item.attachType},
+            #{item.areaType}
             )
         </foreach>
     </insert>

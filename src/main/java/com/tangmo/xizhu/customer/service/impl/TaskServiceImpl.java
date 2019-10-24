@@ -56,7 +56,7 @@ public class TaskServiceImpl implements TaskService {
         taskRequireDao.insertTaskRequire(require);
         //添加任务需求单图片附件
         List<TaskAttach> attaches = TaskAttachConverter.String2Entity(require.getDetailPictureList(),requireId,
-                TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.PICTURE);
+                TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
         if(attaches != null){
             taskAttachDao.insertBatchAttach(attaches);
         }

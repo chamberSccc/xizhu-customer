@@ -1,17 +1,23 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.FastFeedbackDao;
+import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.dao.TaskRequireDao;
 import com.tangmo.xizhu.customer.entity.FastFeedBack;
+import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.TaskRequire;
+import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskRequireConverter;
 import com.tangmo.xizhu.customer.service.FastFeedbackService;
 import com.tangmo.xizhu.customer.service.TaskRequireService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -26,9 +32,20 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
     private FastFeedbackDao fastFeedbackDao;
     @Resource
     private TaskRequireService taskRequireService;
+    @Resource
+    private TaskAttachDao taskAttachDao;
     @Override
     public HttpResult addFastFeedback(FastFeedBack fastFeedBack) {
+        String uuid = EncryptUtil.get32Uuid();
+        fastFeedBack.setUuid(uuid);
         fastFeedbackDao.insertFastFeedback(fastFeedBack);
+        //添加任务需求单图片附件
+        List<TaskAttach> detailAttach = TaskAttachConverter.String2Entity(fastFeedBack.getDetailPictureList(),uuid,
+                TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+        List<TaskAttach> solAttach = TaskAttachConverter.String2Entity(fastFeedBack.getDetailPictureList(),uuid,
+                TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.SOLUTION);
+        detailAttach.addAll(solAttach);
+        taskAttachDao.insertBatchAttach(detailAttach);
         return HttpResult.success();
     }
 

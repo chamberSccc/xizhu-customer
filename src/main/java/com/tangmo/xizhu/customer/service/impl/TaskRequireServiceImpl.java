@@ -42,7 +42,7 @@ public class TaskRequireServiceImpl implements TaskRequireService {
         if(taskRequire != null){
             String requireId = taskRequire.getUuid();
             List<String> attaches = taskAttachDao.selectByParentAndType(requireId, TaskAttachConst.REQUIRE_ATTACH,
-                    TaskAttachConst.PICTURE);
+                    TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
             taskRequire.setDetailPictureList(attaches);
         }
         return HttpResult.success(taskRequire);

@@ -25,7 +25,7 @@ public interface TaskAttachDao {
      * @description: 根据父类型和附件类型查询任务附件
      */
     List<String> selectByParentAndType(@Param("parentId") String parentId,@Param("parentType") Byte parentType,
-                                       @Param("attachType") Byte attachType);
+                                       @Param("attachType") Byte attachType,@Param("areaType") Byte areaType);
 
     /**
      * @param list

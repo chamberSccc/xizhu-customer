@@ -8,7 +8,14 @@ package com.tangmo.xizhu.customer.constant;
  **/
 public class TaskAttachConst {
 
-    public static final byte REQUIRE_ATTACH = 0;
+    //parentType
+    public static final byte REQUIRE_ATTACH = 0;//任务需求单
+    public static final byte FAST_FB_ATTACH = 1;//快速服务反馈单
 
+    //attachType
     public static final byte PICTURE = 0;
+
+    //areaType
+    public static final byte DETAIL = 0;
+    public static final byte SOLUTION = 1;//快速服务处理方案
 }

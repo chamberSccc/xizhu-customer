@@ -16,4 +16,6 @@ public class TaskAttach {
     private Byte parentType;
     //0: 图片
     private Byte attachType;
+    //0:细节 1:快速服务处理方案
+    private Byte areaType;
 }

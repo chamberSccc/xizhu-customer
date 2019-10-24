@@ -18,12 +18,13 @@ public class TaskAttachConverter {
      * @param parentId	    父Id
      * @param parentType	父类型
      * @param attachType	附件类型
+     * @param attachType	区域类型 细节，处理方案
      * @return
      * @author chen bo
      * @date 2019/10/24
      * @description: TODO
      */
-    public static List<TaskAttach> String2Entity(List<String> list, String parentId, Byte parentType, Byte attachType){
+    public static List<TaskAttach> String2Entity(List<String> list, String parentId, Byte parentType, Byte attachType,Byte areaType){
         if(list == null || list.size() == 0 || parentId == null || parentType == null || attachType == null){
             return null;
         }
@@ -35,6 +36,7 @@ public class TaskAttachConverter {
             taskAttach.setAttachType(attachType);
             taskAttach.setParentId(parentId);
             taskAttach.setParentType(parentType);
+            taskAttach.setAreaType(areaType);
             result.add(taskAttach);
         }
         return result;
