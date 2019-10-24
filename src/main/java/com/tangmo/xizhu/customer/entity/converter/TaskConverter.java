@@ -24,6 +24,7 @@ public class TaskConverter {
         TaskRequire taskRequire = new TaskRequire();
         taskRequire.setApplyDate(task.getCreatedTime());
         taskRequire.setCompanyName(task.getCompanyName());
+        taskRequire.setMobile(task.getMobile());
         taskRequire.setDeviceType(task.getDeviceType());
         taskRequire.setContactName(task.getContactName());
         taskRequire.setTaskAssignType(task.getTaskAssignType());

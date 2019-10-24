@@ -42,7 +42,8 @@ public interface TaskDao {
      * @date 2019/10/21
      * @description: 修改任务执行人
      */
-    void updateTaskUser(@Param("taskId") String taskId,@Param("userId") String userId,@Param("status") Byte status);
+    void updateTaskUser(@Param("taskId") String taskId,@Param("userId") String userId,
+                        @Param("status") Byte status,@Param("taskType") Byte taskType);
 
     /**
      * @param taskId

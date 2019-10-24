@@ -9,5 +9,5 @@ package com.tangmo.xizhu.customer.constant;
 public class AuditOperateConst {
     public static final byte REJECT = -1;// 拒绝
     public static final byte ASSIGN = 0;// 分配
-    public static final byte COMPLETE = -1;// 通过
+    public static final byte COMPLETE = 1;// 标记完成
 }

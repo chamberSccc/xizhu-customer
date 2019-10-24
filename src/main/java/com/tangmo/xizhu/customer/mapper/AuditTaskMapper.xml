@@ -29,9 +29,13 @@
             <if test="operation != null">
                 operation,
             </if>
+            <if test="taskType != null">
+                task_type,
+            </if>
             <if test="createdBy != null">
                 created_by,
             </if>
+                created_time,
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -50,9 +54,13 @@
             <if test="operation != null">
                 #{operation},
             </if>
+            <if test="taskType != null">
+                #{taskType},
+            </if>
             <if test="createdBy != null">
                 #{createdBy},
             </if>
+                getDate(),
         </trim>
     </insert>
 

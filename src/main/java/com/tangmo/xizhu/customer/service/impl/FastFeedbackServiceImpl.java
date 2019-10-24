@@ -2,8 +2,13 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.dao.FastFeedbackDao;
+import com.tangmo.xizhu.customer.dao.TaskDao;
+import com.tangmo.xizhu.customer.dao.TaskRequireDao;
 import com.tangmo.xizhu.customer.entity.FastFeedBack;
+import com.tangmo.xizhu.customer.entity.TaskRequire;
+import com.tangmo.xizhu.customer.entity.converter.TaskRequireConverter;
 import com.tangmo.xizhu.customer.service.FastFeedbackService;
+import com.tangmo.xizhu.customer.service.TaskRequireService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +24,8 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
 
     @Resource
     private FastFeedbackDao fastFeedbackDao;
+    @Resource
+    private TaskRequireService taskRequireService;
     @Override
     public HttpResult addFastFeedback(FastFeedBack fastFeedBack) {
         fastFeedbackDao.insertFastFeedback(fastFeedBack);
@@ -33,6 +40,14 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
 
     @Override
     public HttpResult getByTaskId(String taskId) {
-        return HttpResult.success(fastFeedbackDao.selectByTaskId(taskId));
+        FastFeedBack fastFeedBack = fastFeedbackDao.selectByTaskId(taskId);
+        //如果未填写，返回公共信息
+        if(fastFeedBack == null){
+            TaskRequire taskRequire = (TaskRequire) taskRequireService.getByTaskId(taskId).getData();
+            if(taskRequire != null){
+                fastFeedBack = TaskRequireConverter.require2FastFb(taskRequire);
+            }
+        }
+        return HttpResult.success(fastFeedBack);
     }
 }

@@ -7,7 +7,9 @@ import com.tangmo.xizhu.customer.dao.AuditTaskDao;
 import com.tangmo.xizhu.customer.entity.AuditTask;
 import com.tangmo.xizhu.customer.service.AuditTaskService;
 import com.tangmo.xizhu.customer.service.TaskService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -24,12 +26,14 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     @Resource
     private AuditTaskDao auditTaskDao;
     @Override
+    @Transactional
     public HttpResult assignTask(AuditTask auditTask) {
         //如果当前任务已完成，不能审核
         //修改任务执行人
-        taskService.changeTaskUser(auditTask.getTaskId(),auditTask.getAssignUser(), TaskStatusConst.DEALING);
+        taskService.changeTaskUser(auditTask.getTaskId(),auditTask.getAssignUser(), TaskStatusConst.DEALING,auditTask.getTaskType());
         //新增审批流
         auditTask.setOperation(AuditOperateConst.ASSIGN);
+        auditTask.setUuid(EncryptUtil.get32Uuid());
         auditTaskDao.insertAuditTask(auditTask);
         return HttpResult.success();
     }

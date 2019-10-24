@@ -31,6 +31,7 @@ public class AuditTaskController extends BaseController {
     @ApiOperation(value = "分派任务",httpMethod = "POST",notes = "")
     @PostMapping("/assign")
     public HttpResult assignTask(@ApiParam(name="审批信息对象",value="json格式",required=true) @RequestBody AuditTask auditTask){
+        auditTask.setCreatedBy(getUserId());
         return auditTaskService.assignTask(auditTask);
     }
 

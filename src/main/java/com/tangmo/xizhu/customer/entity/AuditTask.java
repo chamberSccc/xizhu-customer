@@ -19,6 +19,8 @@ public class AuditTask {
     @ApiModelProperty(value="备注",name="comment",example="")
     private String comment;
     private Byte operation;
+    @ApiModelProperty(value="任务类型0:快速服务 1:现场服务 2:安调设备",name="taskType",example="")
+    private Byte taskType;
     private String createdBy;
     private String createdTime;
 }

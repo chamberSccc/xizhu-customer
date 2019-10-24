@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.constant.TaskStatusConst;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -42,11 +45,14 @@ public class TaskServiceImpl implements TaskService {
         task.setUuid(uuid);
         task.setTaskStatus(TaskStatusConst.INITIAL);
         taskDao.insertTask(task);
-        //新增任务需求单
+        task.setCreatedTime(new Date(System.currentTimeMillis()));
+        //新增任务需求单，转换任务中相同信息
         TaskRequire require = TaskConverter.task2Require(task);
         String requireId = EncryptUtil.get32Uuid();
         require.setUuid(requireId);
+        require.setTaskId(uuid);
         require.setTaskNo("001");
+        require.setCreatedBy(task.getCreatedBy());
         taskRequireDao.insertTaskRequire(require);
         //添加任务需求单图片附件
         List<TaskAttach> attaches = TaskAttachConverter.String2Entity(require.getDetailPictureList(),requireId,
@@ -63,8 +69,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public HttpResult changeTaskUser(String taskId, String userId, Byte taskStatus) {
-        taskDao.updateTaskUser(taskId, userId, taskStatus);
+    public HttpResult changeTaskUser(String taskId, String userId, Byte taskStatus,Byte taskType) {
+        taskDao.updateTaskUser(taskId, userId, taskStatus,taskType);
         return HttpResult.success();
     }
 
@@ -76,11 +82,19 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public HttpResult getUndoTaskList(String userId, TaskSearch taskSearch) {
-        return HttpResult.success(taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING));
+        Page page = taskSearch;
+        page.startPage();
+        List<Task> list = taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING);
+        page.setResult(list);
+        return HttpResult.success(page);
     }
 
     @Override
     public HttpResult getDoneTaskList(String userId, TaskSearch taskSearch) {
+        Page page = taskSearch;
+        page.startPage();
+        List<Task> list = taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING);
+        page.setResult(list);
         return HttpResult.success(taskDao.selectByStatusAndUser(userId, TaskStatusConst.COMPLETE));
     }
 

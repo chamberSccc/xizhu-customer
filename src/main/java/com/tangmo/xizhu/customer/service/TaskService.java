@@ -39,7 +39,7 @@ public interface TaskService {
      * @date 2019/10/21
      * @description: 修改任务执行人
      */
-    HttpResult changeTaskUser(String taskId,String userId,Byte taskStatus);
+    HttpResult changeTaskUser(String taskId,String userId,Byte taskStatus,Byte taskType);
 
     /**
      * @param taskId
@@ -56,7 +56,7 @@ public interface TaskService {
      * @return com.tangmo.xizhu.customer.common.HttpResult
      * @author chen bo
      * @date 2019/10/15
-     * @description: 获取未完成任务列表
+     * @description: 获取未完成任务列表，分页
      */
     HttpResult getUndoTaskList(String userId, TaskSearch taskSearch);
 

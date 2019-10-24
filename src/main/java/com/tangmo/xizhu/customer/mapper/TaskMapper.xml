@@ -72,9 +72,7 @@
             <if test="executor != null">
                 executor,
             </if>
-            <if test="createdTime != null">
                 created_time,
-            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -123,9 +121,7 @@
             <if test="executor != null">
                 #{executor},
             </if>
-            <if test="createdTime != null">
-                getDate(),
-            </if>
+                getDate()
         </trim>
     </insert>
 
@@ -140,6 +136,9 @@
         update s_service_task set executor = #{userId}
         <if test="status != null">
             ,task_status = #{status}
+        </if>
+        <if test="taskType != null">
+            ,task_type = #{taskType}
         </if>
         where uuid = #{taskId}
     </update>
