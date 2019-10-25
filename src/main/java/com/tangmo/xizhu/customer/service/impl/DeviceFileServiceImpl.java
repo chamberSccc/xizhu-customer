@@ -3,8 +3,10 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.dao.DeviceFileDao;
 import com.tangmo.xizhu.customer.dao.EquipUserDao;
+import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.DeviceFile;
 import com.tangmo.xizhu.customer.entity.EquipUser;
+import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.service.DeviceFileService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class DeviceFileServiceImpl implements DeviceFileService {
     private DeviceFileDao deviceFileDao;
     @Resource
     private EquipUserDao equipUserDao;
+    @Resource
+    private TaskDao taskDao;
     @Override
     @Transactional
     public HttpResult addDeviceFile(DeviceFile deviceFile) {
@@ -54,8 +58,13 @@ public class DeviceFileServiceImpl implements DeviceFileService {
     @Override
     public HttpResult getByTaskId(String taskId) {
         DeviceFile deviceFile = deviceFileDao.selectByTaskId(taskId);
-        List<EquipUser> list = equipUserDao.selectByDeviceFileId(deviceFile.getUuid());
-        deviceFile.setUserList(list);
+        if(deviceFile == null){
+            Task task = taskDao.selectById(taskId);
+            deviceFile.setDeviceType(task.getDeviceType());
+        }else{
+            List<EquipUser> list = equipUserDao.selectByDeviceFileId(deviceFile.getUuid());
+            deviceFile.setUserList(list);
+        }
         return HttpResult.success(deviceFile);
     }
 }

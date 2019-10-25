@@ -1,10 +1,14 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.constant.AuditOperateConst;
 import com.tangmo.xizhu.customer.constant.TaskStatusConst;
 import com.tangmo.xizhu.customer.dao.AuditTaskDao;
+import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.AuditTask;
+import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import com.tangmo.xizhu.customer.service.AuditTaskService;
 import com.tangmo.xizhu.customer.service.TaskService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -25,6 +30,8 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     private TaskService taskService;
     @Resource
     private AuditTaskDao auditTaskDao;
+    @Resource
+    private TaskDao taskDao;
     @Override
     @Transactional
     public HttpResult assignTask(AuditTask auditTask) {
@@ -57,5 +64,32 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     @Override
     public Boolean checkTaskStatus(String taskId) {
         return null;
+    }
+
+    @Override
+    public HttpResult getUndoAuditList(TaskSearch taskSearch) {
+        Page page = taskSearch;
+        page.startPage();
+        List<Task> list = taskDao.selectByStatus(TaskStatusConst.INITIAL);
+        page.setResult(list);
+        return HttpResult.success(page);
+    }
+
+    @Override
+    public HttpResult getDoneAuditList(TaskSearch taskSearch) {
+        Page page = taskSearch;
+        page.startPage();
+        List<Task> list = taskDao.selectByStatus(TaskStatusConst.DEALING);
+        page.setResult(list);
+        return HttpResult.success(page);
+    }
+
+    @Override
+    public HttpResult getRejectAuditList(TaskSearch taskSearch) {
+        Page page = taskSearch;
+        page.startPage();
+        List<Task> list = taskDao.selectByStatus(TaskStatusConst.REJECT);
+        page.setResult(list);
+        return HttpResult.success(page);
     }
 }

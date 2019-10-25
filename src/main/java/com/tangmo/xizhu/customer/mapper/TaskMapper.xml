@@ -148,7 +148,7 @@
     </select>
 
     <select id="selectUnauditCountByUser" resultType="java.lang.Integer">
-        select count(*) from s_service_task where executor = #{userId} and task_status = 0
+        select count(*) from s_service_task where  task_status = 0
     </select>
 
     <select id="selectById" resultType="java.lang.Integer">

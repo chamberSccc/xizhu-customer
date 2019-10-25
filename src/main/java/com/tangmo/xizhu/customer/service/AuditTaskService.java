@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.service;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.AuditTask;
+import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 
 /**
  * @Author chen bo
@@ -46,4 +47,25 @@ public interface AuditTaskService {
      * @description: 检查任务是否已完成
      */
     Boolean checkTaskStatus(String taskId);
+
+    /**
+     * 获取待审批列表
+     * @param taskSearch
+     * @return
+     */
+    HttpResult getUndoAuditList(TaskSearch taskSearch);
+
+    /**
+     * 获取已审批列表
+     * @param taskSearch
+     * @return
+     */
+    HttpResult getDoneAuditList(TaskSearch taskSearch);
+
+    /**
+     * 获取已拒绝审批列表
+     * @param taskSearch
+     * @return
+     */
+    HttpResult getRejectAuditList(TaskSearch taskSearch);
 }
