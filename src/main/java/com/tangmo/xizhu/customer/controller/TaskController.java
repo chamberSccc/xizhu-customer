@@ -198,7 +198,7 @@ public class TaskController extends BaseController {
     @ApiOperation(value = "获取安装工作记录(机械)",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/machineRecord")
     public HttpResult<MachRecord> getMachineRecord(@PathVariable String taskId){
-        return null;
+        return machRecordService.getByTaskId(taskId);
     }
     /**
      * @param taskId
@@ -210,7 +210,7 @@ public class TaskController extends BaseController {
     @ApiOperation(value = "获取安装工作记录(电气)",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/elecRecord")
     public HttpResult<ElecRecord> getElecRecord(@PathVariable String taskId){
-        return null;
+        return elecRecordService.getByTaskId(taskId);
     }
 
     /**
