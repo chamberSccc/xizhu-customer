@@ -45,6 +45,8 @@ public class BaseController {
     //电气安装工作记录service
     @Resource
     protected ElecRecordService elecRecordService;
+    @Resource
+    protected FilePathService filePathService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
