@@ -40,15 +40,14 @@ public class FilePathServiceImpl implements FilePathService {
 
     @Override
     public ResponseEntity<byte[]> downloadFile(String fileId,String agent) {
-//        FilePath fp = filePathDao.selectById(fileId);
-
+        FilePath fp = filePathDao.selectById(fileId);
         ResponseEntity<byte[]> responseEntity = null;
         try {
-            FilePath fp = new FilePath();
-            fp.setUserId("1");
-            fp.setFileType("jpg");
-            fp.setFilePath("/Users/boge/Downloads/xizhu-customer/attach/1/29ff520695534d659c35ad9ad523f7d7.jpg");
-            fp.setUuid("29ff520695534d659c35ad9ad523f7d7");
+//            FilePath fp = new FilePath();
+//            fp.setUserId("1");
+//            fp.setFileType("jpg");
+//            fp.setFilePath("/Users/boge/Downloads/xizhu-customer/attach/1/29ff520695534d659c35ad9ad523f7d7.jpg");
+//            fp.setUuid("29ff520695534d659c35ad9ad523f7d7");
             if (fp == null || fp.getFilePath() == null) {
                 return null;
             }
