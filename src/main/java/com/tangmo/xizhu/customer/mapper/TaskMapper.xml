@@ -159,9 +159,7 @@
         select count(*) from s_service_task where  task_status = 0
     </select>
 
-    <select id="selectById" resultType="java.lang.Integer">
-        select count(*) from s_service_task where uuid = #{uuid}
+    <select id="selectById" resultMap="TaskMap">
+        select * from s_service_task where uuid = #{uuid}
     </select>
-
-
 </mapper>

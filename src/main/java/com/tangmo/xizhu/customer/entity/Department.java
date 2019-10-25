@@ -1,5 +1,6 @@
 package com.tangmo.xizhu.customer.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
 public class Department {
 
     private String uuid;
+    @ApiModelProperty(value="部门名称",name="deptName",example="")
     private String deptName;
     private String createdBy;
     private String createdTime;

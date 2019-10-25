@@ -47,6 +47,8 @@ public class BaseController {
     protected ElecRecordService elecRecordService;
     @Resource
     protected FilePathService filePathService;
+    @Resource
+    protected DeptService deptService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

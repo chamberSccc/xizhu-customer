@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.DeptDao">
+    <resultMap id="DeptMap" type="com.tangmo.xizhu.customer.entity.Department">
+        <id column="uuid" property="uuid"/>
+        <result column="dept_name" property="userName"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="DeptMap">
+      SELECT uuid,dept_name  from s_department where uuid = #{deptId} and status = 0
+    </select>
+
+    <select id="selectAllDept" resultMap="DeptMap">
+        SELECT uuid,dept_name  from s_department where status = 0
+    </select>
+    <insert id="insertUser" parameterType="com.tangmo.xizhu.customer.entity.Department">
+        INSERT INTO s_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="deptName != null">
+                dept_name,
+            </if>
+            created_time,status
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="deptName != null">
+                #{deptName},
+            </if>
+            getDate(),0
+        </trim>
+    </insert>
+
+    <update id="deleteById">
+        update s_department set status = 1 where uuid = #{userId}
+    </update>
+
+    <update id="updateDept">
+        update s_department set dept_name = #{deptName} where uuid = #{uuid}
+    </update>
+</mapper>

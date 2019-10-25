@@ -50,22 +50,34 @@ public interface AuditTaskService {
 
     /**
      * 获取待审批列表
+     * @param userId
      * @param taskSearch
      * @return
      */
-    HttpResult getUndoAuditList(TaskSearch taskSearch);
+    HttpResult getUndoAuditList(String userId,TaskSearch taskSearch);
 
     /**
      * 获取已审批列表
+     * @param userId
      * @param taskSearch
      * @return
      */
-    HttpResult getDoneAuditList(TaskSearch taskSearch);
+    HttpResult getDoneAuditList(String userId,TaskSearch taskSearch);
 
     /**
      * 获取已拒绝审批列表
+     * @param userId
      * @param taskSearch
      * @return
      */
-    HttpResult getRejectAuditList(TaskSearch taskSearch);
+    HttpResult getRejectAuditList(String userId,TaskSearch taskSearch);
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/25
+     * @description: 获取任务审批流
+     */
+    HttpResult getAuditFlowList(String taskId);
 }

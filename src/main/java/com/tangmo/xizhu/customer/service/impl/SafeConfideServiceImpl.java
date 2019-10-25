@@ -4,6 +4,7 @@ import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.dao.SafeConfideDao;
 import com.tangmo.xizhu.customer.entity.SafeConfide;
 import com.tangmo.xizhu.customer.service.SafeConfideService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ public class SafeConfideServiceImpl implements SafeConfideService {
     private SafeConfideDao safeConfideDao;
     @Override
     public HttpResult addSafeConfide(SafeConfide safeConfide) {
+        safeConfide.setUuid(EncryptUtil.get32Uuid());
         safeConfideDao.insertSafeConfide(safeConfide);
         return HttpResult.success();
     }

@@ -25,6 +25,10 @@
       SELECT uuid,mobile,password  from s_user where uuid = #{userId} and status = 0
     </select>
 
+    <select id="selectByDeptId" resultMap="UserMap">
+        SELECT uuid,mobile,password  from s_user where dept_id = #{deptId} and status = 0
+    </select>
+
     <insert id="insertUser" parameterType="com.tangmo.xizhu.customer.entity.User">
         INSERT INTO s_user
         <trim prefix="(" suffix=")" suffixOverrides=",">

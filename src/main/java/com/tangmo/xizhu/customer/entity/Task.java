@@ -30,6 +30,7 @@ public class Task {
     @ApiModelProperty(value="现场细节描述",name="detail",example="")
     private String detail;//细节描述
     private Byte isOutservice;
+    @ApiModelProperty(value="任务状态 -1:拒绝 0:审核中 1:审核完成 2:任务完成",name="taskStatus",example="")
     private Byte taskStatus;
     private Byte taskType;
     private String createdBy;

@@ -67,7 +67,7 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     }
 
     @Override
-    public HttpResult getUndoAuditList(TaskSearch taskSearch) {
+    public HttpResult getUndoAuditList(String userId,TaskSearch taskSearch) {
         Page page = taskSearch;
         page.startPage();
         List<Task> list = taskDao.selectByStatus(TaskStatusConst.INITIAL);
@@ -76,7 +76,7 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     }
 
     @Override
-    public HttpResult getDoneAuditList(TaskSearch taskSearch) {
+    public HttpResult getDoneAuditList(String userId,TaskSearch taskSearch) {
         Page page = taskSearch;
         page.startPage();
         List<Task> list = taskDao.selectByStatus(TaskStatusConst.DEALING);
@@ -85,11 +85,16 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     }
 
     @Override
-    public HttpResult getRejectAuditList(TaskSearch taskSearch) {
+    public HttpResult getRejectAuditList(String userId,TaskSearch taskSearch) {
         Page page = taskSearch;
         page.startPage();
         List<Task> list = taskDao.selectByStatus(TaskStatusConst.REJECT);
         page.setResult(list);
         return HttpResult.success(page);
+    }
+
+    @Override
+    public HttpResult getAuditFlowList(String taskId) {
+        return HttpResult.success(auditTaskDao.selectByTaskId(taskId));
     }
 }

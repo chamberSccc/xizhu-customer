@@ -54,5 +54,5 @@ public interface DeptDao {
      * @date 2019/10/24
      * @description: 查询所有部门列表
      */
-    List<Department> selectDeptList();
+    List<Department> selectAllDept();
 }

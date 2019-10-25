@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.ElecRecord;
 import com.tangmo.xizhu.customer.entity.MaintainConfide;
 import io.swagger.annotations.Api;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description="沥青混合料搅拌设备维护保养交底表接口")
 @RestController
 @RequestMapping("/maintainConfide")
-public class MaintainConfideController {
+public class MtainConfideController extends BaseController {
 
     /**
      * @param maintainConfide

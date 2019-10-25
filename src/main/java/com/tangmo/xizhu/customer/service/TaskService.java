@@ -32,6 +32,15 @@ public interface TaskService {
 
     /**
      * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/25
+     * @description: 获取任务详情
+     */
+    HttpResult getTaskDetail(String taskId);
+
+    /**
+     * @param taskId
      * @param userId
      * @param taskStatus
      * @return

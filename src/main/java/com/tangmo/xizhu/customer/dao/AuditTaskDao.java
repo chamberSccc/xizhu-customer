@@ -30,5 +30,5 @@ public interface AuditTaskDao {
      * @date 2019/10/21
      * @description: 查询任务的审核信息
      */
-    List<AuditTask> selectByTaskId(Integer taskId);
+    List<AuditTask> selectByTaskId(String taskId);
 }

@@ -5,6 +5,8 @@ import com.tangmo.xizhu.customer.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @Author chen bo
  * @Date 2019/10/15
@@ -69,5 +71,14 @@ public interface UserDao {
      * @description: 修改头像
      */
     void updateAvatar(@Param("userId") String userId, @Param("avatar") String avatar);
+
+    /**
+     * @param deptId
+     * @return
+     * @author chen bo
+     * @date 2019/10/25
+     * @description: 通过部门id查询人员
+     */
+    List<User> selectByDeptId(String deptId);
 
 }

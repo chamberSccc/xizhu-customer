@@ -65,22 +65,42 @@ public class AuditTaskController extends BaseController {
         return auditTaskService.finishTask(auditTask);
     }
 
-
+    /**
+     * @param taskSearch
+     * @return
+     * @author chen bo
+     * @date 2019/10/25
+     * @description: 获取已审核列表
+     */
     @ApiOperation(value = "获取已审批列表,分页",httpMethod = "POST",notes = "带分页")
     @PostMapping("/list/done")
     public HttpResult<List<Task>> getDoneAudit(TaskSearch taskSearch){
-        return taskService.getLaunchTaskList(getUserId(),taskSearch);
+        return auditTaskService.getDoneAuditList(getUserId(),taskSearch);
     }
 
+    /**
+     * @param taskSearch
+     * @return
+     * @author chen bo
+     * @date 2019/10/25
+     * @description: 获取待审批列表
+     */
     @ApiOperation(value = "获取待审批列表,分页",httpMethod = "POST",notes = "带分页")
     @PostMapping("/list/undo")
     public HttpResult<List<Task>> getUndoAudit(TaskSearch taskSearch){
-        return taskService.getLaunchTaskList(getUserId(),taskSearch);
+        return auditTaskService.getUndoAuditList(getUserId(),taskSearch);
     }
 
+    /**
+     * @param taskSearch
+     * @return
+     * @author chen bo
+     * @date 2019/10/25
+     * @description: 获取已拒绝列表
+     */
     @ApiOperation(value = "获取已拒绝列表,分页",httpMethod = "POST",notes = "带分页")
     @PostMapping("/list/reject")
     public HttpResult<List<Task>> getRejectAudit(TaskSearch taskSearch){
-        return taskService.getLaunchTaskList(getUserId(),taskSearch);
+        return auditTaskService.getRejectAuditList(getUserId(),taskSearch);
     }
 }

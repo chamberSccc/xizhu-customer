@@ -9,7 +9,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author chen bo
@@ -35,6 +37,23 @@ public class TaskController extends BaseController {
         task.setCreatedBy(getUserId());
         return taskService.createTask(task);
     }
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/25
+     * @description: 查询任务详情
+     */
+    @ApiOperation(value = "获取任务详情",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}")
+    public HttpResult getTaskDetail(@PathVariable String taskId){
+        List<AuditTask> auditFlowList = (List<AuditTask>) auditTaskService.getAuditFlowList(taskId).getData();
+        Task taskDetail = (Task) taskService.getTaskDetail(taskId).getData();
+        Map<String,Object> map = new HashMap<>();
+        map.put("task",taskDetail);
+        map.put("audit",auditFlowList);
+        return HttpResult.success(map);
+    }
 
     /**
      * @param taskId
@@ -48,6 +67,7 @@ public class TaskController extends BaseController {
     public HttpResult commitTask(@PathVariable String taskId){
         return null;
     }
+
     /**
      * @param taskSearch
      * @return
@@ -73,9 +93,6 @@ public class TaskController extends BaseController {
     public HttpResult<List<Task>> getDoneList(TaskSearch taskSearch){
         return taskService.getDoneTaskList(getUserId(),taskSearch);
     }
-
-
-
 
     /**
      * @param taskSearch

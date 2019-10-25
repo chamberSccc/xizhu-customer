@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.MtainConfideDao">
+    <resultMap id="MtainConfideMap" type="com.tangmo.xizhu.customer.entity.MaintainConfide">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="form_type" property="formType"/>
+        <result column="device_name" property="deviceName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="company_name" property="companyName"/>
+        <result column="factory_no" property="factoryNo"/>
+        <result column="contract_no" property="contractNo"/>
+        <result column="job_site" property="jobSite"/>
+        <result column="user_type" property="userType"/>
+        <result column="safety" property="safety"/>
+        <result column="equipment" property="equipment"/>
+        <result column="maintain" property="maintain"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="selectByTaskIdAndType" resultMap="MtainConfideMap">
+      SELECT uuid,task_id,device_name,form_type,device_type,company_name,factory_no,contract_no,job_site,user_type,equipment,maintain,created_by,created_time
+       from s_mtain_confide where task_id = #{taskId} and form_type = #{type}
+    </select>
+
+    <insert id="insertMtainConfide" parameterType="com.tangmo.xizhu.customer.entity.MaintainConfide">
+        INSERT INTO s_mtain_confide
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="formType != null">
+                form_type,
+            </if>
+            <if test="deviceName != null">
+                device_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="factoryNo != null">
+                factory_no,
+            </if>
+            <if test="jobSite != null">
+                job_site,
+            </if>
+            <if test="contractNo != null">
+                contract_no,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="safety != null">
+                safety,
+            </if>
+            <if test="equipment != null">
+                equipment,
+            </if>
+            <if test="maintain != null">
+                maintain,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+                created_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="formType != null">
+                #{formType},
+            </if>
+            <if test="deviceName != null">
+                #{deviceName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="factoryNo != null">
+                #{factoryNo},
+            </if>
+            <if test="contractNo != null">
+                #{contractNo},
+            </if>
+            <if test="jobSite != null">
+                #{jobSite},
+            </if>
+            <if test="userType != null">
+                #{userType},
+            </if>
+            <if test="safety != null">
+                #{safety},
+            </if>
+            <if test="equipment != null">
+                #{equipment},
+            </if>
+            <if test="maintain != null">
+                #{maintain},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+           getDate()
+        </trim>
+    </insert>
+
+    <update id="updateMtainConfide">
+        UPDATE s_mtain_confide
+        <set>
+            <if test="deviceName != null">
+                deviceName = #{deviceName},
+            </if>
+            <if test="safety != null">
+                safety = #{safety},
+            </if>
+            <if test="equipment != null">
+                equipment = #{equipment},
+            </if>
+            <if test="maintain != null">
+                maintain = #{maintain},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>
