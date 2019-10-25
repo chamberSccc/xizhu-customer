@@ -132,7 +132,7 @@
         </if>
     </select>
 
-    <select id="selectLaunchedTask">
+    <select id="selectLaunchedTask" resultMap="TaskMap">
         select * from s_service_task where created_by = #{userId};
     </select>
 
