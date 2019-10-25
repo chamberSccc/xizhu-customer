@@ -132,6 +132,14 @@
         </if>
     </select>
 
+    <select id="selectLaunchedTask">
+        select * from s_service_task where created_by = #{userId};
+    </select>
+
+    <select id="selectByStatus" resultMap="TaskMap">
+        select * FROM s_service_task where task_status = #{status}
+    </select>
+
     <update id="updateTaskUser">
         update s_service_task set executor = #{userId}
         <if test="status != null">

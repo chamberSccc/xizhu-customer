@@ -100,4 +100,12 @@ public interface TaskDao {
      */
     Task selectById(String taskId);
 
+    /**
+     * 查询我发起的任务
+     * @param userId
+     * @return
+     */
+    List<Task> selectLaunchedTask(@Param("userId") String userId);
+
+
 }

@@ -93,14 +93,18 @@ public class TaskServiceImpl implements TaskService {
     public HttpResult getDoneTaskList(String userId, TaskSearch taskSearch) {
         Page page = taskSearch;
         page.startPage();
-        List<Task> list = taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING);
+        List<Task> list = taskDao.selectByStatusAndUser(userId, TaskStatusConst.COMPLETE);
         page.setResult(list);
-        return HttpResult.success(taskDao.selectByStatusAndUser(userId, TaskStatusConst.COMPLETE));
+        return HttpResult.success(page);
     }
 
     @Override
     public HttpResult getLaunchTaskList(String userId, TaskSearch taskSearch) {
-        return null;
+        Page page = taskSearch;
+        page.startPage();
+        List<Task> list = taskDao.selectLaunchedTask(userId);
+        page.setResult(list);
+        return HttpResult.success(page);
     }
 
     @Override
