@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version V1.0
  * @Description: 审核controller
  **/
-@Api(description="审批相关接口")
+@Api(description="审批操作接口")
 @RestController
 @RequestMapping("/audit")
 public class AuditTaskController extends BaseController {
