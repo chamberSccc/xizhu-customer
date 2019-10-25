@@ -18,7 +18,7 @@ public class DeviceFile {
     @ApiModelProperty(value="任务id",name="taskId",example="")
     private String taskId;
     @ApiModelProperty(value="建档时间",name="fileDate",example="")
-    private String fileDate;//建档时间
+    private Date fileDate;//建档时间
     @ApiModelProperty(value="用户单位",name="companyName",example="")
     private String companyName;//用户单位
     @ApiModelProperty(value="产品型号",name="deviceType",example="")
@@ -32,7 +32,7 @@ public class DeviceFile {
     @ApiModelProperty(value="出厂编号",name="factoryNo",example="")
     private String factoryNo;//出厂编号
     @ApiModelProperty(value="验收时间",name="checkDate",example="")
-    private String checkDate;//验收时间
+    private Date checkDate;//验收时间
     @ApiModelProperty(value="设备配置",name="deviceConfig",example="")
     private String deviceConfig;//设备配置
     @ApiModelProperty(value="备注",name="comment",example="")

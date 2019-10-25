@@ -6,6 +6,7 @@ import com.tangmo.xizhu.customer.dao.EquipUserDao;
 import com.tangmo.xizhu.customer.entity.DeviceFile;
 import com.tangmo.xizhu.customer.entity.EquipUser;
 import com.tangmo.xizhu.customer.service.DeviceFileService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +28,11 @@ public class DeviceFileServiceImpl implements DeviceFileService {
     @Override
     @Transactional
     public HttpResult addDeviceFile(DeviceFile deviceFile) {
+        String uuid = EncryptUtil.get32Uuid();
+        deviceFile.setUuid(uuid);
         deviceFileDao.insertDeviceFile(deviceFile);
-        String uuid = deviceFile.getUuid();
         for (int i = 0; i < deviceFile.getUserList().size(); i++) {
+            deviceFile.getUserList().get(i).setUuid(EncryptUtil.get32Uuid());
             deviceFile.getUserList().get(i).setDeviceFileId(uuid);
         }
         equipUserDao.insertBatchUser(deviceFile.getUserList());
@@ -53,6 +56,6 @@ public class DeviceFileServiceImpl implements DeviceFileService {
         DeviceFile deviceFile = deviceFileDao.selectByTaskId(taskId);
         List<EquipUser> list = equipUserDao.selectByDeviceFileId(deviceFile.getUuid());
         deviceFile.setUserList(list);
-        return HttpResult.success(list);
+        return HttpResult.success(deviceFile);
     }
 }

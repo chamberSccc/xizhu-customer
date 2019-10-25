@@ -159,7 +159,7 @@ public class TaskController extends BaseController {
      */
     @ApiOperation(value = "获取任务的现场服务反馈单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/fieldFeedback")
-    public HttpResult<FieldFeedBack> getFieldFeedback(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+    public HttpResult<FieldFeedBack> getFieldFeedback(@PathVariable String taskId){
         return fieldFeedbackService.getByTaskId(taskId);
     }
 
@@ -172,8 +172,8 @@ public class TaskController extends BaseController {
      */
     @ApiOperation(value = "获取任务的安全交底表",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/safeConfide")
-    public HttpResult<SafeConfide>  getSafeConfide(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
-        return null;
+    public HttpResult<SafeConfide>  getSafeConfide(@PathVariable String taskId){
+        return safeConfideService.getByTaskId(taskId);
     }
     /**
      * @param taskId
@@ -184,8 +184,8 @@ public class TaskController extends BaseController {
      */
     @ApiOperation(value = "获取任务的设备档案",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/deviceFile")
-    public HttpResult<DeviceFile> getDeviceFile(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
-        return null;
+    public HttpResult<DeviceFile> getDeviceFile(@PathVariable String taskId){
+        return deviceFileService.getByTaskId(taskId);
     }
 
     /**
@@ -197,7 +197,7 @@ public class TaskController extends BaseController {
      */
     @ApiOperation(value = "获取安装工作记录(机械)",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/machineRecord")
-    public HttpResult<MachRecord> getMachineRecord(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+    public HttpResult<MachRecord> getMachineRecord(@PathVariable String taskId){
         return null;
     }
     /**
@@ -209,7 +209,7 @@ public class TaskController extends BaseController {
      */
     @ApiOperation(value = "获取安装工作记录(电气)",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/elecRecord")
-    public HttpResult<ElecRecord> getElecRecord(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+    public HttpResult<ElecRecord> getElecRecord(@PathVariable String taskId){
         return null;
     }
 
@@ -222,7 +222,7 @@ public class TaskController extends BaseController {
      */
     @ApiOperation(value = "获取沥青混合料搅拌设备维护保养交底表(1-11)",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/maintainConfide")
-    public HttpResult<MaintainConfide> getMaintainConfide(@ApiParam(name="任务id",value="字符串",required=true) @PathVariable String taskId){
+    public HttpResult<MaintainConfide> getMaintainConfide(@PathVariable String taskId){
         return null;
     }
 

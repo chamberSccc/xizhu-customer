@@ -29,6 +29,7 @@ public class DeviceFileController extends BaseController {
     @ApiOperation(value = "新增设备档案表",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addDeviceFile(@ApiParam(name="设备档案表对象",value="json格式",required=true) @RequestBody DeviceFile deviceFile){
+        deviceFile.setCreatedBy(getUserId());
         return deviceFileService.addDeviceFile(deviceFile);
     }
     /**

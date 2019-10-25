@@ -18,10 +18,11 @@
     </delete>
 
     <insert id="insertBatchUser" parameterType="java.util.List">
-        insert into s_equip_user (device_file_id, member_name,  member_type, content, createdby)
+        insert into s_equip_user (uuid,device_file_id, member_name,  member_type, content)
         values
         <foreach collection="list" item="item" index="index" separator=",">
             (
+            #{item.uuid},
             #{item.deviceFileId},
             #{item.memberName},
             #{item.memberType},
