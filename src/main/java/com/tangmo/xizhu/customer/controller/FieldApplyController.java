@@ -29,6 +29,7 @@ public class FieldApplyController extends BaseController {
     @ApiOperation(value = "新增现场服务申请",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addFieldApply(@ApiParam(name="现场服务申请表对象",value="json格式",required=true) @RequestBody FieldApply fieldApply){
+        fieldApply.setCreatedBy(getUserId());
         return fieldApplyService.addApply(fieldApply);
     }
     /**

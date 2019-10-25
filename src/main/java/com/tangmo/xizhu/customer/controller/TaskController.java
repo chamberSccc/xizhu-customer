@@ -35,6 +35,19 @@ public class TaskController extends BaseController {
         task.setCreatedBy(getUserId());
         return taskService.createTask(task);
     }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/24
+     * @description: 提交任务
+     */
+    @ApiOperation(value = "提交任务",httpMethod = "POST",notes = "")
+    @PutMapping("/commit/{taskId}")
+    public HttpResult commitTask(@PathVariable String taskId){
+        return null;
+    }
     /**
      * @param taskSearch
      * @return

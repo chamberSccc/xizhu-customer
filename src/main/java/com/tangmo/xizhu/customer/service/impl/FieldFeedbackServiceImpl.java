@@ -32,6 +32,12 @@ public class FieldFeedbackServiceImpl implements FieldFeedbackService {
 
     @Override
     public HttpResult getByTaskId(String taskId) {
+        FieldFeedBack fieldFeedBack = fieldFeedbackDao.selectByTaskId(taskId);
+        if(fieldFeedBack == null){
+
+        }else{
+
+        }
         return HttpResult.success(fieldFeedbackDao.selectByTaskId(taskId));
     }
 }

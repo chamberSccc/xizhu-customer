@@ -41,9 +41,9 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
         fastFeedbackDao.insertFastFeedback(fastFeedBack);
         //添加任务需求单图片附件
         List<TaskAttach> detailAttach = TaskAttachConverter.String2Entity(fastFeedBack.getDetailPictureList(),uuid,
-                TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+                TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
         List<TaskAttach> solAttach = TaskAttachConverter.String2Entity(fastFeedBack.getDetailPictureList(),uuid,
-                TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.SOLUTION);
+                TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.SOLUTION);
         detailAttach.addAll(solAttach);
         taskAttachDao.insertBatchAttach(detailAttach);
         return HttpResult.success();
@@ -64,6 +64,13 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
             if(taskRequire != null){
                 fastFeedBack = TaskRequireConverter.require2FastFb(taskRequire);
             }
+        }else {
+            List<String> detail = taskAttachDao.selectByParentAndType(fastFeedBack.getUuid(), TaskAttachConst.FAST_FB_ATTACH,
+                    TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+            List<String> solution = taskAttachDao.selectByParentAndType(fastFeedBack.getUuid(), TaskAttachConst.FAST_FB_ATTACH,
+                    TaskAttachConst.PICTURE,TaskAttachConst.SOLUTION);
+            fastFeedBack.setDetailPictureList(detail);
+            fastFeedBack.setSolPictureList(solution);
         }
         return HttpResult.success(fastFeedBack);
     }
