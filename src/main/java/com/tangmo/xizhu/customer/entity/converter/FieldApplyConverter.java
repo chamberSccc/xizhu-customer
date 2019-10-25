@@ -59,8 +59,6 @@ public class FieldApplyConverter {
         fieldFeedBack.setDeviceType(fieldApply.getDeviceType());
         fieldFeedBack.setContactName(fieldApply.getContactName());
         fieldFeedBack.setMobile(fieldApply.getMobile());
-        fieldFeedBack.setEngineer(fieldApply.getApplyUser());//todo 现场服务申请的现场申请时间在其他里面的应用
-        //fieldFeedBack.setReceiveDate(null);  //todo
         fieldFeedBack.setTaskAssignType(fieldApply.getTaskAssignType());
         fieldFeedBack.setTroubleType(fieldApply.getTroubleType());
         fieldFeedBack.setAssemblyType(fieldApply.getAssemblyType());
