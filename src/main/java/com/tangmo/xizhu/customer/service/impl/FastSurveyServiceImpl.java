@@ -41,7 +41,12 @@ public class FastSurveyServiceImpl implements FastSurveyService {
                 TaskAttachConst.FAST_SURVEY,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
         List<TaskAttach> solAttach = TaskAttachConverter.String2Entity(fastSurvey.getDetailPictureList(),uuid,
                 TaskAttachConst.FAST_SURVEY,TaskAttachConst.PICTURE,TaskAttachConst.SOLUTION);
-        detailAttach.addAll(solAttach);
+        if(detailAttach != null){
+            taskAttachDao.insertBatchAttach(detailAttach);
+        }
+        if(solAttach != null){
+            taskAttachDao.insertBatchAttach(solAttach);
+        }
         return HttpResult.success();
     }
 

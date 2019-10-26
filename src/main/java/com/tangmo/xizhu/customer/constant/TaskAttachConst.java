@@ -14,6 +14,7 @@ public class TaskAttachConst {
     public static final byte FAST_SURVEY = 2;//快速服务满意度调查表
     public static final byte FIELD_APPLY = 3;//现场申请单
     public static final byte FIELD_ASSIGN = 4;//现场指派单
+    public static final byte FIELD_FB = 5;//现场反馈单
 
     //attachType
     public static final byte PICTURE = 0;
@@ -21,4 +22,5 @@ public class TaskAttachConst {
     //areaType
     public static final byte DETAIL = 0;
     public static final byte SOLUTION = 1;//快速服务处理方案
+    public static final byte RESULT = 2;//现场处理结果
 }

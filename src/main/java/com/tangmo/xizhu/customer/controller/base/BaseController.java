@@ -49,6 +49,10 @@ public class BaseController {
     protected FilePathService filePathService;
     @Resource
     protected DeptService deptService;
+    @Resource
+    protected MtainConfideService mtainConfideService;
+    @Resource
+    protected UserService userService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

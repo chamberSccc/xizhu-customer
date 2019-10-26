@@ -40,7 +40,9 @@ public class FieldApplyServiceImpl implements FieldApplyService {
         List<String> picture = fieldApply.getDetailPictureList();
         List<TaskAttach> list = TaskAttachConverter.String2Entity(picture, uuid,TaskAttachConst.FIELD_APPLY,
                 TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
-        taskAttachDao.insertBatchAttach(list);
+        if(list != null){
+            taskAttachDao.insertBatchAttach(list);
+        }
         return HttpResult.success();
     }
 

@@ -42,6 +42,7 @@ public class FieldFeedbackController extends BaseController {
     @ApiOperation(value = "修改现场服务反馈单",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeFeedback(@ApiParam(name="现场服务反馈单对象",value="json格式",required=true) @RequestBody FieldFeedBack fieldFeedBack){
+        fieldFeedBack.setUpdatedBy(getUserId());
         return fieldFeedbackService.changeFeedback(fieldFeedBack);
     }
 }

@@ -48,8 +48,11 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     @Override
     public HttpResult rejectTask(AuditTask auditTask) {
         //如果当前任务已完成，不能审核
+        taskService.changeTaskStatus(auditTask.getTaskId(), TaskStatusConst.REJECT);
         auditTask.setOperation(AuditOperateConst.REJECT);
-        return null;
+        auditTask.setUuid(EncryptUtil.get32Uuid());
+        auditTaskDao.insertAuditTask(auditTask);
+        return HttpResult.success();
     }
 
     @Override
@@ -57,6 +60,7 @@ public class AuditTaskServiceImpl implements AuditTaskService {
         //标记任务完成
         taskService.changeTaskStatus(auditTask.getTaskId(), TaskStatusConst.COMPLETE);
         auditTask.setOperation(AuditOperateConst.COMPLETE);
+        auditTask.setUuid(EncryptUtil.get32Uuid());
         auditTaskDao.insertAuditTask(auditTask);
         return HttpResult.success();
     }

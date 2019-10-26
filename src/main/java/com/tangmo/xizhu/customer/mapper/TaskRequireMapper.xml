@@ -21,7 +21,7 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="TaskRequireMap">
-      SELECT uuid,task_no, apply_date,company_name,device_type,contact_name,mobile,assembly_type,trouble_type,
+      SELECT uuid,task_id,task_no, task_id,apply_date,company_name,device_type,contact_name,mobile,assembly_type,trouble_type,
        task_assign_type,detail,created_by,created_time,detail_audio_id,detail_speech_id from s_task_require where task_id = #{taskId}
     </select>
 
@@ -182,9 +182,7 @@
             <if test="updatedBy != null">
                 updated_by = #{updatedBy},
             </if>
-            <if test="updatedTime != null">
-                updated_time = #{updatedTime},
-            </if>
+                updated_time = getDate()
         </set>
         WHERE uuid = #{uuid}
     </update>

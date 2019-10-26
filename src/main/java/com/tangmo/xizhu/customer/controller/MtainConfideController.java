@@ -33,6 +33,17 @@ public class MtainConfideController extends BaseController {
     @ApiOperation(value = "新增保养交底表(11种类型按1-11区分)",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addMaintainConfide(@ApiParam(name="安装工作记录(电气)表对象",value="json格式",required=true) @RequestBody MaintainConfide maintainConfide){
-        return null;
+        return mtainConfideService.addMtainConfide(maintainConfide);
+    }
+    /**
+     * @param maintainConfide
+     * @return
+     * @author chen bo
+     * @date 2019/10/26
+     * @description: 修改保养交底表
+     */
+    @ApiOperation(value = "修改保养交底表(11种类型按1-11区分)",httpMethod = "PUT",notes = "")
+    public HttpResult changeConfide(@ApiParam(name="安装工作记录(电气)表对象",value="json格式",required=true) @RequestBody MaintainConfide maintainConfide){
+        return mtainConfideService.changeMtainConfide(maintainConfide);
     }
 }

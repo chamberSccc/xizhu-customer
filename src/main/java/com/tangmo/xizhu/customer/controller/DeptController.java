@@ -39,7 +39,7 @@ public class DeptController extends BaseController {
      * @date 2019/10/25
      * @description: 修改部门信息
      */
-    @ApiOperation(value = "修改部门",httpMethod = "POST",notes = "")
+    @ApiOperation(value = "修改部门",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeDept(@RequestBody Department department){
         return null;
@@ -66,7 +66,7 @@ public class DeptController extends BaseController {
      * @date 2019/10/25
      * @description: 查询部门列表
      */
-    @ApiOperation(value = "添加部门",httpMethod = "POST",notes = "")
+    @ApiOperation(value = "查询部门列表",httpMethod = "GET",notes = "")
     @GetMapping("/deptList")
     public HttpResult<List<Department>> getDeptList(){
         return deptService.getDeptList();
@@ -79,7 +79,8 @@ public class DeptController extends BaseController {
      * @date 2019/10/25
      * @description: 查询部门人员列表
      */
-    @GetMapping("/{deptId}")
+    @ApiOperation(value = "查询部门人员列表",httpMethod = "GET",notes = "")
+    @GetMapping("/{deptId}/user")
     public HttpResult<List<User>> getDeptUser(@PathVariable String deptId){
         return deptService.getDeptUser(deptId);
     }

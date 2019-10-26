@@ -44,8 +44,12 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
                 TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
         List<TaskAttach> solAttach = TaskAttachConverter.String2Entity(fastFeedBack.getDetailPictureList(),uuid,
                 TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.SOLUTION);
-        detailAttach.addAll(solAttach);
-        taskAttachDao.insertBatchAttach(detailAttach);
+        if(detailAttach != null){
+            taskAttachDao.insertBatchAttach(detailAttach);
+        }
+        if(solAttach != null){
+            taskAttachDao.insertBatchAttach(solAttach);
+        }
         return HttpResult.success();
     }
 

@@ -3,6 +3,8 @@ package com.tangmo.xizhu.customer.entity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.sql.Date;
+
 /**
  * @Author chen bo
  * @Date 2019/10/21
@@ -22,5 +24,5 @@ public class AuditTask {
     @ApiModelProperty(value="任务类型0:快速服务 1:现场服务 2:安调设备",name="taskType",example="")
     private Byte taskType;
     private String createdBy;
-    private String createdTime;
+    private Date createdTime;
 }

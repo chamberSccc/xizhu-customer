@@ -42,6 +42,7 @@ public class FieldApplyController extends BaseController {
     @ApiOperation(value = "修改现场服务申请",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeFieldApply(@ApiParam(name="现场服务申请表对象",value="json格式",required=true) @RequestBody FieldApply fieldApply){
+        fieldApply.setUpdatedBy(getUserId());
         return fieldApplyService.changeApply(fieldApply);
     }
 }

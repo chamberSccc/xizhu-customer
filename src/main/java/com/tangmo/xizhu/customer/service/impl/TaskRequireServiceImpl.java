@@ -6,6 +6,7 @@ import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskRequireDao;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.TaskRequire;
+import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.TaskRequireService;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,13 @@ public class TaskRequireServiceImpl implements TaskRequireService {
     @Override
     public HttpResult changeTaskRequire(TaskRequire taskRequire) {
         taskRequireDao.updateTaskRequire(taskRequire);
+        taskAttachDao.deleteByParentAndType(taskRequire.getUuid(),TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.DETAIL);
+        //添加任务需求单图片附件
+        List<TaskAttach> attaches = TaskAttachConverter.String2Entity(taskRequire.getDetailPictureList(),taskRequire.getUuid(),
+                TaskAttachConst.REQUIRE_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+        if(attaches != null){
+            taskAttachDao.insertBatchAttach(attaches);
+        }
         return HttpResult.success();
     }
 

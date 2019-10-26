@@ -9,7 +9,7 @@
     </select>
 
     <delete id="deleteByParentAndType">
-        delete  from s_task_attach where parent_id = #{parentId} and parent_type = #{parentType} and attach_type = #{attachType} and area_type = #{areaType}
+        delete  from s_task_attach where parent_id = #{parentId} and parent_type = #{parentType} and attach_type = #{attachType}
     </delete>
 
     <insert id="insertBatchAttach" parameterType="java.util.List">

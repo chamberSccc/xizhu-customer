@@ -240,10 +240,8 @@ public class TaskController extends BaseController {
      * @description: 获取沥青混合料搅拌设备维护保养交底表(1-11)
      */
     @ApiOperation(value = "获取沥青混合料搅拌设备维护保养交底表(1-11)",httpMethod = "GET",notes = "")
-    @GetMapping("/{taskId}/maintainConfide")
-    public HttpResult<MaintainConfide> getMaintainConfide(@PathVariable String taskId){
-        return null;
+    @GetMapping("/{taskId}/maintainConfide/{formType}")
+    public HttpResult<MaintainConfide> getMaintainConfide(@PathVariable String taskId,@PathVariable Byte formType){
+        return getMaintainConfide(taskId,formType);
     }
-
-
 }

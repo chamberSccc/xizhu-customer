@@ -37,7 +37,6 @@ public class MachRecordServiceImpl implements MachRecordService {
         List<DailyRecord> work = machRecord.getWorkList();
         List<DailyRecord> safe = machRecord.getSafeList();
         integrateDaily(work,safe,uuid);
-        dailyRecordDao.insertBatchDaily(work);
         return HttpResult.success();
     }
 
@@ -47,7 +46,7 @@ public class MachRecordServiceImpl implements MachRecordService {
         dailyRecordDao.deleteByParentAndBase(machRecord.getUuid(),InstallRecordConst.BASE_MACH);
         List<DailyRecord> work = machRecord.getWorkList();
         List<DailyRecord> safe = machRecord.getSafeList();
-        dailyRecordDao.insertBatchDaily(integrateDaily(work,safe,machRecord.getUuid()));
+        integrateDaily(work,safe,machRecord.getUuid());
         return HttpResult.success();
     }
 
@@ -57,6 +56,7 @@ public class MachRecordServiceImpl implements MachRecordService {
         if(machRecord == null){
             Task task = taskDao.selectById(taskId);
             machRecord.setDeviceType(task.getDeviceType());
+            machRecord.setTaskId(taskId);
         }else{
             List<DailyRecord> work = dailyRecordDao.selectByParentAndType(machRecord.getUuid(),InstallRecordConst.BASE_MACH,InstallRecordConst.WORK);
             List<DailyRecord> safe = dailyRecordDao.selectByParentAndType(machRecord.getUuid(),InstallRecordConst.BASE_MACH,InstallRecordConst.SAFE);
@@ -67,14 +67,12 @@ public class MachRecordServiceImpl implements MachRecordService {
     }
 
     /**
-     * @param workList
-     * @param safeList
      * @return
      * @author chen bo
      * @date 2019/10/23
      * @description: 整合工作记录
      */
-    private List<DailyRecord> integrateDaily(List<DailyRecord> workList,List<DailyRecord> safeList,String parentId){
+    private void integrateDaily(List<DailyRecord> workList,List<DailyRecord> safeList,String parentId){
         for (int i = 0; i < workList.size(); i++) {
             workList.get(i).setBaseType(InstallRecordConst.BASE_MACH);
             workList.get(i).setContentType(InstallRecordConst.WORK);
@@ -87,7 +85,11 @@ public class MachRecordServiceImpl implements MachRecordService {
             workList.get(i).setUuid(EncryptUtil.get32Uuid());
             workList.get(i).setParentId(parentId);
         }
-        workList.addAll(safeList);
-        return workList;
+        if(workList != null){
+            dailyRecordDao.insertBatchDaily(workList);
+        }
+        if(safeList != null){
+            dailyRecordDao.insertBatchDaily(safeList);
+        }
     }
 }

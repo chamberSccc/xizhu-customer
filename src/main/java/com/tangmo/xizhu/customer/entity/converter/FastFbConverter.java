@@ -66,7 +66,6 @@ public class FastFbConverter {
         fieldApply.setContactName(fastback.getContactName());
         fieldApply.setMobile(fastback.getMobile());
         fieldApply.setApplyUser(fastback.getEngineer());
-        fieldApply.setApplyDate(fastback.getCreatedTime());
         fieldApply.setTaskAssignType(fastback.getTaskAssignType());
         fieldApply.setAssemblyType(fastback.getAssemblyType());
         fieldApply.setTroubleType(fastback.getTroubleType());

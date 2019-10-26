@@ -18,7 +18,6 @@
         <result column="detail" property="detail"/>
         <result column="solution" property="solution"/>
         <result column="field_target" property="fieldTarget"/>
-        <result column="satisfaction" property="satisfaction"/>
         <result column="created_by" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
         <result column="detail_audio_id" property="detailAudioId"/>
@@ -26,8 +25,8 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="FieldAssignMap">
-      SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,leadre,assign_date,assembly_type,trouble_type,
-       task_assign_type,detail,solution,field_target,detail_audio_id,detail_speech_id,created_by,created_time,satisfaction
+      SELECT uuid,task_id,task_no,apply_date,company_name,device_type,contact_name,mobile,leader,assign_date,assembly_type,trouble_type,
+       task_assign_type,detail,solution,field_target,detail_audio_id,detail_speech_id,created_by,created_time
         from s_field_assign where task_id = #{taskId}
     </select>
 
@@ -62,8 +61,8 @@
             <if test="leader != null">
                 leader,
             </if>
-            <if test="assign_date != null">
-                assignDate,
+            <if test="assignDate != null">
+                assign_date,
             </if>
             <if test="assemblyType != null">
                 assembly_type,
@@ -83,9 +82,6 @@
             <if test="fieldTarget != null">
                 field_target,
             </if>
-            <if test="satisfaction != null">
-                satisfaction,
-            </if>
             <if test="detailAudioId != null">
                 detail_audio_id,
             </if>
@@ -98,12 +94,7 @@
             <if test="updatedBy != null">
                 updated_by,
             </if>
-            <if test="createdTime != null">
-                created_time,
-            </if>
-            <if test="updatedTime != null">
-                updated_time,
-            </if>
+                created_time
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -155,9 +146,6 @@
             <if test="fieldTarget != null">
                 #{fieldTarget},
             </if>
-            <if test="satisfaction != null">
-                #{satisfaction},
-            </if>
             <if test="detailAudioId != null">
                 #{detailAudioId},
             </if>
@@ -170,17 +158,12 @@
             <if test="updatedBy != null">
                 #{updatedBy},
             </if>
-            <if test="createdTime != null">
-                #{createdTime},
-            </if>
-            <if test="updatedTime != null">
-                #{updatedTime},
-            </if>
+            getDate()
         </trim>
     </insert>
 
-    <update id="updateFeedback">
-        UPDATE s_field_feedback
+    <update id="updateAssign">
+        UPDATE s_field_assign
         <set>
             <if test="companyName != null">
                 company_name = #{companyName},
@@ -209,9 +192,6 @@
             <if test="solution != null">
                 solution=  #{solution},
             </if>
-            <if test="satisfaction != null">
-                satisfaction=  #{satisfaction},
-            </if>
             <if test="fieldTarget != null">
                 field_target=  #{fieldTarget},
             </if>
@@ -224,9 +204,7 @@
             <if test="updatedBy != null">
                 updated_by = #{updatedBy},
             </if>
-            <if test="updatedTime != null">
-                updated_time = #{updatedTime},
-            </if>
+            updated_time = getDate()
         </set>
         WHERE uuid = #{uuid}
     </update>

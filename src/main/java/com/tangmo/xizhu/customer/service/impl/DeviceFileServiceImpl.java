@@ -29,17 +29,20 @@ public class DeviceFileServiceImpl implements DeviceFileService {
     private EquipUserDao equipUserDao;
     @Resource
     private TaskDao taskDao;
+
     @Override
     @Transactional
     public HttpResult addDeviceFile(DeviceFile deviceFile) {
         String uuid = EncryptUtil.get32Uuid();
         deviceFile.setUuid(uuid);
         deviceFileDao.insertDeviceFile(deviceFile);
-        for (int i = 0; i < deviceFile.getUserList().size(); i++) {
-            deviceFile.getUserList().get(i).setUuid(EncryptUtil.get32Uuid());
-            deviceFile.getUserList().get(i).setDeviceFileId(uuid);
+        if (deviceFile.getUserList() != null) {
+            for (int i = 0; i < deviceFile.getUserList().size(); i++) {
+                deviceFile.getUserList().get(i).setUuid(EncryptUtil.get32Uuid());
+                deviceFile.getUserList().get(i).setDeviceFileId(uuid);
+            }
+            equipUserDao.insertBatchUser(deviceFile.getUserList());
         }
-        equipUserDao.insertBatchUser(deviceFile.getUserList());
         return HttpResult.success();
     }
 
@@ -51,17 +54,23 @@ public class DeviceFileServiceImpl implements DeviceFileService {
             deviceFile.getUserList().get(i).setDeviceFileId(uuid);
         }
         equipUserDao.deleteByDeviceFileId(deviceFile.getUuid());
-        equipUserDao.insertBatchUser(deviceFile.getUserList());
+        if(deviceFile.getUserList()==null || deviceFile.getUserList().size() == 0){
+            equipUserDao.insertBatchUser(deviceFile.getUserList());
+        }
+
         return HttpResult.success();
     }
 
     @Override
     public HttpResult getByTaskId(String taskId) {
         DeviceFile deviceFile = deviceFileDao.selectByTaskId(taskId);
-        if(deviceFile == null){
+        if (deviceFile == null) {
             Task task = taskDao.selectById(taskId);
+            deviceFile = new DeviceFile();
             deviceFile.setDeviceType(task.getDeviceType());
-        }else{
+            deviceFile.setCompanyName(task.getCompanyName());
+            deviceFile.setTaskId(task.getUuid());
+        } else {
             List<EquipUser> list = equipUserDao.selectByDeviceFileId(deviceFile.getUuid());
             deviceFile.setUserList(list);
         }

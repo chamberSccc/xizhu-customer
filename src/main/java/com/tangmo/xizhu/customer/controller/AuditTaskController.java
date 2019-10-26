@@ -8,10 +8,7 @@ import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,24 +41,28 @@ public class AuditTaskController extends BaseController {
      * @return
      * @author chen bo
      * @date 2019/10/21
-     * @description: 拒绝通过
+     * @description: 审批拒绝
      */
     @ApiOperation(value = "审批拒绝",httpMethod = "POST",notes = "")
     @PostMapping("/reject")
     public HttpResult rejectTask(@ApiParam(name="审批信息对象",value="json格式",required=true) @RequestBody AuditTask auditTask){
+        auditTask.setCreatedBy(getUserId());
         return auditTaskService.rejectTask(auditTask);
     }
 
     /**
-     * @param auditTask
+     * @param taskId
      * @return
      * @author chen bo
      * @date 2019/10/21
-     * @description: 拒绝通过
+     * @description: 标记完成
      */
-    @ApiOperation(value = "标记完成",httpMethod = "POST",notes = "")
-    @PostMapping("/finish")
-    public HttpResult finishTask(@ApiParam(name="审批信息对象",value="json格式",required=true) @RequestBody AuditTask auditTask){
+    @ApiOperation(value = "标记完成",httpMethod = "PUT",notes = "")
+    @PutMapping("/{taskId}/finish")
+    public HttpResult finishTask(@ApiParam(name="审批信息对象",value="json格式",required=true)@PathVariable String taskId){
+        AuditTask auditTask = new AuditTask();
+        auditTask.setTaskId(taskId);
+        auditTask.setCreatedBy(getUserId());
         return auditTaskService.finishTask(auditTask);
     }
 

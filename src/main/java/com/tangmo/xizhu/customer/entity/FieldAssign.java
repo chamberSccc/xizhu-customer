@@ -19,8 +19,8 @@ public class FieldAssign {
     @ApiModelProperty(value="所属任务id",name="taskId",example="")
     private String taskId;
     private String taskNo;
-    @ApiModelProperty(value="申请时间",name="applyDate",example="2019-08-03")
-    private Date applyDate;//申请时间
+    @ApiModelProperty(value="用戶申请时间",name="applyDate",example="2019-08-03")
+    private Date applyDate;//用戶申请时间
     @ApiModelProperty(value="用户单位",name="companyName",example="")
     private String companyName;//用户单位
     @ApiModelProperty(value="设备型号",name="deviceType",example="")

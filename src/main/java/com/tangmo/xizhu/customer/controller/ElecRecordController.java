@@ -32,7 +32,14 @@ public class ElecRecordController extends BaseController {
         return null;
     }
 
-    @ApiOperation(value = "新增安装工作记录(电气)表",httpMethod = "PUT",notes = "")
+    /**
+     * @param elecRecord
+     * @return
+     * @author chen bo
+     * @date 2019/10/26
+     * @description: 修改安装工作记录(电气)表
+     */
+    @ApiOperation(value = "修改安装工作记录(电气)表",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeElecRecord(@ApiParam(name="安装工作记录(电气)表对象",value="json格式",required=true) @RequestBody ElecRecord elecRecord){
         return null;

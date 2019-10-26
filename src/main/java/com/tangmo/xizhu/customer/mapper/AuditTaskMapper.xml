@@ -65,6 +65,6 @@
     </insert>
 
     <select id="selectByTaskId" resultMap="AuditTaskMap">
-        select operation,created_by,created_time FROM s_audit_task where task_id = #{taskId}
+        select operation,created_by,created_time FROM s_audit_task where task_id = #{taskId} order by created_time desc
     </select>
 </mapper>

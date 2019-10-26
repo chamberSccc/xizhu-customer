@@ -27,7 +27,7 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="FastFeedbackMap">
-      SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,service_date,assembly_type,trouble_type,
+      SELECT uuid,task_id,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,service_date,assembly_type,trouble_type,
        task_assign_type,detail,solution,result,detail_audio_id,detail_speech_id,sol_audio_id,sol_speech_id,created_by,created_time
        from s_fast_feedback where task_id = #{taskId}
     </select>
@@ -102,12 +102,7 @@
             <if test="updatedBy != null">
                 updated_by,
             </if>
-            <if test="createdTime != null">
-                created_time,
-            </if>
-            <if test="updatedTime != null">
-                updated_time,
-            </if>
+                created_time
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -177,12 +172,7 @@
             <if test="updatedBy != null">
                 #{updatedBy},
             </if>
-            <if test="createdTime != null">
-                #{createdTime},
-            </if>
-            <if test="updatedTime != null">
-                #{updatedTime},
-            </if>
+                getDate()
         </trim>
     </insert>
 
@@ -240,9 +230,7 @@
             <if test="updatedBy != null">
                 updated_by = #{updatedBy},
             </if>
-            <if test="updatedTime != null">
-                updated_time = #{updatedTime},
-            </if>
+            updated_time = getDate()
         </set>
         WHERE uuid = #{uuid}
     </update>

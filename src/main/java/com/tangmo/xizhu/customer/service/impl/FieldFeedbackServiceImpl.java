@@ -6,9 +6,12 @@ import com.tangmo.xizhu.customer.dao.FieldFeedbackDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.entity.FieldApply;
 import com.tangmo.xizhu.customer.entity.FieldFeedBack;
+import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.converter.FieldApplyConverter;
+import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.FieldApplyService;
 import com.tangmo.xizhu.customer.service.FieldFeedbackService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,7 +33,21 @@ public class FieldFeedbackServiceImpl implements FieldFeedbackService {
     private TaskAttachDao taskAttachDao;
     @Override
     public HttpResult addFeedback(FieldFeedBack feedBack) {
+        String uuid = EncryptUtil.get32Uuid();
+        feedBack.setUuid(uuid);
         fieldFeedbackDao.insertFeedback(feedBack);
+        List<String> picture = feedBack.getDetailPictureList();
+        List<TaskAttach> list = TaskAttachConverter.String2Entity(picture, uuid, TaskAttachConst.FIELD_FB,
+                TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+        List<String> result = feedBack.getResPictureList();
+        List<TaskAttach> resultList = TaskAttachConverter.String2Entity(result, uuid, TaskAttachConst.FIELD_FB,
+                TaskAttachConst.PICTURE,TaskAttachConst.RESULT);
+        if(list != null){
+            taskAttachDao.insertBatchAttach(list);
+        }
+        if(resultList != null){
+            taskAttachDao.insertBatchAttach(resultList);
+        }
         return HttpResult.success();
     }
 

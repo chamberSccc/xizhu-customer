@@ -3,7 +3,7 @@
 <mapper namespace="com.tangmo.xizhu.customer.dao.DeptDao">
     <resultMap id="DeptMap" type="com.tangmo.xizhu.customer.entity.Department">
         <id column="uuid" property="uuid"/>
-        <result column="dept_name" property="userName"/>
+        <result column="dept_name" property="deptName"/>
     </resultMap>
 
     <select id="selectById" resultMap="DeptMap">

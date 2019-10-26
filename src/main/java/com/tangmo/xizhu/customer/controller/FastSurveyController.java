@@ -6,10 +6,7 @@ import com.tangmo.xizhu.customer.entity.FastSurvey;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author chen bo
@@ -42,7 +39,9 @@ public class FastSurveyController extends BaseController {
      * @description: 修改快速服务满意度调查表
      */
     @ApiOperation(value = "修改快速服务满意度调查表",httpMethod = "PUT",notes = "完成任务时填写")
+    @PutMapping("")
     public HttpResult changeFastSurvey(@ApiParam(name="满意度调查表对象",value="json格式",required=true) @RequestBody FastSurvey fastSurvey){
+        fastSurvey.setUpdatedBy(getUserId());
         return fastSurveyService.changeSurvey(fastSurvey);
     }
 }

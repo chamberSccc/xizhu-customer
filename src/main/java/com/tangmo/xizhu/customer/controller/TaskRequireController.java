@@ -38,6 +38,7 @@ public class TaskRequireController extends BaseController {
      */
     @PutMapping("")
     public HttpResult changeTaskRequire(@RequestBody TaskRequire taskRequire){
+        taskRequire.setUpdatedBy(getUserId());
         return taskRequireService.changeTaskRequire(taskRequire);
     }
 }

@@ -42,6 +42,7 @@ public class FastFeedbackController extends BaseController {
     @ApiOperation(value = "修改快速服务反馈单",httpMethod = "PUT",notes = "完成任务时填写")
     @PutMapping("")
     public HttpResult changeFeedBack(@ApiParam(name="快速服务反馈单对象",value="json格式",required=true) @RequestBody FastFeedBack fastFeedBack){
+        fastFeedBack.setUpdatedBy(getUserId());
         return fastFeedbackService.changeFastFeedback(fastFeedBack);
     }
 }

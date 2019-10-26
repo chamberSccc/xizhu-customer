@@ -23,18 +23,17 @@
         <result column="created_time" property="createdTime"/>
         <result column="detail_audio_id" property="detailAudioId"/>
         <result column="detail_speech_id" property="detailSpeechId"/>
-        <result column="res_audio_id" property="solAudioId"/>
-        <result column="res_speech_id" property="solSpeechId"/>
+        <result column="res_audio_id" property="resAudioId"/>
+        <result column="res_speech_id" property="resSpeechId"/>
     </resultMap>
 
     <select id="selectByTaskId" resultMap="FieldFeedbackMap">
-      SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,receive_date,assembly_type,trouble_type,
-       task_assign_type,detail,solution,result,detail_audio_id,detail_speech_id,rel_audio_id,rel_speech_id,created_by,created_time
+      SELECT uuid,task_id,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,receive_date,assembly_type,trouble_type,
+       task_assign_type,detail,solution,result,detail_audio_id,detail_speech_id,res_audio_id,res_speech_id,created_by,created_time
        from s_field_feedback where task_id = #{taskId}
     </select>
 
-    <!--    todo 缺少图片id的新增和update-->
-    <insert id="insertFieldFeedback" parameterType="com.tangmo.xizhu.customer.entity.FieldFeedBack">
+    <insert id="insertFeedback" parameterType="com.tangmo.xizhu.customer.entity.FieldFeedBack">
         INSERT INTO s_field_feedback
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
@@ -91,11 +90,11 @@
             <if test="detailSpeechId != null">
                 detail_speech_id,
             </if>
-            <if test="relAudioId != null">
-                rel_audio_id,
+            <if test="resAudioId != null">
+                res_audio_id,
             </if>
-            <if test="relSpeechId != null">
-                rel_speech_id,
+            <if test="resSpeechId != null">
+                res_speech_id,
             </if>
             <if test="createdBy != null">
                 created_by,
@@ -103,12 +102,7 @@
             <if test="updatedBy != null">
                 updated_by,
             </if>
-            <if test="createdTime != null">
-                created_time,
-            </if>
-            <if test="updatedTime != null">
-                updated_time,
-            </if>
+                created_time
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -166,11 +160,11 @@
             <if test="detailSpeechId != null">
                 #{detailSpeechId},
             </if>
-            <if test="relAudioId != null">
-                #{relAudioId},
+            <if test="resAudioId != null">
+                #{resAudioId},
             </if>
-            <if test="relSpeechId != null">
-                #{relSpeechId},
+            <if test="resSpeechId != null">
+                #{resSpeechId},
             </if>
             <if test="createdBy != null">
                 #{createdBy},
@@ -178,16 +172,11 @@
             <if test="updatedBy != null">
                 #{updatedBy},
             </if>
-            <if test="createdTime != null">
-                #{createdTime},
-            </if>
-            <if test="updatedTime != null">
-                #{updatedTime},
-            </if>
+              getDate()
         </trim>
     </insert>
 
-    <update id="updateFieldFeedback">
+    <update id="updateFeedback">
         UPDATE s_field_feedback
         <set>
             <if test="companyName != null">
@@ -226,18 +215,16 @@
             <if test="detailSpeechId != null">
                 detail_speech_id=  #{detailSpeechId},
             </if>
-            <if test="relAudioId != null">
-                rel_audio_id=  #{relAudioId},
+            <if test="resAudioId != null">
+                res_audio_id=  #{resAudioId},
             </if>
-            <if test="relSpeechId != null">
-                rel_speech_id=  #{relSpeechId},
+            <if test="resSpeechId != null">
+                res_speech_id=  #{resSpeechId},
             </if>
             <if test="updatedBy != null">
                 updated_by = #{updatedBy},
             </if>
-            <if test="updatedTime != null">
-                updated_time = #{updatedTime},
-            </if>
+            updated_time = getDate()
         </set>
         WHERE uuid = #{uuid}
     </update>

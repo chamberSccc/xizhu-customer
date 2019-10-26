@@ -42,6 +42,7 @@ public class FieldAssignController extends BaseController {
     @ApiOperation(value = "修改现场服务指派单",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeAssign(@ApiParam(name="现场服务申请表对象",value="json格式",required=true) @RequestBody FieldAssign fieldAssign){
+        fieldAssign.setUpdatedBy(getUserId());
         return fieldAssignService.changeFieldAssign(fieldAssign);
     }
 

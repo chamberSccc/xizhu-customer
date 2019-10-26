@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.entity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class ElecRecord {
     @ApiModelProperty(value="带队工程师",name="createdBy",example="")
     private String createdBy;//带队工程师
     @ApiModelProperty(value="id",name="uuid",example="")
-    private String createdTime;//填写时间
+    private Date createdTime;//填写时间
     @ApiModelProperty(value="工作记录",name="workList",example="")
     private List<DailyRecord> workList;//工作记录
     @ApiModelProperty(value="安全记录",name="safeList",example="")

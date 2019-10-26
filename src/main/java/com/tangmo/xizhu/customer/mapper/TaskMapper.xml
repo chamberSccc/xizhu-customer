@@ -24,6 +24,10 @@
       SELECT task_id, task_type from s_service_task
     </select>
 
+    <update id="updateStatus">
+        update s_service_task set task_status = #{status} where uuid = #{taskId}
+    </update>
+
     <insert id="insertTask" parameterType="com.tangmo.xizhu.customer.entity.Task">
         INSERT INTO s_service_task
         <trim prefix="(" suffix=")" suffixOverrides=",">

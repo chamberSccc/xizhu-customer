@@ -28,7 +28,7 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="FastSurveyMap">
-      SELECT uuid,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,service_date,assembly_type,trouble_type,
+      SELECT uuid,task_id,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,service_date,assembly_type,trouble_type,
        task_assign_type,detail,solution,result,detail_audio_id,detail_speech_id,sol_audio_id,sol_speech_id,created_by,created_time,satisfaction
        from s_fast_survey where task_id = #{taskId}
     </select>
@@ -247,9 +247,7 @@
             <if test="updatedBy != null">
                 updated_by = #{updatedBy},
             </if>
-            <if test="updatedTime != null">
-                updated_time = #{updatedTime},
-            </if>
+            updated_time = getDate()
         </set>
         WHERE uuid = #{uuid}
     </update>

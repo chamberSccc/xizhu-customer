@@ -3,6 +3,8 @@ package com.tangmo.xizhu.customer.entity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.sql.Date;
+
 /**
  * @Author chen bo
  * @Date 2019/10/20
@@ -28,5 +30,5 @@ public class User {
     private String avatar;
     private String status; //0 正常  1:删除
     private String createdBy;
-    private String createdTime;
+    private Date createdTime;
 }

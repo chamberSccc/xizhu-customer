@@ -2,10 +2,13 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
+import com.tangmo.xizhu.customer.dao.FieldApplyDao;
 import com.tangmo.xizhu.customer.dao.FieldAssignDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
+import com.tangmo.xizhu.customer.entity.FieldApply;
 import com.tangmo.xizhu.customer.entity.FieldAssign;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
+import com.tangmo.xizhu.customer.entity.converter.FieldApplyConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.FieldAssignService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
@@ -27,6 +30,8 @@ public class FieldAssignServiceImpl implements FieldAssignService {
     private FieldAssignDao fieldAssignDao;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private FieldApplyDao fieldApplyDao;
     @Override
     public HttpResult addFieldAssign(FieldAssign fieldAssign) {
         String uuid = EncryptUtil.get32Uuid();
@@ -35,7 +40,9 @@ public class FieldAssignServiceImpl implements FieldAssignService {
         List<String> picture = fieldAssign.getDetailPictureList();
         List<TaskAttach> list = TaskAttachConverter.String2Entity(picture, uuid, TaskAttachConst.FIELD_ASSIGN,
                 TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
-        taskAttachDao.insertBatchAttach(list);
+        if(list != null){
+            taskAttachDao.insertBatchAttach(list);
+        }
         return HttpResult.success();
     }
 
@@ -47,6 +54,15 @@ public class FieldAssignServiceImpl implements FieldAssignService {
 
     @Override
     public HttpResult getByTaskId(String taskId) {
-        return HttpResult.success(fieldAssignDao.selectByTaskId(taskId));
+        FieldAssign fieldAssign = fieldAssignDao.selectByTaskId(taskId);
+        if(fieldAssign == null){
+            FieldApply fieldApply = fieldApplyDao.selectByTaskId(taskId);
+            fieldAssign = FieldApplyConverter.apply2assign(fieldApply);
+        }else{
+            List<String> detail = taskAttachDao.selectByParentAndType(fieldAssign.getUuid(), TaskAttachConst.FIELD_ASSIGN,
+                    TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+            fieldAssign.setDetailPictureList(detail);
+        }
+        return HttpResult.success(fieldAssign);
     }
 }

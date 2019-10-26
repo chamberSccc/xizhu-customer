@@ -38,7 +38,7 @@ public class ElecRecordServiceImpl implements ElecRecordService {
         elecRecordDao.insertElecRecord(elecRecord);
         List<DailyRecord> work = elecRecord.getWorkList();
         List<DailyRecord> safe = elecRecord.getSafeList();
-        dailyRecordDao.insertBatchDaily(integrateDaily(work,safe,uuid));
+        integrateDaily(work,safe,uuid);
         return HttpResult.success();
     }
 
@@ -48,7 +48,7 @@ public class ElecRecordServiceImpl implements ElecRecordService {
         dailyRecordDao.deleteByParentAndBase(elecRecord.getUuid(),InstallRecordConst.BASE_ELEC);
         List<DailyRecord> work = elecRecord.getWorkList();
         List<DailyRecord> safe = elecRecord.getSafeList();
-        dailyRecordDao.insertBatchDaily(integrateDaily(work,safe,elecRecord.getUuid()));
+        integrateDaily(work,safe,elecRecord.getUuid());
         return HttpResult.success();
     }
 
@@ -58,6 +58,7 @@ public class ElecRecordServiceImpl implements ElecRecordService {
         if (elecRecord == null){
             Task task = taskDao.selectById(taskId);
             elecRecord.setDeviceType(task.getDeviceType());
+            elecRecord.setTaskId(taskId);
         }else{
             List<DailyRecord> work = dailyRecordDao.selectByParentAndType(elecRecord.getUuid(),
                     InstallRecordConst.BASE_ELEC,InstallRecordConst.WORK);
@@ -78,7 +79,7 @@ public class ElecRecordServiceImpl implements ElecRecordService {
      * @date 2019/10/23
      * @description: 整合工作记录
      */
-    private List<DailyRecord> integrateDaily(List<DailyRecord> workList,List<DailyRecord> safeList,String parentId){
+    private void integrateDaily(List<DailyRecord> workList,List<DailyRecord> safeList,String parentId){
         for (int i = 0; i < workList.size(); i++) {
             workList.get(i).setBaseType(InstallRecordConst.BASE_ELEC);
             workList.get(i).setContentType(InstallRecordConst.WORK);
@@ -91,7 +92,11 @@ public class ElecRecordServiceImpl implements ElecRecordService {
             workList.get(i).setParentId(parentId);
             workList.get(i).setUuid(EncryptUtil.get32Uuid());
         }
-        workList.addAll(safeList);
-        return workList;
+        if(workList != null){
+            dailyRecordDao.insertBatchDaily(workList);
+        }
+        if(safeList != null){
+            dailyRecordDao.insertBatchDaily(safeList);
+        }
     }
 }
