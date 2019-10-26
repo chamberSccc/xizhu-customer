@@ -23,7 +23,7 @@ public interface UserDao {
      * @date 2019/10/24
      * @description: 增加用户
      */
-    void insertUser();
+    void insertUser(User user);
 
     /**
      * @param userId
@@ -36,22 +36,22 @@ public interface UserDao {
     void updatePwd(@Param("userId") String userId, @Param("newPwd") String newPwd);
 
     /**
-     * @param logInfo
-     * @return
-     * @author chen bo
-     * @date 2019/10/24
-     * @description: 通过账号密码查询用户信息
-     */
-    User selectByLogInfo(LogInfo logInfo);
-
-    /**
      * @param mobile
      * @return
      * @author chen bo
      * @date 2019/10/24
-     * @description: 通过手机号查询用户信息
+     * @description: 通过手机号查询用户密码信息
      */
-    User selectByMobile(String mobile);
+    User selectPwdByMobile(String mobile);
+
+    /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/10/26
+     * @description: 删除用户信息
+     */
+    Integer deleteById(String userId);
 
     /**
      * @param userId
@@ -61,6 +61,15 @@ public interface UserDao {
      * @description: 通过用户id查询用户信息
      */
     User selectByUserId(String userId);
+
+    /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/10/26
+     * @description: 查询带有密码的用户信息
+     */
+    User selectPwdByUserId(String userId);
 
     /**
      * @param userId

@@ -117,11 +117,11 @@ public interface TaskService {
     HttpResult getTaskListBySearch(TaskSearch taskSearch);
 
     /**
-     * @param task
+     * @param taskId
      * @return com.tangmo.xizhu.customer.common.HttpResult
      * @author chen bo
      * @date 2019/10/15
      * @description: 提交任务
      */
-    HttpResult commitTask(Task task);
+    HttpResult commitTask(String taskId,String userId);
 }

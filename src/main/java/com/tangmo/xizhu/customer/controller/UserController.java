@@ -2,9 +2,11 @@ package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
+import com.tangmo.xizhu.customer.entity.PwdInfo;
 import com.tangmo.xizhu.customer.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -31,9 +33,16 @@ public class UserController extends BaseController {
         return userService.getUserInfo(getUserId());
     }
 
+    /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/10/26
+     * @description: 删除用户信息
+     */
     @ApiOperation(value = "删除用户",httpMethod = "GET",notes = "")
     @DeleteMapping("/{userId}")
-    public HttpResult delUser(@PathVariable String userId){
+    public HttpResult<User> delUser(@PathVariable String userId){
         return userService.delUser(userId);
     }
 
@@ -59,7 +68,7 @@ public class UserController extends BaseController {
      */
     @ApiOperation(value = "修改用户信息",httpMethod = "PUT",notes = "")
     @PutMapping("")
-    public HttpResult changeUser(@RequestBody User user){
+    public HttpResult changeUser(@ApiParam(name="审批信息对象",value="json格式",required=true) @RequestBody User user){
         return null;
     }
     /**
@@ -71,7 +80,8 @@ public class UserController extends BaseController {
      */
     @ApiOperation(value = "修改密码",httpMethod = "PUT",notes = "")
     @PutMapping("/pwd")
-    public HttpResult changePwd(){
-        return null;
+    public HttpResult changePwd(@RequestBody PwdInfo pwdInfo){
+        pwdInfo.setUserId(getUserId());
+        return userService.changePwd(pwdInfo);
     }
 }

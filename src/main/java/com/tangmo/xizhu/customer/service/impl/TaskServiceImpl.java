@@ -128,7 +128,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public HttpResult commitTask(Task task) {
-        return null;
+    public HttpResult commitTask(String taskId,String userId) {
+        //修改任务状态为待审核
+        taskDao.updateStatus(taskId,TaskStatusConst.INITIAL);
+        return HttpResult.success();
     }
 }

@@ -57,6 +57,7 @@ public class ElecRecordServiceImpl implements ElecRecordService {
         ElecRecord elecRecord = elecRecordDao.selectByTaskId(taskId);
         if (elecRecord == null){
             Task task = taskDao.selectById(taskId);
+            elecRecord = new ElecRecord();
             elecRecord.setDeviceType(task.getDeviceType());
             elecRecord.setTaskId(taskId);
         }else{

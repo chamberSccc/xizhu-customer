@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.entity.PwdInfo;
 import com.tangmo.xizhu.customer.entity.User;
 
 /**
@@ -21,13 +22,13 @@ public interface UserService {
     HttpResult addUser(User user);
 
     /**
-     * @param user
+     * @param pwdInfo
      * @return
      * @author chen bo
      * @date 2019/10/24
      * @description: 修改密码
      */
-    HttpResult changePwd(User user);
+    HttpResult changePwd(PwdInfo pwdInfo);
 
     /**
      * @param userId

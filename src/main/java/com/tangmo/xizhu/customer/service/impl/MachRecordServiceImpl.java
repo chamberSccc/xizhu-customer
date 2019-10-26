@@ -55,6 +55,7 @@ public class MachRecordServiceImpl implements MachRecordService {
         MachRecord machRecord = machRecordDao.selectByTaskId(taskId);
         if(machRecord == null){
             Task task = taskDao.selectById(taskId);
+            machRecord = new MachRecord();
             machRecord.setDeviceType(task.getDeviceType());
             machRecord.setTaskId(taskId);
         }else{

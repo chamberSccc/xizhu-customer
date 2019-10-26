@@ -13,16 +13,16 @@
         <result column="created_by" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
     </resultMap>
-    <select id="selectByLogInfo" resultMap="UserMap">
-      SELECT uuid,mobile,password  from s_user where mobile = #{mobile} and password = #{password} and status = 0
+    <select id="selectPwdByUserId" resultMap="UserMap">
+        SELECT uuid,password  from s_user where mobile = #{mobile} and status = 0
     </select>
-
-    <select id="selectByMobile" resultMap="UserMap">
+    <select id="selectPwdByMobile" resultMap="UserMap">
       SELECT uuid,mobile,password  from s_user where mobile = #{mobile} and status = 0
     </select>
 
     <select id="selectByUserId" resultMap="UserMap">
-      SELECT uuid,mobile,password  from s_user where uuid = #{userId} and status = 0
+      SELECT uuid,mobile,user_name,user_type,dept_id,dept_name,avatar,created_by
+        from s_user where uuid = #{userId}
     </select>
 
     <select id="selectByDeptId" resultMap="UserMap">
