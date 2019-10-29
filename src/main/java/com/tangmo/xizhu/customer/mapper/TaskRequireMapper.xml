@@ -25,7 +25,7 @@
        task_assign_type,detail,created_by,created_time,detail_audio_id,detail_speech_id from s_task_require where task_id = #{taskId}
     </select>
 
-    <!--    todo 缺少图片id的新增和update-->
+
     <insert id="insertTaskRequire" parameterType="com.tangmo.xizhu.customer.entity.TaskRequire">
         INSERT INTO s_task_require
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -77,12 +77,10 @@
             <if test="updatedBy != null">
                 updated_by,
             </if>
-            <if test="createdTime != null">
-                created_time,
-            </if>
             <if test="updatedTime != null">
                 updated_time,
             </if>
+            created_time
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -134,12 +132,10 @@
             <if test="updatedBy != null">
                 #{updatedBy},
             </if>
-            <if test="createdTime != null">
-                #{createdTime},
-            </if>
             <if test="updatedTime != null">
                 #{updatedTime},
             </if>
+            getDate()
         </trim>
     </insert>
 

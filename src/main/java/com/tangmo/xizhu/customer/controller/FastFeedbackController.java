@@ -29,6 +29,7 @@ public class FastFeedbackController extends BaseController {
     @ApiOperation(value = "新增快速服务反馈单",httpMethod = "POST",notes = "完成任务时填写")
     @PostMapping("")
     public HttpResult addFeedBack(@ApiParam(name="快速服务反馈单对象",value="json格式",required=true) @RequestBody FastFeedBack fastFeedBack){
+        fastFeedBack.setCreatedBy(getUserId());
         return fastFeedbackService.addFastFeedback(fastFeedBack);
     }
 

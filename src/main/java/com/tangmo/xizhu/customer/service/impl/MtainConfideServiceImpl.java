@@ -41,7 +41,7 @@ public class MtainConfideServiceImpl implements MtainConfideService {
     public HttpResult getByTaskIdAndType(String taskId, Byte type) {
         MaintainConfide maintainConfide = mtainConfideDao.selectByTaskIdAndType(taskId, type);
         if (maintainConfide == null){
-            if(type == 0){
+            if(type == 1){
                 //如果是第一种表，从设备档案选择信息
                 DeviceFile deviceFile = deviceFileDao.selectByTaskId(taskId);
                 maintainConfide = new MaintainConfide();

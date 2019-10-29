@@ -34,6 +34,11 @@ public class SafeConfideServiceImpl implements SafeConfideService {
 
     @Override
     public HttpResult getByTaskId(String taskId) {
-        return HttpResult.success(safeConfideDao.selectByTaskId(taskId));
+        SafeConfide safeConfide = safeConfideDao.selectByTaskId(taskId);
+        if(safeConfide == null){
+            safeConfide = new SafeConfide();
+            safeConfide.setTaskId(taskId);
+        }
+        return HttpResult.success(safeConfide);
     }
 }

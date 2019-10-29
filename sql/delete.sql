@@ -1,0 +1,12 @@
+delete from s_service_task;
+delete from s_safe_confide;
+delete from s_fast_feedback;
+delete from s_task_require;
+delete from s_equip_user;
+delete from s_fast_survey;
+delete from s_field_apply;
+delete from s_field_assign;
+delete from s_field_feedback;
+delete from s_machine_record;
+delete from s_task_attach;
+delete from s_task_require;

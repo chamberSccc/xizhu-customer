@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.FastFeedbackDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
@@ -40,22 +41,20 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
         fastFeedBack.setUuid(uuid);
         fastFeedbackDao.insertFastFeedback(fastFeedBack);
         //添加任务需求单图片附件
-        List<TaskAttach> detailAttach = TaskAttachConverter.String2Entity(fastFeedBack.getDetailPictureList(),uuid,
-                TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
-        List<TaskAttach> solAttach = TaskAttachConverter.String2Entity(fastFeedBack.getDetailPictureList(),uuid,
-                TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.SOLUTION);
-        if(detailAttach != null){
-            taskAttachDao.insertBatchAttach(detailAttach);
-        }
-        if(solAttach != null){
-            taskAttachDao.insertBatchAttach(solAttach);
-        }
+        dealPictureList(fastFeedBack.getDetailPictureList(),fastFeedBack.getSolPictureList(),fastFeedBack.getUuid());
         return HttpResult.success();
     }
 
     @Override
     public HttpResult changeFastFeedback(FastFeedBack fastFeedBack) {
+        if(fastFeedBack.getUuid() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
         fastFeedbackDao.updateFastFeedback(fastFeedBack);
+        //先删除之前的附件内容
+        taskAttachDao.deleteByParentAndType(fastFeedBack.getUuid(),TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.SOLUTION);
+        //添加任务需求单图片附件
+        dealPictureList(null,fastFeedBack.getSolPictureList(),fastFeedBack.getUuid());
         return HttpResult.success();
     }
 
@@ -77,5 +76,28 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
             fastFeedBack.setSolPictureList(solution);
         }
         return HttpResult.success(fastFeedBack);
+    }
+
+    /**
+     * @param detail
+     * @param solution
+     * @param uuid
+     * @return
+     * @author chen bo
+     * @date 2019/10/29
+     * @description: 处理图片列表
+     */
+    private void dealPictureList(List<String> detail,List<String> solution,String uuid){
+        List<TaskAttach> detailAttach = TaskAttachConverter.String2Entity(detail,uuid,
+                TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+        List<TaskAttach> solAttach = TaskAttachConverter.String2Entity(solution,uuid,
+                TaskAttachConst.FAST_FB_ATTACH,TaskAttachConst.PICTURE,TaskAttachConst.SOLUTION);
+        if(detailAttach != null){
+            taskAttachDao.insertBatchAttach(detailAttach);
+        }
+        if(solAttach != null){
+            taskAttachDao.insertBatchAttach(solAttach);
+        }
+        return ;
     }
 }

@@ -54,7 +54,7 @@ public class DeviceFileServiceImpl implements DeviceFileService {
             deviceFile.getUserList().get(i).setDeviceFileId(uuid);
         }
         equipUserDao.deleteByDeviceFileId(deviceFile.getUuid());
-        if(deviceFile.getUserList()==null || deviceFile.getUserList().size() == 0){
+        if(deviceFile.getUserList()==null || deviceFile.getUserList().size() != 0){
             equipUserDao.insertBatchUser(deviceFile.getUserList());
         }
 

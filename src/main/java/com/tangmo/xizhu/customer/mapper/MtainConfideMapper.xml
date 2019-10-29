@@ -134,6 +134,10 @@
             <if test="maintain != null">
                 maintain = #{maintain},
             </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy},
+            </if>
+            updated_time = updatedTime;
         </set>
         WHERE uuid = #{uuid}
     </update>

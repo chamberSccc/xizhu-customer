@@ -47,4 +47,5 @@ public interface TaskAttachDao {
      */
     void deleteByParentAndType(@Param("parentId") String parentId,@Param("parentType") Byte parentType,
                                @Param("attachType") Byte attachType);
+
 }

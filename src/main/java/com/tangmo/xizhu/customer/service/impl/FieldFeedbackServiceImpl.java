@@ -36,29 +36,23 @@ public class FieldFeedbackServiceImpl implements FieldFeedbackService {
         String uuid = EncryptUtil.get32Uuid();
         feedBack.setUuid(uuid);
         fieldFeedbackDao.insertFeedback(feedBack);
-        List<String> picture = feedBack.getDetailPictureList();
-        List<TaskAttach> list = TaskAttachConverter.String2Entity(picture, uuid, TaskAttachConst.FIELD_FB,
-                TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
-        List<String> result = feedBack.getResPictureList();
-        List<TaskAttach> resultList = TaskAttachConverter.String2Entity(result, uuid, TaskAttachConst.FIELD_FB,
-                TaskAttachConst.PICTURE,TaskAttachConst.RESULT);
-        if(list != null){
-            taskAttachDao.insertBatchAttach(list);
-        }
-        if(resultList != null){
-            taskAttachDao.insertBatchAttach(resultList);
-        }
+        dealPictureList(feedBack.getDetailPictureList(),feedBack.getResPictureList(),uuid);
         return HttpResult.success();
     }
 
     @Override
     public HttpResult changeFeedback(FieldFeedBack fieldFeedBack) {
         fieldFeedbackDao.updateFeedback(fieldFeedBack);
+        //先删除之前的附件内容
+        taskAttachDao.deleteByParentAndType(fieldFeedBack.getUuid(),TaskAttachConst.FIELD_FB,TaskAttachConst.RESULT);
+        //添加任务需求单图片附件
+        dealPictureList(null,fieldFeedBack.getResPictureList(),fieldFeedBack.getUuid());
         return HttpResult.success();
     }
 
     @Override
     public HttpResult getByTaskId(String taskId) {
+        //现场服务反馈单来自于现场服务申请单
         FieldFeedBack fieldFeedBack = fieldFeedbackDao.selectByTaskId(taskId);
         if(fieldFeedBack == null){
             FieldApply fieldApply = (FieldApply) fieldApplyService.getByTaskId(taskId).getData();
@@ -69,5 +63,29 @@ public class FieldFeedbackServiceImpl implements FieldFeedbackService {
             fieldFeedBack.setDetailPictureList(detail);
         }
         return HttpResult.success(fieldFeedBack);
+    }
+
+
+    /**
+     * @param detail
+     * @param solution
+     * @param uuid
+     * @return
+     * @author chen bo
+     * @date 2019/10/29
+     * @description: 处理图片列表
+     */
+    private void dealPictureList(List<String> detail,List<String> solution,String uuid){
+        List<TaskAttach> detailAttach = TaskAttachConverter.String2Entity(detail,uuid,
+                TaskAttachConst.FIELD_FB,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+        List<TaskAttach> solAttach = TaskAttachConverter.String2Entity(solution,uuid,
+                TaskAttachConst.FIELD_FB,TaskAttachConst.PICTURE,TaskAttachConst.RESULT);
+        if(detailAttach != null){
+            taskAttachDao.insertBatchAttach(detailAttach);
+        }
+        if(solAttach != null){
+            taskAttachDao.insertBatchAttach(solAttach);
+        }
+        return ;
     }
 }

@@ -34,7 +34,7 @@ public class MaintainConfide {
     @ApiModelProperty(value="填写人",name="createdBy",example="")
     private String createdBy;
     @ApiModelProperty(value="交底时间",name="createTime",example="")
-    private Date createTime;
+    private Date createdTime;
     @ApiModelProperty(value="用户类型 0：用户 1：服务人员",name="userType",example="")
     private Byte userType;
     @ApiModelProperty(value="安全警示内容",name="safety",example="")
@@ -43,5 +43,8 @@ public class MaintainConfide {
     private String equipment;
     @ApiModelProperty(value="维护保养内容",name="maintain",example="")
     private String maintain;
+
+    private String updatedBy;
+    private Date updatedTime;
 
 }

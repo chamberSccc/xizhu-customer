@@ -8,7 +8,9 @@ package com.tangmo.xizhu.customer.common;
  **/
 public enum ResultCode {
     /**1000-2000 定义公共模块错误*/
-    PARAM_ERROR("1001","参数错误");
+    PARAM_ERROR("1001","参数错误"),
+    UPLOAD_ERROR("1002","文件上传失败"),
+    TASK_ERROR("1003","任务信息错误");
 
     private String errCode;
     private String errMsg;

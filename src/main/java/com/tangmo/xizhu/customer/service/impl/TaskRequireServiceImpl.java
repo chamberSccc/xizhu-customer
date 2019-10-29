@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskRequireDao;
@@ -52,6 +53,8 @@ public class TaskRequireServiceImpl implements TaskRequireService {
             List<String> attaches = taskAttachDao.selectByParentAndType(requireId, TaskAttachConst.REQUIRE_ATTACH,
                     TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
             taskRequire.setDetailPictureList(attaches);
+        }else{
+            return HttpResult.fail(ResultCode.TASK_ERROR);
         }
         return HttpResult.success(taskRequire);
     }

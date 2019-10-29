@@ -22,7 +22,7 @@
                 user_id,
             </if>
             <if test="fileType != null">
-                filt_type,
+                file_type,
             </if>
                 created_time,
         </trim>

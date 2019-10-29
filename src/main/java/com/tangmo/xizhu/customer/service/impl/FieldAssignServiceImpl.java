@@ -38,11 +38,7 @@ public class FieldAssignServiceImpl implements FieldAssignService {
         fieldAssign.setUuid(uuid);
         fieldAssignDao.insertAssign(fieldAssign);
         List<String> picture = fieldAssign.getDetailPictureList();
-        List<TaskAttach> list = TaskAttachConverter.String2Entity(picture, uuid, TaskAttachConst.FIELD_ASSIGN,
-                TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
-        if(list != null){
-            taskAttachDao.insertBatchAttach(list);
-        }
+        dealPictureList(picture,uuid);
         return HttpResult.success();
     }
 
@@ -64,5 +60,22 @@ public class FieldAssignServiceImpl implements FieldAssignService {
             fieldAssign.setDetailPictureList(detail);
         }
         return HttpResult.success(fieldAssign);
+    }
+
+    /**
+     * @param detail
+     * @param uuid
+     * @return
+     * @author chen bo
+     * @date 2019/10/29
+     * @description: 处理图片列表
+     */
+    private void dealPictureList(List<String> detail,String uuid){
+        List<TaskAttach> detailAttach = TaskAttachConverter.String2Entity(detail,uuid,
+                TaskAttachConst.FIELD_ASSIGN,TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+        if(detailAttach != null){
+            taskAttachDao.insertBatchAttach(detailAttach);
+        }
+        return ;
     }
 }

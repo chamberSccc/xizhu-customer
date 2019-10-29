@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.dao.FilePathDao;
 import com.tangmo.xizhu.customer.entity.FilePath;
 import com.tangmo.xizhu.customer.service.FilePathService;
@@ -33,9 +34,12 @@ public class FilePathServiceImpl implements FilePathService {
     @Override
     public HttpResult uploadFile(MultipartFile file, String userId) {
         FilePath filePath = getPathInfo(file,userId);
+        if(filePath == null || filePath.getFilePath() == null){
+            return HttpResult.fail(ResultCode.UPLOAD_ERROR);
+        }
         filePath.setUserId(userId);
         filePathDao.insertFilePath(filePath);
-        return HttpResult.success();
+        return HttpResult.success(filePath);
     }
 
     @Override
@@ -43,17 +47,12 @@ public class FilePathServiceImpl implements FilePathService {
         FilePath fp = filePathDao.selectById(fileId);
         ResponseEntity<byte[]> responseEntity = null;
         try {
-//            FilePath fp = new FilePath();
-//            fp.setUserId("1");
-//            fp.setFileType("jpg");
-//            fp.setFilePath("/Users/boge/Downloads/xizhu-customer/attach/1/29ff520695534d659c35ad9ad523f7d7.jpg");
-//            fp.setUuid("29ff520695534d659c35ad9ad523f7d7");
+            File basePathFile = new File("");
+            StringBuilder sb = new StringBuilder(basePathFile.getCanonicalPath()).append(File.separator).append(fp.getFilePath());
             if (fp == null || fp.getFilePath() == null) {
                 return null;
             }
-            //获取文件目录
-            String filePath = fp.getFilePath();
-            responseEntity = downloadEntity(agent, filePath, fileId, fp.getFileType());
+            responseEntity = downloadEntity(agent, sb.toString(), fileId, fp.getFileType());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,9 +130,9 @@ public class FilePathServiceImpl implements FilePathService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String dir = "";//没有拿到上传路径
+        String dir = basePath;//没有拿到上传路径
         String uuid = EncryptUtil.get32Uuid();
-        StringBuilder sb = new StringBuilder(basePath).append("/attach/").append(userId).append("/")
+        StringBuilder sb = new StringBuilder(File.separator).append("attach").append(File.separator).append(userId).append(File.separator)
                 .append(uuid).append(".").append(fileType);
         String fileName = sb.toString();
         boolean bool = uploadFileEntity(file, dir, fileName);

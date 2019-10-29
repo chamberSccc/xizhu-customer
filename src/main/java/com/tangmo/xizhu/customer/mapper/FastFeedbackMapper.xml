@@ -206,20 +206,11 @@
             <if test="taskAssignType != null">
                 task_assign_type = #{taskAssignType},
             </if>
-            <if test="detail != null">
-                detail=  #{detail},
-            </if>
             <if test="solution != null">
                 solution=  #{solution},
             </if>
             <if test="result != null">
                 result=  #{result},
-            </if>
-            <if test="detailAudioId != null">
-                detail_audio_id=  #{detailAudioId},
-            </if>
-            <if test="detailSpeechId != null">
-                detail_speech_id=  #{detailSpeechId},
             </if>
             <if test="solAudioId != null">
                 sol_audio_id=  #{solAudioId},

@@ -30,7 +30,6 @@
         from s_field_assign where task_id = #{taskId}
     </select>
 
-    <!--    todo 缺少图片id的新增和update-->
     <insert id="insertAssign" parameterType="com.tangmo.xizhu.customer.entity.FieldAssign">
         INSERT INTO s_field_assign
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -194,12 +193,6 @@
             </if>
             <if test="fieldTarget != null">
                 field_target=  #{fieldTarget},
-            </if>
-            <if test="detailAudioId != null">
-                detail_audio_id=  #{detailAudioId},
-            </if>
-            <if test="detailSpeechId != null">
-                detail_speech_id=  #{detailSpeechId},
             </if>
             <if test="updatedBy != null">
                 updated_by = #{updatedBy},
