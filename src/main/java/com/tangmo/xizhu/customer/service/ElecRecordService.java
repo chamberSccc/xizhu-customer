@@ -38,4 +38,22 @@ public interface ElecRecordService {
      * @description: 查询任务的电气安装工作记录
      */
     HttpResult getByTaskId(String taskId);
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/30
+     * @description: 获取已上传记录列表
+     */
+    HttpResult getDailyDate(String taskId);
+
+    /**
+     * @param dailyId
+     * @return
+     * @author chen bo
+     * @date 2019/10/30
+     * @description: 根据dailyId获取安装工作记录
+     */
+    HttpResult getByDailyId(String dailyId);
 }

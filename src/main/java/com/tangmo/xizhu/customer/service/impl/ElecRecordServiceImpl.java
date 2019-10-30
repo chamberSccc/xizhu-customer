@@ -71,6 +71,16 @@ public class ElecRecordServiceImpl implements ElecRecordService {
         return HttpResult.success(elecRecord);
     }
 
+    @Override
+    public HttpResult getDailyDate(String taskId) {
+        return null;
+    }
+
+    @Override
+    public HttpResult getByDailyId(String dailyId) {
+        return null;
+    }
+
     /**
      * @param workList 工作记录
      * @param safeList 安全记录

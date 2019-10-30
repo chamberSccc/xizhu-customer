@@ -29,7 +29,7 @@ public class ElecRecordController extends BaseController {
     @ApiOperation(value = "新增安装工作记录(电气)表",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addElecRecord(@ApiParam(name="安装工作记录(电气)表对象",value="json格式",required=true) @RequestBody ElecRecord elecRecord){
-        return null;
+        return elecRecordService.addRecord(elecRecord);
     }
 
     /**
@@ -42,6 +42,19 @@ public class ElecRecordController extends BaseController {
     @ApiOperation(value = "修改安装工作记录(电气)表",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeElecRecord(@ApiParam(name="安装工作记录(电气)表对象",value="json格式",required=true) @RequestBody ElecRecord elecRecord){
+        return elecRecordService.changeRecord(elecRecord);
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/30
+     * @description: 获取已上传记录列表
+     */
+    @ApiOperation(value = "获取已上传记录列表",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/dailyDate")
+    public HttpResult getDailyDate(@PathVariable String taskId){
         return null;
     }
 }

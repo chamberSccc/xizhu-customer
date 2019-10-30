@@ -67,6 +67,16 @@ public class MachRecordServiceImpl implements MachRecordService {
         return HttpResult.success(machRecord);
     }
 
+    @Override
+    public HttpResult getDailyDate(String taskId) {
+        return null;
+    }
+
+    @Override
+    public HttpResult getByDailyId(String dailyId) {
+        return null;
+    }
+
     /**
      * @return
      * @author chen bo
