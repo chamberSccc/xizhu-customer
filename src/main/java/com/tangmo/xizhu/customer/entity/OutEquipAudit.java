@@ -23,8 +23,6 @@ public class OutEquipAudit {
     private String deviceType;
     @ApiModelProperty(value="外购设备名称",name="equipName",example="")
     private String equipName;
-    @ApiModelProperty(value="申请人联系方式",name="mobile",example="")
-    private String mobile;
     @ApiModelProperty(value="审批人",name="createdBy",example="")
     private String createdBy;
     @ApiModelProperty(value="审批时间",name="createdTime",example="")

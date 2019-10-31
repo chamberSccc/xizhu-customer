@@ -17,7 +17,7 @@ public interface OutEquipCheckDao {
      * @date 2019/10/31
      * @description: 新增外购件调试现场服务验收单
      */
-    Integer insertOutAudit(OutEquipCheck outEquipCheck);
+    Integer insertOutCheck(OutEquipCheck outEquipCheck);
 
     /**
      * @param outEquipCheck
@@ -26,7 +26,7 @@ public interface OutEquipCheckDao {
      * @date 2019/10/31
      * @description: 修改外购件调试现场服务验收单
      */
-    Integer updateOutApply(OutEquipCheck outEquipCheck);
+    Integer updateOutCheck(OutEquipCheck outEquipCheck);
 
     /**
      * @param taskId

@@ -19,7 +19,7 @@ public interface OutEquipNoticeDao {
      * @date 2019/10/31
      * @description: 新增外购件厂家安装通知单
      */
-    Integer insertOutAudit(OutEquipNotice outEquipNotice);
+    Integer insertOutNotice(OutEquipNotice outEquipNotice);
 
     /**
      * @param outEquipNotice
@@ -28,7 +28,7 @@ public interface OutEquipNoticeDao {
      * @date 2019/10/31
      * @description: 修改外购件厂家安装通知单
      */
-    Integer updateOutApply(OutEquipNotice outEquipNotice);
+    Integer updateOutNotice(OutEquipNotice outEquipNotice);
 
     /**
      * @param taskId

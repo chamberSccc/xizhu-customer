@@ -28,7 +28,7 @@ public interface OutEquipAuditDao {
      * @date 2019/10/31
      * @description: 修改外购件安装调试授权审批单
      */
-    Integer updateOutApply(OutEquipAudit outEquipAudit);
+    Integer updateOutAudit(OutEquipAudit outEquipAudit);
 
     /**
      * @param taskId

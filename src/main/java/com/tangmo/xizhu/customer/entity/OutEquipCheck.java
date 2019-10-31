@@ -27,9 +27,7 @@ public class OutEquipCheck {
     @ApiModelProperty(value="申请人联系方式",name="mobile",example="")
     private String mobile;
     @ApiModelProperty(value="申请人",name="createdBy",example="")
-    private String createdBy;
-    @ApiModelProperty(value="验收时间",name="createdTime",example="")
-    private Date createdTime;
+    private String applyUser;
     @ApiModelProperty(value="现场调试结果",name="detail",example="")
     private String detail;
     @ApiModelProperty(value="现场条件描述视频",name="detailAudioId",example="")
@@ -44,4 +42,8 @@ public class OutEquipCheck {
     private String equipSign;
     @ApiModelProperty(value="现场负责任签字",name="leaderSign",example="")
     private String leaderSign;
+
+    private String createdBy;
+    @ApiModelProperty(value="验收时间",name="createdTime",example="")
+    private Date createdTime;
 }

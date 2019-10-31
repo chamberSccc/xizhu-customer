@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.OutEquipApplyDao">
+    <resultMap id="EquipApplyMap" type="com.tangmo.xizhu.customer.entity.OutEquipApply">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="equip_name" property="equipName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="detail" property="detail"/>
+        <result column="detail_audio_id" property="detailAudioId"/>
+        <result column="detail_speech_id" property="detailSpeechId"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="EquipApplyMap">
+      SELECT uuid,task_id,company_name,device_type,equip_name,mobile,detail,detail_audio_id,detail_speech_id,
+      created_by,created_time
+       from s_equip_apply where task_id = #{taskId}
+    </select>
+
+    <insert id="insertOutApply" parameterType="com.tangmo.xizhu.customer.entity.OutEquipApply">
+        INSERT INTO s_equip_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="equipName != null">
+                equip_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="detailAudioId != null">
+                detail_audio_id,
+            </if>
+            <if test="detailSpeechId != null">
+                detail_speech_id,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+                created_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="equipName != null">
+                #{equipName},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="detailAudioId != null">
+                #{detailAudioId},
+            </if>
+            <if test="detailSpeechId != null">
+                #{detailSpeechId},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+           getDate()
+        </trim>
+    </insert>
+
+    <update id="updateOutApply">
+        UPDATE s_equip_apply
+        <set>
+            <if test="equipName != null">
+                equip_name = #{equipName},
+            </if>
+            <if test="detail!= null">
+                detail = #{detail},
+            </if>
+            <if test="detailAudioId != null">
+                detail_audio_id = #{detailAudioId},
+            </if>
+            <if test="detailSpeechId != null">
+                detail_speech_id = #{detailSpeechId},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>

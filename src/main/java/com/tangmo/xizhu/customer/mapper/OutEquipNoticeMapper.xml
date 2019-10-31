@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.OutEquipNoticeDao">
+    <resultMap id="EquipNoticeMap" type="com.tangmo.xizhu.customer.entity.OutEquipNotice">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="equip_name" property="equipName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="notice" property="notice"/>
+        <result column="factory_user" property="factoryUser"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="EquipNoticeMap">
+      SELECT uuid,task_id,company_name,device_type,equip_name,mobile,factory_user,
+      created_by,created_time
+       from s_equip_notice where task_id = #{taskId}
+    </select>
+
+    <insert id="insertOutNotice" parameterType="com.tangmo.xizhu.customer.entity.OutEquipNotice">
+        INSERT INTO s_equip_audit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="equipName != null">
+                equip_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="factoryUser != null">
+                factory_user,
+            </if>
+            <if test="notice != null">
+                notice,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+                created_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="equipName != null">
+                #{equipName},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="factoryUser != null">
+                #{factory_user},
+            </if>
+            <if test="notice != null">
+                #{notice},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+           getDate()
+        </trim>
+    </insert>
+
+    <update id="updateOutNotice">
+        UPDATE s_equip_notice
+        <set>
+            <if test="notice != null">
+                notice = #{notice},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="factoryUser != null">
+                factory_user = #{factoryUser},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>

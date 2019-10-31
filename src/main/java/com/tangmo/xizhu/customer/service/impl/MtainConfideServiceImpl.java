@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.FormTypeConst;
 import com.tangmo.xizhu.customer.dao.DeviceFileDao;
 import com.tangmo.xizhu.customer.dao.MtainConfideDao;
@@ -40,10 +41,14 @@ public class MtainConfideServiceImpl implements MtainConfideService {
     @Override
     public HttpResult getByTaskIdAndType(String taskId, Byte type) {
         MaintainConfide maintainConfide = mtainConfideDao.selectByTaskIdAndType(taskId, type);
+        // 交底表基础数据来自于设备档案表. 如果已经填写第一张交底表,则基础数据来自于第一张交底表
         if (maintainConfide == null){
             MaintainConfide result = mtainConfideDao.selectByTaskIdAndType(taskId, FormTypeConst.FORM01);
             if(result == null){
                 DeviceFile deviceFile = deviceFileDao.selectByTaskId(taskId);
+                if(deviceFile == null){
+                    return HttpResult.fail(ResultCode.DEVICE_FILE_MISS);
+                }
                 maintainConfide = new MaintainConfide();
                 maintainConfide.setCompanyName(deviceFile.getCompanyName());
                 maintainConfide.setDeviceName(deviceFile.getDeviceType());

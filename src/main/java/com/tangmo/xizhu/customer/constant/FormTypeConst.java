@@ -4,7 +4,7 @@ package com.tangmo.xizhu.customer.constant;
  * @Author chen bo
  * @Date 2019/10/26
  * @Version V1.0
- * @Description:
+ * @Description: 沥青交底表列表
  **/
 public class FormTypeConst {
     public static final byte FORM01 = 0;// 拒绝

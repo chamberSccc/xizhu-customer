@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.OutEquipAuditDao">
+    <resultMap id="EquipAuditMap" type="com.tangmo.xizhu.customer.entity.OutEquipAudit">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="equip_name" property="equipName"/>
+        <result column="opinion" property="opinion"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="EquipAuditMap">
+      SELECT uuid,task_id,company_name,device_type,equip_name,opinion,
+      created_by,created_time
+       from s_equip_audit where task_id = #{taskId}
+    </select>
+
+    <insert id="insertOutAudit" parameterType="com.tangmo.xizhu.customer.entity.OutEquipAudit">
+        INSERT INTO s_equip_audit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="equipName != null">
+                equip_name,
+            </if>
+            <if test="opinion != null">
+                opinion,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+                created_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="equipName != null">
+                #{equipName},
+            </if>
+            <if test="opinion != null">
+                #{opinion},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+           getDate()
+        </trim>
+    </insert>
+
+    <update id="updateOutAudit">
+        UPDATE s_equip_audit
+        <set>
+            <if test="opinion != null">
+                opinion = #{opinion},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>

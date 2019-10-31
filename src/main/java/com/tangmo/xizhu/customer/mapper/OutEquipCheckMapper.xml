@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.OutEquipCheckDao">
+    <resultMap id="EquipCheckMap" type="com.tangmo.xizhu.customer.entity.OutEquipCheck">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="equip_name" property="equipName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="apply_user" property="applyUser"/>
+        <result column="apply_date" property="applyDate"/>
+        <result column="user_opinion" property="userOpinion"/>
+        <result column="user_sign" property="userSign"/>
+        <result column="equip_sign" property="equipSign"/>
+        <result column="leader_sign" property="leaderSign"/>
+        <result column="detail" property="detail"/>
+        <result column="detail_audio_id" property="detailAudioId"/>
+        <result column="detail_speech_id" property="detailSpeechId"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="EquipCheckMap">
+      SELECT uuid,task_id,company_name,device_type,equip_name,mobile,apply_user,apply_date,user_opinion,
+      user_sign,equip_sign,leader_sign,detail,detail_audio_id,detail_speech_id,created_by,created_time
+       from s_equip_check where task_id = #{taskId}
+    </select>
+
+    <insert id="insertOutCheck" parameterType="com.tangmo.xizhu.customer.entity.OutEquipCheck">
+        INSERT INTO s_equip_check
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="equipName != null">
+                equip_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="applyUser != null">
+                apply_user,
+            </if>
+            <if test="applyDate != null">
+                apply_date,
+            </if>
+            <if test="userOpinion != null">
+                user_opinion,
+            </if>
+            <if test="userSign != null">
+                user_sign,
+            </if>
+            <if test="equipSign != null">
+                equip_sign,
+            </if>
+            <if test="leaderSign != null">
+                leader_sign,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="detailAudioId != null">
+                detail_audio_id,
+            </if>
+            <if test="detailSpeechId != null">
+                detail_speech_id,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+                created_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="equipName != null">
+                #{equipName},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="applyUser != null">
+                #{applyUser},
+            </if>
+            <if test="applyDate != null">
+                #{applyDate},
+            </if>
+            <if test="userOpinion != null">
+                #{userOpinion},
+            </if>
+            <if test="userSign != null">
+                #{userSign},
+            </if>
+            <if test="equipSign != null">
+                #{equipSign},
+            </if>
+            <if test="leaderSign != null">
+                #{leaderSign},
+            </if>
+            <if test="detailAudioId != null">
+                #{detailAudioId},
+            </if>
+            <if test="detailSpeechId != null">
+                #{detailSpeechId},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+           getDate()
+        </trim>
+    </insert>
+
+    <update id="updateOutCheck">
+        UPDATE s_equip_check
+        <set>
+            <if test="userSign != null">
+                user_sign = #{userSign},
+            </if>
+            <if test="userOpinion!= null">
+                user_opinion = #{userOpinion},
+            </if>
+            <if test="equipSign != null">
+                equip_sign = #{equipSign},
+            </if>
+            <if test="leaderSign != null">
+                leader_sign = #{leaderSign},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+
+</mapper>

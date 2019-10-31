@@ -10,7 +10,9 @@ public enum ResultCode {
     /**1000-2000 定义公共模块错误*/
     PARAM_ERROR("1001","参数错误"),
     UPLOAD_ERROR("1002","文件上传失败"),
-    TASK_ERROR("1003","任务信息错误");
+    TASK_ERROR("1003","任务信息错误"),
+    DEVICE_FILE_MISS("1004","请先填写设备档案表"),
+    FIELD_APPLY_MISS("1004","系统未收到现场服务申请");
 
     private String errCode;
     private String errMsg;
