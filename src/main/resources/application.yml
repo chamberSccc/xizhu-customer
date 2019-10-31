@@ -37,5 +37,5 @@ spring:
 #    url: jdbc:sqlserver://192.144.151.34:1433;Databasename=xizhu
     url: jdbc:sqlserver://127.0.0.1:1433;Databasename=xizhu
     username: sa
-    password: tangmo123!
-#    password: 123456
+#    password: tangmo123!
+    password: 123456

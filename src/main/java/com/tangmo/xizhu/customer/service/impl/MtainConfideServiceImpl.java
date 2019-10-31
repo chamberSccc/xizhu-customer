@@ -41,19 +41,19 @@ public class MtainConfideServiceImpl implements MtainConfideService {
     public HttpResult getByTaskIdAndType(String taskId, Byte type) {
         MaintainConfide maintainConfide = mtainConfideDao.selectByTaskIdAndType(taskId, type);
         if (maintainConfide == null){
-            if(type == 1){
-                //如果是第一种表，从设备档案选择信息
+            MaintainConfide result = mtainConfideDao.selectByTaskIdAndType(taskId, FormTypeConst.FORM01);
+            if(result == null){
                 DeviceFile deviceFile = deviceFileDao.selectByTaskId(taskId);
                 maintainConfide = new MaintainConfide();
                 maintainConfide.setCompanyName(deviceFile.getCompanyName());
                 maintainConfide.setDeviceName(deviceFile.getDeviceType());
                 maintainConfide.setFactoryNo(deviceFile.getFactoryNo());
                 maintainConfide.setContractNo(deviceFile.getContractNo());
+                maintainConfide.setTaskId(deviceFile.getTaskId());
             }else{
-                //如果是其他表，从第一张表带信息
-                MaintainConfide result = mtainConfideDao.selectByTaskIdAndType(taskId, FormTypeConst.FORM01);
                 maintainConfide = ConfideFormConverter.formPublic2Other(result);
             }
+            maintainConfide.setFormType(type);
         }
         return HttpResult.success(maintainConfide);
     }

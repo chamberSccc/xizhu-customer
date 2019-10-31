@@ -18,7 +18,7 @@ public class MaintainConfide {
     @ApiModelProperty(value="任务Id",name="taskId",example="")
     private String taskId;
     @ApiModelProperty(value="表格类型 1:冷配交底表 2:烘干加热系统交底表...",name="formType",example="")
-    private String formType;
+    private Byte formType;
     @ApiModelProperty(value="设备名称",name="deviceName",example="")
     private String deviceName;
     @ApiModelProperty(value="设备类型",name="deviceType",example="")
