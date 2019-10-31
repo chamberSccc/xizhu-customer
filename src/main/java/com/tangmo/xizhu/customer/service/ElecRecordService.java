@@ -44,7 +44,7 @@ public interface ElecRecordService {
      * @return
      * @author chen bo
      * @date 2019/10/30
-     * @description: 获取已上传记录列表
+     * @description: 获取已上传记录时间列表
      */
     HttpResult getDailyDate(String taskId);
 

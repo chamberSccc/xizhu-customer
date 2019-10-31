@@ -256,4 +256,56 @@ public class TaskController extends BaseController {
     public HttpResult<MaintainConfide> getMaintainConfide(@PathVariable String taskId,@PathVariable Byte formType){
         return mtainConfideService.getByTaskIdAndType(taskId,formType);
     }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/31
+     * @description: 获取外购件安装调试申请单
+     */
+    @ApiOperation(value = "获取外购件安装调试申请单",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/outEquipApply")
+    public HttpResult<OutEquipApply> getOutEquipApply(@PathVariable String taskId){
+        return null;
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/31
+     * @description: 获取外购件安装调试授权审批单
+     */
+    @ApiOperation(value = "获取外购件安装调试授权审批单",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/outEquipAudit")
+    public HttpResult<OutEquipAudit> getOutEquipAudit(@PathVariable String taskId){
+        return null;
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/31
+     * @description: 获取外购件厂家现场安装通知单
+     */
+    @ApiOperation(value = "获取外购件厂家现场安装通知单",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/outEquipNotice")
+    public HttpResult<OutEquipNotice> getOutEquipNotice(@PathVariable String taskId){
+        return null;
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/31
+     * @description: 获取外购件安装服务验收单
+     */
+    @ApiOperation(value = "获取外购件安装服务验收单",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/outEquipCheck")
+    public HttpResult<OutEquipCheck> getOutEquipCheck(@PathVariable String taskId){
+        return null;
+    }
 }
