@@ -18,7 +18,7 @@ public interface EquipAuditService {
      * @date 2019/10/31
      * @description: 添加外购件安装审批
      */
-    HttpResult addOutApply(OutEquipAudit outEquipAudit);
+    HttpResult addOutAudit(OutEquipAudit outEquipAudit);
 
     /**
      * @param outEquipAudit
@@ -27,7 +27,7 @@ public interface EquipAuditService {
      * @date 2019/10/31
      * @description: 外购件安装审批
      */
-    HttpResult changeOutApply(OutEquipAudit outEquipAudit);
+    HttpResult changeOutAudit(OutEquipAudit outEquipAudit);
 
     /**
      * @param taskId

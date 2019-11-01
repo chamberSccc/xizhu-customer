@@ -8,6 +8,7 @@ package com.tangmo.xizhu.customer.constant;
  **/
 public class AuditOperateConst {
     public static final byte REJECT = -1;// 拒绝
-    public static final byte ASSIGN = 0;// 分配
-    public static final byte COMPLETE = 1;// 标记完成
+    public static final byte INITIAL = 0;// 发起
+    public static final byte ASSIGN = 1;// 分配
+    public static final byte COMPLETE = 2;// 标记完成
 }

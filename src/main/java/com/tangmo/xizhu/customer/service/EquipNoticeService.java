@@ -19,7 +19,7 @@ public interface EquipNoticeService {
      * @date 2019/10/31
      * @description: 添加外购件安装通知
      */
-    HttpResult addOutApply(OutEquipNotice outEquipNotice);
+    HttpResult addOutNotice(OutEquipNotice outEquipNotice);
 
     /**
      * @param outEquipNotice
@@ -28,7 +28,7 @@ public interface EquipNoticeService {
      * @date 2019/10/31
      * @description: 修改外购件安装通知
      */
-    HttpResult changeOutApply(OutEquipNotice outEquipNotice);
+    HttpResult changeOutNotice(OutEquipNotice outEquipNotice);
 
     /**
      * @param taskId

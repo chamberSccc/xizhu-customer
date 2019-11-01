@@ -12,12 +12,12 @@ import com.tangmo.xizhu.customer.service.EquipAuditService;
  **/
 public class EquipAuditServiceImpl implements EquipAuditService {
     @Override
-    public HttpResult addOutApply(OutEquipAudit outEquipAudit) {
+    public HttpResult addOutAudit(OutEquipAudit outEquipAudit) {
         return null;
     }
 
     @Override
-    public HttpResult changeOutApply(OutEquipAudit outEquipAudit) {
+    public HttpResult changeOutAudit(OutEquipAudit outEquipAudit) {
         return null;
     }
 

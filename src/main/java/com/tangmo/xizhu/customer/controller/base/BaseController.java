@@ -53,6 +53,8 @@ public class BaseController {
     protected MtainConfideService mtainConfideService;
     @Resource
     protected UserService userService;
+    @Resource
+    protected EquipApplyService equipApplyService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

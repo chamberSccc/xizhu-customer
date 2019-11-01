@@ -12,12 +12,12 @@ import com.tangmo.xizhu.customer.service.EquipCheckService;
  **/
 public class EquipCheckServiceImpl implements EquipCheckService {
     @Override
-    public HttpResult addOutApply(OutEquipCheck outEquipCheck) {
+    public HttpResult addOutCheck(OutEquipCheck outEquipCheck) {
         return null;
     }
 
     @Override
-    public HttpResult changeOutApply(OutEquipCheck outEquipCheck) {
+    public HttpResult changeOutCheck(OutEquipCheck outEquipCheck) {
         return null;
     }
 

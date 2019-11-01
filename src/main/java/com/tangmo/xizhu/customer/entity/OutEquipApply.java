@@ -37,5 +37,5 @@ public class OutEquipApply {
     @ApiModelProperty(value="现场条件描述音频",name="detailSpeechId",example="")
     private String detailSpeechId;
     @ApiModelProperty(value="现场条件描述图片",name="detailPictureId",example="")
-    private List<String> detailPictureId;
+    private List<String> detailPictureList;
 }

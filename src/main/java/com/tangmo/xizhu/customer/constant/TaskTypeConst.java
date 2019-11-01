@@ -9,8 +9,10 @@ package com.tangmo.xizhu.customer.constant;
 public class TaskTypeConst {
     // 快速服务
     public static final byte FAST_SERVICE = 0;
-    //现场服务
+    // 现场服务
     public static final byte FIELD_SERVICE = 1;
     // 安调设备
     public static final byte EQUIPMENT = 2;
+    // 外购件
+    public static final byte OUT_EQUIPMENT = 3;
 }

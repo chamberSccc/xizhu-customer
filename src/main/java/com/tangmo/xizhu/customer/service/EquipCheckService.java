@@ -19,7 +19,7 @@ public interface EquipCheckService {
      * @date 2019/10/31
      * @description: 添加外购件安装验收
      */
-    HttpResult addOutApply(OutEquipCheck outEquipCheck);
+    HttpResult addOutCheck(OutEquipCheck outEquipCheck);
 
     /**
      * @param outEquipCheck
@@ -28,7 +28,7 @@ public interface EquipCheckService {
      * @date 2019/10/31
      * @description: 修改外购件安装验收
      */
-    HttpResult changeOutApply(OutEquipCheck outEquipCheck);
+    HttpResult changeOutCheck(OutEquipCheck outEquipCheck);
 
     /**
      * @param taskId

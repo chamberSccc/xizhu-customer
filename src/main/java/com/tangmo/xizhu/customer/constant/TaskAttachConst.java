@@ -15,12 +15,13 @@ public class TaskAttachConst {
     public static final byte FIELD_APPLY = 3;//现场申请单
     public static final byte FIELD_ASSIGN = 4;//现场指派单
     public static final byte FIELD_FB = 5;//现场反馈单
+    public static final byte EQUIP_APPLY = 6;
 
     //attachType
     public static final byte PICTURE = 0;
 
     //areaType
-    public static final byte DETAIL = 0;
+    public static final byte DETAIL = 0;//细节描述
     public static final byte SOLUTION = 1;//快速服务处理方案
     public static final byte RESULT = 2;//现场处理结果
 }

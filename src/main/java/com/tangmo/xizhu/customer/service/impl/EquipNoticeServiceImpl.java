@@ -12,12 +12,12 @@ import com.tangmo.xizhu.customer.service.EquipNoticeService;
  **/
 public class EquipNoticeServiceImpl implements EquipNoticeService {
     @Override
-    public HttpResult addOutApply(OutEquipNotice outEquipNotice) {
+    public HttpResult addOutNotice(OutEquipNotice outEquipNotice) {
         return null;
     }
 
     @Override
-    public HttpResult changeOutApply(OutEquipNotice outEquipNotice) {
+    public HttpResult changeOutNotice(OutEquipNotice outEquipNotice) {
         return null;
     }
 

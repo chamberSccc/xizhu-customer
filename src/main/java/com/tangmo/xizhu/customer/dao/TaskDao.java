@@ -56,6 +56,17 @@ public interface TaskDao {
     void updateStatus(@Param("taskId") String taskId,@Param("status") Byte status);
 
     /**
+     * @param taskId
+     * @param status
+     * @param taskType
+     * @return
+     * @author chen bo
+     * @date 2019/11/1
+     * @description: 修改任务类型和状态
+     */
+    Integer updateStatusAndType(@Param("taskId") String taskId,@Param("status") Byte status,@Param("taskType") Byte taskType);
+
+    /**
      * @param
      * @return list
      * @author chen bo
