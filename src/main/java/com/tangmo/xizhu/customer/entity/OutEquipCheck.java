@@ -30,10 +30,10 @@ public class OutEquipCheck {
     private String applyUser;
     @ApiModelProperty(value="现场调试结果",name="detail",example="")
     private String detail;
-    @ApiModelProperty(value="现场条件描述视频",name="detailAudioId",example="")
+    @ApiModelProperty(value="安装调试描述视频",name="detailAudioId",example="")
     private String detailAudioId;
-    @ApiModelProperty(value="现场条件描述图片",name="detailPictureId",example="")
-    private List<String> detailPictureId;
+    @ApiModelProperty(value="安装调试描述图片",name="detailPictureId",example="")
+    private List<String> detailPictureList;
     @ApiModelProperty(value="用户意见",name="userOpinion",example="")
     private String userOpinion;
     @ApiModelProperty(value="用户签字",name="userSign",example="")

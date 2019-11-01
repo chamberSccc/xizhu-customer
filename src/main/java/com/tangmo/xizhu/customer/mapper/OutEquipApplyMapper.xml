@@ -8,6 +8,7 @@
         <result column="device_type" property="deviceType"/>
         <result column="equip_name" property="equipName"/>
         <result column="mobile" property="mobile"/>
+        <result column="require" property="require"/>
         <result column="detail" property="detail"/>
         <result column="detail_audio_id" property="detailAudioId"/>
         <result column="detail_speech_id" property="detailSpeechId"/>
@@ -16,7 +17,7 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="EquipApplyMap">
-      SELECT uuid,task_id,company_name,device_type,equip_name,mobile,detail,detail_audio_id,detail_speech_id,
+      SELECT uuid,task_id,company_name,device_type,equip_name,mobile,require,detail,detail_audio_id,detail_speech_id,
       created_by,created_time
        from s_equip_apply where task_id = #{taskId}
     </select>
@@ -38,6 +39,9 @@
             </if>
             <if test="equipName != null">
                 equip_name,
+            </if>
+            <if test="require != null">
+                require,
             </if>
             <if test="mobile != null">
                 mobile,
@@ -73,6 +77,9 @@
             <if test="equipName != null">
                 #{equipName},
             </if>
+            <if test="require != null">
+                #{require},
+            </if>
             <if test="mobile != null">
                 #{mobile},
             </if>
@@ -97,6 +104,9 @@
             </if>
             <if test="detail!= null">
                 detail = #{detail},
+            </if>
+            <if test="require!= null">
+                detail = #{require},
             </if>
             <if test="detailAudioId != null">
                 detail_audio_id = #{detailAudioId},

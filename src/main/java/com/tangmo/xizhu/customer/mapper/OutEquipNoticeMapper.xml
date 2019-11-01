@@ -21,7 +21,7 @@
     </select>
 
     <insert id="insertOutNotice" parameterType="com.tangmo.xizhu.customer.entity.OutEquipNotice">
-        INSERT INTO s_equip_audit
+        INSERT INTO s_equip_notice
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,

@@ -30,6 +30,8 @@ public class OutEquipApply {
     private String createdBy;
     @ApiModelProperty(value="申请时间",name="createdTime",example="")
     private Date createdTime;
+    @ApiModelProperty(value="现场需求描述",name="detail",example="")
+    private String require;
     @ApiModelProperty(value="现场条件描述",name="detail",example="")
     private String detail;
     @ApiModelProperty(value="现场条件描述视频",name="detailAudioId",example="")

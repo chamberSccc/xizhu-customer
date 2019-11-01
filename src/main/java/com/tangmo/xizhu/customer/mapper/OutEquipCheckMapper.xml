@@ -16,14 +16,13 @@
         <result column="leader_sign" property="leaderSign"/>
         <result column="detail" property="detail"/>
         <result column="detail_audio_id" property="detailAudioId"/>
-        <result column="detail_speech_id" property="detailSpeechId"/>
         <result column="created_by" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
     </resultMap>
 
     <select id="selectByTaskId" resultMap="EquipCheckMap">
       SELECT uuid,task_id,company_name,device_type,equip_name,mobile,apply_user,apply_date,user_opinion,
-      user_sign,equip_sign,leader_sign,detail,detail_audio_id,detail_speech_id,created_by,created_time
+      user_sign,equip_sign,leader_sign,detail,detail_audio_id,created_by,created_time
        from s_equip_check where task_id = #{taskId}
     </select>
 
@@ -72,9 +71,6 @@
             <if test="detailAudioId != null">
                 detail_audio_id,
             </if>
-            <if test="detailSpeechId != null">
-                detail_speech_id,
-            </if>
             <if test="createdBy != null">
                 created_by,
             </if>
@@ -120,9 +116,6 @@
             </if>
             <if test="detailAudioId != null">
                 #{detailAudioId},
-            </if>
-            <if test="detailSpeechId != null">
-                #{detailSpeechId},
             </if>
             <if test="createdBy != null">
                 #{createdBy},

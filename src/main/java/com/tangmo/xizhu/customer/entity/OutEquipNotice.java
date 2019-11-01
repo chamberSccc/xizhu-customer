@@ -19,12 +19,15 @@ public class OutEquipNotice {
     private String taskId;
     @ApiModelProperty(value="用户单位",name="companyName",example="")
     private String companyName;
+    @ApiModelProperty(value="外购设备名称",name="equipName",example="")
+    private String equipName;
     @ApiModelProperty(value="设备型号",name="deviceType",example="")
     private String deviceType;
     @ApiModelProperty(value="厂家联系人",name="factoryUser",example="")
     private String factoryUser;
     @ApiModelProperty(value="厂家联系方式",name="mobile",example="")
     private String mobile;
+    private String createdBy;
     private Date createdTime;
     @ApiModelProperty(value="通知",name="detail",example="")
     private String notice;

@@ -16,7 +16,7 @@ public class TaskAttachConst {
     public static final byte FIELD_ASSIGN = 4;//现场指派单
     public static final byte FIELD_FB = 5;//现场反馈单
     public static final byte EQUIP_APPLY = 6;
-
+    public static final byte EQUIP_CHECK = 6;
     //attachType
     public static final byte PICTURE = 0;
 
