@@ -13,4 +13,8 @@ public class DeviceInfo {
     private String uuid;
     private String deviceName;
     private String deviceType;
+    private String companyName;
+    private String contractNo;
+    private String mobile;
+    private String userId;
 }
