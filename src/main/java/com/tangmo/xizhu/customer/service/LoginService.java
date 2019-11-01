@@ -19,4 +19,13 @@ public interface LoginService {
      * @description: 电脑登录
      */
     HttpResult userLogin(LogInfo logInfo);
+
+    /**
+     * @param logInfo
+     * @return
+     * @author chen bo
+     * @date 2019/11/1
+     * @description: 微信登录
+     */
+    HttpResult wechatLogin(LogInfo logInfo);
 }

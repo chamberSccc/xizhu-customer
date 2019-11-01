@@ -13,7 +13,9 @@ public enum ResultCode {
     TASK_ERROR("1003","任务信息错误"),
     DEVICE_FILE_MISS("1004","请先填写设备档案表"),
     FIELD_APPLY_MISS("1004","系统未收到现场服务申请"),
-    EQUIP_APPLY_MISS("1005","系统未收到现场服务申请");
+    EQUIP_APPLY_MISS("1005","系统未收到现场服务申请"),
+    USER_NOT_EXIST("1006","用户不存在"),
+    PASSWORD_ERROR("1007","密码错误");
 
     private String errCode;
     private String errMsg;

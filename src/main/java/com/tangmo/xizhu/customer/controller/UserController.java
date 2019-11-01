@@ -84,4 +84,16 @@ public class UserController extends BaseController {
         pwdInfo.setUserId(getUserId());
         return userService.changePwd(pwdInfo);
     }
+    /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/11/1
+     * @description: 获取用户设备列表
+     */
+    @ApiOperation(value = "修改密码",httpMethod = "PUT",notes = "")
+    @GetMapping("/{userId}/device")
+    public HttpResult getUserDevice(@PathVariable String userId){
+        return null;
+    }
 }
