@@ -1,13 +1,18 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.Page;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.dao.UserDao;
 import com.tangmo.xizhu.customer.entity.PwdInfo;
 import com.tangmo.xizhu.customer.entity.User;
+import com.tangmo.xizhu.customer.entity.search.UserSearch;
 import com.tangmo.xizhu.customer.service.UserService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -21,13 +26,18 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Override
     public HttpResult addUser(User user) {
-        return null;
+        if(user.getUserType() == null || user.getDeptId() == null || user.getPassword() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        user.setUuid(EncryptUtil.get32Uuid());
+        userDao.insertUser(user);
+        return HttpResult.success();
     }
 
     @Override
     public HttpResult changePwd(PwdInfo pwdInfo) {
         User user = userDao.selectPwdByUserId(pwdInfo.getUserId());
-        //判断面
+        //判断
         userDao.updatePwd(pwdInfo.getUserId(),pwdInfo.getNewPwd());
         return HttpResult.success();
     }
@@ -47,5 +57,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public HttpResult getUserInfo(String userId) {
         return HttpResult.success(userDao.selectByUserId(userId));
+    }
+
+    @Override
+    public HttpResult getUserList(UserSearch userSearch) {
+        Page page = userSearch;
+        page.startPage();
+        List<User> list = userDao.selectUser(userSearch);
+        page.setResult(list);
+        return HttpResult.success(page);
+    }
+
+    @Override
+    public HttpResult getCustomerList(UserSearch userSearch) {
+        Page page = userSearch;
+        page.startPage();
+        List<User> list = userDao.selectCustomer(userSearch);
+        page.setResult(list);
+        return HttpResult.success(page);
     }
 }

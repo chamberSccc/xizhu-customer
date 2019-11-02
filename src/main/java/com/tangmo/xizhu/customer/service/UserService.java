@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.service;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.PwdInfo;
 import com.tangmo.xizhu.customer.entity.User;
+import com.tangmo.xizhu.customer.entity.search.UserSearch;
 
 /**
  * @Author chen bo
@@ -57,5 +58,23 @@ public interface UserService {
      * @description: 获取用户信息
      */
     HttpResult getUserInfo(String userId);
+
+    /**
+     * @param userSearch
+     * @return
+     * @author chen bo
+     * @date 2019/11/2
+     * @description: 获取用户列表
+     */
+    HttpResult getUserList(UserSearch userSearch);
+
+    /**
+     * @param userSearch
+     * @return
+     * @author chen bo
+     * @date 2019/11/2
+     * @description: 查询客户列表
+     */
+    HttpResult getCustomerList(UserSearch userSearch);
 
 }

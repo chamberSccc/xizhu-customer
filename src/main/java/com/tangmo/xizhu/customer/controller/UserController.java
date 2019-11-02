@@ -4,6 +4,7 @@ import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.PwdInfo;
 import com.tangmo.xizhu.customer.entity.User;
+import com.tangmo.xizhu.customer.entity.search.UserSearch;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -40,7 +41,7 @@ public class UserController extends BaseController {
      * @date 2019/10/26
      * @description: 删除用户信息
      */
-    @ApiOperation(value = "删除用户",httpMethod = "GET",notes = "")
+    @ApiOperation(value = "删除用户",httpMethod = "DELETE",notes = "")
     @DeleteMapping("/{userId}")
     public HttpResult<User> delUser(@PathVariable String userId){
         return userService.delUser(userId);
@@ -56,6 +57,7 @@ public class UserController extends BaseController {
     @ApiOperation(value = "新增用户",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addUser(@RequestBody User user){
+        user.setCreatedBy(getUserId());
         return userService.addUser(user);
     }
 
@@ -91,9 +93,35 @@ public class UserController extends BaseController {
      * @date 2019/11/1
      * @description: 获取用户设备列表
      */
-    @ApiOperation(value = "修改密码",httpMethod = "PUT",notes = "")
+    @ApiOperation(value = "获取用户设备列表",httpMethod = "PUT",notes = "")
     @GetMapping("/{userId}/device")
     public HttpResult getUserDevice(@PathVariable String userId){
         return null;
+    }
+
+    /**
+     * @param userSearch
+     * @return
+     * @author chen bo
+     * @date 2019/11/2
+     * @description: 获取用户列表，分页
+     */
+    @ApiOperation(value = "获取用户列表，分页",httpMethod = "POST",notes = "")
+    @PostMapping("/list")
+    public HttpResult getUserList(@RequestBody UserSearch userSearch){
+        return userService.getUserList(userSearch);
+    }
+
+    /**
+     * @param userSearch
+     * @return
+     * @author chen bo
+     * @date 2019/11/2
+     * @description: 获取客户列表，分页
+     */
+    @ApiOperation(value = "获取客户列表，分页",httpMethod = "POST",notes = "")
+    @PostMapping("/customer/list")
+    public HttpResult getCustomerList(@RequestBody UserSearch userSearch){
+        return userService.getCustomerList(userSearch);
     }
 }

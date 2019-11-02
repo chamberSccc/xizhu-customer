@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.dao;
 
 import com.tangmo.xizhu.customer.entity.LogInfo;
 import com.tangmo.xizhu.customer.entity.User;
+import com.tangmo.xizhu.customer.entity.search.UserSearch;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -89,5 +90,23 @@ public interface UserDao {
      * @description: 通过部门id查询人员
      */
     List<User> selectByDeptId(String deptId);
+
+    /**
+     * @param userSearch 用户查询对象
+     * @return
+     * @author chen bo
+     * @date 2019/11/2
+     * @description: 查询公司用户
+     */
+    List<User> selectUser(UserSearch userSearch);
+
+    /**
+     * @param userSearch 用户查询对象
+     * @return
+     * @author chen bo
+     * @date 2019/11/2
+     * @description: 查询客户
+     */
+    List<User> selectCustomer(UserSearch userSearch);
 
 }

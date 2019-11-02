@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.common;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,10 +24,13 @@ public class Page implements Serializable{
     private final static String ORDER_DESC = "desc";
 
     /** 页码, 从1开始 */
+    @ApiModelProperty(value="数据加载起始页",name="pageNum",example="")
     protected Integer pageNum = 1;
     /** 每页大小 */
+    @ApiModelProperty(value="每页显示数据大小",name="pageSize",example="")
     protected Integer pageSize = 10;
     /** 总数 */
+    @ApiModelProperty(value="数据总数",name="total",example="")
     protected Long total;
     /** 排序字段 */
     private String orderColumn;
