@@ -27,6 +27,15 @@ public interface UserDao {
     void insertUser(User user);
 
     /**
+     * @param user
+     * @return
+     * @author chen bo
+     * @date 2019/11/2
+     * @description: 修改用户信息
+     */
+    Integer updateUser(User user);
+
+    /**
      * @param userId
      * @param newPwd
      * @return

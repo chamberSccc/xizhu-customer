@@ -13,7 +13,7 @@
     <select id="selectAllDept" resultMap="DeptMap">
         SELECT uuid,dept_name  from s_department where status = 0
     </select>
-    <insert id="insertUser" parameterType="com.tangmo.xizhu.customer.entity.Department">
+    <insert id="insertDept" parameterType="com.tangmo.xizhu.customer.entity.Department">
         INSERT INTO s_department
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
@@ -21,6 +21,9 @@
             </if>
             <if test="deptName != null">
                 dept_name,
+            </if>
+            <if test="createdBy != null">
+                created_by,
             </if>
             created_time,status
         </trim>
@@ -32,15 +35,24 @@
             <if test="deptName != null">
                 #{deptName},
             </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
             getDate(),0
         </trim>
     </insert>
 
-    <update id="deleteById">
-        update s_department set status = 1 where uuid = #{userId}
+    <update id="updateDept">
+        UPDATE s_department
+        <set>
+            <if test="deptName != null">
+                dept_name = #{deptName},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
     </update>
 
-    <update id="updateDept">
-        update s_department set dept_name = #{deptName} where uuid = #{uuid}
+    <update id="deleteById">
+        update s_department set status = 1 where uuid = #{userId}
     </update>
 </mapper>

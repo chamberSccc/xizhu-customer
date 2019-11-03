@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.service;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.Department;
+import com.tangmo.xizhu.customer.entity.search.DeptSearch;
 
 /**
  * @author boge
@@ -57,13 +58,13 @@ public interface DeptService {
     HttpResult getDeptList();
 
     /**
-     * @param
+     * @param deptSearch
      * @return
      * @author chen bo
      * @date 2019/10/25
      * @description: 获取分页部门列表
      */
-    HttpResult getPageDept();
+    HttpResult getPageDept(DeptSearch deptSearch);
 
     /**
      * @param deptId

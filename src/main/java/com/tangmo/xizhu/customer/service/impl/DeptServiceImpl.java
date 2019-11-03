@@ -1,13 +1,18 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.Page;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.dao.DeptDao;
 import com.tangmo.xizhu.customer.dao.UserDao;
 import com.tangmo.xizhu.customer.entity.Department;
+import com.tangmo.xizhu.customer.entity.search.DeptSearch;
 import com.tangmo.xizhu.customer.service.DeptService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author boge
@@ -22,12 +27,21 @@ public class DeptServiceImpl implements DeptService{
     private UserDao userDao;
     @Override
     public HttpResult addDept(Department department) {
-        return null;
+        department.setUuid(EncryptUtil.get32Uuid());
+        if(department == null || department.getDeptName() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        deptDao.insertDept(department);
+        return HttpResult.success();
     }
 
     @Override
     public HttpResult changeDept(Department department) {
-        return null;
+        if(department == null || department.getDeptName() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        deptDao.updateDept(department);
+        return HttpResult.success();
     }
 
     @Override
@@ -46,8 +60,12 @@ public class DeptServiceImpl implements DeptService{
     }
 
     @Override
-    public HttpResult getPageDept() {
-        return null;
+    public HttpResult getPageDept(DeptSearch deptSearch) {
+        Page page = deptSearch;
+        page.startPage();
+        List<Department> list = deptDao.selectAllDept();
+        page.setResult(list);
+        return HttpResult.success(page);
     }
 
     @Override

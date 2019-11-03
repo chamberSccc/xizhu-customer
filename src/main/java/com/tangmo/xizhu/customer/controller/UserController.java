@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @Author chen bo
  * @Date 2019/10/24
  * @Version V1.0
- * @Description:
+ * @Description: 用户接口
  **/
 @Api(description="用戶接口")
 @RestController
@@ -48,6 +48,19 @@ public class UserController extends BaseController {
     }
 
     /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/10/26
+     * @description: 获取指定用户信息
+     */
+    @ApiOperation(value = "获取指定用户信息",httpMethod = "GET",notes = "")
+    @GetMapping("/{userId}")
+    public HttpResult<User> getUserInfoById(@PathVariable String userId){
+        return userService.getUserInfo(userId);
+    }
+
+    /**
      * @param user
      * @return
      * @author chen bo
@@ -71,7 +84,7 @@ public class UserController extends BaseController {
     @ApiOperation(value = "修改用户信息",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeUser(@ApiParam(name="审批信息对象",value="json格式",required=true) @RequestBody User user){
-        return null;
+        return userService.changeUser(user);
     }
     /**
      * @param
@@ -91,12 +104,12 @@ public class UserController extends BaseController {
      * @return
      * @author chen bo
      * @date 2019/11/1
-     * @description: 获取用户设备列表
+     * @description: 获取指定用户设备列表
      */
-    @ApiOperation(value = "获取用户设备列表",httpMethod = "PUT",notes = "")
+    @ApiOperation(value = "获取指定用户设备列表",httpMethod = "GET",notes = "")
     @GetMapping("/{userId}/device")
     public HttpResult getUserDevice(@PathVariable String userId){
-        return null;
+        return deviceService.getDeviceByUserId(userId);
     }
 
     /**

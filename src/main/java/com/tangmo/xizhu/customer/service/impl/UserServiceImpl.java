@@ -30,7 +30,17 @@ public class UserServiceImpl implements UserService {
             return HttpResult.fail(ResultCode.PARAM_ERROR);
         }
         user.setUuid(EncryptUtil.get32Uuid());
+        user.setStatus((byte) 0);
         userDao.insertUser(user);
+        return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult changeUser(User user) {
+        if(user == null || user.getUuid() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        userDao.updateUser(user);
         return HttpResult.success();
     }
 

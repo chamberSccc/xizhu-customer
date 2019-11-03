@@ -53,6 +53,8 @@ public class BaseController {
     protected MtainConfideService mtainConfideService;
     @Resource
     protected UserService userService;
+    @Resource
+    protected DeviceService deviceService;
     //外购件相关服务
     @Resource
     protected EquipApplyService equipApplyService;

@@ -29,7 +29,7 @@ public class DeptController extends BaseController {
     @ApiOperation(value = "添加部门",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult<Department> addDept(@RequestBody Department department){
-        return null;
+        return deptService.addDept(department);
     }
 
     /**
@@ -42,7 +42,7 @@ public class DeptController extends BaseController {
     @ApiOperation(value = "修改部门",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeDept(@RequestBody Department department){
-        return null;
+        return deptService.changeDept(department);
     }
 
     /**

@@ -87,7 +87,7 @@
                 #{createdTime},
             </if>
             <if test="status != null">
-                0,
+                #{status},
             </if>
         </trim>
     </insert>
@@ -107,6 +107,16 @@
    <select id="selectUser" resultMap="UserMap">
        SELECT uuid,mobile,user_name,user_type,dept_name  from s_user where status = 0 and user_type != 0
    </select>
+
+    <update id="updateUser">
+        UPDATE s_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
 
     <select id="selectCustomer" resultMap="UserMap">
        SELECT uuid,mobile,user_name,user_type,dept_name  from s_user where status = 0 and user_type = 0

@@ -28,7 +28,7 @@ public class User {
     private String deptName;
     @ApiModelProperty(value="头像",name="avatar",example="")
     private String avatar;
-    private String status; //0 正常  1:删除
+    private Byte status; //0 正常  1:删除
     private String createdBy;
     private Date createdTime;
 }
