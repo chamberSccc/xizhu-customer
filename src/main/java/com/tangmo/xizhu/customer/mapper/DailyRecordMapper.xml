@@ -20,7 +20,7 @@
         delete from s_daily_record where parent_id = #{parentId} and base_type= #{baseType}
     </delete>
 
-    <insert id="insertBatchUser" parameterType="java.util.List">
+    <insert id="insertBatchDaily" parameterType="java.util.List">
         insert into s_daily_record (parent_id, content,  picture_id, audio_id, content_type,base_type)
         values
         <foreach collection="list" item="item" index="index" separator=",">

@@ -103,10 +103,10 @@ public class ElecRecordServiceImpl implements ElecRecordService {
             workList.get(i).setParentId(parentId);
             workList.get(i).setUuid(EncryptUtil.get32Uuid());
         }
-        if(workList != null){
+        if(workList != null || workList.size() > 0){
             dailyRecordDao.insertBatchDaily(workList);
         }
-        if(safeList != null){
+        if(safeList != null || safeList.size() > 0){
             dailyRecordDao.insertBatchDaily(safeList);
         }
     }

@@ -20,7 +20,7 @@
     </resultMap>
 
     <select id="selectByTaskIdAndType" resultMap="MtainConfideMap">
-      SELECT uuid,task_id,device_name,form_type,device_type,company_name,factory_no,contract_no,job_site,user_type,equipment,maintain,created_by,created_time
+      SELECT uuid,task_id,device_name,form_type,device_type,company_name,factory_no,contract_no,job_site,user_type,safety,equipment,maintain,created_by,created_time
        from s_mtain_confide where task_id = #{taskId} and form_type = #{type}
     </select>
 
@@ -123,7 +123,7 @@
         UPDATE s_mtain_confide
         <set>
             <if test="deviceName != null">
-                deviceName = #{deviceName},
+                device_name = #{deviceName},
             </if>
             <if test="safety != null">
                 safety = #{safety},
@@ -137,7 +137,7 @@
             <if test="updatedBy != null">
                 updated_by = #{updatedBy},
             </if>
-            updated_time = updatedTime;
+            updated_time = getDate()
         </set>
         WHERE uuid = #{uuid}
     </update>

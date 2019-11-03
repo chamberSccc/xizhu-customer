@@ -14,7 +14,7 @@ import java.util.List;
 public interface DailyRecordDao {
 
     /**
-     * @param dailyRecord
+     * @param list
      * @return
      * @author chen bo
      * @date 2019/10/23
