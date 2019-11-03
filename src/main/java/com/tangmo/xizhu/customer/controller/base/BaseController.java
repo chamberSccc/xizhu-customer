@@ -62,6 +62,8 @@ public class BaseController {
     protected EquipAuditService equipAuditService;
     @Resource
     protected EquipCheckService equipCheckService;
+    @Resource
+    protected EquipNoticeService equipNoticeService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

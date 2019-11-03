@@ -15,6 +15,16 @@
        from s_machine_record where task_id = #{taskId}
     </select>
 
+    <select id="selectById" resultMap="MachRecordMap">
+      SELECT uuid,task_id,device_name,device_type,created_by,created_time
+       from s_machine_record where uuid = #{uuid}
+    </select>
+
+    <select id="selectDateByTaskId" resultMap="MachRecordMap">
+      SELECT uuid,created_time
+       from s_machine_record where task_id = #{taskId}
+    </select>
+
     <insert id="insertMachRecord" parameterType="com.tangmo.xizhu.customer.entity.MachRecord" useGeneratedKeys="true" keyProperty="uuid">
         INSERT INTO s_machine_record
         <trim prefix="(" suffix=")" suffixOverrides=",">

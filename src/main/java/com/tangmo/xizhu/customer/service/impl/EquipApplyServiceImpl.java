@@ -71,12 +71,18 @@ public class EquipApplyServiceImpl implements EquipApplyService {
         OutEquipApply outEquipApply = outEquipApplyDao.selectByTaskId(taskId);
         if(outEquipApply == null){
             TaskRequire taskRequire = taskRequireDao.selectByTaskId(taskId);
+            if(taskRequire == null){
+                return HttpResult.fail(ResultCode.TASK_ERROR);
+            }
             outEquipApply = new OutEquipApply();
             outEquipApply.setCompanyName(taskRequire.getCompanyName());
             outEquipApply.setTaskId(taskId);
             outEquipApply.setDeviceType(taskRequire.getDeviceType());
         }else{
             //查询附件信息
+            List<String> list = taskAttachDao.selectByParentAndType(outEquipApply.getUuid(),TaskAttachConst.EQUIP_APPLY,
+                    TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+            outEquipApply.setDetailPictureList(list);
         }
         return HttpResult.success(outEquipApply);
     }

@@ -8,7 +8,6 @@ import com.tangmo.xizhu.customer.dao.OutEquipCheckDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.entity.OutEquipApply;
 import com.tangmo.xizhu.customer.entity.OutEquipCheck;
-import com.tangmo.xizhu.customer.entity.OutEquipNotice;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.converter.EquipApplyConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
@@ -67,6 +66,11 @@ public class EquipCheckServiceImpl implements EquipCheckService {
             }else{
                 outEquipCheck = EquipApplyConverter.apply2Check(outEquipApply);
             }
+        }else{
+            //添加附件图片列表
+            List<String> list = taskAttachDao.selectByParentAndType(outEquipCheck.getUuid(),TaskAttachConst.EQUIP_CHECK,
+                    TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+            outEquipCheck.setDetailPictureList(list);
         }
         return HttpResult.success(outEquipCheck);
     }

@@ -69,7 +69,7 @@ public class MachRecordServiceImpl implements MachRecordService {
 
     @Override
     public HttpResult getDailyDate(String taskId) {
-        return null;
+        return HttpResult.success(machRecordDao.selectDateByTaskId(taskId));
     }
 
     @Override

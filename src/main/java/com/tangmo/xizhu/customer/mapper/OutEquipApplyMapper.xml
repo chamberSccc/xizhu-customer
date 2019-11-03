@@ -83,6 +83,9 @@
             <if test="mobile != null">
                 #{mobile},
             </if>
+            <if test="detail != null">
+                #{detail},
+            </if>
             <if test="detailAudioId != null">
                 #{detailAudioId},
             </if>

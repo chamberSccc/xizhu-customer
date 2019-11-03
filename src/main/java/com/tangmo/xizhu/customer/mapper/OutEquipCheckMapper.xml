@@ -9,7 +9,6 @@
         <result column="equip_name" property="equipName"/>
         <result column="mobile" property="mobile"/>
         <result column="apply_user" property="applyUser"/>
-        <result column="apply_date" property="applyDate"/>
         <result column="user_opinion" property="userOpinion"/>
         <result column="user_sign" property="userSign"/>
         <result column="equip_sign" property="equipSign"/>
@@ -21,7 +20,7 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="EquipCheckMap">
-      SELECT uuid,task_id,company_name,device_type,equip_name,mobile,apply_user,apply_date,user_opinion,
+      SELECT uuid,task_id,company_name,device_type,equip_name,mobile,apply_user,user_opinion,
       user_sign,equip_sign,leader_sign,detail,detail_audio_id,created_by,created_time
        from s_equip_check where task_id = #{taskId}
     </select>
@@ -49,9 +48,6 @@
             </if>
             <if test="applyUser != null">
                 apply_user,
-            </if>
-            <if test="applyDate != null">
-                apply_date,
             </if>
             <if test="userOpinion != null">
                 user_opinion,
@@ -99,9 +95,6 @@
             <if test="applyUser != null">
                 #{applyUser},
             </if>
-            <if test="applyDate != null">
-                #{applyDate},
-            </if>
             <if test="userOpinion != null">
                 #{userOpinion},
             </if>
@@ -113,6 +106,9 @@
             </if>
             <if test="leaderSign != null">
                 #{leaderSign},
+            </if>
+            <if test="detail != null">
+                #{detail},
             </if>
             <if test="detailAudioId != null">
                 #{detailAudioId},

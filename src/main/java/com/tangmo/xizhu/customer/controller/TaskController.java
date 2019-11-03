@@ -267,7 +267,7 @@ public class TaskController extends BaseController {
     @ApiOperation(value = "获取外购件安装调试申请单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/outEquipApply")
     public HttpResult<OutEquipApply> getOutEquipApply(@PathVariable String taskId){
-        return null;
+        return equipApplyService.getByTaskId(taskId);
     }
 
     /**
@@ -280,7 +280,7 @@ public class TaskController extends BaseController {
     @ApiOperation(value = "获取外购件安装调试授权审批单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/outEquipAudit")
     public HttpResult<OutEquipAudit> getOutEquipAudit(@PathVariable String taskId){
-        return null;
+        return equipAuditService.getByTaskId(taskId);
     }
 
     /**
@@ -293,7 +293,7 @@ public class TaskController extends BaseController {
     @ApiOperation(value = "获取外购件厂家现场安装通知单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/outEquipNotice")
     public HttpResult<OutEquipNotice> getOutEquipNotice(@PathVariable String taskId){
-        return null;
+        return equipNoticeService.getByTaskId(taskId);
     }
 
     /**
@@ -306,6 +306,6 @@ public class TaskController extends BaseController {
     @ApiOperation(value = "获取外购件安装服务验收单",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/outEquipCheck")
     public HttpResult<OutEquipCheck> getOutEquipCheck(@PathVariable String taskId){
-        return null;
+        return equipCheckService.getByTaskId(taskId);
     }
 }

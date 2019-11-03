@@ -41,7 +41,7 @@ public class EquipCheckController extends BaseController {
      * @date 2019/11/1
      * @description: 修改外购件调试安装验收单
      */
-    @ApiOperation(value = "新增外购件调试安装验收单",httpMethod = "POST",notes = "")
+    @ApiOperation(value = "修改外购件调试安装验收单",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeEquipCheck(@ApiParam(name="外购件调试安装验收单对象",value="json格式",required=true) @RequestBody OutEquipCheck outEquipCheck){
         return equipCheckService.changeOutCheck(outEquipCheck);
