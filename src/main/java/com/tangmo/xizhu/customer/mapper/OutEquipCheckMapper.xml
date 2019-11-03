@@ -126,6 +126,12 @@
             <if test="userSign != null">
                 user_sign = #{userSign},
             </if>
+            <if test="detail != null">
+                detail = #{detail},
+            </if>
+            <if test="detailAudioId != null">
+                detail_audio_id = #{detailAudioId},
+            </if>
             <if test="userOpinion!= null">
                 user_opinion = #{userOpinion},
             </if>

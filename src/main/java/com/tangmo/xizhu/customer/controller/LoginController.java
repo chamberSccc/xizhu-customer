@@ -45,6 +45,6 @@ public class LoginController extends BaseController {
     @ApiOperation(value = "微信端登录接口",httpMethod = "POST",notes = "登录接口")
     @PostMapping("/wechat")
     public HttpResult wechatLogin(@ApiParam(name="用户对象",value="json格式",required=true) @RequestBody LogInfo logInfo){
-        return loginService.userLogin(logInfo);
+        return loginService.wechatLogin(logInfo);
     }
 }

@@ -34,7 +34,7 @@ public class EquipNoticeServiceImpl implements EquipNoticeService {
 
     @Override
     public HttpResult changeOutNotice(OutEquipNotice outEquipNotice) {
-        outEquipNoticeDao.insertOutNotice(outEquipNotice);
+        outEquipNoticeDao.updateOutNotice(outEquipNotice);
         return HttpResult.success();
     }
 
