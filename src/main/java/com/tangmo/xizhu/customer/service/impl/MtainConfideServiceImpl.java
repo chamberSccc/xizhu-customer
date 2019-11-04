@@ -10,6 +10,7 @@ import com.tangmo.xizhu.customer.entity.MaintainConfide;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.converter.ConfideFormConverter;
 import com.tangmo.xizhu.customer.service.MtainConfideService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,6 +29,7 @@ public class MtainConfideServiceImpl implements MtainConfideService {
     private DeviceFileDao deviceFileDao;
     @Override
     public HttpResult addMtainConfide(MaintainConfide maintainConfide) {
+        maintainConfide.setUuid(EncryptUtil.get32Uuid());
         mtainConfideDao.insertMtainConfide(maintainConfide);
         return HttpResult.success();
     }

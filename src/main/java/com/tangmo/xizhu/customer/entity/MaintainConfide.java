@@ -33,7 +33,7 @@ public class MaintainConfide {
     private String jobSite;
     @ApiModelProperty(value="填写人",name="createdBy",example="")
     private String createdBy;
-    @ApiModelProperty(value="交底时间",name="createTime",example="")
+    @ApiModelProperty(value="交底时间",name="createdTime",example="")
     private Date createdTime;
     @ApiModelProperty(value="用户类型 0：用户 1：服务人员",name="userType",example="")
     private Byte userType;
