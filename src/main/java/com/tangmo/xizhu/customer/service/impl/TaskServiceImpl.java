@@ -3,7 +3,9 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
+import com.tangmo.xizhu.customer.constant.TaskFormConst;
 import com.tangmo.xizhu.customer.constant.TaskStatusConst;
+import com.tangmo.xizhu.customer.constant.TaskTypeConst;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.dao.TaskRequireDao;
@@ -44,8 +46,15 @@ public class TaskServiceImpl implements TaskService {
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);
         task.setTaskStatus(TaskStatusConst.INITIAL);
+        if(task.getTaskAssignType().equals(2)){
+            task.setTaskType(TaskTypeConst.FAST_SERVICE);
+        }else{
+            //todo 如果是安调设备，直接生成现场服务指派单
+            task.setTaskType(TaskTypeConst.EQUIPMENT);
+        }
         taskDao.insertTask(task);
         task.setCreatedTime(new Date(System.currentTimeMillis()));
+
         //新增任务需求单，转换任务中相同信息
         TaskRequire require = TaskConverter.task2Require(task);
         String requireId = EncryptUtil.get32Uuid();
@@ -132,5 +141,11 @@ public class TaskServiceImpl implements TaskService {
         //修改任务状态为待审核
         taskDao.updateStatus(taskId,TaskStatusConst.INITIAL);
         return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult getFormList(String taskId, Byte userType) {
+        Task task = taskDao.selectById(taskId);
+        return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType));
     }
 }

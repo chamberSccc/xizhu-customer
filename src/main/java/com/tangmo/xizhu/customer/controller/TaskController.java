@@ -73,11 +73,11 @@ public class TaskController extends BaseController {
      * @return
      * @author chen bo
      * @date 2019/10/30
-     * @description: 获取任务的列表流程
+     * @description: 获取任务的单子列表
      */
-    @GetMapping("/{taskId}/formFlow/")
+    @GetMapping("/{taskId}/formList")
     public HttpResult getTaskFormFlow(String taskId){
-        return null;
+        return taskService.getFormList(taskId,getUserType());
     }
 
     /**

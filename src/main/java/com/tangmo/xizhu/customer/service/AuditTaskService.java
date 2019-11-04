@@ -22,6 +22,18 @@ public interface AuditTaskService {
     HttpResult assignTask(AuditTask auditTask);
 
     /**
+     * @param userId
+     * @param taskId
+     * @param taskType
+     * @param operation
+     * @return
+     * @author chen bo
+     * @date 2019/11/4
+     * @description: 新增审核任务
+     */
+    HttpResult addAuditTask(String taskId,String userId,Byte taskType,Byte operation);
+
+    /**
      * @param auditTask
      * @return
      * @author chen bo

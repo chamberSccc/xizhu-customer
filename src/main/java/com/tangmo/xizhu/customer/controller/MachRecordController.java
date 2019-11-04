@@ -44,4 +44,17 @@ public class MachRecordController extends BaseController {
     public HttpResult changeMachRecord(@ApiParam(name="安装工作记录(机械)表对象",value="json格式",required=true) @RequestBody MachRecord machRecord){
         return machRecordService.changeRecord(machRecord);
     }
+
+    /**
+     * @param dailyId
+     * @return
+     * @author chen bo
+     * @date 2019/11/4
+     * @description: 通过每日表id获取安装工作记录机械表详情
+     */
+    @ApiOperation(value = "通过每日表id获取安装工作记录机械表详情",httpMethod = "GET",notes = "")
+    @GetMapping("/daily/{dailyId}")
+    public HttpResult getRecordById(@PathVariable String dailyId){
+        return null;
+    }
 }

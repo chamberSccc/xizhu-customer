@@ -76,6 +76,15 @@ public interface TaskDao {
     List<Task> selectByStatusAndUser(@Param("userId") String userId, @Param("status") Byte status);
 
     /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/11/4
+     * @description: 查询已审核任务
+     */
+    List<Task> selectAuditedTask(@Param("userId") String userId);
+
+    /**
      * @param status
      * @return
      * @author chen bo

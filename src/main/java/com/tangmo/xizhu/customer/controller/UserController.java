@@ -104,10 +104,10 @@ public class UserController extends BaseController {
      * @return
      * @author chen bo
      * @date 2019/11/1
-     * @description: 获取指定用户设备列表
+     * @description: 获取客户设备列表
      */
     @ApiOperation(value = "获取指定用户设备列表",httpMethod = "GET",notes = "")
-    @GetMapping("/{userId}/device")
+    @GetMapping("/customer/{userId}/device")
     public HttpResult getUserDevice(@PathVariable String userId){
         return deviceService.getDeviceByUserId(userId);
     }

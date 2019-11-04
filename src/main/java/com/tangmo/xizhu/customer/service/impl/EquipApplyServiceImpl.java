@@ -7,11 +7,11 @@ import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.constant.TaskStatusConst;
 import com.tangmo.xizhu.customer.constant.TaskTypeConst;
 import com.tangmo.xizhu.customer.dao.*;
-import com.tangmo.xizhu.customer.entity.AuditTask;
 import com.tangmo.xizhu.customer.entity.OutEquipApply;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.TaskRequire;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
+import com.tangmo.xizhu.customer.service.AuditTaskService;
 import com.tangmo.xizhu.customer.service.EquipApplyService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
@@ -38,6 +38,8 @@ public class EquipApplyServiceImpl implements EquipApplyService {
     private TaskRequireDao taskRequireDao;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private AuditTaskService auditTaskService;
     @Override
     @Transactional
     public HttpResult addOutApply(OutEquipApply outEquipApply) {
@@ -52,12 +54,8 @@ public class EquipApplyServiceImpl implements EquipApplyService {
         // 更改任务状态和类型
         taskDao.updateStatusAndType(outEquipApply.getTaskId(), TaskStatusConst.INITIAL, TaskTypeConst.OUT_EQUIPMENT);
         //增加审批流程
-        AuditTask auditTask = new AuditTask();
-        auditTask.setCreatedBy(outEquipApply.getCreatedBy());
-        auditTask.setUuid(EncryptUtil.get32Uuid());
-        auditTask.setTaskType(TaskTypeConst.OUT_EQUIPMENT);
-        auditTask.setOperation(AuditOperateConst.INITIAL);
-        auditTaskDao.insertAuditTask(auditTask);
+        auditTaskService.addAuditTask(outEquipApply.getTaskId(),outEquipApply.getCreatedBy(),
+                TaskTypeConst.OUT_EQUIPMENT,AuditOperateConst.INITIAL);
         return HttpResult.success();
     }
 

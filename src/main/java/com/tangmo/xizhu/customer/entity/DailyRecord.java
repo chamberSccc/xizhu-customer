@@ -3,6 +3,8 @@ package com.tangmo.xizhu.customer.entity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.sql.Date;
+
 /**
  * @Author chen bo
  * @Date 2019/10/22
@@ -22,4 +24,5 @@ public class DailyRecord {
     private String parentId; //安装表id
     private Byte contentType;//0 工作内容，1，安全记录
     private Byte baseType;//0 机械，1电器
+    private Date createdTime;
 }

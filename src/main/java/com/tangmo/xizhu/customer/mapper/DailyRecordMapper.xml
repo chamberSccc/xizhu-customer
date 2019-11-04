@@ -9,6 +9,7 @@
         <result column="audio_id" property="audioId"/>
         <result column="content_type" property="contentType"/>
         <result column="base_type" property="baseType"/>
+        <result column="created_time" property="createdTime"/>
     </resultMap>
 
     <select id="selectByParentAndType" resultMap="DailyRecordMap">
@@ -21,7 +22,7 @@
     </delete>
 
     <insert id="insertBatchUser" parameterType="java.util.List">
-        insert into s_daily_record (parent_id, content,  picture_id, audio_id, content_type,base_type)
+        insert into s_daily_record (parent_id, content,  picture_id, audio_id, content_type,base_type,created_time)
         values
         <foreach collection="list" item="item" index="index" separator=",">
             (
@@ -30,7 +31,8 @@
             #{item.pictureId},
             #{item.audioId},
             #{item.contentType},
-            #{item.baseType}
+            #{item.baseType},
+            getDate()
             )
         </foreach>
     </insert>

@@ -13,6 +13,6 @@ public class TaskTypeConst {
     public static final byte FIELD_SERVICE = 1;
     // 安调设备
     public static final byte EQUIPMENT = 2;
-    // 外购件
+    // 外购件安装
     public static final byte OUT_EQUIPMENT = 3;
 }

@@ -4,6 +4,7 @@ import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.constant.AuditOperateConst;
 import com.tangmo.xizhu.customer.constant.TaskStatusConst;
+import com.tangmo.xizhu.customer.constant.TaskTypeConst;
 import com.tangmo.xizhu.customer.dao.AuditTaskDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.AuditTask;
@@ -46,6 +47,18 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     }
 
     @Override
+    public HttpResult addAuditTask(String taskId,String userId, Byte taskType, Byte operation) {
+        AuditTask auditTask = new AuditTask();
+        auditTask.setCreatedBy(userId);
+        auditTask.setUuid(EncryptUtil.get32Uuid());
+        auditTask.setTaskType(taskType);
+        auditTask.setOperation(operation);
+        auditTask.setTaskId(taskId);
+        auditTaskDao.insertAuditTask(auditTask);
+        return HttpResult.success();
+    }
+
+    @Override
     public HttpResult rejectTask(AuditTask auditTask) {
         //如果当前任务已完成，不能审核
         taskService.changeTaskStatus(auditTask.getTaskId(), TaskStatusConst.REJECT);
@@ -83,7 +96,7 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     public HttpResult getDoneAuditList(String userId,TaskSearch taskSearch) {
         Page page = taskSearch;
         page.startPage();
-        List<Task> list = taskDao.selectByStatus(TaskStatusConst.DEALING);
+        List<Task> list = taskDao.selectAuditedTask(userId);
         page.setResult(list);
         return HttpResult.success(page);
     }

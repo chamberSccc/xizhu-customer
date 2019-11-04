@@ -124,4 +124,15 @@ public interface TaskService {
      * @description: 提交任务
      */
     HttpResult commitTask(String taskId,String userId);
+
+
+    /**
+     * @param taskId
+     * @param userType
+     * @return
+     * @author chen bo
+     * @date 2019/11/4
+     * @description: 查询要显示的单子列表
+     */
+    HttpResult getFormList(String taskId,Byte userType);
 }

@@ -1,14 +1,22 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.constant.AuditOperateConst;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
+import com.tangmo.xizhu.customer.constant.TaskStatusConst;
+import com.tangmo.xizhu.customer.constant.TaskTypeConst;
+import com.tangmo.xizhu.customer.dao.AuditTaskDao;
 import com.tangmo.xizhu.customer.dao.FieldApplyDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
+import com.tangmo.xizhu.customer.dao.TaskDao;
+import com.tangmo.xizhu.customer.entity.AuditTask;
 import com.tangmo.xizhu.customer.entity.FastFeedBack;
 import com.tangmo.xizhu.customer.entity.FieldApply;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.converter.FastFbConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
+import com.tangmo.xizhu.customer.service.AuditTaskService;
 import com.tangmo.xizhu.customer.service.FastFeedbackService;
 import com.tangmo.xizhu.customer.service.FieldApplyService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
@@ -31,8 +39,15 @@ public class FieldApplyServiceImpl implements FieldApplyService {
     private TaskAttachDao taskAttachDao;
     @Resource
     private FastFeedbackService fastFeedbackService;
+    @Resource
+    private TaskDao taskDao;
+    @Resource
+    private AuditTaskService auditTaskService;
     @Override
     public HttpResult addApply(FieldApply fieldApply) {
+        if(fieldApply == null || fieldApply.getTaskId() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
         String uuid = EncryptUtil.get32Uuid();
         fieldApply.setUuid(uuid);
         fieldApplyDao.insertFieldApply(fieldApply);
@@ -43,6 +58,11 @@ public class FieldApplyServiceImpl implements FieldApplyService {
         if(list != null){
             taskAttachDao.insertBatchAttach(list);
         }
+        //修改任务审批状态
+        taskDao.updateStatusAndType(fieldApply.getTaskId(), TaskStatusConst.INITIAL, TaskTypeConst.FIELD_SERVICE);
+        //增加审批流程
+        auditTaskService.addAuditTask(fieldApply.getTaskId(),fieldApply.getCreatedBy(),
+                TaskTypeConst.FIELD_SERVICE,AuditOperateConst.INITIAL);
         return HttpResult.success();
     }
 
