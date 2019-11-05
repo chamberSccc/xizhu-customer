@@ -46,6 +46,7 @@ public class TaskFormConst {
             add(new TaskForm(FormNameConst.REQUIRE,false));
             add(new TaskForm(FormNameConst.FAST_FB,false));
             add(new TaskForm(FormNameConst.FAST_SURVEY,true));
+            add(new TaskForm(FormNameConst.FIELD_APPLY,true));
         }};
         return list;
     }

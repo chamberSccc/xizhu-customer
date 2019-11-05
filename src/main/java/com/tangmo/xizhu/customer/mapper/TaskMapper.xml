@@ -21,8 +21,9 @@
 
     </resultMap>
     <select id="selectAuditedTask" resultMap="TaskMap">
-      SELECT st.uuid, st.task_type,st.company_name,st.device_type,st.contact_name,st.mobile,st.task_status,st.created_time,st.detail from s_service_task st
-      inner join s_audit_task aut on st.uuid = aut.uuid where aut.created_by = #{userId} and operation = 1
+      SELECT uuid, task_type,company_name,device_type,contact_name,mobile,task_status,created_time,detail,created_by from s_service_task
+      where uuid in (select task_id from s_audit_task where created_by = #{userId} and operation = 1)
+      order by created_time desc
     </select>
 
     <update id="updateStatus">
@@ -139,14 +140,15 @@
         <if test="userId != null">
             and executor = #{userId}
         </if>
+        order by created_time desc
     </select>
 
     <select id="selectLaunchedTask" resultMap="TaskMap">
-        select * from s_service_task where created_by = #{userId};
+        select * from s_service_task where created_by = #{userId} order by created_time desc
     </select>
 
     <select id="selectByStatus" resultMap="TaskMap">
-        select * FROM s_service_task where task_status = #{status}
+        select * FROM s_service_task where task_status = #{status} order by created_time desc
     </select>
 
     <update id="updateTaskUser">

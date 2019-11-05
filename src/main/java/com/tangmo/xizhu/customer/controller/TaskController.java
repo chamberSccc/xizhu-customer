@@ -63,7 +63,7 @@ public class TaskController extends BaseController {
      * @description: 提交任务
      */
     @ApiOperation(value = "提交任务",httpMethod = "POST",notes = "")
-    @PutMapping("/commit/{taskId}")
+    @PostMapping("/commit/{taskId}")
     public HttpResult commitTask(@PathVariable String taskId){
         return taskService.commitTask(taskId,getUserId());
     }

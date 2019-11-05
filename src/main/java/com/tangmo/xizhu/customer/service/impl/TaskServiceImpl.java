@@ -2,19 +2,18 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
-import com.tangmo.xizhu.customer.constant.TaskAttachConst;
-import com.tangmo.xizhu.customer.constant.TaskFormConst;
-import com.tangmo.xizhu.customer.constant.TaskStatusConst;
-import com.tangmo.xizhu.customer.constant.TaskTypeConst;
+import com.tangmo.xizhu.customer.constant.*;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.dao.TaskRequireDao;
+import com.tangmo.xizhu.customer.entity.AuditTask;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.TaskRequire;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskConverter;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
+import com.tangmo.xizhu.customer.service.AuditTaskService;
 import com.tangmo.xizhu.customer.service.TaskService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
@@ -39,6 +38,8 @@ public class TaskServiceImpl implements TaskService {
     private TaskRequireDao taskRequireDao;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private AuditTaskService auditTaskService;
     @Override
     @Transactional
     public HttpResult createTask(Task task) {
@@ -46,15 +47,13 @@ public class TaskServiceImpl implements TaskService {
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);
         task.setTaskStatus(TaskStatusConst.INITIAL);
-        if(task.getTaskAssignType().equals(2)){
+        if(!task.getTaskAssignType().equals(TaskTypeConst.EQUIPMENT)){
             task.setTaskType(TaskTypeConst.FAST_SERVICE);
         }else{
             //todo 如果是安调设备，直接生成现场服务指派单
             task.setTaskType(TaskTypeConst.EQUIPMENT);
         }
         taskDao.insertTask(task);
-        task.setCreatedTime(new Date(System.currentTimeMillis()));
-
         //新增任务需求单，转换任务中相同信息
         TaskRequire require = TaskConverter.task2Require(task);
         String requireId = EncryptUtil.get32Uuid();
@@ -138,8 +137,13 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public HttpResult commitTask(String taskId,String userId) {
+        Task task = taskDao.selectById(taskId);
         //修改任务状态为待审核
         taskDao.updateStatus(taskId,TaskStatusConst.INITIAL);
+        //添加审批流程
+        auditTaskService.addAuditTask(taskId,userId,
+                task.getTaskType(), AuditOperateConst.TASK_COMPLETE);
+
         return HttpResult.success();
     }
 

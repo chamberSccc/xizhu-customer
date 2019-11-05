@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.AuditOperateConst;
 import com.tangmo.xizhu.customer.constant.TaskStatusConst;
 import com.tangmo.xizhu.customer.constant.TaskTypeConst;
@@ -60,20 +61,30 @@ public class AuditTaskServiceImpl implements AuditTaskService {
 
     @Override
     public HttpResult rejectTask(AuditTask auditTask) {
+        if(auditTask == null || auditTask.getTaskId() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        Task task = taskDao.selectById(auditTask.getTaskId());
         //如果当前任务已完成，不能审核
         taskService.changeTaskStatus(auditTask.getTaskId(), TaskStatusConst.REJECT);
         auditTask.setOperation(AuditOperateConst.REJECT);
         auditTask.setUuid(EncryptUtil.get32Uuid());
+        auditTask.setTaskType(task.getTaskType());
         auditTaskDao.insertAuditTask(auditTask);
         return HttpResult.success();
     }
 
     @Override
     public HttpResult finishTask(AuditTask auditTask) {
+        if(auditTask == null || auditTask.getTaskId() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        Task task = taskDao.selectById(auditTask.getTaskId());
         //标记任务完成
         taskService.changeTaskStatus(auditTask.getTaskId(), TaskStatusConst.COMPLETE);
         auditTask.setOperation(AuditOperateConst.COMPLETE);
         auditTask.setUuid(EncryptUtil.get32Uuid());
+        auditTask.setTaskType(task.getTaskType());
         auditTaskDao.insertAuditTask(auditTask);
         return HttpResult.success();
     }

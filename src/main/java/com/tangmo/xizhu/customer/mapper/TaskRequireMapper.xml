@@ -38,9 +38,6 @@
             <if test="taskNo != null">
                 task_no,
             </if>
-            <if test="applyDate != null">
-                apply_date,
-            </if>
             <if test="companyName != null">
                 company_name,
             </if>
@@ -80,7 +77,7 @@
             <if test="updatedTime != null">
                 updated_time,
             </if>
-            created_time
+            created_time,apply_date
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -92,9 +89,6 @@
             </if>
             <if test="taskNo != null">
                 #{taskNo},
-            </if>
-            <if test="applyDate != null">
-                #{applyDate},
             </if>
             <if test="companyName != null">
                 #{companyName},
@@ -135,7 +129,7 @@
             <if test="updatedTime != null">
                 #{updatedTime},
             </if>
-            getDate()
+            getDate(),getDate()
         </trim>
     </insert>
 
