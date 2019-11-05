@@ -36,7 +36,7 @@ public class DeviceFileServiceImpl implements DeviceFileService {
         String uuid = EncryptUtil.get32Uuid();
         deviceFile.setUuid(uuid);
         deviceFileDao.insertDeviceFile(deviceFile);
-        if (deviceFile.getUserList() != null) {
+        if (deviceFile.getUserList() != null && deviceFile.getUserList().size() > 0) {
             for (int i = 0; i < deviceFile.getUserList().size(); i++) {
                 deviceFile.getUserList().get(i).setUuid(EncryptUtil.get32Uuid());
                 deviceFile.getUserList().get(i).setDeviceFileId(uuid);

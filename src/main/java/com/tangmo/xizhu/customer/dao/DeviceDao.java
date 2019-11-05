@@ -22,6 +22,16 @@ public interface DeviceDao {
      */
     List<DeviceInfo> selectByUserId(String deviceId);
 
+
+    /**
+     * @param uuid
+     * @return
+     * @author chen bo
+     * @date 2019/11/5
+     * @description: 通过id查询信息
+     */
+    DeviceInfo selectById(String uuid);
+
     /**
      * @param deviceInfo
      * @return
@@ -30,4 +40,13 @@ public interface DeviceDao {
      * @description: 添加设备信息
      */
     Integer insertDevice(DeviceInfo deviceInfo);
+
+    /**
+     * @param deviceInfo
+     * @return
+     * @author chen bo
+     * @date 2019/11/5
+     * @description: 修改设备信息
+     */
+    Integer updateDevice(DeviceInfo deviceInfo);
 }

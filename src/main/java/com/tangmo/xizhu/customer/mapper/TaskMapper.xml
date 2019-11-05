@@ -22,7 +22,7 @@
     </resultMap>
     <select id="selectAuditedTask" resultMap="TaskMap">
       SELECT st.uuid, st.task_type,st.company_name,st.device_type,st.contact_name,st.mobile,st.task_status,st.created_time,st.detail from s_service_task st
-      inner join s_audit_task aut on st.task_id = aut.uuid where aut.created_by = #{userId} and operation = 1
+      inner join s_audit_task aut on st.uuid = aut.uuid where aut.created_by = #{userId} and operation = 1
     </select>
 
     <update id="updateStatus">

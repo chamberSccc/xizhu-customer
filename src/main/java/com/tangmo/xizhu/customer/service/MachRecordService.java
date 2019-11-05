@@ -34,9 +34,9 @@ public interface MachRecordService {
      * @return
      * @author chen bo
      * @date 2019/10/23
-     * @description: 查询任务的机械安装工作记录
+     * @description: 查询电气安装工作记录所需要的设备信息
      */
-    HttpResult getByTaskId(String taskId);
+    HttpResult getDeviceByTaskId(String taskId);
 
     /**
      * @param taskId
@@ -48,11 +48,11 @@ public interface MachRecordService {
     HttpResult getDailyDate(String taskId);
 
     /**
-     * @param dailyId
+     * @param recordId
      * @return
      * @author chen bo
      * @date 2019/10/30
-     * @description: 根据dailyId获取安装工作记录
+     * @description: 根据id获取安装工作记录详情
      */
-    HttpResult getByDailyId(String dailyId);
+    HttpResult getByRecordId(String recordId);
 }

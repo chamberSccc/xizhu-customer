@@ -46,15 +46,15 @@ public class ElecRecordController extends BaseController {
     }
 
     /**
-     * @param taskId
+     * @param recordId
      * @return
      * @author chen bo
      * @date 2019/10/30
-     * @description: 获取已上传记录列表
+     * @description: 获取电气安装工作记录详情
      */
-    @ApiOperation(value = "获取已上传记录列表",httpMethod = "GET",notes = "")
-    @GetMapping("/{taskId}/dailyDate")
-    public HttpResult getDailyDate(@PathVariable String taskId){
-        return null;
+    @ApiOperation(value = "获取电气安装工作记录详情",httpMethod = "GET",notes = "")
+    @GetMapping("/{recordId}")
+    public HttpResult getRecordInfo(@PathVariable String recordId){
+        return elecRecordService.getByRecordId(recordId);
     }
 }

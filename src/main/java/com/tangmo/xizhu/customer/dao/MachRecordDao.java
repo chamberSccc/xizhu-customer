@@ -37,9 +37,9 @@ public interface MachRecordDao {
      * @return
      * @author chen bo
      * @date 2019/10/23
-     * @description: 查询任务下的安装工作记录
+     * @description: 查询任务下的安装工作记录列表
      */
-    MachRecord selectByTaskId(String taskId);
+    List<MachRecord> selectByTaskId(String taskId);
 
     /**
      * @param taskId

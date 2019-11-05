@@ -14,9 +14,9 @@ public class FormNameConst {
     public static final String FIELD_ASSIGN = "现场服务指派单";
     public static final String FIELD_FB = "现场服务反馈单";
     public static final String SAFE_CONFIDE = "安全交底表";
-    public static final String DEVICE_FILE = "设备档案";
-    public static final String MACH_RECORD = "安装工作记录(机械)";
-    public static final String ELEC_RECORD = "安装工作记录(电气)";
+    public static final String DEVICE_FILE = "设备档案表";
+    public static final String MACH_RECORD = "安装工作记录(机械)表";
+    public static final String ELEC_RECORD = "安装工作记录(电气)表";
     public static final String MTAIN_CONFIDE = "沥青混合料搅拌设备维护保养交底表";
     public static final String EQUIP_APPLY = "外购件安装调试申请单";
     public static final String EQUIP_AUDIT = "外购件安装调试授权审批单";

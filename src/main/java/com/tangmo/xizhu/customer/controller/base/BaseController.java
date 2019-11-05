@@ -54,6 +54,8 @@ public class BaseController {
     @Resource
     protected UserService userService;
     @Resource
+    protected CustomerService customerService;
+    @Resource
     protected DeviceService deviceService;
     //外购件相关服务
     @Resource

@@ -21,6 +21,15 @@ public interface DeviceService {
     HttpResult getDeviceByUserId(String userId);
 
     /**
+     * @param deviceId
+     * @return
+     * @author chen bo
+     * @date 2019/11/5
+     * @description: 查看设备详情
+     */
+    HttpResult getDeviceInfo(String deviceId);
+
+    /**
      * @param deviceInfo
      * @return
      * @author chen bo

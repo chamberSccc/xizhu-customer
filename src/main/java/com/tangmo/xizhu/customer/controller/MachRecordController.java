@@ -46,15 +46,15 @@ public class MachRecordController extends BaseController {
     }
 
     /**
-     * @param dailyId
+     * @param recordId
      * @return
      * @author chen bo
      * @date 2019/11/4
-     * @description: 通过每日表id获取安装工作记录机械表详情
+     * @description: 通过id获取安装工作记录机械表详情
      */
-    @ApiOperation(value = "通过每日表id获取安装工作记录机械表详情",httpMethod = "GET",notes = "")
-    @GetMapping("/daily/{dailyId}")
-    public HttpResult getRecordById(@PathVariable String dailyId){
-        return null;
+    @ApiOperation(value = "通过id获取安装工作记录机械表详情",httpMethod = "GET",notes = "")
+    @GetMapping("/{recordId}")
+    public HttpResult getRecordById(@PathVariable String recordId){
+        return machRecordService.getByRecordId(recordId);
     }
 }

@@ -1,13 +1,10 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
-import com.tangmo.xizhu.customer.constant.InstallRecordConst;
-import com.tangmo.xizhu.customer.dao.DailyRecordDao;
+import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.dao.DeviceFileDao;
 import com.tangmo.xizhu.customer.dao.MachRecordDao;
-import com.tangmo.xizhu.customer.dao.TaskDao;
-import com.tangmo.xizhu.customer.entity.DailyRecord;
-import com.tangmo.xizhu.customer.entity.MachRecord;
-import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.service.MachRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
@@ -26,81 +23,58 @@ public class MachRecordServiceImpl implements MachRecordService {
     @Resource
     private MachRecordDao machRecordDao;
     @Resource
-    private DailyRecordDao dailyRecordDao;
-    @Resource
-    private TaskDao taskDao;
+    private DeviceFileDao deviceFileDao;
+
     @Override
     public HttpResult addRecord(MachRecord machRecord) {
+        if(machRecord == null|| machRecord.getTaskId() == null ){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
         String uuid = EncryptUtil.get32Uuid();
         machRecord.setUuid(uuid);
         machRecordDao.insertMachRecord(machRecord);
-        List<DailyRecord> work = machRecord.getWorkList();
-        List<DailyRecord> safe = machRecord.getSafeList();
-        integrateDaily(work,safe,uuid);
         return HttpResult.success();
     }
 
     @Override
     public HttpResult changeRecord(MachRecord machRecord) {
+        if(machRecord.getUuid() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
         machRecordDao.updateMachRecord(machRecord);
-        dailyRecordDao.deleteByParentAndBase(machRecord.getUuid(),InstallRecordConst.BASE_MACH);
-        List<DailyRecord> work = machRecord.getWorkList();
-        List<DailyRecord> safe = machRecord.getSafeList();
-        integrateDaily(work,safe,machRecord.getUuid());
         return HttpResult.success();
     }
 
     @Override
-    public HttpResult getByTaskId(String taskId) {
-        MachRecord machRecord = machRecordDao.selectByTaskId(taskId);
-        if(machRecord == null){
-            Task task = taskDao.selectById(taskId);
-            machRecord = new MachRecord();
-            machRecord.setDeviceType(task.getDeviceType());
+    public HttpResult getDeviceByTaskId(String taskId) {
+        List<MachRecord> list = machRecordDao.selectByTaskId(taskId);
+        MachRecord machRecord = new MachRecord();
+        if(list.size() == 0){
+            DeviceFile deviceFile = deviceFileDao.selectByTaskId(taskId);
             machRecord.setTaskId(taskId);
+            machRecord.setDeviceType(deviceFile.getDeviceType());
         }else{
-            List<DailyRecord> work = dailyRecordDao.selectByParentAndType(machRecord.getUuid(),InstallRecordConst.BASE_MACH,InstallRecordConst.WORK);
-            List<DailyRecord> safe = dailyRecordDao.selectByParentAndType(machRecord.getUuid(),InstallRecordConst.BASE_MACH,InstallRecordConst.SAFE);
-            machRecord.setWorkList(work);
-            machRecord.setSafeList(safe);
+            MachRecord temp = list.get(0);
+            machRecord.setTaskId(taskId);
+            machRecord.setDeviceType(temp.getDeviceType());
+            machRecord.setDeviceName(temp.getDeviceName());
         }
         return HttpResult.success(machRecord);
     }
 
     @Override
     public HttpResult getDailyDate(String taskId) {
-        return HttpResult.success(machRecordDao.selectDateByTaskId(taskId));
+        DeviceFile deviceFile = deviceFileDao.selectByTaskId(taskId);
+        if(deviceFile == null){
+            return HttpResult.fail(ResultCode.DEVICE_FILE_MISS);
+        }
+        List<MachRecord> machRecords = machRecordDao.selectDateByTaskId(taskId);
+        return HttpResult.success(machRecords);
     }
 
     @Override
-    public HttpResult getByDailyId(String dailyId) {
-        return null;
-    }
-
-    /**
-     * @return
-     * @author chen bo
-     * @date 2019/10/23
-     * @description: 整合工作记录
-     */
-    private void integrateDaily(List<DailyRecord> workList,List<DailyRecord> safeList,String parentId){
-        for (int i = 0; i < workList.size(); i++) {
-            workList.get(i).setBaseType(InstallRecordConst.BASE_MACH);
-            workList.get(i).setContentType(InstallRecordConst.WORK);
-            workList.get(i).setUuid(EncryptUtil.get32Uuid());
-            workList.get(i).setParentId(parentId);
-        }
-        for (int i = 0; i < safeList.size(); i++) {
-            safeList.get(i).setBaseType(InstallRecordConst.BASE_MACH);
-            safeList.get(i).setContentType(InstallRecordConst.SAFE);
-            workList.get(i).setUuid(EncryptUtil.get32Uuid());
-            workList.get(i).setParentId(parentId);
-        }
-        if(workList != null){
-            dailyRecordDao.insertBatchDaily(workList);
-        }
-        if(safeList != null){
-            dailyRecordDao.insertBatchDaily(safeList);
-        }
+    public HttpResult getByRecordId(String recordId) {
+        MachRecord machRecord = machRecordDao.selectById(recordId);
+        return HttpResult.success(machRecord);
     }
 }

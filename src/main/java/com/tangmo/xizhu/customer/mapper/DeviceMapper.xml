@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.DeviceDao">
+    <resultMap id="DeviceMap" type="com.tangmo.xizhu.customer.entity.DeviceInfo">
+        <id column="uuid" property="uuid"/>
+        <result column="device_name" property="deviceName"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="company_name" property="company_name"/>
+        <result column="contract_no" property="contract_no"/>
+        <result column="mobile" property="mobile"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="DeviceMap">
+      SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id  from s_user_device where uuid = #{uuid}
+    </select>
+
+    <select id="selectAllDept" resultMap="DeviceMap">
+        SELECT uuid,device_name,device_type,company_name,contract_no,mobile  from s_user_device where user_id = #{userId}
+    </select>
+    <insert id="insertDevice" parameterType="com.tangmo.xizhu.customer.entity.DeviceInfo">
+        INSERT INTO s_user_device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="deviceName != null">
+                device_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="contractNo != null">
+                contract_no,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="deviceName != null">
+                #{deviceName},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="contractNo != null">
+                #{contractNo},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateDept">
+        UPDATE s_user_device
+        <set>
+            <if test="deviceName != null">
+                device_name = #{deviceName},
+            </if>
+            <if test="deviceType != null">
+                device_type = #{deviceType},
+            </if>
+            <if test="companyName != null">
+                company_name = #{companyName},
+            </if>
+            <if test="contractNo != null">
+                contract_no = #{contractNo},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+</mapper>

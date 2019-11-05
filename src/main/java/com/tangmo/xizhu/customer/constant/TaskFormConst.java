@@ -59,6 +59,7 @@ public class TaskFormConst {
     public static ArrayList<TaskForm> adminFieldForm(){
         ArrayList<TaskForm> fastList = adminFastForm();
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.FIELD_APPLY,true));
             add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.FIELD_FB,true));
         }};
@@ -84,7 +85,7 @@ public class TaskFormConst {
             add(new TaskForm(FormNameConst.MTAIN_CONFIDE,true));
             add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
         }};
-        return null;
+        return list;
     }
 
     /**
@@ -101,7 +102,8 @@ public class TaskFormConst {
             add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
             add(new TaskForm(FormNameConst.EQUIP_NOTICE,true));
         }};
-        return null;
+        fastList.addAll(list);
+        return fastList;
     }
 
     /**

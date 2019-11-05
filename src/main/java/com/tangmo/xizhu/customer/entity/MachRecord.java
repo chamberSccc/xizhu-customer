@@ -25,8 +25,17 @@ public class MachRecord {
     private String createdBy;//带队工程师
     @ApiModelProperty(value="填写时间",name="createdTime",example="")
     private Date createdTime;//填写时间
-    @ApiModelProperty(value="工作记录",name="workList",example="")
-    private List<DailyRecord> workList;//工作记录
-    @ApiModelProperty(value="安全记录",name="safeList",example="")
-    private List<DailyRecord> safeList;//安全记录
+
+    @ApiModelProperty(value="工作记录",name="workInfo",example="")
+    private String workInfo;
+    @ApiModelProperty(value="工作记录图片",name="workPicture",example="")
+    private String workPicture;
+    @ApiModelProperty(value="工作记录视频",name="workAudio",example="")
+    private String workAudio;
+    @ApiModelProperty(value="安全记录",name="safeInfo",example="")
+    private String safeInfo;
+    @ApiModelProperty(value="安全记录视频",name="safeAudio",example="")
+    private String safeAudio;
+    @ApiModelProperty(value="安全记录照片",name="safePicture",example="")
+    private String safePicture;
 }

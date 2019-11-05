@@ -6,22 +6,30 @@
         <result column="task_id" property="taskId"/>
         <result column="device_name" property="deviceName"/>
         <result column="device_type" property="deviceType"/>
+
+        <result column="work_info" property="workInfo"/>
+        <result column="work_audio" property="workAudio"/>
+        <result column="work_picture" property="workPicture"/>
+        <result column="safe_info" property="safeInfo"/>
+        <result column="safe_audio" property="safeAudio"/>
+        <result column="safe_picture" property="safePicture"/>
+
         <result column="created_by" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
     </resultMap>
 
-    <select id="selectByTaskId" resultMap="MachRecordMap">
-      SELECT uuid,task_id,device_name,device_type,created_by,created_time
-       from s_machine_record where task_id = #{taskId}
-    </select>
-
     <select id="selectById" resultMap="MachRecordMap">
-      SELECT uuid,task_id,device_name,device_type,created_by,created_time
+      SELECT uuid,task_id,device_name,device_type,work_info,work_audio,work_picture,safe_info,safe_audio,safe_picture,created_by,created_time
        from s_machine_record where uuid = #{uuid}
     </select>
 
+    <select id="selectByTaskId" resultMap="MachRecordMap">
+      SELECT uuid,task_id,device_name,device_type,work_info,work_audio,work_picture,safe_info,safe_audio,safe_picture,created_by,created_time
+       from s_machine_record where task_id = #{taskId}
+    </select>
+
     <select id="selectDateByTaskId" resultMap="MachRecordMap">
-      SELECT uuid,created_time
+      SELECT uuid,task_id,created_time
        from s_machine_record where task_id = #{taskId}
     </select>
 
@@ -40,12 +48,30 @@
             <if test="deviceType != null">
                 device_type,
             </if>
+
+            <if test="workInfo != null">
+                work_info,
+            </if>
+            <if test="workAudio != null">
+                work_audio,
+            </if>
+            <if test="workPicture != null">
+                work_picture,
+            </if>
+            <if test="safeInfo != null">
+                safe_info,
+            </if>
+            <if test="safeAudio != null">
+                safe_audio,
+            </if>
+            <if test="safePicture != null">
+                safe_picture,
+            </if>
+
             <if test="createdBy != null">
                 created_by,
             </if>
-            <if test="createdTime != null">
-                created_time,
-            </if>
+                created_time
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -61,12 +87,30 @@
             <if test="deviceType != null">
                 #{deviceType},
             </if>
+
+            <if test="workInfo != null">
+                #{workInfo},
+            </if>
+            <if test="workAudio != null">
+                #{workAudio},
+            </if>
+            <if test="workPicture != null">
+                #{workPicture},
+            </if>
+            <if test="safeInfo != null">
+                #{safeInfo},
+            </if>
+            <if test="safeAudio != null">
+                #{safeAudio},
+            </if>
+            <if test="safePicture != null">
+                #{safePicture},
+            </if>
+
             <if test="createdBy != null">
                 #{createdBy},
             </if>
-            <if test="createdTime != null">
-                #{createdTime},
-            </if>
+                getDate()
         </trim>
     </insert>
 
@@ -78,6 +122,24 @@
             </if>
             <if test="deviceType != null">
                 device_type = #{deviceType},
+            </if>
+            <if test="workInfo != null">
+                work_info = #{workInfo},
+            </if>
+            <if test="workAudio != null">
+                work_audio = #{workAudio},
+            </if>
+            <if test="workPicture != null">
+                work_picture = #{workPicture},
+            </if>
+            <if test="safeInfo != null">
+                safe_info = #{safeInfo},
+            </if>
+            <if test="safeAudio != null">
+                safe_audio = #{safeAudio},
+            </if>
+            <if test="safePicture != null">
+                safe_picture = #{safePicture},
             </if>
         </set>
         WHERE uuid = #{uuid}

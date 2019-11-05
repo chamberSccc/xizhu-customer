@@ -76,7 +76,7 @@ public class TaskController extends BaseController {
      * @description: 获取任务的单子列表
      */
     @GetMapping("/{taskId}/formList")
-    public HttpResult getTaskFormFlow(String taskId){
+    public HttpResult getTaskFormFlow(@PathVariable String taskId){
         return taskService.getFormList(taskId,getUserType());
     }
 
@@ -224,24 +224,51 @@ public class TaskController extends BaseController {
      * @return
      * @author chen bo
      * @date 2019/10/22
-     * @description: 获取安装工作记录(机械)
+     * @description: 获取安装工作记录(机械)所需信息
      */
-    @ApiOperation(value = "获取安装工作记录(机械)",httpMethod = "GET",notes = "")
+    @ApiOperation(value = "获取安装工作记录(机械)所需信息",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/machineRecord")
-    public HttpResult<MachRecord> getMachineRecord(@PathVariable String taskId){
-        return machRecordService.getByTaskId(taskId);
+    public HttpResult<MachRecord> getMachineRecordDevice(@PathVariable String taskId){
+        return machRecordService.getDeviceByTaskId(taskId);
     }
+
     /**
      * @param taskId
      * @return
      * @author chen bo
      * @date 2019/10/22
-     * @description: 获取安装工作记录(电气)
+     * @description: 获取安装工作记录(机械)填写时间
      */
-    @ApiOperation(value = "获取安装工作记录(电气)",httpMethod = "GET",notes = "")
+    @ApiOperation(value = "获取安装工作记录(机械)填写时间",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/machineRecord/dateList")
+    public HttpResult<List<MachRecord>> getMachRecordDate(@PathVariable String taskId){
+        return machRecordService.getDailyDate(taskId);
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/22
+     * @description: 获取安装工作记录(电气)所需信息
+     */
+    @ApiOperation(value = "获取安装工作记录(电气)所需信息",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/elecRecord")
-    public HttpResult<ElecRecord> getElecRecord(@PathVariable String taskId){
-        return elecRecordService.getByTaskId(taskId);
+    public HttpResult<ElecRecord> getElecRecordDevice(@PathVariable String taskId){
+        return elecRecordService.getDeviceByTaskId(taskId);
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/10/22
+     * @description: 获取安装工作记录(电气)填写时间
+     */
+    @ApiOperation(value = "获取安装工作记录(电气)填写时间",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/elecRecord/dateList")
+    public HttpResult<List<ElecRecord>> getElecRecordDate(@PathVariable String taskId){
+        return elecRecordService.getDailyDate(taskId);
     }
 
     /**
