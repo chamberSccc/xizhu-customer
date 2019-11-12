@@ -5,8 +5,8 @@
         <id column="uuid" property="uuid"/>
         <result column="device_name" property="deviceName"/>
         <result column="device_type" property="deviceType"/>
-        <result column="company_name" property="company_name"/>
-        <result column="contract_no" property="contract_no"/>
+        <result column="company_name" property="companyName"/>
+        <result column="contract_no" property="contractNo"/>
         <result column="mobile" property="mobile"/>
         <result column="user_id" property="userId"/>
         <result column="device_pid" property="devicePid"/>

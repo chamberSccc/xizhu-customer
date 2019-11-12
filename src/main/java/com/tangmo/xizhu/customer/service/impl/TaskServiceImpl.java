@@ -47,10 +47,10 @@ public class TaskServiceImpl implements TaskService {
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);
         task.setTaskStatus(TaskStatusConst.INITIAL);
-        if(!task.getTaskAssignType().equals(TaskTypeConst.EQUIPMENT)){
+        if(!task.getTaskAssignType().equals(TaskAssignType.INSTALL_DEVICE)){
             task.setTaskType(TaskTypeConst.FAST_SERVICE);
         }else{
-            //todo 如果是安调设备，直接生成现场服务指派单
+
             task.setTaskType(TaskTypeConst.EQUIPMENT);
         }
         taskDao.insertTask(task);
