@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.controller;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.DeviceInfo;
+import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -55,5 +56,44 @@ public class DeviceInfoController extends BaseController {
     @GetMapping("/{deviceId}")
     public HttpResult getDeviceInfo(@PathVariable String deviceId){
         return deviceService.getDeviceInfo(deviceId);
+    }
+
+    /**
+     * @param pid
+     * @return
+     * @author chen bo
+     * @date 2019/11/12
+     * @description: 通过设备pid查询设备信息
+     */
+    @ApiOperation(value = "通过设备pid获取设备详情",httpMethod = "GET",notes = "")
+    @GetMapping("/pidSearch/{pid}")
+    public HttpResult getDeviceByPid(@PathVariable String pid){
+        return deviceService.getDeviceByPid(pid);
+    }
+
+    /**
+     * @param pid
+     * @return
+     * @author chen bo
+     * @date 2019/11/12
+     * @description: 通过设备pid模糊查询设备信息
+     */
+    @ApiOperation(value = "通过设备pid模糊查询设备信息",httpMethod = "GET",notes = "")
+    @GetMapping("/pidFuzzy/{pid}")
+    public HttpResult getDeviceByFuzzyPid(@PathVariable String pid){
+        return deviceService.getDeviceByFuzzyPid(pid);
+    }
+
+    /**
+     * @param pid
+     * @return
+     * @author chen bo
+     * @date 2019/11/12
+     * @description: 通过设备pid查询设备维修历史
+     */
+    @ApiOperation(value = "通过设备pid查询设备维修历史，分页",httpMethod = "GET",notes = "")
+    @GetMapping("/{pid}/task")
+    public HttpResult getDeviceTaskByPid(@PathVariable String pid, TaskSearch taskSearch){
+        return taskService.getTaskListByPid(taskSearch,pid);
     }
 }

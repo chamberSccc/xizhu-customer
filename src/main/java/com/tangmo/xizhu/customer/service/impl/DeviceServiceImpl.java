@@ -31,6 +31,16 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    public HttpResult getDeviceByPid(String devicePid) {
+        return HttpResult.success(deviceDao.selectByPid(devicePid));
+    }
+
+    @Override
+    public HttpResult getDeviceByFuzzyPid(String devicePid) {
+        return HttpResult.success(deviceDao.selectByFuzzyPid(devicePid));
+    }
+
+    @Override
     public HttpResult addDevice(DeviceInfo deviceInfo) {
         if(deviceInfo == null || deviceInfo.getUserId() == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);

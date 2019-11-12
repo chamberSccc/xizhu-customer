@@ -117,6 +117,16 @@ public interface TaskService {
     HttpResult getTaskListBySearch(TaskSearch taskSearch);
 
     /**
+     * @param taskSearch
+     * @param pid
+     * @return
+     * @author chen bo
+     * @date 2019/11/12
+     * @description: 通过设备pid查询设备任务信息
+     */
+    HttpResult getTaskListByPid(TaskSearch taskSearch, String pid);
+
+    /**
      * @param taskId
      * @return com.tangmo.xizhu.customer.common.HttpResult
      * @author chen bo

@@ -3,6 +3,7 @@
 <mapper namespace="com.tangmo.xizhu.customer.dao.TaskDao">
     <resultMap id="TaskMap" type="com.tangmo.xizhu.customer.entity.Task">
         <id column="uuid" property="uuid"/>
+        <result column="device_pid" property="devicePid"/>
         <result column="company_name" property="companyName"/>
         <result column="device_type" property="deviceType"/>
         <result column="contact_name" property="contactName"/>
@@ -39,6 +40,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 uuid,
+            </if>
+            <if test="devicePid != null">
+                device_pid,
             </if>
             <if test="companyName != null">
                 company_name,
@@ -88,6 +92,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uuid != null">
                 #{uuid},
+            </if>
+            <if test="devicePid != null">
+                #{devicePid},
             </if>
             <if test="companyName != null">
                 #{companyName},
@@ -145,6 +152,10 @@
 
     <select id="selectLaunchedTask" resultMap="TaskMap">
         select * from s_service_task where created_by = #{userId} order by created_time desc
+    </select>
+
+    <select id="selectByPid" resultMap="TaskMap">
+        select * from s_service_task where device_pid = #{devicePid} order by created_time desc
     </select>
 
     <select id="selectByStatus" resultMap="TaskMap">

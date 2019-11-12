@@ -17,4 +17,5 @@ public class DeviceInfo {
     private String contractNo;
     private String mobile;
     private String userId;
+    private String devicePid; //设备出厂唯一标识码
 }

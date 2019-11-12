@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.dao;
 
 import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -127,5 +128,13 @@ public interface TaskDao {
      */
     List<Task> selectLaunchedTask(@Param("userId") String userId);
 
-
+    /**
+     * @param devicePid
+     * @param taskSearch 任务搜索对象
+     * @return
+     * @author chen bo
+     * @date 2019/11/12
+     * @description: 通过设备pid查询设备任务列表
+     */
+    List<Task> selectByPid(@Param("devicePid") String devicePid, @Param("search") TaskSearch taskSearch);
 }

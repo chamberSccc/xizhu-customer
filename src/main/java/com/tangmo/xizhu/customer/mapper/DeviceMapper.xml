@@ -9,15 +9,21 @@
         <result column="contract_no" property="contract_no"/>
         <result column="mobile" property="mobile"/>
         <result column="user_id" property="userId"/>
+        <result column="device_pid" property="devicePid"/>
     </resultMap>
 
     <select id="selectById" resultMap="DeviceMap">
-      SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id  from s_user_device where uuid = #{uuid}
+      SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where uuid = #{uuid}
     </select>
 
-    <select id="selectAllDept" resultMap="DeviceMap">
-        SELECT uuid,device_name,device_type,company_name,contract_no,mobile  from s_user_device where user_id = #{userId}
+    <select id="selectByPid" resultMap="DeviceMap">
+      SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where device_pid = #{devicePid}
     </select>
+
+    <select id="selectByFuzzyPid" resultMap="DeviceMap">
+      SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where device_pid like '%' + #{devicePid} + '%'
+    </select>
+
     <insert id="insertDevice" parameterType="com.tangmo.xizhu.customer.entity.DeviceInfo">
         INSERT INTO s_user_device
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -41,6 +47,9 @@
             </if>
             <if test="userId != null">
                 user_id,
+            </if>
+            <if test="devicePid != null">
+                device_pid,
             </if>
         </trim>
         values
@@ -66,6 +75,9 @@
             <if test="userId != null">
                 #{userId},
             </if>
+            <if test="devicePid != null">
+                #{devicePid},
+            </if>
         </trim>
     </insert>
 
@@ -86,6 +98,9 @@
             </if>
             <if test="mobile != null">
                 mobile = #{mobile},
+            </if>
+            <if test="device_pid != null">
+                device_pid = #{devicePid},
             </if>
         </set>
         WHERE uuid = #{uuid}

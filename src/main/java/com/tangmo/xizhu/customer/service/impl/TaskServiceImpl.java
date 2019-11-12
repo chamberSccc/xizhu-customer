@@ -136,6 +136,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public HttpResult getTaskListByPid(TaskSearch taskSearch, String pid) {
+        return HttpResult.success(taskDao.selectByPid(pid,taskSearch));
+    }
+
+    @Override
     public HttpResult commitTask(String taskId,String userId) {
         Task task = taskDao.selectById(taskId);
         //修改任务状态为待审核

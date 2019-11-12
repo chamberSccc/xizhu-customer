@@ -28,9 +28,27 @@ public interface DeviceDao {
      * @return
      * @author chen bo
      * @date 2019/11/5
-     * @description: 通过id查询信息
+     * @description: 通过id查询设备信息
      */
     DeviceInfo selectById(String uuid);
+
+    /**
+     * @param devicePid
+     * @return
+     * @author chen bo
+     * @date 2019/11/5
+     * @description: 通过pid查询设备信息
+     */
+    DeviceInfo selectByPid(String devicePid);
+
+    /**
+     * @param devicePid
+     * @return
+     * @author chen bo
+     * @date 2019/11/12
+     * @description: 通过pid模糊查询设备信息
+     */
+    List<DeviceInfo> selectByFuzzyPid(String devicePid);
 
     /**
      * @param deviceInfo
