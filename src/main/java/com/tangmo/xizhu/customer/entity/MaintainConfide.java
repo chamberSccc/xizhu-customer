@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -35,14 +36,12 @@ public class MaintainConfide {
     private String createdBy;
     @ApiModelProperty(value="交底时间",name="createdTime",example="")
     private Date createdTime;
-    @ApiModelProperty(value="用户类型 0：用户 1：服务人员",name="userType",example="")
-    private Byte userType;
-    @ApiModelProperty(value="安全警示内容",name="safety",example="")
-    private String safety;
-    @ApiModelProperty(value="安调关键内容",name="equipment",example="")
-    private String equipment;
-    @ApiModelProperty(value="维护保养内容",name="maintain",example="")
-    private String maintain;
+    @ApiModelProperty(value="用户签字",name="userSign",example="")
+    private String userSign;
+    @ApiModelProperty(value="服务人员签字",name="serviceSign",example="")
+    private String serviceSign;
+    @ApiModelProperty(value="图片列表",name="maintain",example="")
+    private List<String> pictureList;
 
     private String updatedBy;
     private Date updatedTime;

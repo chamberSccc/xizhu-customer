@@ -20,7 +20,7 @@
     </resultMap>
 
     <select id="selectByTaskIdAndType" resultMap="MtainConfideMap">
-      SELECT uuid,task_id,device_name,form_type,device_type,company_name,factory_no,contract_no,job_site,user_type,safety,equipment,maintain,created_by,created_time
+      SELECT uuid,task_id,device_name,form_type,device_type,company_name,factory_no,contract_no,job_site,user_type,user_sign,service_sign,created_by,created_time
        from s_mtain_confide where task_id = #{taskId} and form_type = #{type}
     </select>
 
@@ -57,14 +57,11 @@
             <if test="userType != null">
                 user_type,
             </if>
-            <if test="safety != null">
-                safety,
+            <if test="userSign != null">
+                user_sign,
             </if>
-            <if test="equipment != null">
-                equipment,
-            </if>
-            <if test="maintain != null">
-                maintain,
+            <if test="serviceSign != null">
+                service_sign,
             </if>
             <if test="createdBy != null">
                 created_by,
@@ -103,14 +100,11 @@
             <if test="userType != null">
                 #{userType},
             </if>
-            <if test="safety != null">
-                #{safety},
+            <if test="userSign != null">
+                #{userSign},
             </if>
-            <if test="equipment != null">
-                #{equipment},
-            </if>
-            <if test="maintain != null">
-                #{maintain},
+            <if test="serviceSign != null">
+                #{serviceSign},
             </if>
             <if test="createdBy != null">
                 #{createdBy},
@@ -125,14 +119,14 @@
             <if test="deviceName != null">
                 device_name = #{deviceName},
             </if>
-            <if test="safety != null">
-                safety = #{safety},
+            <if test="userSign != null">
+                user_sign = #{userSign},
             </if>
-            <if test="equipment != null">
-                equipment = #{equipment},
+            <if test="serviceSign != null">
+                service_sign = #{serviceSign},
             </if>
-            <if test="maintain != null">
-                maintain = #{maintain},
+            <if test="jobSite != null">
+                job_site = #{jobSite},
             </if>
             <if test="updatedBy != null">
                 updated_by = #{updatedBy},

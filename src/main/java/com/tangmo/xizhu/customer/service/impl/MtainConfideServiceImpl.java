@@ -3,17 +3,22 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.FormTypeConst;
+import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.DeviceFileDao;
 import com.tangmo.xizhu.customer.dao.MtainConfideDao;
+import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.entity.DeviceFile;
 import com.tangmo.xizhu.customer.entity.MaintainConfide;
 import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.converter.ConfideFormConverter;
+import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.MtainConfideService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -27,16 +32,27 @@ public class MtainConfideServiceImpl implements MtainConfideService {
     private MtainConfideDao mtainConfideDao;
     @Resource
     private DeviceFileDao deviceFileDao;
+    @Resource
+    private TaskAttachDao taskAttachDao;
     @Override
     public HttpResult addMtainConfide(MaintainConfide maintainConfide) {
-        maintainConfide.setUuid(EncryptUtil.get32Uuid());
+        String uuid = EncryptUtil.get32Uuid();
+        maintainConfide.setUuid(uuid);
         mtainConfideDao.insertMtainConfide(maintainConfide);
+        dealPictureList(maintainConfide.getPictureList(),uuid);
         return HttpResult.success();
     }
 
     @Override
     public HttpResult changeMtainConfide(MaintainConfide maintainConfide) {
+        if(maintainConfide == null || maintainConfide.getUuid() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
         mtainConfideDao.updateMtainConfide(maintainConfide);
+        if(maintainConfide.getPictureList() != null){
+            taskAttachDao.deleteByParentAndType(maintainConfide.getUuid(),TaskAttachConst.MTAIN_CONFIDE,TaskAttachConst.DETAIL);
+            dealPictureList(maintainConfide.getPictureList(),maintainConfide.getUuid());
+        }
         return HttpResult.success();
     }
 
@@ -59,9 +75,30 @@ public class MtainConfideServiceImpl implements MtainConfideService {
                 maintainConfide.setTaskId(deviceFile.getTaskId());
             }else{
                 maintainConfide = ConfideFormConverter.formPublic2Other(result);
+
             }
             maintainConfide.setFormType(type);
         }
         return HttpResult.success(maintainConfide);
+    }
+
+    /**
+     * @param detail
+     * @param uuid
+     * @return
+     * @author chen bo
+     * @date 2019/11/1
+     * @description: 处理照片列表
+     */
+    private void dealPictureList(List<String> detail, String uuid){
+        if(detail == null || detail.size() == 0){
+            return;
+        }
+        List<TaskAttach> detailAttach = TaskAttachConverter.String2Entity(detail,uuid,
+                TaskAttachConst.MTAIN_CONFIDE, TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+        if(detailAttach != null){
+            taskAttachDao.insertBatchAttach(detailAttach);
+        }
+        return ;
     }
 }
