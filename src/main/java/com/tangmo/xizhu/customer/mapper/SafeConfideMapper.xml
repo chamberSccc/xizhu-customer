@@ -4,28 +4,14 @@
     <resultMap id="SafeConfideMap" type="com.tangmo.xizhu.customer.entity.SafeConfide">
         <id column="uuid" property="uuid"/>
         <result column="task_id" property="taskId"/>
-        <result column="safe01" property="safe01"/>
-        <result column="safe02" property="safe02"/>
-        <result column="safe03" property="safe03"/>
-        <result column="safe04" property="safe04"/>
-        <result column="safe05" property="safe05"/>
-        <result column="safe06" property="safe06"/>
-        <result column="safe07" property="safe07"/>
-        <result column="safe08" property="safe08"/>
-        <result column="safe09" property="safe09"/>
-        <result column="safe10" property="safe10"/>
-        <result column="safe11" property="safe11"/>
-        <result column="safe12" property="safe12"/>
-        <result column="safe13" property="safe13"/>
-        <result column="safe14" property="safe14"/>
-        <result column="safe15" property="safe15"/>
+        <result column="service_sign" property="serviceSign"/>
+        <result column="user_sign" property="userSign"/>
         <result column="created_by" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
     </resultMap>
 
     <select id="selectByTaskId" resultMap="SafeConfideMap">
-      SELECT uuid,task_id,safe01,safe02,safe03,safe04,safe05,safe06,safe07,safe08,safe09,safe10,
-      safe11,safe12,safe13,safe14,safe15,created_by,created_time
+      SELECT uuid,task_id,user_sign,service_sign,created_by,created_time
        from s_safe_confide where task_id = #{taskId}
     </select>
 
@@ -38,50 +24,11 @@
             <if test="taskId != null">
                 task_id,
             </if>
-            <if test="safe01 != null">
-                safe01,
+            <if test="userSign != null">
+                user_sign,
             </if>
-            <if test="safe02 != null">
-                safe02,
-            </if>
-            <if test="safe03 != null">
-                safe03,
-            </if>
-            <if test="safe04 != null">
-                safe04,
-            </if>
-            <if test="safe05 != null">
-                safe05,
-            </if>
-            <if test="safe06 != null">
-                safe06,
-            </if>
-            <if test="safe07 != null">
-                safe07,
-            </if>
-            <if test="safe08 != null">
-                safe08,
-            </if>
-            <if test="safe09 != null">
-                safe09,
-            </if>
-            <if test="safe10 != null">
-                safe10,
-            </if>
-            <if test="safe11 != null">
-                safe11,
-            </if>
-            <if test="safe12 != null">
-                safe12,
-            </if>
-            <if test="safe13 != null">
-                safe13,
-            </if>
-            <if test="safe14 != null">
-                safe14,
-            </if>
-            <if test="safe15 != null">
-                safe15,
+            <if test="serviceSign != null">
+                service_sign,
             </if>
             <if test="createdBy != null">
                 created_by,
@@ -96,50 +43,11 @@
             <if test="taskId != null">
                 #{taskId},
             </if>
-            <if test="safe01 != null">
-                #{safe01},
+            <if test="userSign != null">
+                #{userSign},
             </if>
-            <if test="safe02 != null">
-                #{safe02},
-            </if>
-            <if test="safe03 != null">
-                #{safe03},
-            </if>
-            <if test="safe04 != null">
-                #{safe04},
-            </if>
-            <if test="safe05 != null">
-                #{safe05},
-            </if>
-            <if test="safe06 != null">
-                #{safe06},
-            </if>
-            <if test="safe07 != null">
-                #{safe07},
-            </if>
-            <if test="safe08 != null">
-                #{safe08},
-            </if>
-            <if test="safe09 != null">
-                #{safe09},
-            </if>
-            <if test="safe10 != null">
-                #{safe10},
-            </if>
-            <if test="safe11 != null">
-                #{safe11},
-            </if>
-            <if test="safe12 != null">
-                #{safe12},
-            </if>
-            <if test="safe13 != null">
-                #{safe13},
-            </if>
-            <if test="safe14 != null">
-                #{safe14},
-            </if>
-            <if test="safe15 != null">
-                #{safe15},
+            <if test="serviceSign != null">
+                #{serviceSign},
             </if>
             <if test="createdBy != null">
                 #{createdBy},
@@ -151,50 +59,11 @@
     <update id="updateSafeConfide">
         UPDATE s_safe_confide
         <set>
-            <if test="safe01 != null">
-                safe01 = #{safe01},
+            <if test="userSign != null">
+                user_sign = #{userSign},
             </if>
-            <if test="safe02 != null">
-                safe02 = #{safe02},
-            </if>
-            <if test="safe03 != null">
-                safe03 = #{safe03},
-            </if>
-            <if test="safe04 != null">
-                safe04 = #{safe04},
-            </if>
-            <if test="safe05 != null">
-                safe05 = #{safe05},
-            </if>
-            <if test="safe06 != null">
-                safe06 = #{safe06},
-            </if>
-            <if test="safe07 != null">
-                safe07 = #{safe07},
-            </if>
-            <if test="safe08 != null">
-                safe08 = #{safe08},
-            </if>
-            <if test="safe09 != null">
-                safe09 = #{safe09},
-            </if>
-            <if test="safe10 != null">
-                safe10=  #{safe10},
-            </if>
-            <if test="safe11 != null">
-                safe11=  #{safe11},
-            </if>
-            <if test="safe12 != null">
-                safe12=  #{safe12},
-            </if>
-            <if test="safe13 != null">
-                safe13=  #{safe13},
-            </if>
-            <if test="safe14 != null">
-                safe14=  #{safe14},
-            </if>
-            <if test="safe15 != null">
-                safe15=  #{safe14},
+            <if test="serviceSign != null">
+                service_sign = #{serviceSign},
             </if>
         </set>
         WHERE uuid = #{uuid}

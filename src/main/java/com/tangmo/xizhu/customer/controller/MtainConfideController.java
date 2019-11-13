@@ -43,6 +43,7 @@ public class MtainConfideController extends BaseController {
     @ApiOperation(value = "修改保养交底表(11种类型按1-11区分)",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeConfide(@ApiParam(name="安装工作记录(电气)表对象",value="json格式",required=true) @RequestBody MaintainConfide maintainConfide){
+        maintainConfide.setUpdatedBy(getUserId());
         return mtainConfideService.changeMtainConfide(maintainConfide);
     }
 }
