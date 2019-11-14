@@ -6,10 +6,7 @@ import com.tangmo.xizhu.customer.constant.*;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.dao.TaskRequireDao;
-import com.tangmo.xizhu.customer.entity.AuditTask;
-import com.tangmo.xizhu.customer.entity.Task;
-import com.tangmo.xizhu.customer.entity.TaskAttach;
-import com.tangmo.xizhu.customer.entity.TaskRequire;
+import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskConverter;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
@@ -156,5 +153,15 @@ public class TaskServiceImpl implements TaskService {
     public HttpResult getFormList(String taskId, Byte userType) {
         Task task = taskDao.selectById(taskId);
         return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType));
+    }
+
+    @Override
+    public HttpResult startPunch(TaskPunch taskPunch) {
+        return null;
+    }
+
+    @Override
+    public HttpResult endPunch(TaskPunch taskPunch) {
+        return null;
     }
 }

@@ -36,6 +36,13 @@ public class MtainConfideServiceImpl implements MtainConfideService {
     private TaskAttachDao taskAttachDao;
     @Override
     public HttpResult addMtainConfide(MaintainConfide maintainConfide) {
+        if(maintainConfide == null || maintainConfide.getTaskId() == null || maintainConfide.getFormType() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        MaintainConfide exists = mtainConfideDao.selectByTaskIdAndType(maintainConfide.getTaskId(),maintainConfide.getFormType());
+        if(exists != null){
+            return HttpResult.fail(ResultCode.DOUBLE_SUBMIT);
+        }
         String uuid = EncryptUtil.get32Uuid();
         maintainConfide.setUuid(uuid);
         mtainConfideDao.insertMtainConfide(maintainConfide);
@@ -78,6 +85,11 @@ public class MtainConfideServiceImpl implements MtainConfideService {
 
             }
             maintainConfide.setFormType(type);
+        }else{
+            //图片
+            List<String> pictureList = taskAttachDao.selectByParentAndType(maintainConfide.getUuid(),TaskAttachConst.MTAIN_CONFIDE,
+                    TaskAttachConst.PICTURE,TaskAttachConst.DETAIL);
+            maintainConfide.setPictureList(pictureList);
         }
         return HttpResult.success(maintainConfide);
     }

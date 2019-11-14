@@ -15,7 +15,8 @@ public enum ResultCode {
     FIELD_APPLY_MISS("1004","系统未收到现场服务申请"),
     EQUIP_APPLY_MISS("1005","系统未收到外购件调试申请"),
     USER_NOT_EXIST("1006","用户不存在"),
-    PASSWORD_ERROR("1007","密码错误");
+    PASSWORD_ERROR("1007","密码错误"),
+    DOUBLE_SUBMIT("1008","表已存在，请勿重复提交");
 
     private String errCode;
     private String errMsg;

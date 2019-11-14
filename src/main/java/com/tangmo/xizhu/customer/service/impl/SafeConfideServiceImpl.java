@@ -29,6 +29,13 @@ public class SafeConfideServiceImpl implements SafeConfideService {
     private TaskAttachDao taskAttachDao;
     @Override
     public HttpResult addSafeConfide(SafeConfide safeConfide) {
+        if(safeConfide == null || safeConfide.getTaskId() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        SafeConfide exists = safeConfideDao.selectByTaskId(safeConfide.getTaskId());
+        if(exists != null){
+            return HttpResult.fail(ResultCode.DOUBLE_SUBMIT);
+        }
         String uuid = EncryptUtil.get32Uuid();
         safeConfide.setUuid(uuid);
         safeConfideDao.insertSafeConfide(safeConfide);

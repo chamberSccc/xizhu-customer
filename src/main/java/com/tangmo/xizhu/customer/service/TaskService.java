@@ -4,6 +4,7 @@ package com.tangmo.xizhu.customer.service;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.TaskPunch;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 /**
  * @return
@@ -145,4 +146,22 @@ public interface TaskService {
      * @description: 查询要显示的单子列表
      */
     HttpResult getFormList(String taskId,Byte userType);
+
+    /**
+     * @param taskPunch
+     * @return
+     * @author chen bo
+     * @date 2019/11/14
+     * @description: 开始任务打卡
+     */
+    HttpResult startPunch(TaskPunch taskPunch);
+
+    /**
+     * @param taskPunch
+     * @return
+     * @author chen bo
+     * @date 2019/11/14
+     * @description: 结束任务打卡
+     */
+    HttpResult endPunch(TaskPunch taskPunch);
 }
