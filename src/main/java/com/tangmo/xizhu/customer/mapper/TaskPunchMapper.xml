@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.TaskPunchDao">
+    <resultMap id="TaskPunchMap" type="com.tangmo.xizhu.customer.entity.TaskPunch">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="address" property="address"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="punch_type" property="punchType"/>
+        <result column="user_id" property="userId"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <insert id="insertPunch" parameterType="com.tangmo.xizhu.customer.entity.TaskPunch">
+        INSERT INTO s_task_punch
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="punchType != null">
+                punch_type,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+                created_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="address != null">
+                #{address},
+            </if>
+            <if test="longitude != null">
+                #{longitude},
+            </if>
+            <if test="latitude != null">
+                #{latitude},
+            </if>
+            <if test="punchType != null">
+                #{punchType},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+                getDate(),
+        </trim>
+    </insert>
+
+
+    <update id="updatePunch">
+        UPDATE s_task_punch
+        <set>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude},
+            </if>
+            created_time = getDate()
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+
+    <select id="selectByUserAndType" resultMap="TaskPunchMap">
+        select uuid,address,longitude,latitude,user_id,punch_type,created_time FROM s_task_punch
+        where task_id = #{taskId} and user_id = #{userId} and punch_type = #{punchType}
+    </select>
+</mapper>

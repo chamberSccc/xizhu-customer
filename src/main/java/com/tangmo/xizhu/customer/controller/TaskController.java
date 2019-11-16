@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.constant.PunchTypeConst;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
@@ -66,32 +67,6 @@ public class TaskController extends BaseController {
     @PostMapping("/commit/{taskId}")
     public HttpResult commitTask(@PathVariable String taskId){
         return taskService.commitTask(taskId,getUserId());
-    }
-
-    /**
-     * @param taskPunch
-     * @return
-     * @author chen bo
-     * @date 2019/11/14
-     * @description: 开始打卡
-     */
-    @ApiOperation(value = "开始打卡",httpMethod = "PUT",notes = "")
-    @PutMapping("/punch/start")
-    public HttpResult startPunch(@RequestBody TaskPunch taskPunch){
-        return null;
-    }
-
-    /**
-     * @param taskPunch
-     * @return
-     * @author chen bo
-     * @date 2019/11/14
-     * @description: 结束打卡
-     */
-    @ApiOperation(value = "结束打卡",httpMethod = "PUT",notes = "")
-    @PutMapping("/punch/end")
-    public HttpResult endPunch(@RequestBody TaskPunch taskPunch){
-        return null;
     }
 
     /**

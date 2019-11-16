@@ -33,22 +33,6 @@ public class Task {
     @ApiModelProperty(value="任务状态 -1:拒绝 0:审核中 1:审核完成 2:任务完成",name="taskStatus",example="")
     private Byte taskStatus;
     private Byte taskType;//任务类型
-    @ApiModelProperty(value="开始打卡地点",name="startAddress",example="")
-    private String startAddress;
-    @ApiModelProperty(value="开始打卡经度",name="startLongitude",example="")
-    private String startLongitude;
-    @ApiModelProperty(value="开始打卡纬度",name="startLatitude",example="")
-    private String startLatitude;
-    @ApiModelProperty(value="开始打卡时间",name="startPunchDate",example="")
-    private Date startPunchDate;
-    @ApiModelProperty(value="结束打卡地点",name="endAddress",example="")
-    private String endAddress;
-    @ApiModelProperty(value="结束打卡经度",name="endLongitude",example="")
-    private String endLongitude;
-    @ApiModelProperty(value="结束打卡纬度",name="endLatitude",example="")
-    private String endLatitude;
-    @ApiModelProperty(value="结束打卡时间",name="endPunchDate",example="")
-    private Date endPunchDate;
 
     private String createdBy;
     private String executor;

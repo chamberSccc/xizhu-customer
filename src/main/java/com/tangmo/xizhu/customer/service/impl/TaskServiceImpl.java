@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.*;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
@@ -17,8 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -37,6 +36,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskAttachDao taskAttachDao;
     @Resource
     private AuditTaskService auditTaskService;
+
     @Override
     @Transactional
     public HttpResult createTask(Task task) {
@@ -153,15 +153,5 @@ public class TaskServiceImpl implements TaskService {
     public HttpResult getFormList(String taskId, Byte userType) {
         Task task = taskDao.selectById(taskId);
         return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType));
-    }
-
-    @Override
-    public HttpResult startPunch(TaskPunch taskPunch) {
-        return null;
-    }
-
-    @Override
-    public HttpResult endPunch(TaskPunch taskPunch) {
-        return null;
     }
 }
