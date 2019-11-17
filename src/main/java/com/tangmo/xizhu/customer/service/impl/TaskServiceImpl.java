@@ -40,6 +40,16 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public HttpResult createTask(Task task) {
+        if(task == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        if(task.getTroubleType() == null || task.getTaskAssignType() == null || task.getAssemblyType()==null){
+            return HttpResult.fail(ResultCode.TROUBLE_MISS);
+        }
+        if(task.getDeviceType() == null){
+            return HttpResult.fail(ResultCode.DEVICE_MISS);
+        }
+
         //新增任务
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);

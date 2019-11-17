@@ -16,6 +16,8 @@ public class Task {
     private String companyName;//用户单位
     @ApiModelProperty(value="设备型号",name="deviceType",example="")
     private String deviceType;//设备型号
+    @ApiModelProperty(value="设备标识码",name="devicePid",example="")
+    private String devicePid;//设备标识码
     @ApiModelProperty(value="联系人",name="contactName",example="")
     private String contactName;//联系人
     @ApiModelProperty(value="联系电话",name="mobile",example="")
