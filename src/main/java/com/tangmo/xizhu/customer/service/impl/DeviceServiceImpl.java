@@ -55,6 +55,7 @@ public class DeviceServiceImpl implements DeviceService {
         if(deviceInfo == null || deviceInfo.getUuid() == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);
         }
+        deviceDao.updateDevice(deviceInfo);
         return HttpResult.success();
     }
 }

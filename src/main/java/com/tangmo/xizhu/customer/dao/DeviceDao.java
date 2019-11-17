@@ -20,7 +20,7 @@ public interface DeviceDao {
      * @date 2019/11/1
      * @description: 根据用户Id查询设备信息
      */
-    List<DeviceInfo> selectByUserId(String deviceId);
+    List<DeviceInfo> selectByUserId(String userId);
 
 
     /**

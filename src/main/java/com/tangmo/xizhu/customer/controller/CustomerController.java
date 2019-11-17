@@ -28,7 +28,7 @@ public class CustomerController extends BaseController {
      * @description: 获取客户设备列表
      */
     @ApiOperation(value = "获取客户设备列表",httpMethod = "GET",notes = "")
-    @GetMapping("/{userid}/device")
+    @GetMapping("/{userId}/device")
     public HttpResult getUserDevice(@PathVariable String userId){
         return deviceService.getDeviceByUserId(userId);
     }

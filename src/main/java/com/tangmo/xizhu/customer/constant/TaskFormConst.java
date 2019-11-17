@@ -12,7 +12,16 @@ import java.util.ArrayList;
  **/
 public class TaskFormConst {
 
-    public static ArrayList<TaskForm> getTaskForm(Byte taskType,Byte userType){
+    /**
+     * @param taskType
+     * @param userType
+     * @param troubleType 问题类型
+     * @return
+     * @author chen bo
+     * @date 2019/11/17
+     * @description: TODO
+     */
+    public static ArrayList<TaskForm> getTaskForm(Byte taskType,Byte userType,Byte troubleType){
         ArrayList<TaskForm> list;
         if(taskType == null){
             list = new ArrayList<TaskForm>() {{
@@ -20,18 +29,39 @@ public class TaskFormConst {
             }};
             return list;
         }
-        if(taskType.equals(TaskTypeConst.FAST_SERVICE)){
-            return adminFastForm();
+        //审核人员
+        if(userType.equals(UserTypeConst.AUDIT)){
+            //快速服务单子
+            if(taskType.equals(TaskTypeConst.FAST_SERVICE)){
+                return adminFastForm();
+            }
+            //现场服务单子
+            if(taskType.equals(TaskTypeConst.FIELD_SERVICE)){
+                ArrayList<TaskForm> fastList = adminFastForm();
+                ArrayList<TaskForm> fieldList = adminFieldForm();
+                fastList.addAll(fieldList);
+                return fastList;
+            }
+            //安装调试单子
+            if(taskType.equals(TaskTypeConst.EQUIPMENT)){
+                return adminEquipForm(troubleType);
+            }
+            //外购件安装单子
+            if(taskType.equals(TaskTypeConst.OUT_EQUIPMENT)){
+                ArrayList<TaskForm> equipList = adminEquipForm(troubleType);
+                ArrayList<TaskForm> outList = adminOutEquipForm();
+                equipList.addAll(outList);
+                return equipList;
+            }
         }
-        if(taskType.equals(TaskTypeConst.FIELD_SERVICE)){
-            return adminFieldForm();
+        if(userType.equals(UserTypeConst.SERVICE)){
+
         }
-        if(taskType.equals(TaskTypeConst.EQUIPMENT)){
-            return adminEquipForm();
+        if(userType.equals(UserTypeConst.CUSTOMER)){
+
         }
-        if(taskType.equals(TaskTypeConst.OUT_EQUIPMENT)){
-            return adminOutEquipForm();
-        }
+
+
         return null;
     }
     /**
@@ -58,14 +88,12 @@ public class TaskFormConst {
      * @description: 审核人员可看现场服务单子列表
      */
     public static ArrayList<TaskForm> adminFieldForm(){
-        ArrayList<TaskForm> fastList = adminFastForm();
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
             add(new TaskForm(FormNameConst.FIELD_APPLY,true));
             add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.FIELD_FB,true));
         }};
-        fastList.addAll(list);
-        return fastList;
+        return list;
     }
 
     /**
@@ -75,17 +103,22 @@ public class TaskFormConst {
      * @date 2019/11/4
      * @description: 审核人员可看安装单子列表
      */
-    public static ArrayList<TaskForm> adminEquipForm(){
+    public static ArrayList<TaskForm> adminEquipForm(Byte troubleType){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
             add(new TaskForm(FormNameConst.REQUIRE,true));
             add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.SAFE_CONFIDE,true));
             add(new TaskForm(FormNameConst.DEVICE_FILE,true));
-            add(new TaskForm(FormNameConst.MACH_RECORD,true));
-            add(new TaskForm(FormNameConst.ELEC_RECORD,true));
-            add(new TaskForm(FormNameConst.MTAIN_CONFIDE,true));
-            add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
         }};
+        //区分机械问题和电气问题
+        if(troubleType.equals(TroubleTypeConst.ELECTRIC)){
+            list.add(new TaskForm(FormNameConst.ELEC_RECORD,true));
+        }
+        if(troubleType.equals(TroubleTypeConst.MACHINE)){
+            list.add(new TaskForm(FormNameConst.MACH_RECORD,true));
+        }
+        list.add(new TaskForm(FormNameConst.MTAIN_CONFIDE,true));
+        list.add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
         return list;
     }
 
@@ -97,14 +130,12 @@ public class TaskFormConst {
      * @description: 审核人员可看外购件单子列表
      */
     public static ArrayList<TaskForm> adminOutEquipForm(){
-        ArrayList<TaskForm> fastList = adminEquipForm();
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
             add(new TaskForm(FormNameConst.EQUIP_AUDIT,true));
             add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
             add(new TaskForm(FormNameConst.EQUIP_NOTICE,true));
         }};
-        fastList.addAll(list);
-        return fastList;
+        return list;
     }
 
     /**

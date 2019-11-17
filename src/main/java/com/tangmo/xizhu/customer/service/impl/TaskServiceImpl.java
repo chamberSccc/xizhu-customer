@@ -152,6 +152,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public HttpResult getFormList(String taskId, Byte userType) {
         Task task = taskDao.selectById(taskId);
-        return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType));
+        return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType, Byte.valueOf(task.getTroubleType())));
     }
 }

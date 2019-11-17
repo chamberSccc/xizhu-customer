@@ -4,6 +4,7 @@ import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.Department;
 import com.tangmo.xizhu.customer.entity.User;
+import com.tangmo.xizhu.customer.entity.search.DeptSearch;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class DeptController extends BaseController {
     @ApiOperation(value = "添加部门",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult<Department> addDept(@RequestBody Department department){
+        department.setCreatedBy(getUserId());
         return deptService.addDept(department);
     }
 
@@ -70,6 +72,19 @@ public class DeptController extends BaseController {
     @GetMapping("/deptList")
     public HttpResult<List<Department>> getDeptList(){
         return deptService.getDeptList();
+    }
+
+    /**
+     * @param
+     * @return
+     * @author chen bo
+     * @date 2019/10/25
+     * @description: 查询分页部门列表
+     */
+    @ApiOperation(value = "查询分页部门列表",httpMethod = "GET",notes = "")
+    @GetMapping("/list/deptList")
+    public HttpResult<List<Department>> getPageDeptList(DeptSearch deptSearch){
+        return deptService.getPageDept(deptSearch);
     }
 
     /**
