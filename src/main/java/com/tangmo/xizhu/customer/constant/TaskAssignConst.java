@@ -6,7 +6,7 @@ package com.tangmo.xizhu.customer.constant;
  * @Version V1.0
  * @Description: 任务类型
  **/
-public class TaskAssignType {
+public class TaskAssignConst {
 
     // 安装设备
     public static final byte INSTALL_DEVICE = 0;

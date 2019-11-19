@@ -18,7 +18,7 @@ public class TaskAttachConst {
     public static final byte EQUIP_APPLY = 6;//现场申请单
     public static final byte EQUIP_CHECK = 7;//现场检查单
     public static final byte SAFE_CONFIDE = 9;//安全交底表
-    public static final byte MTAIN_CONFIDE = 9;//沥青交底表
+    public static final byte MTAIN_CONFIDE = 10;//沥青交底表
     //attachType
     public static final byte PICTURE = 0;
 

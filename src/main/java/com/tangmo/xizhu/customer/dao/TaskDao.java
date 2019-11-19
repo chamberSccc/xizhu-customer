@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.dao;
 
 import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.TaskPunch;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

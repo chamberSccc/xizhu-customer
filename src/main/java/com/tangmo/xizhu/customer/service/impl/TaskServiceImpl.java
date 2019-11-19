@@ -2,14 +2,12 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
+import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.*;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.dao.TaskRequireDao;
-import com.tangmo.xizhu.customer.entity.AuditTask;
-import com.tangmo.xizhu.customer.entity.Task;
-import com.tangmo.xizhu.customer.entity.TaskAttach;
-import com.tangmo.xizhu.customer.entity.TaskRequire;
+import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskConverter;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
@@ -20,8 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -40,9 +36,20 @@ public class TaskServiceImpl implements TaskService {
     private TaskAttachDao taskAttachDao;
     @Resource
     private AuditTaskService auditTaskService;
+
     @Override
     @Transactional
     public HttpResult createTask(Task task) {
+        if(task == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        if(task.getTroubleType() == null || task.getTaskAssignType() == null || task.getAssemblyType()==null){
+            return HttpResult.fail(ResultCode.TROUBLE_MISS);
+        }
+        if(task.getDeviceType() == null){
+            return HttpResult.fail(ResultCode.DEVICE_MISS);
+        }
+
         //新增任务
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);
@@ -155,6 +162,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public HttpResult getFormList(String taskId, Byte userType) {
         Task task = taskDao.selectById(taskId);
-        return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType));
+        return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType, Byte.valueOf(task.getTroubleType())));
     }
 }

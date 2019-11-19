@@ -11,16 +11,14 @@
         <result column="factory_no" property="factoryNo"/>
         <result column="contract_no" property="contractNo"/>
         <result column="job_site" property="jobSite"/>
-        <result column="user_type" property="userType"/>
-        <result column="safety" property="safety"/>
-        <result column="equipment" property="equipment"/>
-        <result column="maintain" property="maintain"/>
+        <result column="service_sign" property="serviceSign"/>
+        <result column="user_sign" property="userSign"/>
         <result column="created_by" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
     </resultMap>
 
     <select id="selectByTaskIdAndType" resultMap="MtainConfideMap">
-      SELECT uuid,task_id,device_name,form_type,device_type,company_name,factory_no,contract_no,job_site,user_type,user_sign,service_sign,created_by,created_time
+      SELECT uuid,task_id,device_name,form_type,device_type,company_name,factory_no,contract_no,job_site,user_sign,service_sign,created_by,created_time
        from s_mtain_confide where task_id = #{taskId} and form_type = #{type}
     </select>
 
@@ -53,9 +51,6 @@
             </if>
             <if test="contractNo != null">
                 contract_no,
-            </if>
-            <if test="userType != null">
-                user_type,
             </if>
             <if test="userSign != null">
                 user_sign,
@@ -96,9 +91,6 @@
             </if>
             <if test="jobSite != null">
                 #{jobSite},
-            </if>
-            <if test="userType != null">
-                #{userType},
             </if>
             <if test="userSign != null">
                 #{userSign},

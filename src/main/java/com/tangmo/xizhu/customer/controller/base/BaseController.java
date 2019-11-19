@@ -67,6 +67,9 @@ public class BaseController {
     @Resource
     protected EquipNoticeService equipNoticeService;
 
+    @Resource
+    protected TaskPunchService taskPunchService;
+
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }

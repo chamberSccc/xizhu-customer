@@ -4,6 +4,8 @@
     <resultMap id="DeptMap" type="com.tangmo.xizhu.customer.entity.Department">
         <id column="uuid" property="uuid"/>
         <result column="dept_name" property="deptName"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="user_name" property="createdBy"/>
     </resultMap>
 
     <select id="selectById" resultMap="DeptMap">
@@ -11,7 +13,8 @@
     </select>
 
     <select id="selectAllDept" resultMap="DeptMap">
-        SELECT uuid,dept_name  from s_department where status = 0
+        SELECT dept.uuid,dept.dept_name,dept.created_time,suser.user_name  from s_department dept left join s_user suser
+         on dept.created_by = suser.uuid  where dept.status = 0
     </select>
     <insert id="insertDept" parameterType="com.tangmo.xizhu.customer.entity.Department">
         INSERT INTO s_department

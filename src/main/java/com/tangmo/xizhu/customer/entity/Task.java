@@ -16,6 +16,8 @@ public class Task {
     private String companyName;//用户单位
     @ApiModelProperty(value="设备型号",name="deviceType",example="")
     private String deviceType;//设备型号
+    @ApiModelProperty(value="设备标识码",name="devicePid",example="")
+    private String devicePid;//设备标识码
     @ApiModelProperty(value="联系人",name="contactName",example="")
     private String contactName;//联系人
     @ApiModelProperty(value="联系电话",name="mobile",example="")
@@ -32,7 +34,8 @@ public class Task {
     private Byte isOutservice;
     @ApiModelProperty(value="任务状态 -1:拒绝 0:审核中 1:审核完成 2:任务完成",name="taskStatus",example="")
     private Byte taskStatus;
-    private Byte taskType;
+    private Byte taskType;//任务类型
+
     private String createdBy;
     private String executor;
     private Date createdTime;

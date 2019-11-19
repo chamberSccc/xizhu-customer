@@ -21,7 +21,7 @@ public class SafeConfide {
     private List<String> pictureList;
     @ApiModelProperty(value="用户签字",name="userSign",example="")
     private String userSign;
-    @ApiModelProperty(value="serviceSign",name="serviceSign",example="")
+    @ApiModelProperty(value="服务人员签字",name="serviceSign",example="")
     private String serviceSign;
     @ApiModelProperty(value="登录人",name="createdBy",example="")
     private String createdBy;

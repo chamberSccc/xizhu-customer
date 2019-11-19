@@ -16,6 +16,10 @@
       SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where uuid = #{uuid}
     </select>
 
+    <select id="selectByUserId" resultMap="DeviceMap">
+      SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where user_id = #{userId}
+    </select>
+
     <select id="selectByPid" resultMap="DeviceMap">
       SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where device_pid = #{devicePid}
     </select>
@@ -81,7 +85,7 @@
         </trim>
     </insert>
 
-    <update id="updateDept">
+    <update id="updateDevice">
         UPDATE s_user_device
         <set>
             <if test="deviceName != null">
@@ -99,7 +103,7 @@
             <if test="mobile != null">
                 mobile = #{mobile},
             </if>
-            <if test="device_pid != null">
+            <if test="devicePid != null">
                 device_pid = #{devicePid},
             </if>
         </set>
