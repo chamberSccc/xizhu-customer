@@ -133,7 +133,6 @@ public class TaskFormConst {
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
             add(new TaskForm(FormNameConst.EQUIP_AUDIT,true));
             add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
-            add(new TaskForm(FormNameConst.EQUIP_NOTICE,true));
         }};
         return list;
     }

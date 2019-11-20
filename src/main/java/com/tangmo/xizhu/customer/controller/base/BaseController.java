@@ -79,7 +79,7 @@ public class BaseController {
     }
 
     protected Byte getUserType(){
-        return 0;
+        return 2;
     }
 
     protected String getDeptId(){return "1";}

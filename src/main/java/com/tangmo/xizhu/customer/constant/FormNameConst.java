@@ -21,5 +21,4 @@ public class FormNameConst {
     public static final String EQUIP_APPLY = "外购件安装调试申请单";
     public static final String EQUIP_AUDIT = "外购件安装调试授权审批单";
     public static final String EQUIP_CHECK = "外购件安装调试现场服务验收单";
-    public static final String EQUIP_NOTICE = "外购件厂家现场安装调试通知单";
 }

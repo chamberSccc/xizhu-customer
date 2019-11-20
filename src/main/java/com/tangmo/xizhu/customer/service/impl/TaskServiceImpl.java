@@ -46,7 +46,7 @@ public class TaskServiceImpl implements TaskService {
         if(task.getTroubleType() == null || task.getTaskAssignType() == null || task.getAssemblyType()==null){
             return HttpResult.fail(ResultCode.TROUBLE_MISS);
         }
-        if(task.getDeviceType() == null){
+        if(task.getDeviceType() == null || task.getDeviceAddress() == null){
             return HttpResult.fail(ResultCode.DEVICE_MISS);
         }
 

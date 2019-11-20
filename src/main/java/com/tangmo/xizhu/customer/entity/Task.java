@@ -35,6 +35,8 @@ public class Task {
     @ApiModelProperty(value="任务状态 -1:拒绝 0:审核中 1:审核完成 2:任务完成",name="taskStatus",example="")
     private Byte taskStatus;
     private Byte taskType;//任务类型
+    @ApiModelProperty(value="设备地址",name="deviceAddress",example="")
+    private String deviceAddress;
 
     private String createdBy;
     private String executor;
