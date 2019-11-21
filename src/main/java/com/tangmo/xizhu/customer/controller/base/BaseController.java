@@ -69,6 +69,12 @@ public class BaseController {
 
     @Resource
     protected TaskPunchService taskPunchService;
+    //快速服务满意度调查表
+    @Resource
+    protected FieldSurveyService fieldSurveyService;
+    //安调服务满意度调查表
+    @Resource
+    protected EquipSurveyService equipSurveyService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

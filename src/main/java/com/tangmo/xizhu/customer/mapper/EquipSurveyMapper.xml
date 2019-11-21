@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.EquipSurveyDao">
+    <resultMap id="EquipSurveyMap" type="com.tangmo.xizhu.customer.entity.EquipSurvey">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="contract_no" property="contractNo"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="service_user" property="serviceUser"/>
+        <result column="device_name" property="deviceName"/>
+        <result column="start_date" property="startDate"/>
+        <result column="install_date" property="installDate"/>
+        <result column="check_date" property="checkDate"/>
+        <result column="equip_date" property="equipDate"/>
+        <result column="unreasonable" property="unreasonable"/>
+        <result column="remark" property="remark"/>
+        <result column="advice" property="advice"/>
+        <result column="satisfaction" property="satisfaction"/>
+        <result column="leader" property="leader"/>
+        <result column="problem" property="problem"/>
+        <result column="evaluate01" property="evaluate01"/>
+        <result column="evaluate02" property="evaluate02"/>
+        <result column="evaluate03" property="evaluate03"/>
+        <result column="evaluate04" property="evaluate04"/>
+        <result column="evaluate05" property="evaluate05"/>
+        <result column="evaluate06" property="evaluate06"/>
+        <result column="evaluate07" property="evaluate07"/>
+        <result column="evaluate08" property="evaluate08"/>
+        <result column="evaluate09" property="evaluate09"/>
+        <result column="evaluate10" property="evaluate10"/>
+        <result column="evaluate11" property="evaluate11"/>
+
+
+        <result column="project01" property="project01"/>
+        <result column="project02" property="project02"/>
+        <result column="project03" property="project03"/>
+        <result column="project04" property="project04"/>
+        <result column="project05" property="project05"/>
+        <result column="project06" property="project06"/>
+        <result column="project07" property="project07"/>
+        <result column="project08" property="project08"/>
+        <result column="project09" property="project09"/>
+        <result column="project10" property="project10"/>
+        <result column="project11" property="project11"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="FieldSurveyMap">
+      SELECT uuid,task_id,company_name,contract_no,contact_name,mobile,service_user,device_name,equip_date
+      start_date,install_date,check_date,unreasonable,remark,advice,satisfaction,leader,problem,
+      evaluate01,evaluate02,evaluate03,evaluate04,evaluate05,evaluate06,evaluate07,evaluate08,evaluate09,evaluate10,evaluate11,
+      project01,project02,project03,project04,project05,project06,project07,project08,project09,project10,project11,
+      created_by,created_time
+       from s_equip_survey where task_id = #{taskId}
+    </select>
+
+    <insert id="insertSurvey" parameterType="com.tangmo.xizhu.customer.entity.FieldSurvey">
+        INSERT INTO s_equip_survey (uuid,task_id,company_name,contract_no,contact_name,mobile,service_user,device_name,equip_date
+      start_date,install_date,check_date,unreasonable,remark,advice,satisfaction,leader,problem,
+      evaluate01,evaluate02,evaluate03,evaluate04,evaluate05,evaluate06,evaluate07,evaluate08,evaluate09,evaluate10,evaluate11,
+      project01,project02,project03,project04,project05,project06,project07,project08,project09,project10,project11,
+      created_by,created_time)
+      VALUES(#{uuid},#{taskId},#{companyName},#{contractNo},#{contactName},#{mobile},#{serviceUser},#{deviceName},#{equipDate},
+      #{startDate}, #{installDate},#{checkDate},#{unreasonable},#{remark},#{advice},#{satisfaction},#{leader},#{problem},
+      #{evaluate01},#{evaluate02},#{evaluate03},#{evaluate04},#{evaluate05},#{evaluate06},#{evaluate07},#{evaluate08},#{evaluate09},#{evaluate10},#{evaluate11},
+      #{project01},#{project02},#{project03},#{project04},#{project05},#{project06},#{project07},#{project08},#{project09},#{project10},#{project11},
+      #{createdBy},getDate())
+
+    </insert>
+
+    <update id="updateSurvey">
+        UPDATE s_equip_survey
+        <set>
+            <if test="evaluate01 != null">
+                evaluate01 = #{evaluate01},
+            </if>
+            <if test="evaluate02 != null">
+                evaluate02 = #{evaluate02},
+            </if>
+            <if test="evaluate03 != null">
+                evaluate03 = #{evaluate03},
+            </if>
+            <if test="evaluate04!= null">
+                evaluate04 = #{evaluate04},
+            </if>
+            <if test="evaluate05 != null">
+                evaluate05 = #{evaluate05},
+            </if>
+            <if test="evaluate06 != null">
+                evaluate06 = #{evaluate06},
+            </if>
+            <if test="evaluate07 != null">
+                evaluate07 = #{evaluate07},
+            </if>
+            <if test="evaluate08 != null">
+                evaluate08 = #{evaluate08},
+            </if>
+            <if test="evaluate09 != null">
+                evaluate09 = #{evaluate09},
+            </if>
+            <if test="evaluate10 != null">
+                evaluate10 = #{evaluate10},
+            </if>
+            <if test="evaluate11 != null">
+                evaluate11 = #{evaluate11},
+            </if>
+            <if test="project01 != null">
+                project01 = #{project01},
+            </if>
+            <if test="project02 != null">
+                project02 = #{project02},
+            </if>
+            <if test="project03 != null">
+                project03 = #{project03},
+            </if>
+            <if test="project04!= null">
+                project04 = #{project04},
+            </if>
+            <if test="project05 != null">
+                project05 = #{project05},
+            </if>
+            <if test="project06 != null">
+                project06 = #{project06},
+            </if>
+            <if test="project07 != null">
+                project07 = #{project07},
+            </if>
+            <if test="project08 != null">
+                project08 = #{project08},
+            </if>
+            <if test="project09 != null">
+                project09 = #{project09},
+            </if>
+            <if test="project10 != null">
+                project10 = #{project10},
+            </if>
+            <if test="project11 != null">
+                project11 = #{project11},
+            </if>
+            <if test="leader != null">
+                leader = #{leader},
+            </if>
+            <if test="satisfaction != null">
+                satisfaction = #{satisfaction},
+            </if>
+            <if test="advice != null">
+                advice = #{advice},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="unreasonable != null">
+                unreasonable = #{unreasonable},
+            </if>
+            <if test="problem != null">
+                problem = #{problem},
+            </if>
+            <if test="startDate != null">
+                startDate = #{startDate},
+            </if>
+            <if test="installDate != null">
+                installDate = #{installDate},
+            </if>
+        </set>
+        WHERE uuid = #{uuid}
+    </update>
+</mapper>
