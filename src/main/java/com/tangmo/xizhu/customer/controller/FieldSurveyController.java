@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @Author chen bo
  * @Date 2019/11/21
  * @Version V1.0
- * @Description: 安调服务满意度调查表controller
+ * @Description: 售后服务满意度调查表controller
  **/
 @Api(description="安调服务满意度调查表")
 @RestController
@@ -23,9 +23,9 @@ public class FieldSurveyController extends BaseController {
      * @return
      * @author chen bo
      * @date 2019/11/21
-     * @description: 新增安调服务满意度调查表
+     * @description: 新增售后服务满意度调查表
      */
-    @ApiOperation(value = "新增安调服务满意度调查表",httpMethod = "POST",notes = "")
+    @ApiOperation(value = "新增售后服务满意度调查表",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addFieldSurvey(@RequestBody FieldSurvey fieldSurvey){
         return fieldSurveyService.addSurvey(fieldSurvey);
@@ -35,9 +35,9 @@ public class FieldSurveyController extends BaseController {
      * @return
      * @author chen bo
      * @date 2019/11/21
-     * @description: 修改安调服务满意度调查表
+     * @description: 修改售后服务满意度调查表
      */
-    @ApiOperation(value = "修改安调服务满意度调查表",httpMethod = "PUT",notes = "")
+    @ApiOperation(value = "修改售后服务满意度调查表",httpMethod = "PUT",notes = "")
     @PutMapping("")
     public HttpResult changeFieldSurvey(@RequestBody FieldSurvey fieldSurvey){
         return fieldSurveyService.changeSurvey(fieldSurvey);

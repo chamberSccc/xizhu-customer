@@ -48,7 +48,7 @@
         <result column="created_time" property="createdTime"/>
     </resultMap>
 
-    <select id="selectByTaskId" resultMap="FieldSurveyMap">
+    <select id="selectByTaskId" resultMap="EquipSurveyMap">
       SELECT uuid,task_id,company_name,contract_no,contact_name,mobile,service_user,device_name,equip_date
       start_date,install_date,check_date,unreasonable,remark,advice,satisfaction,leader,problem,
       evaluate01,evaluate02,evaluate03,evaluate04,evaluate05,evaluate06,evaluate07,evaluate08,evaluate09,evaluate10,evaluate11,
