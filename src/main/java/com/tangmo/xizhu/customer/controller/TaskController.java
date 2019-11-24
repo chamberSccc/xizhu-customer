@@ -200,6 +200,19 @@ public class TaskController extends BaseController {
      * @param taskId
      * @return
      * @author chen bo
+     * @date 2019/11/21
+     * @description: 获取任务的售后服务满意度调查表
+     */
+    @ApiOperation(value = "获取售后服务满意度调查表",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/fieldSurvey")
+    public HttpResult<FieldSurvey> getFieldSurvey(@PathVariable String taskId){
+        return fieldSurveyService.getByTaskId(taskId);
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
      * @date 2019/10/22
      * @description: 获取任务的安全交底表
      */
@@ -336,5 +349,18 @@ public class TaskController extends BaseController {
     @GetMapping("/{taskId}/outEquipCheck")
     public HttpResult<OutEquipCheck> getOutEquipCheck(@PathVariable String taskId){
         return equipCheckService.getByTaskId(taskId);
+    }
+
+    /**
+     * @param taskId
+     * @return
+     * @author chen bo
+     * @date 2019/11/21
+     * @description: 获取安调的安调满意度调查表
+     */
+    @ApiOperation(value = "获取安调的安调满意度调查表",httpMethod = "GET",notes = "")
+    @GetMapping("/{taskId}/equipSurvey")
+    public HttpResult<EquipSurvey> geEquipSurvey(@PathVariable String taskId){
+        return equipSurveyService.getByTaskId(taskId);
     }
 }

@@ -6,6 +6,7 @@ import com.tangmo.xizhu.customer.constant.PunchTypeConst;
 import com.tangmo.xizhu.customer.dao.TaskPunchDao;
 import com.tangmo.xizhu.customer.entity.TaskPunch;
 import com.tangmo.xizhu.customer.service.TaskPunchService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,6 +27,7 @@ public class TaskPunchServiceImpl implements TaskPunchService {
         if(taskPunch == null || taskPunch.getTaskId() == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);
         }
+        taskPunch.setUuid(EncryptUtil.get32Uuid());
         taskPunch.setPunchType(PunchTypeConst.OnDuty);
         taskPunchDao.insertPunch(taskPunch);
         return HttpResult.success();
@@ -36,6 +38,7 @@ public class TaskPunchServiceImpl implements TaskPunchService {
         if(taskPunch == null || taskPunch.getTaskId() == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);
         }
+        taskPunch.setUuid(EncryptUtil.get32Uuid());
         taskPunch.setPunchType(PunchTypeConst.OffDuty);
         taskPunchDao.insertPunch(taskPunch);
         return HttpResult.success();

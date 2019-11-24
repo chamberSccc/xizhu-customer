@@ -26,6 +26,8 @@ public class OutEquipApply {
     private String equipName;
     @ApiModelProperty(value="申请人联系方式",name="mobile",example="")
     private String mobile;
+    @ApiModelProperty(value="地址",name="address",example="")
+    private String address;
     @ApiModelProperty(value="申请人",name="createdBy",example="")
     private String createdBy;
     @ApiModelProperty(value="申请时间",name="createdTime",example="")

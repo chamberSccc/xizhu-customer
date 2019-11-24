@@ -18,7 +18,8 @@ public enum ResultCode {
     PASSWORD_ERROR("1007","密码错误"),
     DOUBLE_SUBMIT("1008","表已存在，请勿重复提交"),
     TROUBLE_MISS("1009","请选择设备问题"),
-    DEVICE_MISS("1010","请填写设备信息");
+    DEVICE_MISS("1010","请填写设备信息"),
+    SURVEY_EXIST("1011","调查表已存在，请勿重复填写");
 
     private String errCode;
     private String errMsg;

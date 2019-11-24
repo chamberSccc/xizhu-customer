@@ -1,6 +1,9 @@
 package com.tangmo.xizhu.customer.controller.base;
 
+import com.tangmo.xizhu.customer.common.TokenBo;
+import com.tangmo.xizhu.customer.config.JWTToken;
 import com.tangmo.xizhu.customer.service.*;
+import com.tangmo.xizhu.customer.util.JWTUtil;
 import com.tangmo.xizhu.customer.util.MoblieUtil;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -69,22 +72,34 @@ public class BaseController {
 
     @Resource
     protected TaskPunchService taskPunchService;
+    //快速服务满意度调查表
+    @Resource
+    protected FieldSurveyService fieldSurveyService;
+    //安调服务满意度调查表
+    @Resource
+    protected EquipSurveyService equipSurveyService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
+    public TokenBo getToken(){
+        String authorization = getRequest().getHeader("Authorization");
+        JWTToken token = new JWTToken(authorization);
+        TokenBo tokenBo = JWTUtil.getTokenBO(token.getToken());
+        return tokenBo;
+    }
     protected String getUserId(){
-        return "1";
+        return getToken().getUserId();
     }
 
     protected Byte getUserType(){
-        return 0;
+        return 2;
     }
 
-    protected String getDeptId(){return "1";}
+    protected String getDeptId(){  return getToken().getDeptId();}
 
-    protected String getDeptName(){return "1";}
+    protected String getDeptName(){ return getToken().getDeptName();}
 
     /**
      * @param

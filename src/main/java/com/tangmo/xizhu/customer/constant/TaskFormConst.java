@@ -92,6 +92,7 @@ public class TaskFormConst {
             add(new TaskForm(FormNameConst.FIELD_APPLY,true));
             add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.FIELD_FB,true));
+            add(new TaskForm(FormNameConst.FIELD_SURVEY,true));
         }};
         return list;
     }
@@ -119,6 +120,8 @@ public class TaskFormConst {
         }
         list.add(new TaskForm(FormNameConst.MTAIN_CONFIDE,true));
         list.add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
+        list.add(new TaskForm(FormNameConst.EQUIP_SURVEY,true));
+        list.add(new TaskForm(FormNameConst.FIELD_SURVEY,true));
         return list;
     }
 
@@ -133,7 +136,6 @@ public class TaskFormConst {
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
             add(new TaskForm(FormNameConst.EQUIP_AUDIT,true));
             add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
-            add(new TaskForm(FormNameConst.EQUIP_NOTICE,true));
         }};
         return list;
     }

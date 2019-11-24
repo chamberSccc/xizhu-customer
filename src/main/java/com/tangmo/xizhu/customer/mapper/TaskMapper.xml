@@ -18,6 +18,7 @@
         <result column="task_type" property="taskType"/>
         <result column="created_by" property="createdBy"/>
         <result column="executor" property="executor"/>
+        <result column="device_address" property="deviceAddress"/>
         <result column="created_time" property="createdTime"/>
 
     </resultMap>
@@ -86,6 +87,9 @@
             <if test="executor != null">
                 executor,
             </if>
+            <if test="deviceAddress != null">
+                device_address,
+            </if>
                 created_time,
         </trim>
         values
@@ -137,6 +141,9 @@
             </if>
             <if test="executor != null">
                 #{executor},
+            </if>
+            <if test="deviceAddress != null">
+                #{deviceAddress},
             </if>
                 getDate()
         </trim>
