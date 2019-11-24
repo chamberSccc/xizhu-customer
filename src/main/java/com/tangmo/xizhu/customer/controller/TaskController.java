@@ -206,7 +206,7 @@ public class TaskController extends BaseController {
     @ApiOperation(value = "获取售后服务满意度调查表",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}/fieldSurvey")
     public HttpResult<FieldSurvey> getFieldSurvey(@PathVariable String taskId){
-        return fastSurveyService.getByTaskId(taskId);
+        return fieldSurveyService.getByTaskId(taskId);
     }
 
     /**

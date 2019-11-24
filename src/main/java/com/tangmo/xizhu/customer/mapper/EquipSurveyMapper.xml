@@ -49,7 +49,7 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="EquipSurveyMap">
-      SELECT uuid,task_id,company_name,contract_no,contact_name,mobile,service_user,device_name,equip_date
+      SELECT uuid,task_id,company_name,contract_no,contact_name,mobile,service_user,device_name,equip_date,
       start_date,install_date,check_date,unreasonable,remark,advice,satisfaction,leader,problem,
       evaluate01,evaluate02,evaluate03,evaluate04,evaluate05,evaluate06,evaluate07,evaluate08,evaluate09,evaluate10,evaluate11,
       project01,project02,project03,project04,project05,project06,project07,project08,project09,project10,project11,
@@ -57,18 +57,262 @@
        from s_equip_survey where task_id = #{taskId}
     </select>
 
-    <insert id="insertSurvey" parameterType="com.tangmo.xizhu.customer.entity.FieldSurvey">
-        INSERT INTO s_equip_survey (uuid,task_id,company_name,contract_no,contact_name,mobile,service_user,device_name,equip_date
-      start_date,install_date,check_date,unreasonable,remark,advice,satisfaction,leader,problem,
-      evaluate01,evaluate02,evaluate03,evaluate04,evaluate05,evaluate06,evaluate07,evaluate08,evaluate09,evaluate10,evaluate11,
-      project01,project02,project03,project04,project05,project06,project07,project08,project09,project10,project11,
-      created_by,created_time)
-      VALUES(#{uuid},#{taskId},#{companyName},#{contractNo},#{contactName},#{mobile},#{serviceUser},#{deviceName},#{equipDate},
-      #{startDate}, #{installDate},#{checkDate},#{unreasonable},#{remark},#{advice},#{satisfaction},#{leader},#{problem},
-      #{evaluate01},#{evaluate02},#{evaluate03},#{evaluate04},#{evaluate05},#{evaluate06},#{evaluate07},#{evaluate08},#{evaluate09},#{evaluate10},#{evaluate11},
-      #{project01},#{project02},#{project03},#{project04},#{project05},#{project06},#{project07},#{project08},#{project09},#{project10},#{project11},
-      #{createdBy},getDate())
 
+    <insert id="insertSurvey" parameterType="com.tangmo.xizhu.customer.entity.EquipSurvey">
+        INSERT INTO s_equip_survey
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="contractNo != null">
+                contract_no,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="serviceUser != null">
+                service_user,
+            </if>
+            <if test="deviceName != null">
+                device_name,
+            </if>
+            <if test="equipDate != null">
+                equip_date,
+            </if>
+            <if test="startDate != null">
+                start_date,
+            </if>
+            <if test="installDate != null">
+                install_date,
+            </if>
+            <if test="checkDate != null">
+                check_date,
+            </if>
+            <if test="unreasonable != null">
+                unreasonable,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="advice != null">
+                advice,
+            </if>
+            <if test="satisfaction != null">
+                satisfaction,
+            </if>
+            <if test="leader != null">
+                leader,
+            </if>
+            <if test="problem != null">
+                problem,
+            </if>
+            <if test="evaluate01 != null">
+                evaluate01,
+            </if>
+            <if test="evaluate02 != null">
+                evaluate02,
+            </if>
+            <if test="evaluate03 != null">
+                evaluate03,
+            </if>
+            <if test="evaluate04 != null">
+                evaluate04,
+            </if>
+            <if test="evaluate05 != null">
+                evaluate05,
+            </if>
+            <if test="evaluate06 != null">
+                evaluate06,
+            </if>
+            <if test="evaluate07 != null">
+                evaluate07,
+            </if>
+            <if test="evaluate08 != null">
+                evaluate08,
+            </if>
+            <if test="evaluate09 != null">
+                evaluate09,
+            </if>
+            <if test="evaluate10 != null">
+                evaluate10,
+            </if>
+            <if test="evaluate11 != null">
+                evaluate11,
+            </if>
+            <if test="project01 != null">
+                project01,
+            </if>
+            <if test="project02 != null">
+                project02,
+            </if>
+            <if test="project03 != null">
+                project03,
+            </if>
+            <if test="project04 != null">
+                project04,
+            </if>
+            <if test="project05 != null">
+                project05,
+            </if>
+            <if test="project06 != null">
+                project06,
+            </if>
+            <if test="project07 != null">
+                project07,
+            </if>
+            <if test="project08 != null">
+                project08,
+            </if>
+            <if test="project09 != null">
+                project09,
+            </if>
+            <if test="project10 != null">
+                project10,
+            </if>
+            <if test="project11 != null">
+                project11,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            created_time
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="contractNo != null">
+                #{contractNo},
+            </if>
+            <if test="contactName != null">
+                #{contactName},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="serviceUser != null">
+                #{serviceUser},
+            </if>
+            <if test="deviceName != null">
+                #{deviceName},
+            </if>
+            <if test="equipDate != null">
+                #{equipDate},
+            </if>
+            <if test="startDate != null">
+                #{startDate},
+            </if>
+            <if test="installDate != null">
+                #{installDate},
+            </if>
+            <if test="checkDate != null">
+                #{checkDate},
+            </if>
+            <if test="unreasonable != null">
+                #{unreasonable},
+            </if>
+            <if test="remark != null">
+                #{remark},
+            </if>
+            <if test="advice != null">
+                #{advice},
+            </if>
+            <if test="satisfaction != null">
+                #{satisfaction},
+            </if>
+            <if test="leader != null">
+                #{leader},
+            </if>
+            <if test="problem != null">
+                #{problem},
+            </if>
+            <if test="evaluate01 != null">
+                #{evaluate01},
+            </if>
+            <if test="evaluate02 != null">
+                #{evaluate02},
+            </if>
+            <if test="evaluate03 != null">
+                #{evaluate03},
+            </if>
+            <if test="evaluate04 != null">
+                #{evaluate04},
+            </if>
+            <if test="evaluate05 != null">
+                #{evaluate05},
+            </if>
+            <if test="evaluate06 != null">
+                #{evaluate06},
+            </if>
+            <if test="evaluate07 != null">
+                #{evaluate07},
+            </if>
+            <if test="evaluate08 != null">
+                #{evaluate08},
+            </if>
+            <if test="evaluate09 != null">
+                #{evaluate09},
+            </if>
+            <if test="evaluate10 != null">
+                #{evaluate10},
+            </if>
+            <if test="evaluate11 != null">
+                #{evaluate11},
+            </if>
+            <if test="project01 != null">
+                #{project01},
+            </if>
+            <if test="project02 != null">
+                #{project02},
+            </if>
+            <if test="project03 != null">
+                #{project03},
+            </if>
+            <if test="project04 != null">
+                #{project04},
+            </if>
+            <if test="project05 != null">
+                #{project05},
+            </if>
+            <if test="project06 != null">
+                #{project06},
+            </if>
+            <if test="project07 != null">
+                #{project07},
+            </if>
+            <if test="project08 != null">
+                #{project08},
+            </if>
+            <if test="project09 != null">
+                #{project09},
+            </if>
+            <if test="project10 != null">
+                #{project10},
+            </if>
+            <if test="project11 != null">
+                #{project11},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+            getDate()
+        </trim>
     </insert>
 
     <update id="updateSurvey">

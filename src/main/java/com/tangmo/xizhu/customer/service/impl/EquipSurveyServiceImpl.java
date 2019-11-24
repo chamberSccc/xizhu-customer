@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @Description: 安调服务满意度调查表service实现类
  **/
 @Service("equipSurveyService")
-public class EquipServiceImpl implements EquipSurveyService {
+public class EquipSurveyServiceImpl implements EquipSurveyService {
     @Resource
     private EquipSurveyDao equipSurveyDao;
     @Override
@@ -46,6 +46,10 @@ public class EquipServiceImpl implements EquipSurveyService {
     @Override
     public HttpResult getByTaskId(String taskId) {
         EquipSurvey equipSurvey = equipSurveyDao.selectByTaskId(taskId);
+        if(equipSurvey == null){
+            equipSurvey = new EquipSurvey();
+            equipSurvey.setTaskId(taskId);
+        }
         return HttpResult.success(equipSurvey);
     }
 }

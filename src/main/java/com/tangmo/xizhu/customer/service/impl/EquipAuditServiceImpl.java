@@ -44,6 +44,10 @@ public class EquipAuditServiceImpl implements EquipAuditService {
         if(outEquipApply == null){
             return HttpResult.fail(ResultCode.EQUIP_APPLY_MISS);
         }
+        OutEquipAudit exists = outEquipAuditDao.selectByTaskId(outEquipAudit.getTaskId());
+        if(exists != null){
+            return HttpResult.fail(ResultCode.DOUBLE_SUBMIT);
+        }
         outEquipAudit.setUuid(EncryptUtil.get32Uuid());
         outEquipAuditDao.insertOutAudit(outEquipAudit);
         //添加通知单

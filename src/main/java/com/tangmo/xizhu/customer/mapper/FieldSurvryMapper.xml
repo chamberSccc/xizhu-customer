@@ -40,13 +40,176 @@
     </select>
 
     <insert id="insertSurvey" parameterType="com.tangmo.xizhu.customer.entity.FieldSurvey">
-        INSERT INTO s_field_survey (uuid,task_id,company_name,contract_no,contact_name,job_position,mobile,service_user,device_name,device_state,
-      start_date,end_date,check_date,unreasonable,remark,advice,satisfaction,leader,evaluate01,evaluate02,evaluate03,evaluate04,
-      evaluate05,evaluate06,evaluate07,evaluate08,created_by,created_time)
-      VALUES(#{uuid},#{taskId},#{companyName},#{contractNo},#{contactName},#{jobPosition},#{mobile},#{serviceUser},#{deviceName},#{deviceState},
-      #{startDate},#{endDate},#{checkDate},#{unreasonable},#{remark},#{advice},#{satisfaction},#{leader},#{evaluate01},#{evaluate02},#{evaluate03},#{evaluate04},
-      #{evaluate05},#{evaluate06},#{evaluate07},#{evaluate08},#{createdBy},getDate())
-
+        INSERT INTO s_field_survey
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="contractNo != null">
+                contract_no,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="jobPosition != null">
+                job_position,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="serviceUser != null">
+                service_user,
+            </if>
+            <if test="deviceName != null">
+                device_name,
+            </if>
+            <if test="deviceState != null">
+                device_state,
+            </if>
+            <if test="startDate != null">
+                start_date,
+            </if>
+            <if test="endDate != null">
+                end_date,
+            </if>
+            <if test="checkDate != null">
+                check_date,
+            </if>
+            <if test="unreasonable != null">
+                unreasonable,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="advice != null">
+                advice,
+            </if>
+            <if test="satisfaction != null">
+                satisfaction,
+            </if>
+            <if test="leader != null">
+                leader,
+            </if>
+            <if test="evaluate01 != null">
+                evaluate01,
+            </if>
+            <if test="evaluate02 != null">
+                evaluate02,
+            </if>
+            <if test="evaluate03 != null">
+                evaluate03,
+            </if>
+            <if test="evaluate04 != null">
+                evaluate04,
+            </if>
+            <if test="evaluate05 != null">
+                evaluate05,
+            </if>
+            <if test="evaluate06 != null">
+                evaluate06,
+            </if>
+            <if test="evaluate07 != null">
+                evaluate07,
+            </if>
+            <if test="evaluate08 != null">
+                evaluate08,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            created_time
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="taskId != null">
+                #{taskId},
+            </if>
+            <if test="companyName != null">
+                #{companyName},
+            </if>
+            <if test="contractNo != null">
+                #{contractNo},
+            </if>
+            <if test="contactName != null">
+                #{contactName},
+            </if>
+            <if test="jobPosition != null">
+                #{jobPosition},
+            </if>
+            <if test="mobile != null">
+                #{mobile},
+            </if>
+            <if test="serviceUser != null">
+                #{serviceUser},
+            </if>
+            <if test="deviceName != null">
+                #{deviceName},
+            </if>
+            <if test="deviceState != null">
+                #{deviceState},
+            </if>
+            <if test="startDate != null">
+                #{startDate},
+            </if>
+            <if test="endDate != null">
+                #{endDate},
+            </if>
+            <if test="checkDate != null">
+                #{checkDate},
+            </if>
+            <if test="unreasonable != null">
+                #{unreasonable},
+            </if>
+            <if test="remark != null">
+                #{remark},
+            </if>
+            <if test="advice != null">
+                #{advice},
+            </if>
+            <if test="satisfaction != null">
+                #{satisfaction},
+            </if>
+            <if test="leader != null">
+                #{leader},
+            </if>
+            <if test="evaluate01 != null">
+                #{evaluate01},
+            </if>
+            <if test="evaluate02 != null">
+                #{evaluate02},
+            </if>
+            <if test="evaluate03 != null">
+                #{evaluate03},
+            </if>
+            <if test="evaluate04 != null">
+                #{evaluate04},
+            </if>
+            <if test="evaluate05 != null">
+                #{evaluate05},
+            </if>
+            <if test="evaluate06 != null">
+                #{evaluate06},
+            </if>
+            <if test="evaluate07 != null">
+                #{evaluate07},
+            </if>
+            <if test="evaluate08 != null">
+                #{evaluate08},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy},
+            </if>
+            getDate()
+        </trim>
     </insert>
 
     <update id="updateSurvey">
@@ -91,8 +254,8 @@
             <if test="unreasonable != null">
                 unreasonable = #{unreasonable},
             </if>
-            <if test="device_state != null">
-                device_state = #{device_state},
+            <if test="deviceState != null">
+                device_state = #{deviceState},
             </if>
         </set>
         WHERE uuid = #{uuid}

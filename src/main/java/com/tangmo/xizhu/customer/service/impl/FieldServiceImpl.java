@@ -47,6 +47,10 @@ public class FieldServiceImpl implements FieldSurveyService {
     @Override
     public HttpResult getByTaskId(String taskId) {
         FieldSurvey fieldSurvey = fieldSurveyDao.selectByTaskId(taskId);
+        if(fieldSurvey == null){
+            fieldSurvey = new FieldSurvey();
+            fieldSurvey.setTaskId(taskId);
+        }
         return HttpResult.success(fieldSurvey);
     }
 }
