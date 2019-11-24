@@ -3,8 +3,12 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.dao.FieldSurveyDao;
+import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.FieldSurvey;
+import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.TaskRequire;
 import com.tangmo.xizhu.customer.service.FieldSurveyService;
+import com.tangmo.xizhu.customer.service.TaskRequireService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,10 @@ public class FieldServiceImpl implements FieldSurveyService {
 
     @Resource
     private FieldSurveyDao fieldSurveyDao;
+    @Resource
+    private TaskRequireService taskRequireService;
+    @Resource
+    private TaskDao taskDao;
     @Override
     public HttpResult addSurvey(FieldSurvey fieldSurvey) {
         if(fieldSurvey == null || fieldSurvey.getTaskId() == null){
@@ -48,8 +56,16 @@ public class FieldServiceImpl implements FieldSurveyService {
     public HttpResult getByTaskId(String taskId) {
         FieldSurvey fieldSurvey = fieldSurveyDao.selectByTaskId(taskId);
         if(fieldSurvey == null){
+            TaskRequire taskRequire = (TaskRequire) taskRequireService.getByTaskId(taskId).getData();
+            Task task = taskDao.selectById(taskId);
             fieldSurvey = new FieldSurvey();
             fieldSurvey.setTaskId(taskId);
+            fieldSurvey.setCompanyName(taskRequire.getCompanyName());
+            fieldSurvey.setContactName(taskRequire.getContactName());
+            fieldSurvey.setMobile(taskRequire.getMobile());
+            fieldSurvey.setDeviceName(taskRequire.getDeviceType());
+            fieldSurvey.setServiceUser(task.getExecutor());
+            fieldSurvey.setStartDate(taskRequire.getCreatedTime());
         }
         return HttpResult.success(fieldSurvey);
     }

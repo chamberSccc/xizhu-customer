@@ -42,8 +42,12 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public HttpResult addDevice(DeviceInfo deviceInfo) {
-        if(deviceInfo == null || deviceInfo.getUserId() == null){
+        if(deviceInfo == null || deviceInfo.getUserId() == null || deviceInfo.getDevicePid() == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        DeviceInfo result = deviceDao.selectByPid(deviceInfo.getDevicePid());
+        if(result != null){
+            return HttpResult.fail(ResultCode.PID_EXIST);
         }
         deviceInfo.setUuid(EncryptUtil.get32Uuid());
         deviceDao.insertDevice(deviceInfo);

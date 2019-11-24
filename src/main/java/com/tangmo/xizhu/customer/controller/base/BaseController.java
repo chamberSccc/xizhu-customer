@@ -94,7 +94,7 @@ public class BaseController {
     }
 
     protected Byte getUserType(){
-        return 2;
+        return getToken().getUserType();
     }
 
     protected String getDeptId(){  return getToken().getDeptId();}

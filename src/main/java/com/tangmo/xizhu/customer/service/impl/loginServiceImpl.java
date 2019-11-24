@@ -24,7 +24,13 @@ public class loginServiceImpl implements LoginService {
     private UserDao userDao;
     @Override
     public HttpResult userLogin(LogInfo logInfo) {
-        User user = new User();
+        User user = userDao.selectPwdByMobile(logInfo.getMobile());
+        if(user == null){
+            return HttpResult.fail(ResultCode.USER_NOT_EXIST);
+        }
+        if(!user.getPassword().equals(logInfo.getPassword())){
+            return HttpResult.fail(ResultCode.PASSWORD_ERROR);
+        }
         TokenBo tokenBo = getTokenBo(user);
         String token = JWTUtil.sign(tokenBo,3000L);
         return HttpResult.success(token);
@@ -36,7 +42,7 @@ public class loginServiceImpl implements LoginService {
         if(user == null){
             return HttpResult.fail(ResultCode.USER_NOT_EXIST);
         }
-        if(user.getPassword().equals(logInfo.getPassword())){
+        if(!user.getPassword().equals(logInfo.getPassword())){
             return HttpResult.fail(ResultCode.PASSWORD_ERROR);
         }
         TokenBo tokenBo = getTokenBo(user);
@@ -53,11 +59,11 @@ public class loginServiceImpl implements LoginService {
      */
     private TokenBo getTokenBo(User user){
         TokenBo tokenBo = new TokenBo();
-        tokenBo.setUserId("1");
-        tokenBo.setUserName("测试");
-        tokenBo.setDeptId("1");
-        tokenBo.setDeptName("测试部门");
-        tokenBo.setUserType((byte) 1);
+        tokenBo.setUserId(user.getUuid());
+        tokenBo.setUserName(user.getUserName());
+        tokenBo.setDeptId(user.getDeptId());
+        tokenBo.setDeptName(user.getDeptName());
+        tokenBo.setUserType(user.getUserType());
         return tokenBo;
     }
 }

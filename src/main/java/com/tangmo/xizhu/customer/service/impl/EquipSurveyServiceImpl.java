@@ -3,8 +3,14 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.dao.EquipSurveyDao;
+import com.tangmo.xizhu.customer.dao.OutEquipCheckDao;
+import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.EquipSurvey;
+import com.tangmo.xizhu.customer.entity.OutEquipCheck;
+import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.TaskRequire;
 import com.tangmo.xizhu.customer.service.EquipSurveyService;
+import com.tangmo.xizhu.customer.service.TaskRequireService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +26,12 @@ import javax.annotation.Resource;
 public class EquipSurveyServiceImpl implements EquipSurveyService {
     @Resource
     private EquipSurveyDao equipSurveyDao;
+    @Resource
+    private TaskRequireService taskRequireService;
+    @Resource
+    private TaskDao taskDao;
+    @Resource
+    private OutEquipCheckDao outEquipCheckDao;
     @Override
     public HttpResult addSurvey(EquipSurvey equipSurvey) {
         if(equipSurvey == null || equipSurvey.getTaskId() == null){
@@ -47,8 +59,19 @@ public class EquipSurveyServiceImpl implements EquipSurveyService {
     public HttpResult getByTaskId(String taskId) {
         EquipSurvey equipSurvey = equipSurveyDao.selectByTaskId(taskId);
         if(equipSurvey == null){
+            TaskRequire taskRequire = (TaskRequire) taskRequireService.getByTaskId(taskId).getData();
+            Task task = taskDao.selectById(taskId);
+            OutEquipCheck outEquipCheck = outEquipCheckDao.selectByTaskId(taskId);
+            if(outEquipCheck == null){
+                return HttpResult.fail(ResultCode.NOT_CHECK);
+            }
             equipSurvey = new EquipSurvey();
             equipSurvey.setTaskId(taskId);
+            equipSurvey.setCompanyName(taskRequire.getCompanyName());
+            equipSurvey.setMobile(taskRequire.getMobile());
+            equipSurvey.setServiceUser(task.getExecutor());
+            equipSurvey.setCheckDate(outEquipCheck.getCreatedTime());
+            //调试日期
         }
         return HttpResult.success(equipSurvey);
     }

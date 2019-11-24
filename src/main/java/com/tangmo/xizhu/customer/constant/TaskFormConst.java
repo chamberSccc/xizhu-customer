@@ -55,7 +55,26 @@ public class TaskFormConst {
             }
         }
         if(userType.equals(UserTypeConst.SERVICE)){
-
+            //快速服务单子
+            if(taskType.equals(TaskTypeConst.FAST_SERVICE)){
+                return userFastForm();
+            }
+            //现场服务单子
+            if(taskType.equals(TaskTypeConst.FIELD_SERVICE)){
+                ArrayList<TaskForm> fieldList = userFieldForm();
+                return fieldList;
+            }
+            //安装调试单子
+            if(taskType.equals(TaskTypeConst.EQUIPMENT)){
+                return userEquipForm(troubleType);
+            }
+            //外购件安装单子
+            if(taskType.equals(TaskTypeConst.OUT_EQUIPMENT)){
+                ArrayList<TaskForm> equipList = userEquipForm(troubleType);
+                ArrayList<TaskForm> outList = userOutEquipForm();
+                equipList.addAll(outList);
+                return equipList;
+            }
         }
         if(userType.equals(UserTypeConst.CUSTOMER)){
 
@@ -121,7 +140,6 @@ public class TaskFormConst {
         list.add(new TaskForm(FormNameConst.MTAIN_CONFIDE,true));
         list.add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
         list.add(new TaskForm(FormNameConst.EQUIP_SURVEY,true));
-        list.add(new TaskForm(FormNameConst.FIELD_SURVEY,true));
         return list;
     }
 
@@ -145,10 +163,15 @@ public class TaskFormConst {
      * @return
      * @author chen bo
      * @date 2019/11/4
-     * @description: 服务人员可看现场服务单子列表
+     * @description: 服务人员可看快速服务单子列表
      */
     public static ArrayList<TaskForm> userFastForm(){
-        return null;
+        ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.REQUIRE,false));
+            add(new TaskForm(FormNameConst.FAST_FB,false));
+            add(new TaskForm(FormNameConst.FIELD_APPLY,true));
+        }};
+        return list;
     }
     /**
      * @param
@@ -158,7 +181,13 @@ public class TaskFormConst {
      * @description: 服务人员可看现场服务单子列表
      */
     public static ArrayList<TaskForm> userFieldForm(){
-        return null;
+        ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.REQUIRE,false));
+            add(new TaskForm(FormNameConst.FIELD_APPLY,true));
+            add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
+            add(new TaskForm(FormNameConst.FIELD_FB,true));
+        }};
+        return list;
     }
 
     /**
@@ -168,8 +197,23 @@ public class TaskFormConst {
      * @date 2019/11/4
      * @description: 服务人员可看安装单子列表
      */
-    public static ArrayList<TaskForm> userEquipForm(){
-        return null;
+    public static ArrayList<TaskForm> userEquipForm(Byte troubleType){
+        ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.REQUIRE,true));
+            add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
+            add(new TaskForm(FormNameConst.SAFE_CONFIDE,true));
+            add(new TaskForm(FormNameConst.DEVICE_FILE,true));
+        }};
+        //区分机械问题和电气问题
+        if(troubleType.equals(TroubleTypeConst.ELECTRIC)){
+            list.add(new TaskForm(FormNameConst.ELEC_RECORD,true));
+        }
+        if(troubleType.equals(TroubleTypeConst.MACHINE)){
+            list.add(new TaskForm(FormNameConst.MACH_RECORD,true));
+        }
+        list.add(new TaskForm(FormNameConst.MTAIN_CONFIDE,true));
+        list.add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
+        return list;
     }
     /**
      * @param
@@ -179,7 +223,10 @@ public class TaskFormConst {
      * @description: 服务人员可看外购件单子列表
      */
     public static ArrayList<TaskForm> userOutEquipForm(){
-        return null;
+        ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
+        }};
+        return list;
     }
 
     /**

@@ -14,10 +14,12 @@
         <result column="created_time" property="createdTime"/>
     </resultMap>
     <select id="selectPwdByUserId" resultMap="UserMap">
-        SELECT uuid,password  from s_user where mobile = #{mobile} and status = 0
+        SELECT uuid,password  from s_user where uuid = #{userId} and status = 0
     </select>
     <select id="selectPwdByMobile" resultMap="UserMap">
-      SELECT uuid,mobile,password  from s_user where mobile = #{mobile} and status = 0
+      SELECT suser.uuid,suser.mobile,suser.password,suser.user_name,suser.dept_id,dept.dept_name,suser.user_type  from s_user suser
+      left join s_department dept on suser.dept_id = dept.uuid
+      where suser.mobile = #{mobile} and suser.status = 0
     </select>
 
     <select id="selectByUserId" resultMap="UserMap">

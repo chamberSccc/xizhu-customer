@@ -19,7 +19,9 @@ public enum ResultCode {
     DOUBLE_SUBMIT("1008","表已存在，请勿重复提交"),
     TROUBLE_MISS("1009","请选择设备问题"),
     DEVICE_MISS("1010","请填写设备信息"),
-    SURVEY_EXIST("1011","调查表已存在，请勿重复填写");
+    SURVEY_EXIST("1011","调查表已存在，请勿重复填写"),
+    PID_EXIST("1012","设备pid已存在"),
+    NOT_CHECK("1013","未填写设备验收表");
 
     private String errCode;
     private String errMsg;
