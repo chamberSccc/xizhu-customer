@@ -19,6 +19,7 @@
         <result column="created_by" property="createdBy"/>
         <result column="executor" property="executor"/>
         <result column="device_address" property="deviceAddress"/>
+        <result column="user_name" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
 
     </resultMap>
@@ -150,15 +151,20 @@
     </insert>
 
     <select id="selectByStatusAndUser" resultMap="TaskMap">
-        select * FROM s_service_task where task_status = #{status}
+        select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail FROM s_service_task task
+        left join s_user suser on task.created_by = suser.uuid
+        where task.task_status = #{status}
         <if test="userId != null">
-            and executor = #{userId}
+            and task.executor = #{userId}
         </if>
-        order by created_time desc
+        order by task.created_time desc
     </select>
 
     <select id="selectLaunchedTask" resultMap="TaskMap">
-        select * from s_service_task where created_by = #{userId} order by created_time desc
+        select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail FROM s_service_task task
+        left join s_user suser on task.created_by = suser.uuid
+        where task.created_by = #{userId}
+        order by task.created_time desc
     </select>
 
     <select id="selectByPid" resultMap="TaskMap">
@@ -166,7 +172,10 @@
     </select>
 
     <select id="selectByStatus" resultMap="TaskMap">
-        select * FROM s_service_task where task_status = #{status} order by created_time desc
+        select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail FROM s_service_task task
+        left join s_user suser on task.created_by = suser.uuid
+        where task.task_status = #{status}
+        order by task.created_time desc
     </select>
 
     <update id="updateTaskUser">
@@ -189,6 +198,10 @@
     </select>
 
     <select id="selectById" resultMap="TaskMap">
-        select * from s_service_task where uuid = #{uuid}
+        select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail,
+        task.task_type,task.mobile,task.company_name,task.contact_name,task.trouble_type,task.assembly_type,
+        task.task_assign_type
+         from s_service_task task left join s_user suser ON
+        task.created_by = suser.uuid where task.uuid = #{uuid}
     </select>
 </mapper>

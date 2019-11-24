@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.constant.UserTypeConst;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,6 +37,9 @@ public class HomeController extends BaseController {
     @ApiOperation(value = "查询未审批任务数量",httpMethod = "GET",notes = "")
     @GetMapping("/audit/undo/count")
     public HttpResult<Integer> getUndoAudit(){
+        if(getUserType() != UserTypeConst.AUDIT){
+            return HttpResult.success(0);
+        }
         return taskService.getUnauditCount(getUserId());
     }
 }

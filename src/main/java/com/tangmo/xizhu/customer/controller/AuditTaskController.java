@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.constant.UserTypeConst;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.AuditTask;
 import com.tangmo.xizhu.customer.entity.Task;
@@ -76,6 +77,9 @@ public class AuditTaskController extends BaseController {
     @ApiOperation(value = "获取已审批列表,分页",httpMethod = "POST",notes = "带分页")
     @PostMapping("/list/done")
     public HttpResult<List<Task>> getDoneAudit(TaskSearch taskSearch){
+        if(getUserType() != UserTypeConst.AUDIT){
+            return HttpResult.success();
+        }
         return auditTaskService.getDoneAuditList(getUserId(),taskSearch);
     }
 
@@ -89,6 +93,9 @@ public class AuditTaskController extends BaseController {
     @ApiOperation(value = "获取待审批列表,分页",httpMethod = "POST",notes = "带分页")
     @PostMapping("/list/undo")
     public HttpResult<List<Task>> getUndoAudit(TaskSearch taskSearch){
+        if(getUserType() != UserTypeConst.AUDIT){
+            return HttpResult.success();
+        }
         return auditTaskService.getUndoAuditList(getUserId(),taskSearch);
     }
 
@@ -102,6 +109,9 @@ public class AuditTaskController extends BaseController {
     @ApiOperation(value = "获取已拒绝列表,分页",httpMethod = "POST",notes = "带分页")
     @PostMapping("/list/reject")
     public HttpResult<List<Task>> getRejectAudit(TaskSearch taskSearch){
+        if(getUserType() != UserTypeConst.AUDIT){
+            return HttpResult.success();
+        }
         return auditTaskService.getRejectAuditList(getUserId(),taskSearch);
     }
 }

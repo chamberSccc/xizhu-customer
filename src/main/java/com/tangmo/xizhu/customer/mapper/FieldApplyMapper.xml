@@ -10,7 +10,7 @@
         <result column="device_type" property="deviceType"/>
         <result column="contact_name" property="contactName"/>
         <result column="mobile" property="mobile"/>
-        <result column="apply_user" property="applyUser"/>
+        <result column="user_name" property="applyUser"/>
         <result column="field_apply_date" property="fieldApplyDate"/>
         <result column="task_assign_type" property="taskAssignType"/>
         <result column="assembly_type" property="assemblyType"/>
@@ -25,9 +25,11 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="FieldApplyMap">
-      SELECT uuid,task_id,task_no,apply_date,company_name,device_type,contact_name,mobile,apply_user,field_apply_date,assembly_type,trouble_type,
-       task_assign_type,detail,solution,field_target,detail_audio_id,detail_speech_id,created_by,created_time
-       from s_field_apply where task_id = #{taskId}
+      SELECT apply.uuid,apply.task_id,apply.task_no,apply.apply_date,apply.company_name,apply.device_type,apply.contact_name,
+      apply.mobile,apply.apply_user,apply.field_apply_date,apply.assembly_type,apply.trouble_type,suser.user_name,
+       apply.task_assign_type,apply.detail,apply.solution,apply.field_target,apply.detail_audio_id,apply.detail_speech_id,apply.created_by,apply.created_time
+       from s_field_apply apply left join s_user suser on apply.created_by = suser.uuid
+       where apply.task_id = #{taskId}
     </select>
 
     <!--    todo 缺少图片id的新增和update-->
