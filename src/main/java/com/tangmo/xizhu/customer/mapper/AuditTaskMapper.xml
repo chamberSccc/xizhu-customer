@@ -7,7 +7,7 @@
         <result column="assign_user" property="assign_user"/>
         <result column="comment" property="comment"/>
         <result column="operation" property="operation"/>
-        <result column="created_by" property="createdBy"/>
+        <result column="user_name" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
     </resultMap>
 
@@ -65,6 +65,8 @@
     </insert>
 
     <select id="selectByTaskId" resultMap="AuditTaskMap">
-        select task_type,operation,created_by,created_time FROM s_audit_task where task_id = #{taskId} order by created_time desc
+        select audit.task_type,audit.operation,suser.user_name,audit.created_time FROM s_audit_task audit
+        left join s_user suser on audit.created_by = suser.uuid
+         where audit.task_id = #{taskId} order by audit.created_time desc
     </select>
 </mapper>

@@ -21,7 +21,8 @@ public enum ResultCode {
     DEVICE_MISS("1010","请填写设备信息"),
     SURVEY_EXIST("1011","调查表已存在，请勿重复填写"),
     PID_EXIST("1012","设备pid已存在"),
-    NOT_CHECK("1013","未填写设备验收表");
+    NOT_CHECK("1013","未填写设备验收表"),
+    PID_ERROR("1012","设备标识码错误");
 
     private String errCode;
     private String errMsg;

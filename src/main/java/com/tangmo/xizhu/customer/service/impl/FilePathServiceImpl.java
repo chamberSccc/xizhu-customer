@@ -59,6 +59,23 @@ public class FilePathServiceImpl implements FilePathService {
         return responseEntity;
     }
 
+    @Override
+    public ResponseEntity<byte[]> downloadApk(String agent) {
+        ResponseEntity<byte[]> responseEntity = null;
+        File basePathFile = new File("");
+        try {
+            StringBuilder sb = new StringBuilder(basePathFile.getCanonicalPath()).append(File.separator)
+                    .append("apk").append(File.separator).append("xizhu.apk");
+            responseEntity = downloadEntity(agent, sb.toString(),"xizhu", "apk");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return responseEntity;
+    }
+
+
     /**
      * 下载文件实体
      *

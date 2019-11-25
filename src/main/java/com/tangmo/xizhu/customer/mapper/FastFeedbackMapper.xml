@@ -18,7 +18,7 @@
         <result column="detail" property="detail"/>
         <result column="solution" property="solution"/>
         <result column="result" property="result"/>
-        <result column="created_by" property="createdBy"/>
+        <result column="user_name" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
         <result column="detail_audio_id" property="detailAudioId"/>
         <result column="detail_speech_id" property="detailSpeechId"/>
@@ -27,9 +27,10 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="FastFeedbackMap">
-      SELECT uuid,task_id,task_no,apply_date,company_name,device_type,contact_name,mobile,engineer,service_date,assembly_type,trouble_type,
-       task_assign_type,detail,solution,result,detail_audio_id,detail_speech_id,sol_audio_id,sol_speech_id,created_by,created_time
-       from s_fast_feedback where task_id = #{taskId}
+      SELECT fb.uuid,fb.task_id,fb.task_no,fb.apply_date,fb.company_name,fb.device_type,fb.contact_name,fb.mobile,fb.engineer,fb.service_date,fb.assembly_type,fb.trouble_type,
+       fb.task_assign_type,fb.detail,solution,fb.result,fb.detail_audio_id,fb.detail_speech_id,fb.sol_audio_id,fb.sol_speech_id,suser.user_name,fb.created_time
+       from s_fast_feedback fb left join s_user suser on fb.created_by = suser.uuid
+       where fb.task_id = #{taskId}
     </select>
 
     <!--    todo 缺少图片id的新增和update-->

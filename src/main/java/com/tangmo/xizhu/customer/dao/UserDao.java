@@ -55,6 +55,15 @@ public interface UserDao {
     User selectPwdByMobile(String mobile);
 
     /**
+     * @param devicePid
+     * @return
+     * @author chen bo
+     * @date 2019/11/25
+     * @description: 根据设备pid查询用户信息
+     */
+    User selectUserByDevice(String devicePid);
+
+    /**
      * @param userId
      * @return
      * @author chen bo

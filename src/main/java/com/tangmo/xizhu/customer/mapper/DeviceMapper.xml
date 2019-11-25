@@ -24,6 +24,7 @@
       SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where device_pid = #{devicePid}
     </select>
 
+
     <select id="selectByFuzzyPid" resultMap="DeviceMap">
       SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where device_pid like '%' + #{devicePid} + '%'
     </select>

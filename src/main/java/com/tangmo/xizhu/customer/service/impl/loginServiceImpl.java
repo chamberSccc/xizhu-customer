@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.common.TokenBo;
+import com.tangmo.xizhu.customer.dao.DeviceDao;
 import com.tangmo.xizhu.customer.dao.UserDao;
 import com.tangmo.xizhu.customer.entity.LogInfo;
 import com.tangmo.xizhu.customer.entity.User;
@@ -22,6 +23,8 @@ import javax.annotation.Resource;
 public class loginServiceImpl implements LoginService {
     @Resource
     private UserDao userDao;
+    @Resource
+    private DeviceDao deviceDao;
     @Override
     public HttpResult userLogin(LogInfo logInfo) {
         User user = userDao.selectPwdByMobile(logInfo.getMobile());
@@ -38,12 +41,9 @@ public class loginServiceImpl implements LoginService {
 
     @Override
     public HttpResult wechatLogin(LogInfo logInfo) {
-        User user = userDao.selectPwdByMobile(logInfo.getMobile());//这样对比密码有问题，以后改
+        User user = userDao.selectUserByDevice(logInfo.getMobile());//这样对比密码有问题，以后改
         if(user == null){
-            return HttpResult.fail(ResultCode.USER_NOT_EXIST);
-        }
-        if(!user.getPassword().equals(logInfo.getPassword())){
-            return HttpResult.fail(ResultCode.PASSWORD_ERROR);
+            return HttpResult.fail(ResultCode.PID_ERROR);
         }
         TokenBo tokenBo = getTokenBo(user);
         String token = JWTUtil.sign(tokenBo,3000L);

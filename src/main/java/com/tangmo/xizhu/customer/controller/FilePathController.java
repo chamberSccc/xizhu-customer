@@ -40,4 +40,12 @@ public class FilePathController extends BaseController{
         String agent = this.getRequest().getHeader("USER-AGENT");
         return filePathService.downloadFile(fileId,agent);
     }
+
+
+    @ApiOperation(value = "下载apk",httpMethod = "GET",notes = "")
+    @GetMapping("/download/apk")
+    public ResponseEntity<byte[]> downloadApk(){
+        String agent = this.getRequest().getHeader("USER-AGENT");
+        return filePathService.downloadApk(agent);
+    }
 }

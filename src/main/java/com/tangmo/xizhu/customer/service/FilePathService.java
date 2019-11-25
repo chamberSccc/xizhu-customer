@@ -12,8 +12,33 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FilePathService {
 
+    /**
+     * @param file
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/11/25
+     * @description: 上传文件
+     */
     HttpResult uploadFile(MultipartFile file,String userId);
 
+    /**
+     * @param fileId
+     * @param agent
+     * @return
+     * @author chen bo
+     * @date 2019/11/25
+     * @description: 下载文件
+     */
     ResponseEntity<byte[]> downloadFile(String fileId,String agent);
+
+    /**
+     * @param agent
+     * @return
+     * @author chen bo
+     * @date 2019/11/25
+     * @description: 下载apk包
+     */
+    ResponseEntity<byte[]> downloadApk(String agent);
 
 }

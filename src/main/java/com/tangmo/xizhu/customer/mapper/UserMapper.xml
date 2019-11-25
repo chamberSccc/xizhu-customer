@@ -16,10 +16,17 @@
     <select id="selectPwdByUserId" resultMap="UserMap">
         SELECT uuid,password  from s_user where uuid = #{userId} and status = 0
     </select>
+
     <select id="selectPwdByMobile" resultMap="UserMap">
       SELECT suser.uuid,suser.mobile,suser.password,suser.user_name,suser.dept_id,dept.dept_name,suser.user_type  from s_user suser
       left join s_department dept on suser.dept_id = dept.uuid
       where suser.mobile = #{mobile} and suser.status = 0
+    </select>
+
+    <select id="selectUserByDevice" resultMap="UserMap">
+      SELECT suser.uuid, suser.user_type,suser.user_name from s_user_device device
+      inner join s_user suser on device.user_id = suser.uuid
+       where device.device_pid = #{devicePid}
     </select>
 
     <select id="selectByUserId" resultMap="UserMap">
