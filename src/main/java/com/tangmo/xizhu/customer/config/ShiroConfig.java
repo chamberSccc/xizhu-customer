@@ -22,7 +22,7 @@ import java.util.Map;
  * @Version V1.0
  * @Description: shiro登录管理
  **/
-//@Configuration
+@Configuration
 public class ShiroConfig {
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
@@ -44,7 +44,7 @@ public class ShiroConfig {
         logoutFilter.setRedirectUrl("/xizhu/logout"); //退出操作 待定
         filters.put("logout", logoutFilter);
         shiroFilterFactoryBean.setFilters(filters);
-        shiroFilterFactoryBean.setUnauthorizedUrl("/pacs/401");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/xizhu/401");
         /**
          * 拦截器
          *
@@ -55,7 +55,8 @@ public class ShiroConfig {
          * /userList=authc,perms[/userList]的含义是要访问/userList需要有/userList的权限，要是没分配此权限访问此URL会返回无授权页面
          */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/login/*", "anon");
+        filterChainDefinitionMap.put("/file/download/*", "anon");
 //        filterChainDefinitionMap.put("/user/pwd/change", "jwt");
 //        filterChainDefinitionMap.put("/user/pwd/**", "anon");
 //        filterChainDefinitionMap.put("/login/project", "jwt");

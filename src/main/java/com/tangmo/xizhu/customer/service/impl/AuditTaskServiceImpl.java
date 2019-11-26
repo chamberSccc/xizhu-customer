@@ -14,6 +14,7 @@ import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import com.tangmo.xizhu.customer.service.AuditTaskService;
 import com.tangmo.xizhu.customer.service.TaskService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import java.util.List;
  * @Version V1.0
  * @Description: 审核任务service实现类
  **/
-@Service("auditService")
+@Service("auditTaskService")
 public class AuditTaskServiceImpl implements AuditTaskService {
     @Resource
+    @Lazy
     private TaskService taskService;
     @Resource
     private AuditTaskDao auditTaskDao;
