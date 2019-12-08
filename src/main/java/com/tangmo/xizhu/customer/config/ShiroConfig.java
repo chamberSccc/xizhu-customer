@@ -55,7 +55,8 @@ public class ShiroConfig {
          * /userList=authc,perms[/userList]的含义是要访问/userList需要有/userList的权限，要是没分配此权限访问此URL会返回无授权页面
          */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login/*", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/login/wechat", "anon");
         filterChainDefinitionMap.put("/file/download/*", "anon");
 //        filterChainDefinitionMap.put("/user/pwd/change", "jwt");
 //        filterChainDefinitionMap.put("/user/pwd/**", "anon");

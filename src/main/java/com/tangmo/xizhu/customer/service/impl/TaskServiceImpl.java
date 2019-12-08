@@ -43,10 +43,28 @@ public class TaskServiceImpl implements TaskService {
         if(task == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);
         }
-        if(task.getTroubleType() == null || task.getTaskAssignType() == null || task.getAssemblyType()==null){
+        System.out.println(task.getTroubleType());
+        System.out.println(task.getTaskAssignType());
+        System.out.println(task.getAssemblyType());
+        System.out.println(task.getDeviceType());
+        System.out.println(task.getDeviceAddress());
+        System.out.println(task.getDevicePid());
+        if(task.getTroubleType() == null || task.getTroubleType().equals("")){
             return HttpResult.fail(ResultCode.TROUBLE_MISS);
         }
-        if(task.getDeviceType() == null || task.getDeviceAddress() == null){
+        if(task.getTaskAssignType() == null || task.getTaskAssignType().equals("")){
+            return HttpResult.fail(ResultCode.TROUBLE_MISS);
+        }
+        if(task.getAssemblyType() == null || task.getAssemblyType().equals("")){
+            return HttpResult.fail(ResultCode.TROUBLE_MISS);
+        }
+        if(task.getDeviceType() == null || task.getDeviceType().equals("")){
+            return HttpResult.fail(ResultCode.DEVICE_MISS);
+        }
+        if(task.getDeviceAddress() == null || task.getDeviceAddress().equals("")){
+            return HttpResult.fail(ResultCode.DEVICE_MISS);
+        }
+        if(task.getDevicePid() == null || task.getDevicePid().equals("")){
             return HttpResult.fail(ResultCode.DEVICE_MISS);
         }
 
@@ -54,7 +72,7 @@ public class TaskServiceImpl implements TaskService {
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);
         task.setTaskStatus(TaskStatusConst.INITIAL);
-        if(!task.getTaskAssignType().equals(TaskTypeConst.EQUIPMENT)){
+        if(!task.getTaskAssignType().equals(String.valueOf(TaskTypeConst.EQUIPMENT))){
             task.setTaskType(TaskTypeConst.FAST_SERVICE);
         }else{
             //todo 如果是安调设备，直接生成现场服务指派单
