@@ -12,6 +12,8 @@ import com.tangmo.xizhu.customer.util.JWTUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author chen bo
@@ -36,7 +38,10 @@ public class loginServiceImpl implements LoginService {
         }
         TokenBo tokenBo = getTokenBo(user);
         String token = JWTUtil.sign(tokenBo,3000L);
-        return HttpResult.success(token);
+        Map<String,Object> map = new HashMap<>();
+        map.put("token",token);
+        map.put("data",tokenBo);
+        return HttpResult.success(map);
     }
 
     @Override
