@@ -47,8 +47,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public HttpResult changePwd(PwdInfo pwdInfo) {
         User user = userDao.selectPwdByUserId(pwdInfo.getUserId());
+        if(user.getPassword() == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        if(user.getPassword().equals(pwdInfo.getPassword())){
+            userDao.updatePwd(pwdInfo.getUserId(),pwdInfo.getNewPwd());
+        }else{
+            return HttpResult.fail(ResultCode.PASSWORD_ERROR);
+        }
         //判断
-        userDao.updatePwd(pwdInfo.getUserId(),pwdInfo.getNewPwd());
         return HttpResult.success();
     }
 

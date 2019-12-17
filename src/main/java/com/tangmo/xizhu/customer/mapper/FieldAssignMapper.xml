@@ -60,9 +60,7 @@
             <if test="leader != null">
                 leader,
             </if>
-            <if test="assignDate != null">
-                assign_date,
-            </if>
+            assign_date,
             <if test="assemblyType != null">
                 assembly_type,
             </if>
@@ -124,9 +122,7 @@
             <if test="leader != null">
                 #{leader},
             </if>
-            <if test="assignDate != null">
-                #{assignDate},
-            </if>
+            getDate(),
             <if test="assemblyType != null">
                 #{assemblyType},
             </if>

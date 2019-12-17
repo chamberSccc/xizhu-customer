@@ -28,12 +28,14 @@ public interface TaskPunchDao {
      * @param taskId
      * @param userId
      * @param punchType
+     * @param taskType
      * @return
      * @author chen bo
      * @date 2019/11/16
      * @description: 根据任务和人员查询打卡记录
      */
-    TaskPunch selectByUserAndType(@Param("taskId") String taskId, @Param("userId") String userId, @Param("punchType") Byte punchType);
+    TaskPunch selectByUserAndType(@Param("taskId") String taskId, @Param("userId") String userId,
+                                  @Param("punchType") Byte punchType,@Param("taskType") Byte taskType);
 
     /**
      * @param taskPunch

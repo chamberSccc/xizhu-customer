@@ -3,7 +3,9 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.PunchTypeConst;
+import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.dao.TaskPunchDao;
+import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.TaskPunch;
 import com.tangmo.xizhu.customer.service.TaskPunchService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
@@ -21,6 +23,8 @@ import javax.annotation.Resource;
 public class TaskPunchServiceImpl implements TaskPunchService {
     @Resource
     private TaskPunchDao taskPunchDao;
+    @Resource
+    private TaskDao taskDao;
 
     @Override
     public HttpResult startPunch(TaskPunch taskPunch) {
@@ -29,6 +33,8 @@ public class TaskPunchServiceImpl implements TaskPunchService {
         }
         taskPunch.setUuid(EncryptUtil.get32Uuid());
         taskPunch.setPunchType(PunchTypeConst.OnDuty);
+        Task task = taskDao.selectById(taskPunch.getTaskId());
+        taskPunch.setTaskType(task.getTaskType());
         taskPunchDao.insertPunch(taskPunch);
         return HttpResult.success();
     }
@@ -40,6 +46,8 @@ public class TaskPunchServiceImpl implements TaskPunchService {
         }
         taskPunch.setUuid(EncryptUtil.get32Uuid());
         taskPunch.setPunchType(PunchTypeConst.OffDuty);
+        Task task = taskDao.selectById(taskPunch.getTaskId());
+        taskPunch.setTaskType(task.getTaskType());
         taskPunchDao.insertPunch(taskPunch);
         return HttpResult.success();
     }
@@ -64,6 +72,7 @@ public class TaskPunchServiceImpl implements TaskPunchService {
 
     @Override
     public HttpResult getUserPunch(String taskId, String userId, Byte punchType) {
-        return HttpResult.success(taskPunchDao.selectByUserAndType(taskId,userId,punchType));
+        Task task = taskDao.selectById(taskId);
+        return HttpResult.success(taskPunchDao.selectByUserAndType(taskId,userId,punchType,task.getTaskType()));
     }
 }

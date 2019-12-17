@@ -2,14 +2,9 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
-import com.tangmo.xizhu.customer.constant.AuditOperateConst;
-import com.tangmo.xizhu.customer.constant.TaskAttachConst;
-import com.tangmo.xizhu.customer.constant.TaskStatusConst;
-import com.tangmo.xizhu.customer.constant.TaskTypeConst;
+import com.tangmo.xizhu.customer.constant.*;
 import com.tangmo.xizhu.customer.dao.*;
-import com.tangmo.xizhu.customer.entity.OutEquipApply;
-import com.tangmo.xizhu.customer.entity.TaskAttach;
-import com.tangmo.xizhu.customer.entity.TaskRequire;
+import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.AuditTaskService;
 import com.tangmo.xizhu.customer.service.EquipApplyService;
@@ -40,11 +35,20 @@ public class EquipApplyServiceImpl implements EquipApplyService {
     private TaskAttachDao taskAttachDao;
     @Resource
     private AuditTaskService auditTaskService;
+    @Resource
+    private TaskPunchDao taskPunchDao;
     @Override
     @Transactional
     public HttpResult addOutApply(OutEquipApply outEquipApply) {
         if(outEquipApply.getTaskId() == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        Task task = taskDao.selectById(outEquipApply.getTaskId());
+        //判断是否打卡
+        TaskPunch taskPunch = taskPunchDao.selectByUserAndType(outEquipApply.getTaskId(),outEquipApply.getCreatedBy(),
+                PunchTypeConst.OffDuty,task.getTaskType());
+        if(taskPunch == null){
+            return HttpResult.fail(ResultCode.END_PUNCH_MISS);
         }
         //新增外购件安装调试申请
         String uuid = EncryptUtil.get32Uuid();
@@ -56,6 +60,7 @@ public class EquipApplyServiceImpl implements EquipApplyService {
         //增加审批流程
         auditTaskService.addAuditTask(outEquipApply.getTaskId(),outEquipApply.getCreatedBy(),
                 TaskTypeConst.OUT_EQUIPMENT,AuditOperateConst.INITIAL);
+
         return HttpResult.success();
     }
 

@@ -24,6 +24,7 @@ public class TaskPunch {
     private String latitude;
     @ApiModelProperty(value="打卡类型，0开始打卡，1结束打卡",name="punchType",example="")
     private Byte punchType;
+    private Byte taskType;//任务类型
     private String userId;
     private Date createdTime;
 }

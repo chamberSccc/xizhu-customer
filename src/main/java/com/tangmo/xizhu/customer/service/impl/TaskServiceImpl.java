@@ -4,9 +4,7 @@ import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.*;
-import com.tangmo.xizhu.customer.dao.TaskAttachDao;
-import com.tangmo.xizhu.customer.dao.TaskDao;
-import com.tangmo.xizhu.customer.dao.TaskRequireDao;
+import com.tangmo.xizhu.customer.dao.*;
 import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskConverter;
@@ -18,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -36,6 +35,10 @@ public class TaskServiceImpl implements TaskService {
     private TaskAttachDao taskAttachDao;
     @Resource
     private AuditTaskService auditTaskService;
+    @Resource
+    private FieldAssignDao fieldAssignDao;
+    @Resource
+    private TaskPunchDao taskPunchDao;
 
     @Override
     @Transactional
@@ -43,12 +46,6 @@ public class TaskServiceImpl implements TaskService {
         if(task == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);
         }
-        System.out.println(task.getTroubleType());
-        System.out.println(task.getTaskAssignType());
-        System.out.println(task.getAssemblyType());
-        System.out.println(task.getDeviceType());
-        System.out.println(task.getDeviceAddress());
-        System.out.println(task.getDevicePid());
         if(task.getTroubleType() == null || task.getTroubleType().equals("")){
             return HttpResult.fail(ResultCode.TROUBLE_MISS);
         }
@@ -75,8 +72,20 @@ public class TaskServiceImpl implements TaskService {
         if(!task.getTaskAssignType().equals(String.valueOf(TaskTypeConst.EQUIPMENT))){
             task.setTaskType(TaskTypeConst.FAST_SERVICE);
         }else{
-            //todo 如果是安调设备，直接生成现场服务指派单
+            //如果是安调设备，直接生成现场服务指派单
             task.setTaskType(TaskTypeConst.EQUIPMENT);
+            FieldAssign fieldAssign = new FieldAssign();
+            fieldAssign.setUuid(EncryptUtil.get32Uuid());
+            fieldAssign.setApplyDate(new Date(System.currentTimeMillis()));
+            fieldAssign.setCompanyName(task.getCompanyName());
+            fieldAssign.setContactName(task.getContactName());
+            fieldAssign.setMobile(task.getMobile());
+            fieldAssign.setDeviceType(task.getDeviceType());
+            fieldAssign.setAssemblyType(task.getAssemblyType());
+            fieldAssign.setTaskAssignType(task.getTaskAssignType());
+            fieldAssign.setTroubleType(task.getTroubleType());
+            fieldAssign.setTaskId(uuid);
+            fieldAssignDao.insertAssign(fieldAssign);
         }
         taskDao.insertTask(task);
         //新增任务需求单，转换任务中相同信息
@@ -168,6 +177,14 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public HttpResult commitTask(String taskId,String userId) {
         Task task = taskDao.selectById(taskId);
+        //判断是否打卡
+        if(!task.getTaskType().equals(TaskTypeConst.FAST_SERVICE)){
+            TaskPunch taskPunch = taskPunchDao.selectByUserAndType(taskId,userId,
+                    PunchTypeConst.OffDuty,task.getTaskType());
+            if(taskPunch == null){
+                return HttpResult.fail(ResultCode.END_PUNCH_MISS);
+            }
+        }
         //修改任务状态为待审核
         taskDao.updateStatus(taskId,TaskStatusConst.INITIAL);
         //添加审批流程
@@ -180,6 +197,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public HttpResult getFormList(String taskId, Byte userType) {
         Task task = taskDao.selectById(taskId);
-        return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType, Byte.valueOf(task.getTroubleType())));
+        String trouble = task.getTroubleType();
+        if(trouble.substring(0,1).equals(",")){
+            trouble = trouble.substring(1,trouble.length());
+        }
+        String [] strArr= trouble.split(",");
+        return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType, Byte.valueOf(strArr[0])));
     }
 }
