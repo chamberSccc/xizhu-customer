@@ -36,7 +36,7 @@ public class EncryptUtil {
         if(isSecondMd5){
             str = DigestUtils.md5Hex(str);
         }
-        return DigestUtils.md5Hex(MD5KEY + "_" + str);
+        return DigestUtils.md5Hex(str);
     }
 
     /**

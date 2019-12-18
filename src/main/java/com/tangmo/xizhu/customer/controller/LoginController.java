@@ -39,6 +39,19 @@ public class LoginController extends BaseController {
      * @param logInfo
      * @return
      * @author chen bo
+     * @date 2019/10/15
+     * @description: 网页登录操作
+     */
+    @ApiOperation(value = "管理员登录",httpMethod = "POST",notes = "登录接口")
+    @PostMapping("/admin")
+    public HttpResult adminLogin(@ApiParam(name="用户对象",value="json格式",required=true) @RequestBody LogInfo logInfo){
+        return loginService.adminLogin(logInfo);
+    }
+
+    /**
+     * @param logInfo
+     * @return
+     * @author chen bo
      * @date 2019/11/1
      * @description: 微信端登录
      */

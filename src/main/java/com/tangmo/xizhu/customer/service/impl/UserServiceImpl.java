@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setUuid(EncryptUtil.get32Uuid());
         user.setStatus((byte) 0);
+        user.setPassword(EncryptUtil.md5("123456",false));
         userDao.insertUser(user);
         return HttpResult.success();
     }

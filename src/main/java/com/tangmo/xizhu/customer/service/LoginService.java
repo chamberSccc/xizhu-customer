@@ -24,6 +24,15 @@ public interface LoginService {
      * @param logInfo
      * @return
      * @author chen bo
+     * @date 2019/12/18
+     * @description: 管理员登录
+     */
+    HttpResult adminLogin(LogInfo logInfo);
+
+    /**
+     * @param logInfo
+     * @return
+     * @author chen bo
      * @date 2019/11/1
      * @description: 微信登录
      */

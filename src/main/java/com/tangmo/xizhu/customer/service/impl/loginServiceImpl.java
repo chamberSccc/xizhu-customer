@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.common.TokenBo;
+import com.tangmo.xizhu.customer.constant.UserTypeConst;
 import com.tangmo.xizhu.customer.dao.DeviceDao;
 import com.tangmo.xizhu.customer.dao.UserDao;
 import com.tangmo.xizhu.customer.entity.LogInfo;
@@ -31,6 +32,26 @@ public class loginServiceImpl implements LoginService {
     public HttpResult userLogin(LogInfo logInfo) {
         User user = userDao.selectPwdByMobile(logInfo.getMobile());
         if(user == null){
+            return HttpResult.fail(ResultCode.USER_NOT_EXIST);
+        }
+        if(!user.getPassword().equals(logInfo.getPassword())){
+            return HttpResult.fail(ResultCode.PASSWORD_ERROR);
+        }
+        TokenBo tokenBo = getTokenBo(user);
+        String token = JWTUtil.sign(tokenBo,3000L);
+        Map<String,Object> map = new HashMap<>();
+        map.put("token",token);
+        map.put("data",tokenBo);
+        return HttpResult.success(map);
+    }
+
+    @Override
+    public HttpResult adminLogin(LogInfo logInfo) {
+        User user = userDao.selectPwdByMobile(logInfo.getMobile());
+        if(user == null){
+            return HttpResult.fail(ResultCode.USER_NOT_EXIST);
+        }
+        if(!user.getUserType().equals(UserTypeConst.AUDIT)){
             return HttpResult.fail(ResultCode.USER_NOT_EXIST);
         }
         if(!user.getPassword().equals(logInfo.getPassword())){
