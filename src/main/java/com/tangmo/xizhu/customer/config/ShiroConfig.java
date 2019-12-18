@@ -63,6 +63,12 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/user/pwd/change", "jwt");
 //        filterChainDefinitionMap.put("/user/pwd/**", "anon");
 //        filterChainDefinitionMap.put("/login/project", "jwt");
+        filterChainDefinitionMap.put("/index.html", "anon");
+        filterChainDefinitionMap.put("/static/css/**", "anon");
+        filterChainDefinitionMap.put("/static/js/**", "anon");
+        filterChainDefinitionMap.put("/static/fonts/**", "anon");
+        filterChainDefinitionMap.put("/static/img/**", "anon");
+
         filterChainDefinitionMap.put("/swagger-ui.html", "anon");
         filterChainDefinitionMap.put("/swagger-resources", "anon");
         filterChainDefinitionMap.put("/swagger-resources/configuration/security", "anon");
