@@ -60,9 +60,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login/admin", "anon");
         filterChainDefinitionMap.put("/file/download/*", "anon");
         filterChainDefinitionMap.put("/version/latest", "anon");
-//        filterChainDefinitionMap.put("/user/pwd/change", "jwt");
-//        filterChainDefinitionMap.put("/user/pwd/**", "anon");
-//        filterChainDefinitionMap.put("/login/project", "jwt");
+//      filterChainDefinitionMap.put("/user/pwd/change", "jwt");
+//      filterChainDefinitionMap.put("/user/pwd/**", "anon");
+//      filterChainDefinitionMap.put("/login/project", "jwt");
         filterChainDefinitionMap.put("/index.html", "anon");
         filterChainDefinitionMap.put("/static/css/**", "anon");
         filterChainDefinitionMap.put("/static/js/**", "anon");
@@ -79,7 +79,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/401", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-//        shiroFilterFactoryBean.setLoginUrl("/login/unauth");
+        //shiroFilterFactoryBean.setLoginUrl("/login/unauth");
         return shiroFilterFactoryBean;
     }
 
