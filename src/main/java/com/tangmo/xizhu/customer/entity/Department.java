@@ -17,4 +17,6 @@ public class Department {
     private String deptName;
     private String createdBy;
     private String createdTime;
+    @ApiModelProperty(value="部门关联的任务类型",name="deptName",example="")
+    private String taskType;//快速服务是0 现场服务2  安调设备1  外购件3
 }
