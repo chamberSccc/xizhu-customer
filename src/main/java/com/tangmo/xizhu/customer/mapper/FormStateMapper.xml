@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.FormStateDao">
+    <resultMap id="FormStateMap" type="com.tangmo.xizhu.customer.entity.FormState">
+        <id column="uuid" property="uuid"/>
+        <result column="task_id" property="taskId"/>
+    </resultMap>
+
+    <select id="selectByTaskId" resultMap="FormStateMap">
+      SELECT uuid,user_id,user_name,operation,created_time  from s_form_state where task_id = #{taskId}
+    </select>
+
+    <insert id="insertFormState" parameterType="com.tangmo.xizhu.customer.entity.FormState">
+        INSERT INTO s_form_state (uuid,task_id,form01) VALUE (#{uuid},#{taskId},#{form01})
+    </insert>
+
+    <update id="updateFormState">
+        UPDATE s_form_state SET ${column} = true WHERE task_id = #{taskId}
+    </update>
+</mapper>

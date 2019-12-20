@@ -102,6 +102,7 @@ public class TaskServiceImpl implements TaskService {
         if(attaches != null){
             taskAttachDao.insertBatchAttach(attaches);
         }
+        //添加任务状态
         return HttpResult.success();
     }
 
