@@ -2,10 +2,7 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
-import com.tangmo.xizhu.customer.constant.AuditOperateConst;
-import com.tangmo.xizhu.customer.constant.TaskAttachConst;
-import com.tangmo.xizhu.customer.constant.TaskStatusConst;
-import com.tangmo.xizhu.customer.constant.TaskTypeConst;
+import com.tangmo.xizhu.customer.constant.*;
 import com.tangmo.xizhu.customer.dao.AuditTaskDao;
 import com.tangmo.xizhu.customer.dao.FieldApplyDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
@@ -16,9 +13,7 @@ import com.tangmo.xizhu.customer.entity.FieldApply;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.converter.FastFbConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
-import com.tangmo.xizhu.customer.service.AuditTaskService;
-import com.tangmo.xizhu.customer.service.FastFeedbackService;
-import com.tangmo.xizhu.customer.service.FieldApplyService;
+import com.tangmo.xizhu.customer.service.*;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +38,10 @@ public class FieldApplyServiceImpl implements FieldApplyService {
     private TaskDao taskDao;
     @Resource
     private AuditTaskService auditTaskService;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addApply(FieldApply fieldApply) {
         if(fieldApply == null || fieldApply.getTaskId() == null){
@@ -63,6 +62,10 @@ public class FieldApplyServiceImpl implements FieldApplyService {
         //增加审批流程
         auditTaskService.addAuditTask(fieldApply.getTaskId(),fieldApply.getCreatedBy(),
                 TaskTypeConst.FIELD_SERVICE,AuditOperateConst.INITIAL);
+        //操作记录
+        optRecordService.addOptRecord(fieldApply.getTaskId(),fieldApply.getCreatedBy(), OptConst.FIELD_APPLY);
+        //任务流程
+        formStateService.changeFormState(fieldApply.getTaskId(),"form04");
         return HttpResult.success();
     }
 

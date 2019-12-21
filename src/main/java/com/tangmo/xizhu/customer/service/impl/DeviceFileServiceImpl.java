@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.dao.DeviceFileDao;
 import com.tangmo.xizhu.customer.dao.EquipUserDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
@@ -8,6 +9,8 @@ import com.tangmo.xizhu.customer.entity.DeviceFile;
 import com.tangmo.xizhu.customer.entity.EquipUser;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.service.DeviceFileService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +32,10 @@ public class DeviceFileServiceImpl implements DeviceFileService {
     private EquipUserDao equipUserDao;
     @Resource
     private TaskDao taskDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
 
     @Override
     @Transactional
@@ -43,6 +50,10 @@ public class DeviceFileServiceImpl implements DeviceFileService {
             }
             equipUserDao.insertBatchUser(deviceFile.getUserList());
         }
+        //操作记录
+        optRecordService.addOptRecord(deviceFile.getTaskId(),deviceFile.getCreatedBy(), OptConst.DEVICE_FILE);
+        //任务流程
+        formStateService.changeFormState(deviceFile.getTaskId(),"form09");
         return HttpResult.success();
     }
 

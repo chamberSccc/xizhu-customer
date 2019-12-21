@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.FastFeedbackDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
@@ -13,6 +14,8 @@ import com.tangmo.xizhu.customer.entity.TaskRequire;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskRequireConverter;
 import com.tangmo.xizhu.customer.service.FastFeedbackService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.service.TaskRequireService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
@@ -35,6 +38,10 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
     private TaskRequireService taskRequireService;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addFastFeedback(FastFeedBack fastFeedBack) {
         String uuid = EncryptUtil.get32Uuid();
@@ -42,6 +49,10 @@ public class FastFeedbackServiceImpl implements FastFeedbackService {
         fastFeedbackDao.insertFastFeedback(fastFeedBack);
         //添加任务需求单图片附件
         dealPictureList(fastFeedBack.getDetailPictureList(),fastFeedBack.getSolPictureList(),fastFeedBack.getUuid());
+        //操作记录
+        optRecordService.addOptRecord(fastFeedBack.getTaskId(),fastFeedBack.getCreatedBy(), OptConst.FAST_FEED);
+        //任务流程
+        formStateService.changeFormState(fastFeedBack.getTaskId(),"form02");
         return HttpResult.success();
     }
 

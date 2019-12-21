@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.FastSurveyDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
@@ -11,6 +12,8 @@ import com.tangmo.xizhu.customer.entity.converter.FastFbConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.FastFeedbackService;
 import com.tangmo.xizhu.customer.service.FastSurveyService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +34,10 @@ public class FastSurveyServiceImpl implements FastSurveyService {
     private FastFeedbackService fastFeedbackService;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
 
     @Override
     public HttpResult addSurvey(FastSurvey fastSurvey) {
@@ -47,6 +54,10 @@ public class FastSurveyServiceImpl implements FastSurveyService {
         if(solAttach != null){
             taskAttachDao.insertBatchAttach(solAttach);
         }
+        //操作记录
+        optRecordService.addOptRecord(fastSurvey.getTaskId(),fastSurvey.getCreatedBy(), OptConst.FAST_SURVEY);
+        //任务流程
+        formStateService.changeFormState(fastSurvey.getTaskId(),"form03");
         return HttpResult.success();
     }
 

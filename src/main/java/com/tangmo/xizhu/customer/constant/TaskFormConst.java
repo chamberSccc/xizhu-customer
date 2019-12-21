@@ -1,8 +1,10 @@
 package com.tangmo.xizhu.customer.constant;
 
+import com.tangmo.xizhu.customer.entity.FormState;
 import com.tangmo.xizhu.customer.entity.TaskForm;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -12,6 +14,19 @@ import java.util.ArrayList;
  **/
 public class TaskFormConst {
 
+    /**
+     * @param list
+     * @param formState
+     * @return
+     * @author chen bo
+     * @date 2019/12/21
+     * @description: 给表单添加是否填写完成的状态
+     */
+    private void addState(List<TaskForm> list, FormState formState){
+        if(formState == null || list == null){
+            return;
+        }
+    }
     /**
      * @param taskType
      * @param userType

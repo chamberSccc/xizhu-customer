@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.dao.EquipSurveyDao;
 import com.tangmo.xizhu.customer.dao.OutEquipCheckDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
@@ -10,6 +11,8 @@ import com.tangmo.xizhu.customer.entity.OutEquipCheck;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.TaskRequire;
 import com.tangmo.xizhu.customer.service.EquipSurveyService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.service.TaskRequireService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
@@ -32,6 +35,10 @@ public class EquipSurveyServiceImpl implements EquipSurveyService {
     private TaskDao taskDao;
     @Resource
     private OutEquipCheckDao outEquipCheckDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addSurvey(EquipSurvey equipSurvey) {
         if(equipSurvey == null || equipSurvey.getTaskId() == null){
@@ -43,6 +50,10 @@ public class EquipSurveyServiceImpl implements EquipSurveyService {
         }
         equipSurvey.setUuid(EncryptUtil.get32Uuid());
         equipSurveyDao.insertSurvey(equipSurvey);
+        //操作记录
+        optRecordService.addOptRecord(equipSurvey.getTaskId(),equipSurvey.getCreatedBy(), OptConst.EQUIP_SURVEY);
+        //任务流程
+        formStateService.changeFormState(equipSurvey.getTaskId(),"form16");
         return HttpResult.success();
     }
 

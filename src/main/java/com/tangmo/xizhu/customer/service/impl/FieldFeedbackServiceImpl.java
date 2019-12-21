@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.FieldFeedbackDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
@@ -11,6 +12,8 @@ import com.tangmo.xizhu.customer.entity.converter.FieldApplyConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.FieldApplyService;
 import com.tangmo.xizhu.customer.service.FieldFeedbackService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -31,12 +34,20 @@ public class FieldFeedbackServiceImpl implements FieldFeedbackService {
     private FieldApplyService fieldApplyService;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addFeedback(FieldFeedBack feedBack) {
         String uuid = EncryptUtil.get32Uuid();
         feedBack.setUuid(uuid);
         fieldFeedbackDao.insertFeedback(feedBack);
         dealPictureList(feedBack.getDetailPictureList(),feedBack.getResPictureList(),uuid);
+        //操作记录
+        optRecordService.addOptRecord(feedBack.getTaskId(),feedBack.getCreatedBy(), OptConst.FIELD_FEED);
+        //任务流程
+        formStateService.changeFormState(feedBack.getTaskId(),"form06");
         return HttpResult.success();
     }
 

@@ -8,6 +8,8 @@ import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.AuditTaskService;
 import com.tangmo.xizhu.customer.service.EquipApplyService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,10 @@ public class EquipApplyServiceImpl implements EquipApplyService {
     private AuditTaskService auditTaskService;
     @Resource
     private TaskPunchDao taskPunchDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     @Transactional
     public HttpResult addOutApply(OutEquipApply outEquipApply) {
@@ -58,8 +64,12 @@ public class EquipApplyServiceImpl implements EquipApplyService {
         // 更改任务状态和类型
         taskDao.updateStatusAndType(outEquipApply.getTaskId(), TaskStatusConst.INITIAL, TaskTypeConst.OUT_EQUIPMENT);
         //增加审批流程
-        auditTaskService.addAuditTask(outEquipApply.getTaskId(),outEquipApply.getCreatedBy(),
-                TaskTypeConst.OUT_EQUIPMENT,AuditOperateConst.INITIAL);
+//        auditTaskService.addAuditTask(outEquipApply.getTaskId(),outEquipApply.getCreatedBy(),
+//                TaskTypeConst.OUT_EQUIPMENT,AuditOperateConst.INITIAL);
+        //操作记录
+        optRecordService.addOptRecord(outEquipApply.getTaskId(),outEquipApply.getCreatedBy(), OptConst.EQUIP_APPLY);
+        //任务流程
+        formStateService.changeFormState(outEquipApply.getTaskId(),"form13");
 
         return HttpResult.success();
     }

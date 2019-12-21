@@ -2,10 +2,13 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.dao.DeviceFileDao;
 import com.tangmo.xizhu.customer.dao.MachRecordDao;
 import com.tangmo.xizhu.customer.entity.*;
+import com.tangmo.xizhu.customer.service.FormStateService;
 import com.tangmo.xizhu.customer.service.MachRecordService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,10 @@ public class MachRecordServiceImpl implements MachRecordService {
     private MachRecordDao machRecordDao;
     @Resource
     private DeviceFileDao deviceFileDao;
-
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addRecord(MachRecord machRecord) {
         if(machRecord == null|| machRecord.getTaskId() == null ){
@@ -33,6 +39,10 @@ public class MachRecordServiceImpl implements MachRecordService {
         String uuid = EncryptUtil.get32Uuid();
         machRecord.setUuid(uuid);
         machRecordDao.insertMachRecord(machRecord);
+        //操作记录
+        optRecordService.addOptRecord(machRecord.getTaskId(),machRecord.getCreatedBy(), OptConst.INSTALL_RECORD);
+        //任务流程
+        formStateService.changeFormState(machRecord.getTaskId(),"form10");
         return HttpResult.success();
     }
 

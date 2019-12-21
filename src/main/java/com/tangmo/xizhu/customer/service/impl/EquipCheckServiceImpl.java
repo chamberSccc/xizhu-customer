@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.OutEquipApplyDao;
 import com.tangmo.xizhu.customer.dao.OutEquipCheckDao;
@@ -12,6 +13,8 @@ import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.converter.EquipApplyConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.service.EquipCheckService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,10 @@ public class EquipCheckServiceImpl implements EquipCheckService {
     private OutEquipApplyDao outEquipApplyDao;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addOutCheck(OutEquipCheck outEquipCheck) {
         String uuid = EncryptUtil.get32Uuid();
@@ -39,6 +46,10 @@ public class EquipCheckServiceImpl implements EquipCheckService {
         outEquipCheckDao.insertOutCheck(outEquipCheck);
         //处理附件
         dealPictureList(outEquipCheck.getDetailPictureList(),uuid);
+        //操作记录
+        optRecordService.addOptRecord(outEquipCheck.getTaskId(),outEquipCheck.getCreatedBy(), OptConst.EQUIP_CHECK);
+        //任务流程
+        formStateService.changeFormState(outEquipCheck.getTaskId(),"form15");
         return HttpResult.success();
     }
 

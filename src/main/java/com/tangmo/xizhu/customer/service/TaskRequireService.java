@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.TaskRequire;
 
 /**

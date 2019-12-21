@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.FormTypeConst;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.DeviceFileDao;
 import com.tangmo.xizhu.customer.dao.MtainConfideDao;
@@ -13,7 +14,9 @@ import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.converter.ConfideFormConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
+import com.tangmo.xizhu.customer.service.FormStateService;
 import com.tangmo.xizhu.customer.service.MtainConfideService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +37,10 @@ public class MtainConfideServiceImpl implements MtainConfideService {
     private DeviceFileDao deviceFileDao;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addMtainConfide(MaintainConfide maintainConfide) {
         if(maintainConfide == null || maintainConfide.getTaskId() == null || maintainConfide.getFormType() == null){
@@ -47,6 +54,10 @@ public class MtainConfideServiceImpl implements MtainConfideService {
         maintainConfide.setUuid(uuid);
         mtainConfideDao.insertMtainConfide(maintainConfide);
         dealPictureList(maintainConfide.getPictureList(),uuid);
+        //操作记录
+        optRecordService.addOptRecord(maintainConfide.getTaskId(),maintainConfide.getCreatedBy(), OptConst.LIQING_CONFIDE);
+        //任务流程
+        formStateService.changeFormState(maintainConfide.getTaskId(),"form12");
         return HttpResult.success();
     }
 

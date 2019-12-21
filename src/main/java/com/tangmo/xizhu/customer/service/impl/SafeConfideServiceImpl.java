@@ -2,12 +2,15 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.SafeConfideDao;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.entity.SafeConfide;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.service.SafeConfideService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,10 @@ public class SafeConfideServiceImpl implements SafeConfideService {
     private SafeConfideDao safeConfideDao;
     @Resource
     private TaskAttachDao taskAttachDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addSafeConfide(SafeConfide safeConfide) {
         if(safeConfide == null || safeConfide.getTaskId() == null){
@@ -40,6 +47,10 @@ public class SafeConfideServiceImpl implements SafeConfideService {
         safeConfide.setUuid(uuid);
         safeConfideDao.insertSafeConfide(safeConfide);
         dealPictureList(safeConfide.getPictureList(),uuid);
+        //操作记录
+        optRecordService.addOptRecord(safeConfide.getTaskId(),safeConfide.getCreatedBy(), OptConst.SAFE_CONFIDE);
+        //任务流程
+        formStateService.changeFormState(safeConfide.getTaskId(),"form09");
         return HttpResult.success();
     }
 

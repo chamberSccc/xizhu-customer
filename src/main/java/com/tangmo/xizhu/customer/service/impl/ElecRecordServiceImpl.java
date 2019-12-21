@@ -2,9 +2,12 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.dao.*;
 import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.service.ElecRecordService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,10 @@ public class ElecRecordServiceImpl implements ElecRecordService {
     private TaskDao taskDao;
     @Resource
     private DeviceFileDao deviceFileDao;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addRecord(ElecRecord elecRecord) {
         if(elecRecord == null || elecRecord.getTaskId() == null ){
@@ -33,6 +40,10 @@ public class ElecRecordServiceImpl implements ElecRecordService {
         String uuid = EncryptUtil.get32Uuid();
         elecRecord.setUuid(uuid);
         elecRecordDao.insertElecRecord(elecRecord);
+        //操作记录
+        optRecordService.addOptRecord(elecRecord.getTaskId(),elecRecord.getCreatedBy(), OptConst.INSTALL_RECORD);
+        //任务流程
+        formStateService.changeFormState(elecRecord.getTaskId(),"form11");
         return HttpResult.success();
     }
 

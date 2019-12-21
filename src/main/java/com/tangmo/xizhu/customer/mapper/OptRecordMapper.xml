@@ -22,9 +22,6 @@
             <if test="userId != null">
                 user_id,
             </if>
-            <if test="userName != null">
-                user_name,
-            </if>
             <if test="operation != null">
                 operation,
             </if>
@@ -43,9 +40,6 @@
             </if>
             <if test="userId != null">
                 #{userId},
-            </if>
-            <if test="userName != null">
-                #{userName},
             </if>
             <if test="operation != null">
                 #{operation},

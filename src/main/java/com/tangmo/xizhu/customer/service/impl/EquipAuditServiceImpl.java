@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.AuditOperateConst;
+import com.tangmo.xizhu.customer.constant.OptConst;
 import com.tangmo.xizhu.customer.constant.TaskTypeConst;
 import com.tangmo.xizhu.customer.dao.AuditTaskDao;
 import com.tangmo.xizhu.customer.dao.OutEquipApplyDao;
@@ -14,6 +15,8 @@ import com.tangmo.xizhu.customer.entity.OutEquipNotice;
 import com.tangmo.xizhu.customer.entity.converter.EquipApplyConverter;
 import com.tangmo.xizhu.customer.service.EquipAuditService;
 import com.tangmo.xizhu.customer.service.EquipNoticeService;
+import com.tangmo.xizhu.customer.service.FormStateService;
+import com.tangmo.xizhu.customer.service.OptRecordService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +38,10 @@ public class EquipAuditServiceImpl implements EquipAuditService {
     private AuditTaskDao auditTaskDao;
     @Resource
     private EquipNoticeService equipNoticeService;
+    @Resource
+    private OptRecordService optRecordService;
+    @Resource
+    private FormStateService formStateService;
     @Override
     public HttpResult addOutAudit(OutEquipAudit outEquipAudit) {
         if(outEquipAudit == null || outEquipAudit.getTaskId() == null){
@@ -51,16 +58,13 @@ public class EquipAuditServiceImpl implements EquipAuditService {
         outEquipAudit.setUuid(EncryptUtil.get32Uuid());
         outEquipAuditDao.insertOutAudit(outEquipAudit);
         //添加通知单
-        OutEquipNotice outEquipNotice = EquipApplyConverter.apply2Notice(outEquipApply);
-        outEquipNotice.setUuid(EncryptUtil.get32Uuid());
-        equipNoticeService.addOutNotice(outEquipNotice);
-//        //增加审批流程
-//        AuditTask auditTask = new AuditTask();
-//        auditTask.setCreatedBy(outEquipApply.getCreatedBy());
-//        auditTask.setUuid(EncryptUtil.get32Uuid());
-//        auditTask.setTaskType(TaskTypeConst.OUT_EQUIPMENT);
-//        auditTask.setOperation(AuditOperateConst.ASSIGN);
-//        auditTaskDao.insertAuditTask(auditTask);
+//        OutEquipNotice outEquipNotice = EquipApplyConverter.apply2Notice(outEquipApply);
+//        outEquipNotice.setUuid(EncryptUtil.get32Uuid());
+//        equipNoticeService.addOutNotice(outEquipNotice);
+        //操作记录
+        optRecordService.addOptRecord(outEquipApply.getTaskId(),outEquipApply.getCreatedBy(), OptConst.EQUIP_AUDIT);
+        //任务流程
+        formStateService.changeFormState(outEquipApply.getTaskId(),"form14");
         return HttpResult.success();
     }
 

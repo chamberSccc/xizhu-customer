@@ -9,8 +9,7 @@ import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
 import com.tangmo.xizhu.customer.entity.converter.TaskConverter;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
-import com.tangmo.xizhu.customer.service.AuditTaskService;
-import com.tangmo.xizhu.customer.service.TaskService;
+import com.tangmo.xizhu.customer.service.*;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,9 +35,13 @@ public class TaskServiceImpl implements TaskService {
     @Resource
     private AuditTaskService auditTaskService;
     @Resource
-    private FieldAssignDao fieldAssignDao;
+    private OptRecordService optRecordService;
+    @Resource
+    private FieldAssignService fieldAssignService;
     @Resource
     private TaskPunchDao taskPunchDao;
+    @Resource
+    private FormStateService formStateService;
 
     @Override
     @Transactional
@@ -69,24 +72,15 @@ public class TaskServiceImpl implements TaskService {
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);
         task.setTaskStatus(TaskStatusConst.INITIAL);
-        if(!task.getTaskAssignType().equals(String.valueOf(TaskTypeConst.EQUIPMENT))){
-            task.setTaskType(TaskTypeConst.FAST_SERVICE);
-        }else{
-            //如果是安调设备，直接生成现场服务指派单
-            task.setTaskType(TaskTypeConst.EQUIPMENT);
-            FieldAssign fieldAssign = new FieldAssign();
-            fieldAssign.setUuid(EncryptUtil.get32Uuid());
-            fieldAssign.setApplyDate(new Date(System.currentTimeMillis()));
-            fieldAssign.setCompanyName(task.getCompanyName());
-            fieldAssign.setContactName(task.getContactName());
-            fieldAssign.setMobile(task.getMobile());
-            fieldAssign.setDeviceType(task.getDeviceType());
-            fieldAssign.setAssemblyType(task.getAssemblyType());
-            fieldAssign.setTaskAssignType(task.getTaskAssignType());
-            fieldAssign.setTroubleType(task.getTroubleType());
-            fieldAssign.setTaskId(uuid);
-            fieldAssignDao.insertAssign(fieldAssign);
-        }
+        task.setTaskType(TaskTypeConst.FAST_SERVICE);
+//        if(!task.getTaskAssignType().equals(String.valueOf(TaskTypeConst.EQUIPMENT))){
+//
+//        }else{
+//            task.setTaskType(TaskTypeConst.EQUIPMENT);
+//            //如果是安调设备，直接生成现场服务指派单
+//            //fieldAssignService.addFieldAssign(task);
+//        }
+        //新增任务
         taskDao.insertTask(task);
         //新增任务需求单，转换任务中相同信息
         TaskRequire require = TaskConverter.task2Require(task);
@@ -103,6 +97,9 @@ public class TaskServiceImpl implements TaskService {
             taskAttachDao.insertBatchAttach(attaches);
         }
         //添加任务状态
+        formStateService.addFormState(uuid);
+        //添加任务流程
+        optRecordService.addOptRecord(task,OptConst.CREATE_TASK);
         return HttpResult.success();
     }
 

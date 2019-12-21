@@ -22,8 +22,9 @@ public class FormState {
     private Boolean form09;//设备档案表
     private Boolean form10;//安装工作记录表(机械)
     private Boolean form11;//安装工作记录表(电气)
-    private Boolean form12;//外购件安装调试申请单
-    private Boolean form13;//外购件授权审批单
-    private Boolean form14;//外购件现场服务验收单
-    private Boolean form15;//安调满意度调查表
+    private Boolean form12;//沥青交底表
+    private Boolean form13;//外购件安装调试申请单
+    private Boolean form14;//外购件授权审批单
+    private Boolean form15;//外购件现场服务验收单
+    private Boolean form16;//安调满意度调查表
 }

@@ -5,10 +5,13 @@ import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.TaskAttachConst;
 import com.tangmo.xizhu.customer.dao.TaskAttachDao;
 import com.tangmo.xizhu.customer.dao.TaskRequireDao;
+import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.TaskAttach;
 import com.tangmo.xizhu.customer.entity.TaskRequire;
 import com.tangmo.xizhu.customer.entity.converter.TaskAttachConverter;
+import com.tangmo.xizhu.customer.entity.converter.TaskConverter;
 import com.tangmo.xizhu.customer.service.TaskRequireService;
+import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

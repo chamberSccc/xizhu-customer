@@ -30,7 +30,8 @@ public class FormStateServiceImpl implements FormStateService{
 
     @Override
     public HttpResult changeFormState(String taskId, String column) {
-        return null;
+        formStateDao.updateFormState(taskId, column);
+        return HttpResult.success();
     }
 
     @Override
