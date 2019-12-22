@@ -11,7 +11,7 @@
     </select>
 
     <insert id="insertFormState" parameterType="com.tangmo.xizhu.customer.entity.FormState">
-        INSERT INTO s_form_state (uuid,task_id,form01) VALUE (#{uuid},#{taskId},#{form01})
+        INSERT INTO s_form_state (uuid,task_id,form01)  values (#{uuid},#{taskId},#{form01})
     </insert>
 
     <update id="updateFormState">

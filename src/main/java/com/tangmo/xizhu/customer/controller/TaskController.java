@@ -49,11 +49,15 @@ public class TaskController extends BaseController {
     @ApiOperation(value = "获取任务详情",httpMethod = "GET",notes = "")
     @GetMapping("/{taskId}")
     public HttpResult getTaskDetail(@PathVariable String taskId){
-        List<AuditTask> auditFlowList = (List<AuditTask>) auditTaskService.getAuditFlowList(taskId).getData();
+        //List<AuditTask> auditFlowList = (List<AuditTask>) auditTaskService.getAuditFlowList(taskId).getData();
         Task taskDetail = (Task) taskService.getTaskDetail(taskId).getData();
+        if(taskDetail == null){
+            return HttpResult.fail(ResultCode.PARAM_ERROR);
+        }
+        List<OptRecord> list = (List<OptRecord>) optRecordService.getTaskRecord(taskId,taskDetail.getTaskType()).getData();
         Map<String,Object> map = new HashMap<>();
         map.put("task",taskDetail);
-        map.put("audit",auditFlowList);
+        map.put("audit",list);
         return HttpResult.success(map);
     }
 

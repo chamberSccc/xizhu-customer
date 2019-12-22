@@ -62,4 +62,9 @@ public class OptRecordServiceImpl implements OptRecordService {
         }
         return HttpResult.success(optRecordDao.selectByTaskIdAndType(taskId,type));
     }
+
+    @Override
+    public HttpResult getTaskRecord(String taskId, Byte taskType) {
+        return HttpResult.success(optRecordDao.selectByTaskIdAndType(taskId,taskType));
+    }
 }

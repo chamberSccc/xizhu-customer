@@ -11,7 +11,7 @@
 
     <select id="selectByTaskIdAndType" resultMap="RecordMap">
       SELECT opt.uuid,opt.user_id,suser.user_name,opt.operation,opt.created_time  from s_opt_record opt left join s_user suser
-      on opt.user_id = suser.user_id
+      on opt.user_id = suser.uuid
       where opt.task_id = #{taskId} and opt.task_type = #{taskType}
     </select>
 

@@ -79,6 +79,9 @@ public class BaseController {
     @Resource
     protected EquipSurveyService equipSurveyService;
 
+    @Resource
+    protected OptRecordService optRecordService;
+
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }

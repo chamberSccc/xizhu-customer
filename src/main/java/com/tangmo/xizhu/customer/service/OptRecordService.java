@@ -51,4 +51,14 @@ public interface OptRecordService {
      * @description: 查找任务的操作记录
      */
     HttpResult getTaskRecord(String taskId);
+
+    /**
+     * @param taskId
+     * @param taskType
+     * @return
+     * @author chen bo
+     * @date 2019/12/21
+     * @description: 查找任务的操作记录
+     */
+    HttpResult getTaskRecord(String taskId,Byte taskType);
 }
