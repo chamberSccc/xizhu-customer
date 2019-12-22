@@ -50,6 +50,7 @@ public class OptRecordServiceImpl implements OptRecordService {
         optRecord.setOperation(operation);
         optRecord.setUserId(userId);
         optRecord.setUuid(EncryptUtil.get32Uuid());
+        optRecordDao.insertOptRecord(optRecord);
         return HttpResult.success();
     }
 

@@ -21,7 +21,7 @@ public class TaskForm {
     public TaskForm(String formName, boolean editable) {
         this.formName = formName;
         this.editable = editable;
-        this.doneState = false;
+        this.doneState = true;
     }
 
     public TaskForm(String formName, boolean editable ,boolean doneState) {

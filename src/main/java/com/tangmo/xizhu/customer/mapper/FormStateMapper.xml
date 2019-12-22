@@ -15,6 +15,6 @@
     </insert>
 
     <update id="updateFormState">
-        UPDATE s_form_state SET ${column} = true WHERE task_id = #{taskId}
+        UPDATE s_form_state SET ${column} = 1 WHERE task_id = #{taskId}
     </update>
 </mapper>

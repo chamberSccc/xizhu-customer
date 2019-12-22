@@ -71,7 +71,7 @@ public class TaskServiceImpl implements TaskService {
         //新增任务
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);
-        task.setTaskStatus(TaskStatusConst.INITIAL);
+        task.setTaskStatus(TaskStatusConst.DEALING);
         task.setTaskType(TaskTypeConst.FAST_SERVICE);
 //        if(!task.getTaskAssignType().equals(String.valueOf(TaskTypeConst.EQUIPMENT))){
 //
