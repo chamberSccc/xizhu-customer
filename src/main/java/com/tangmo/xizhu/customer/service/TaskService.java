@@ -100,13 +100,13 @@ public interface TaskService {
     HttpResult getUndoTaskCount(String userId);
 
     /**
-     * @param userId
+     * @param deptId
      * @return
      * @author chen bo
      * @date 2019/10/21
      * @description: 获取未审核任务数量
      */
-    HttpResult getUnauditCount(String userId);
+    HttpResult getUnauditCount(String deptId);
 
     /**
      * @param taskSearch

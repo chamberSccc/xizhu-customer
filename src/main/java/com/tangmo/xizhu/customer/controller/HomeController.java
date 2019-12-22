@@ -40,6 +40,6 @@ public class HomeController extends BaseController {
         if(getUserType() != UserTypeConst.AUDIT){
             return HttpResult.success(0);
         }
-        return taskService.getUnauditCount(getUserId());
+        return taskService.getUnauditCount(getDeptId());
     }
 }

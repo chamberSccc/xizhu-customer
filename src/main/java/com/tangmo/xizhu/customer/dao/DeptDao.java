@@ -48,6 +48,15 @@ public interface DeptDao {
     Department selectById(String deptId);
 
     /**
+     * @param userId
+     * @return
+     * @author chen bo
+     * @date 2019/12/22
+     * @description: 查询部门详情 通过人物信息
+     */
+    Department selectByUserId(String userId);
+
+    /**
      * @param
      * @return
      * @author chen bo

@@ -7,8 +7,10 @@ import com.tangmo.xizhu.customer.constant.AuditOperateConst;
 import com.tangmo.xizhu.customer.constant.TaskStatusConst;
 import com.tangmo.xizhu.customer.constant.TaskTypeConst;
 import com.tangmo.xizhu.customer.dao.AuditTaskDao;
+import com.tangmo.xizhu.customer.dao.DeptDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.entity.AuditTask;
+import com.tangmo.xizhu.customer.entity.Department;
 import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import com.tangmo.xizhu.customer.service.AuditTaskService;
@@ -36,6 +38,8 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     private AuditTaskDao auditTaskDao;
     @Resource
     private TaskDao taskDao;
+    @Resource
+    private DeptDao deptDao;
     @Override
     @Transactional
     public HttpResult assignTask(AuditTask auditTask) {
@@ -98,9 +102,10 @@ public class AuditTaskServiceImpl implements AuditTaskService {
 
     @Override
     public HttpResult getUndoAuditList(String userId,TaskSearch taskSearch) {
+        Department department = deptDao.selectByUserId(userId);
         Page page = taskSearch;
         page.startPage();
-        List<Task> list = taskDao.selectByStatus(TaskStatusConst.INITIAL);
+        List<Task> list = taskDao.selectByStatusAndType(TaskStatusConst.INITIAL,department.getTaskType());
         page.setResult(list);
         return HttpResult.success(page);
     }

@@ -105,13 +105,13 @@ public interface TaskDao {
     Integer selectUndoCountByUser(String userId);
 
     /**
-     * @param userId
+     * @param deptId
      * @return
      * @author chen bo
      * @date 2019/10/21
      * @description: 查询未审核任务
      */
-    Integer selectUnauditCountByUser(String userId);
+    Integer selectUnauditCountByDept(String deptId);
 
     /**
      * @param taskId
@@ -138,4 +138,15 @@ public interface TaskDao {
      * @description: 通过设备pid查询设备任务列表
      */
     List<Task> selectByPid(@Param("devicePid") String devicePid, @Param("search") TaskSearch taskSearch);
+
+
+    /**
+     * @param status
+     * @param taskType
+     * @return
+     * @author chen bo
+     * @date 2019/12/22
+     * @description: 通过任务状态和类型查找任务
+     */
+    List<Task> selectByStatusAndType(@Param("status") Byte status,@Param("taskType") Byte taskType);
 }

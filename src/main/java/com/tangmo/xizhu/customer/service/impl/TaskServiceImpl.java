@@ -158,8 +158,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public HttpResult getUnauditCount(String userId) {
-        return HttpResult.success(taskDao.selectUnauditCountByUser(userId));
+    public HttpResult getUnauditCount(String deptId) {
+        return HttpResult.success(taskDao.selectUnauditCountByDept(deptId));
     }
 
     @Override
