@@ -86,9 +86,9 @@ public class FieldAssignServiceImpl implements FieldAssignService {
         FieldAssign fieldAssign = fieldAssignDao.selectByTaskId(taskId);
         if(fieldAssign == null){
             FieldApply fieldApply = fieldApplyDao.selectByTaskId(taskId);
-            if(fieldApply == null){
-                return HttpResult.fail(ResultCode.FIELD_APPLY_MISS);
-            }
+//            if(fieldApply == null){
+//                return HttpResult.fail(ResultCode.FIELD_APPLY_MISS);
+//            }
             fieldAssign = FieldApplyConverter.apply2assign(fieldApply);
         }else{
             List<String> detail = taskAttachDao.selectByParentAndType(fieldAssign.getUuid(), TaskAttachConst.FIELD_ASSIGN,

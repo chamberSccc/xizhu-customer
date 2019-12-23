@@ -28,6 +28,7 @@ public class FieldSurveyController extends BaseController {
     @ApiOperation(value = "新增售后服务满意度调查表",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addFieldSurvey(@RequestBody FieldSurvey fieldSurvey){
+        fieldSurvey.setCreatedBy(getUserId());
         return fieldSurveyService.addSurvey(fieldSurvey);
     }
     /**

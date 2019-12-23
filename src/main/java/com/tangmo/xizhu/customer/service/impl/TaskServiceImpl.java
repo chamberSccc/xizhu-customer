@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,6 +74,7 @@ public class TaskServiceImpl implements TaskService {
         task.setUuid(uuid);
         task.setTaskStatus(TaskStatusConst.DEALING);
         task.setTaskType(TaskTypeConst.FAST_SERVICE);
+        task.setExecutor(task.getCreatedBy());
 //        if(!task.getTaskAssignType().equals(String.valueOf(TaskTypeConst.EQUIPMENT))){
 //
 //        }else{
@@ -200,6 +202,9 @@ public class TaskServiceImpl implements TaskService {
             trouble = trouble.substring(1,trouble.length());
         }
         String [] strArr= trouble.split(",");
-        return HttpResult.success(TaskFormConst.getTaskForm(task.getTaskType(),userType, Byte.valueOf(strArr[0])));
+        FormState formState = (FormState) formStateService.getTaskState(taskId).getData();
+        ArrayList<TaskForm> list = TaskFormConst.getTaskForm(task.getTaskType(),userType, Byte.valueOf(strArr[0]));
+        TaskFormConst.changeState(list,formState);
+        return HttpResult.success(list);
     }
 }

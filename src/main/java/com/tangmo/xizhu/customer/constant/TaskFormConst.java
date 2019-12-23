@@ -22,9 +22,102 @@ public class TaskFormConst {
      * @date 2019/12/21
      * @description: 给表单添加是否填写完成的状态
      */
-    private void addState(List<TaskForm> list, FormState formState){
+    public static void changeState(List<TaskForm> list, FormState formState){
         if(formState == null || list == null){
             return;
+        }
+        for (int i = 0; i < list.size(); i++) {
+            TaskForm taskForm = list.get(i);
+            if(taskForm.getFormName().equals(FormNameConst.FAST_FB)){
+                if(formState.getForm02() != null && formState.getForm02() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.FAST_SURVEY)){
+                if(formState.getForm03() != null && formState.getForm03() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.FIELD_APPLY)){
+                if(formState.getForm04() != null && formState.getForm04() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.FIELD_ASSIGN)){
+                if(formState.getForm05() != null && formState.getForm05() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.FIELD_FB)){
+                if(formState.getForm06() != null && formState.getForm06() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.FIELD_SURVEY)){
+                if(formState.getForm07() != null && formState.getForm07() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.SAFE_CONFIDE)){
+                if(formState.getForm08() != null && formState.getForm08() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.DEVICE_FILE)){
+                if(formState.getForm09() != null && formState.getForm09() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.MACH_RECORD)){
+                if(formState.getForm10() != null && formState.getForm10() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.ELEC_RECORD)){
+                if(formState.getForm11() != null && formState.getForm11() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.MTAIN_CONFIDE)){
+                if(formState.getForm12() != null && formState.getForm12() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.EQUIP_APPLY)){
+                if(formState.getForm13() != null && formState.getForm13() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.EQUIP_AUDIT)){
+                if(formState.getForm14() != null && formState.getForm14() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.EQUIP_CHECK)){
+                if(formState.getForm15() != null && formState.getForm15() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
+            if(taskForm.getFormName().equals(FormNameConst.EQUIP_SURVEY)){
+                if(formState.getForm16() != null && formState.getForm16() == true){
+                    taskForm.setDoneState(true);
+                }
+                continue;
+            }
         }
     }
     /**
@@ -40,7 +133,7 @@ public class TaskFormConst {
         ArrayList<TaskForm> list;
         if(taskType == null){
             list = new ArrayList<TaskForm>() {{
-                add(new TaskForm(FormNameConst.REQUIRE,false));
+                add(new TaskForm(FormNameConst.REQUIRE,false,true));
             }};
             return list;
         }
@@ -52,10 +145,8 @@ public class TaskFormConst {
             }
             //现场服务单子
             if(taskType.equals(TaskTypeConst.FIELD_SERVICE)){
-                ArrayList<TaskForm> fastList = adminFastForm();
                 ArrayList<TaskForm> fieldList = adminFieldForm();
-                fastList.addAll(fieldList);
-                return fastList;
+                return fieldList;
             }
             //安装调试单子
             if(taskType.equals(TaskTypeConst.EQUIPMENT)){
@@ -63,10 +154,8 @@ public class TaskFormConst {
             }
             //外购件安装单子
             if(taskType.equals(TaskTypeConst.OUT_EQUIPMENT)){
-                ArrayList<TaskForm> equipList = adminEquipForm(troubleType);
                 ArrayList<TaskForm> outList = adminOutEquipForm();
-                equipList.addAll(outList);
-                return equipList;
+                return outList;
             }
         }
         if(userType.equals(UserTypeConst.SERVICE)){
@@ -85,10 +174,8 @@ public class TaskFormConst {
             }
             //外购件安装单子
             if(taskType.equals(TaskTypeConst.OUT_EQUIPMENT)){
-                ArrayList<TaskForm> equipList = userEquipForm(troubleType);
                 ArrayList<TaskForm> outList = userOutEquipForm();
-                equipList.addAll(outList);
-                return equipList;
+                return outList;
             }
         }
         if(userType.equals(UserTypeConst.CUSTOMER)){
@@ -126,10 +213,9 @@ public class TaskFormConst {
      */
     public static ArrayList<TaskForm> adminFastForm(){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
-            add(new TaskForm(FormNameConst.REQUIRE,false));
+            add(new TaskForm(FormNameConst.REQUIRE,false,true));
             add(new TaskForm(FormNameConst.FAST_FB,false));
             add(new TaskForm(FormNameConst.FAST_SURVEY,true));
-            add(new TaskForm(FormNameConst.FIELD_APPLY,true));
         }};
         return list;
     }
@@ -142,6 +228,7 @@ public class TaskFormConst {
      */
     public static ArrayList<TaskForm> adminFieldForm(){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.REQUIRE,false,true));
             add(new TaskForm(FormNameConst.FIELD_APPLY,true));
             add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.FIELD_FB,true));
@@ -159,7 +246,8 @@ public class TaskFormConst {
      */
     public static ArrayList<TaskForm> adminEquipForm(Byte troubleType){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
-            add(new TaskForm(FormNameConst.REQUIRE,true));
+            add(new TaskForm(FormNameConst.REQUIRE,true,true));
+            add(new TaskForm(FormNameConst.FIELD_APPLY,true));
             add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.SAFE_CONFIDE,true));
             add(new TaskForm(FormNameConst.DEVICE_FILE,true));
@@ -172,7 +260,6 @@ public class TaskFormConst {
             list.add(new TaskForm(FormNameConst.MACH_RECORD,true));
         }
         list.add(new TaskForm(FormNameConst.MTAIN_CONFIDE,true));
-        list.add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
         list.add(new TaskForm(FormNameConst.EQUIP_SURVEY,true));
         return list;
     }
@@ -186,6 +273,8 @@ public class TaskFormConst {
      */
     public static ArrayList<TaskForm> adminOutEquipForm(){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.REQUIRE,true,true));
+            add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
             add(new TaskForm(FormNameConst.EQUIP_AUDIT,true));
             add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
         }};
@@ -201,7 +290,7 @@ public class TaskFormConst {
      */
     public static ArrayList<TaskForm> userFastForm(){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
-            add(new TaskForm(FormNameConst.REQUIRE,false));
+            add(new TaskForm(FormNameConst.REQUIRE,false,true));
             add(new TaskForm(FormNameConst.FAST_FB,false));
             add(new TaskForm(FormNameConst.FIELD_APPLY,true));
         }};
@@ -216,7 +305,7 @@ public class TaskFormConst {
      */
     public static ArrayList<TaskForm> userFieldForm(){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
-            add(new TaskForm(FormNameConst.REQUIRE,false));
+            add(new TaskForm(FormNameConst.REQUIRE,false,true));
             add(new TaskForm(FormNameConst.FIELD_APPLY,true));
             add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.FIELD_FB,true));
@@ -233,7 +322,7 @@ public class TaskFormConst {
      */
     public static ArrayList<TaskForm> userEquipForm(Byte troubleType){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
-            add(new TaskForm(FormNameConst.REQUIRE,true));
+            add(new TaskForm(FormNameConst.REQUIRE,true,true));
             add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.SAFE_CONFIDE,true));
             add(new TaskForm(FormNameConst.DEVICE_FILE,true));
@@ -258,6 +347,9 @@ public class TaskFormConst {
      */
     public static ArrayList<TaskForm> userOutEquipForm(){
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.REQUIRE,true,true));
+            add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
+            add(new TaskForm(FormNameConst.EQUIP_AUDIT,true));
             add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
         }};
         return list;

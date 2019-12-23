@@ -7,7 +7,8 @@
     </resultMap>
 
     <select id="selectByTaskId" resultMap="FormStateMap">
-      SELECT uuid,user_id,user_name,operation,created_time  from s_form_state where task_id = #{taskId}
+      SELECT uuid,task_id,form01,form02,form03,form04,form05,form06,form07,form08,form09,form10,form11
+        ,form12,form13,form14,form15,form16 from s_form_state where task_id = #{taskId}
     </select>
 
     <insert id="insertFormState" parameterType="com.tangmo.xizhu.customer.entity.FormState">

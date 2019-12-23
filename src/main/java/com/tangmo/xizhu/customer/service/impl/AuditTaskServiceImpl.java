@@ -9,11 +9,11 @@ import com.tangmo.xizhu.customer.constant.TaskTypeConst;
 import com.tangmo.xizhu.customer.dao.AuditTaskDao;
 import com.tangmo.xizhu.customer.dao.DeptDao;
 import com.tangmo.xizhu.customer.dao.TaskDao;
-import com.tangmo.xizhu.customer.entity.AuditTask;
-import com.tangmo.xizhu.customer.entity.Department;
-import com.tangmo.xizhu.customer.entity.Task;
+import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
 import com.tangmo.xizhu.customer.service.AuditTaskService;
+import com.tangmo.xizhu.customer.service.EquipAuditService;
+import com.tangmo.xizhu.customer.service.FieldAssignService;
 import com.tangmo.xizhu.customer.service.TaskService;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.context.annotation.Lazy;
@@ -40,6 +40,10 @@ public class AuditTaskServiceImpl implements AuditTaskService {
     private TaskDao taskDao;
     @Resource
     private DeptDao deptDao;
+    @Resource
+    private FieldAssignService fieldAssignService;
+    @Resource
+    private EquipAuditService equipAuditService;
     @Override
     @Transactional
     public HttpResult assignTask(AuditTask auditTask) {
@@ -50,6 +54,20 @@ public class AuditTaskServiceImpl implements AuditTaskService {
         auditTask.setOperation(AuditOperateConst.ASSIGN);
         auditTask.setUuid(EncryptUtil.get32Uuid());
         auditTaskDao.insertAuditTask(auditTask);
+        //增加指派单和审核单
+        if(auditTask.getTaskType().equals(TaskTypeConst.FIELD_SERVICE) || auditTask.getTaskType().equals(TaskTypeConst.EQUIPMENT)){
+            FieldAssign fieldAssign = (FieldAssign) fieldAssignService.getByTaskId(auditTask.getTaskId()).getData();
+            fieldAssign.setCreatedBy(auditTask.getCreatedBy());
+            fieldAssign.setLeader(auditTask.getCreatedBy());
+            fieldAssign.setFieldTarget(auditTask.getComment());
+            fieldAssignService.addFieldAssign(fieldAssign);
+        }
+        if(auditTask.getTaskType().equals(TaskTypeConst.OUT_EQUIPMENT)){
+            OutEquipAudit outEquipAudit = (OutEquipAudit) equipAuditService.getByTaskId(auditTask.getTaskId()).getData();
+            outEquipAudit.setCreatedBy(auditTask.getCreatedBy());
+            outEquipAudit.setOpinion(auditTask.getComment());
+            equipAuditService.addOutAudit(outEquipAudit);
+        }
         return HttpResult.success();
     }
 

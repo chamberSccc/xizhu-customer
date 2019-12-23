@@ -29,6 +29,7 @@ public class FieldFeedbackController extends BaseController {
     @ApiOperation(value = "新增现场服务反馈单",httpMethod = "POST",notes = "")
     @PostMapping("")
     public HttpResult addFeedback(@ApiParam(name="现场服务反馈单对象",value="json格式",required=true) @RequestBody FieldFeedBack fieldFeedBack){
+        fieldFeedBack.setCreatedBy(getUserId());
         return fieldFeedbackService.addFeedback(fieldFeedBack);
     }
 

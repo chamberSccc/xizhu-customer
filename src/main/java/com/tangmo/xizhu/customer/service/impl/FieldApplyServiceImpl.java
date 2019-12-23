@@ -60,8 +60,8 @@ public class FieldApplyServiceImpl implements FieldApplyService {
         //修改任务审批状态
         taskDao.updateStatusAndType(fieldApply.getTaskId(), TaskStatusConst.INITIAL, TaskTypeConst.FIELD_SERVICE);
         //增加审批流程
-        auditTaskService.addAuditTask(fieldApply.getTaskId(),fieldApply.getCreatedBy(),
-                TaskTypeConst.FIELD_SERVICE,AuditOperateConst.INITIAL);
+//        auditTaskService.addAuditTask(fieldApply.getTaskId(),fieldApply.getCreatedBy(),
+//                TaskTypeConst.FIELD_SERVICE,AuditOperateConst.INITIAL);
         //操作记录
         optRecordService.addOptRecord(fieldApply.getTaskId(),fieldApply.getCreatedBy(), OptConst.FIELD_APPLY);
         //任务流程
