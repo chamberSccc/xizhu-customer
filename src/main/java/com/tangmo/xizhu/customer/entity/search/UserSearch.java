@@ -14,4 +14,5 @@ import lombok.Data;
 public class UserSearch extends Page {
     @ApiModelProperty(value="用户姓名",name="userName",example="")
     private String userName;
+    private String userState;
 }

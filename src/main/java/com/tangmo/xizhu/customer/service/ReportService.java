@@ -2,6 +2,7 @@ package com.tangmo.xizhu.customer.service;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.entity.search.TaskReportSearch;
+import com.tangmo.xizhu.customer.entity.search.UserSearch;
 
 /**
  * @author boge
@@ -31,4 +32,13 @@ public interface ReportService {
      * @return
      */
     HttpResult getTaskMonthCount(TaskReportSearch taskReportSearch);
+
+    /**
+     * @param userSearch
+     * @return
+     * @author chen bo
+     * @date 2019/12/26
+     * @description: 人员状态
+     */
+    HttpResult getUserState(UserSearch userSearch);
 }

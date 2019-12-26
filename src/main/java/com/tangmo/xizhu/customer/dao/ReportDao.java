@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.dao;
 
 import com.tangmo.xizhu.customer.entity.search.TaskReportSearch;
+import com.tangmo.xizhu.customer.entity.search.UserSearch;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -36,8 +37,8 @@ public interface ReportDao {
 
     /**
      * 查询人员状态
-     * @param taskReportSearch
+     * @param userSearch
      * @return
      */
-    List<Map<String,Object>> selectUserState(TaskReportSearch taskReportSearch);
+    List<Map<String,Object>> selectUserState(UserSearch userSearch);
 }

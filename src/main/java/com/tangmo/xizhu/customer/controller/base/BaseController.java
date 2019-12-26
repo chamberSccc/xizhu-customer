@@ -81,6 +81,8 @@ public class BaseController {
 
     @Resource
     protected OptRecordService optRecordService;
+    @Resource
+    protected ReportService reportService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

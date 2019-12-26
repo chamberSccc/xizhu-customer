@@ -1,5 +1,6 @@
 package com.tangmo.xizhu.customer.entity.search;
 
+import com.tangmo.xizhu.customer.common.Page;
 import lombok.Data;
 
 /**
@@ -8,10 +9,12 @@ import lombok.Data;
  * @description 任务报表搜索对象
  */
 @Data
-public class TaskReportSearch {
+public class TaskReportSearch extends Page {
 
     private String year;
-    private Byte State;
     private String troubleType;
     private String assemblyType;
+    private Byte status; //任务状态
+    private String deviceType;
+
 }
