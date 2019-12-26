@@ -28,6 +28,7 @@ public class FastSurveyController extends BaseController {
     @ApiOperation(value = "新增快速服务满意度调查表",httpMethod = "POST",notes = "完成任务时填写")
     @PostMapping("")
     public HttpResult addFastSurvey(@ApiParam(name="满意度调查表对象",value="json格式",required=true) @RequestBody FastSurvey fastSurvey){
+        fastSurvey.setCreatedBy(getUserId());
         return fastSurveyService.addSurvey(fastSurvey);
     }
 
