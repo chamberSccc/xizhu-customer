@@ -9,9 +9,9 @@ package com.tangmo.xizhu.customer.constant;
 public class TroubleTypeConst {
 
     // 机械问题
-    public static final byte MACHINE = 0;
+    public static final byte MACHINE = 1;
     // 电气问题
-    public static final byte ELECTRIC = 1;
+    public static final byte ELECTRIC = 2;
 
     public static final String MACHINE_CODE = "机械问题";
     public static final String ELECTRIC_CODE = "电气问题";

@@ -46,7 +46,8 @@ public class DeptServiceImpl implements DeptService{
 
     @Override
     public HttpResult delDeptById(String deptId) {
-        return null;
+        deptDao.deleteById(deptId);
+        return HttpResult.success();
     }
 
     @Override

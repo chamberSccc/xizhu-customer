@@ -22,23 +22,36 @@
     </select>
 
     <select id="selectTaskReport" resultType="java.util.Map">
-        select task.uuid,task.company_name,task.device_type,task.assembly_type,task.trouble_type,task.task_status,
-        task.device_address,task.executor,task.created_time FROM s_service_task task
-        left join s_audit_task audit on task.uuid = audit.task_id
-        where audit.operation = 3
+        select task.uuid,task.company_name as companyName,task.device_type as deviceType,task.assembly_type as assemblyType,
+        task.trouble_type as troubleType,task.task_status as taskStatus,
+        task.device_address as deviceAddress,suser.user_name as executor,task.created_time as createdTime FROM s_service_task task
+        inner join s_user suser on task.executor = suser.uuid
+        where 1 = 1
+        <if test="status != null">
+            and task.task_status = #{status}
+        </if>
+        <if test="troubleType != null">
+            and CHARINDEX(#{troubleType},task.trouble_type)>0
+        </if>
+        <if test="assemblyType != null">
+            and CHARINDEX(#{assemblyType},task.assembly_type)>0
+        </if>
+        <if test="deviceType != null">
+            and CHARINDEX(#{deviceType},task.device_type)>0
+        </if>
     </select>
 
     <select id="selectUserState" resultType="java.util.Map">
-        select t.user_name,t.dept_name,t.userState,t.address
-        (select suser.user_name,suser.dept_name,(case when task.task_status = 2 then 0 else 1 end) as userState,
+        select t.mobile,t.user_name as userName,t.dept_name as deptName,t.userState,t.address from
+        (select suser.mobile,suser.user_name,suser.dept_name,(case when task.task_status = 2 then 0 else 1 end) as userState,
         punch.address
         from s_user suser left join s_service_task task on suser.uuid = task.executor
         left join s_task_punch punch on task.uuid = punch.task_id
         where suser.status = 0 and suser.user_type = 1 and punch.punch_type = 0
         <if test="userName != null">
-            and CHARINDEX(#{suser.user_name},suser.user_name) > 0
+            and CHARINDEX(#{userName},suser.user_name) > 0
         </if>
-         ) t
+         ) t where 1 = 1
         <if test="userState != null">
             and t.userState = #{userState}
         </if>
@@ -54,13 +67,13 @@
             and year(audit.created_time) = #{year}
         </if>
         <if test="troubleType != null">
-            and CHARINDEX(#{task.troubleType},trouble_type)>0
+            and CHARINDEX(#{troubleType},task.trouble_type)>0
         </if>
         <if test="assemblyType != null">
-            and CHARINDEX(#{task.assemblyType},assembly_ype)>0
+            and CHARINDEX(#{assemblyType},task.assembly_ype)>0
         </if>
         <if test="deviceType != null">
-            and CHARINDEX(#{task.deviceType},device_type)>0
+            and CHARINDEX(#{deviceType},task.device_type)>0
         </if>
         ) t
         group by month(t.created_time)

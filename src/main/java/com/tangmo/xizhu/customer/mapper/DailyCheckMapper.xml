@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tangmo.xizhu.customer.dao.DailyCheckDao">
+    <resultMap id="TaskPunchMap" type="com.tangmo.xizhu.customer.entity.DailyCheck">
+        <id column="uuid" property="uuid"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="punch_type" property="punchType"/>
+        <result column="user_id" property="userId"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <insert id="insertDailyCheck" parameterType="com.tangmo.xizhu.customer.entity.DailyCheck">
+        INSERT INTO s_daily_check
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="startDate != null">
+                start_date,
+            </if>
+            <if test="endDate != null">
+                end_date,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="checkType != null">
+                check_type,
+            </if>
+            <if test="duration != null">
+                duration,
+            </if>
+            <if test="option != null">
+                option,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+                created_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="startDate != null">
+                #{startDate},
+            </if>
+            <if test="endDate != null">
+                #{endDate},
+            </if>
+            <if test="longitude != null">
+                #{longitude},
+            </if>
+            <if test="latitude != null">
+                #{latitude},
+            </if>
+            <if test="checkType != null">
+                #{checkType},
+            </if>
+            <if test="duration != null">
+                #{duration},
+            </if>
+            <if test="option != null">
+                #{option},
+            </if>
+            <if test="remark != null">
+                #{remark},
+            </if>
+            <if test="address != null">
+                #{address},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+                getDate(),
+        </trim>
+    </insert>
+
+
+</mapper>

@@ -5,10 +5,7 @@ import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.search.TaskReportSearch;
 import com.tangmo.xizhu.customer.entity.search.UserSearch;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author boge
@@ -33,7 +30,7 @@ public class TaskReportController extends BaseController {
      * @description: 查询任务统计数量
      */
     @PostMapping("/task/month/count")
-    public HttpResult getTaskMonthCount(TaskReportSearch taskReportSearch){
+    public HttpResult getTaskMonthCount(@RequestBody TaskReportSearch taskReportSearch){
         return reportService.getTaskMonthCount(taskReportSearch);
     }
 
@@ -45,7 +42,7 @@ public class TaskReportController extends BaseController {
      * @description: 查询任务统计时间
      */
     @PostMapping("/task/month/time")
-    public HttpResult getTaskMonthTime(TaskReportSearch taskReportSearch){
+    public HttpResult getTaskMonthTime(@RequestBody TaskReportSearch taskReportSearch){
         return reportService.getTaskMonthTime(taskReportSearch);
     }
 
@@ -57,7 +54,7 @@ public class TaskReportController extends BaseController {
      * @description: 查询任务报表
      */
     @PostMapping("/task")
-    public HttpResult getTaskReport(TaskReportSearch taskReportSearch){
+    public HttpResult getTaskReport(@RequestBody TaskReportSearch taskReportSearch){
         return reportService.getTaskReport(taskReportSearch);
     }
     /**
@@ -68,7 +65,7 @@ public class TaskReportController extends BaseController {
      * @description: 查询人员任务报表
      */
     @PostMapping("/user/state")
-    public HttpResult getUserState(UserSearch userSearch){
+    public HttpResult getUserState(@RequestBody UserSearch userSearch){
         return reportService.getUserState(userSearch);
     }
 

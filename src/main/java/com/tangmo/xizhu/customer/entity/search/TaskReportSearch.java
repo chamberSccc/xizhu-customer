@@ -11,10 +11,34 @@ import lombok.Data;
 @Data
 public class TaskReportSearch extends Page {
 
-    private String year;
+    private Integer year;
     private String troubleType;
     private String assemblyType;
     private Byte status; //任务状态
     private String deviceType;
 
+    public void setTroubleType(String troubleType) {
+        if(troubleType.equals("")){
+            this.troubleType = null;
+        }else{
+            this.troubleType = troubleType;
+        }
+
+    }
+
+    public void setAssemblyType(String assemblyType) {
+        if(assemblyType.equals("")){
+            this.assemblyType = null;
+        }else{
+            this.assemblyType = assemblyType;
+        }
+    }
+
+    public void setDeviceType(String deviceType) {
+        if(deviceType.equals("")){
+            this.deviceType = null;
+        }else{
+            this.deviceType = deviceType;
+        }
+    }
 }

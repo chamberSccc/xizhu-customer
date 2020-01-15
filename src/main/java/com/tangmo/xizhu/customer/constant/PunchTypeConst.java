@@ -7,6 +7,6 @@ package com.tangmo.xizhu.customer.constant;
  * @Description: 打卡类型
  **/
 public class PunchTypeConst {
-    public static final byte OnDuty = 0;
-    public static final byte OffDuty = 1;
+    public static final byte OnDuty = 0; //开始打卡
+    public static final byte OffDuty = 1; // 结束打卡
 }

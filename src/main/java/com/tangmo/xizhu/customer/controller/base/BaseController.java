@@ -83,6 +83,9 @@ public class BaseController {
     protected OptRecordService optRecordService;
     @Resource
     protected ReportService reportService;
+    //考勤service
+    @Resource
+    protected DailyCheckService dailyCheckService;
 
     public HttpServletRequest getRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

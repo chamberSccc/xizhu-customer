@@ -57,7 +57,7 @@ public class DeptController extends BaseController {
     @ApiOperation(value = "删除部门",httpMethod = "DELETE",notes = "")
     @DeleteMapping("/{deptId}")
     public HttpResult delDept(@PathVariable String deptId){
-        return null;
+        return deptService.delDeptById(deptId);
     }
 
 
