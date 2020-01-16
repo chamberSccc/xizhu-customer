@@ -94,5 +94,10 @@ public class DailyCheckController extends BaseController {
         return dailyCheckService.addDailyPunch(dailyCheck);
     }
 
-//    @GetMapping("/user/monthCount")
+    @ApiOperation(value = "获取每种考勤数量",httpMethod = "POST",notes = "")
+    @GetMapping("/user/monthCount")
+    public HttpResult getMonthCount(){
+        String userId = getUserId();
+        return dailyCheckService.getMonthCount(userId);
+    }
 }

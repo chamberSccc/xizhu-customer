@@ -86,4 +86,13 @@ public interface UserService {
      */
     HttpResult getCustomerList(UserSearch userSearch);
 
+    /**
+     * @param
+     * @return
+     * @author chen bo
+     * @date 2020/1/16
+     * @description: 获取所有通讯录
+     */
+    HttpResult getAllContact();
+
 }

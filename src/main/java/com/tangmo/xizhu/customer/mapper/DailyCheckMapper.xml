@@ -34,8 +34,8 @@
             <if test="duration != null">
                 duration,
             </if>
-            <if test="option != null">
-                option,
+            <if test="checkOption != null">
+                check_option,
             </if>
             <if test="remark != null">
                 remark,
@@ -71,8 +71,8 @@
             <if test="duration != null">
                 #{duration},
             </if>
-            <if test="option != null">
-                #{option},
+            <if test="checkOption != null">
+                #{checkOption},
             </if>
             <if test="remark != null">
                 #{remark},
@@ -87,5 +87,10 @@
         </trim>
     </insert>
 
+    <select id="selectMonthCount" resultType="java.util.Map">
+        select check_type,count(*) as sumCount from  s_daily_check where user_id = #{userId}
+        and yaer(created_time) = #{year} and month(created_time) = #{month}
+        group by check_type
+    </select>
 
 </mapper>

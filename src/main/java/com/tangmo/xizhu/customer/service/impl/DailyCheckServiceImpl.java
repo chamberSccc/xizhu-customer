@@ -4,6 +4,7 @@ import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.dao.DailyCheckDao;
 import com.tangmo.xizhu.customer.entity.DailyCheck;
 import com.tangmo.xizhu.customer.service.DailyCheckService;
+import com.tangmo.xizhu.customer.util.DateUtil;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +24,14 @@ public class DailyCheckServiceImpl implements DailyCheckService {
     public HttpResult addDailyPunch(DailyCheck dailyCheck) {
         dailyCheck.setUuid(EncryptUtil.get32Uuid());
         dailyCheckDao.insertDailyCheck(dailyCheck);
-        return null;
+        return HttpResult.success();
     }
 
     @Override
-    public HttpResult getMonthCount() {
-        return null;
+    public HttpResult getMonthCount(String userId) {
+        Integer year = DateUtil.getYear();
+        Integer month = DateUtil.getMonth();
+        return HttpResult.success(dailyCheckDao.selectMonthCount(userId,year,month));
     }
 
     @Override

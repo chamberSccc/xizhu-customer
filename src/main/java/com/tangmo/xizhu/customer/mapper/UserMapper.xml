@@ -13,6 +13,13 @@
         <result column="created_by" property="createdBy"/>
         <result column="created_time" property="createdTime"/>
     </resultMap>
+
+    <resultMap id="ContactMap" type="com.tangmo.xizhu.customer.entity.UserContact">
+        <id column="uuid" property="uuid"/>
+        <result column="user_name" property="userName"/>
+        <result column="mobile" property="mobile"/>
+    </resultMap>
+
     <select id="selectPwdByUserId" resultMap="UserMap">
         SELECT uuid,password  from s_user where uuid = #{userId} and status = 0
     </select>
@@ -128,4 +135,8 @@
     <select id="selectCustomer" resultMap="UserMap">
        SELECT uuid,mobile,user_name,user_type,created_time  from s_user where status = 0 and user_type = 0
    </select>
+
+    <select id="selectAllContact" resultMap="ContactMap">
+        SELECT uuid,mobile,user_name  from s_user where status = 0 and user_type !=0
+    </select>
 </mapper>

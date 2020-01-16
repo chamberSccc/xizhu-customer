@@ -94,4 +94,9 @@ public class UserServiceImpl implements UserService {
         page.setResult(list);
         return HttpResult.success(page);
     }
+
+    @Override
+    public HttpResult getAllContact() {
+        return HttpResult.success(userDao.selectAllContact());
+    }
 }

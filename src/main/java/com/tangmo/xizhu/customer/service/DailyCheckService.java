@@ -20,7 +20,7 @@ public interface DailyCheckService {
      * @date 2020/1/15
      * @description: 按月查询类型统计
      */
-    HttpResult getMonthCount();
+    HttpResult getMonthCount(String userId);
 
     /**
      * @param uuid

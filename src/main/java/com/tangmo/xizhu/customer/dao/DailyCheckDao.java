@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.dao;
 
 import com.tangmo.xizhu.customer.entity.DailyCheck;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -31,5 +32,5 @@ public interface DailyCheckDao {
      * @date 2020/1/15
      * @description: 按月查询各类型统计数量
      */
-    List<Map<String,Integer>> selectMonthCount(Integer month);
+    List<Map<String,Integer>> selectMonthCount(@Param("userId") String userId,@Param("year") Integer year,@Param("month") Integer month);
 }
