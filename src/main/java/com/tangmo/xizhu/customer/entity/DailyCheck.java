@@ -22,7 +22,7 @@ public class DailyCheck {
     private String duration;
     private Byte checkType;
     @ApiModelProperty(value="选项",name="startLongitude",example="")
-    private String option;
+    private String checkOption;
     @ApiModelProperty(value="打卡经度",name="startLongitude",example="")
     private String longitude;
     @ApiModelProperty(value="打卡纬度",name="startLatitude",example="")

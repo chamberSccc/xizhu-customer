@@ -3,8 +3,11 @@ package com.tangmo.xizhu.customer.service.impl;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.common.ResultCode;
+import com.tangmo.xizhu.customer.constant.TaskStatusConst;
+import com.tangmo.xizhu.customer.dao.TaskDao;
 import com.tangmo.xizhu.customer.dao.UserDao;
 import com.tangmo.xizhu.customer.entity.PwdInfo;
+import com.tangmo.xizhu.customer.entity.Task;
 import com.tangmo.xizhu.customer.entity.User;
 import com.tangmo.xizhu.customer.entity.search.UserSearch;
 import com.tangmo.xizhu.customer.service.UserService;
@@ -12,7 +15,9 @@ import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author chen bo
@@ -24,6 +29,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
+    @Resource
+    private TaskDao taskDao;
     @Override
     public HttpResult addUser(User user) {
         if(user.getUserType() == null || user.getDeptId() == null || user.getPassword() == null){
@@ -84,6 +91,16 @@ public class UserServiceImpl implements UserService {
         List<User> list = userDao.selectUser(userSearch);
         page.setResult(list);
         return HttpResult.success(page);
+    }
+
+    @Override
+    public HttpResult getUserTask(String userId) {
+        List<Task> list1 = taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING);
+        List<Task> list2 = taskDao.selectByStatusAndUser(userId, TaskStatusConst.COMPLETE);
+        Map<String,Object> map = new HashMap<>();
+        map.put("dealing",list1);
+        map.put("complete",list2);
+        return HttpResult.success(map);
     }
 
     @Override

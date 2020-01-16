@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.entity.PwdInfo;
 import com.tangmo.xizhu.customer.entity.User;
 import com.tangmo.xizhu.customer.entity.search.UserSearch;
@@ -76,6 +77,13 @@ public interface UserService {
      * @description: 获取用户列表
      */
     HttpResult getUserList(UserSearch userSearch);
+
+    /**
+     * 获取用户任务
+     * @param userId
+     * @return
+     */
+    HttpResult getUserTask(String userId);
 
     /**
      * @param userSearch

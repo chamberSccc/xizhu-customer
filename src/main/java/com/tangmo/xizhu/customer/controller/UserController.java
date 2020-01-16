@@ -126,6 +126,16 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 获取用户各种任务
+     * @return
+     */
+    @ApiOperation(value = "获取用户任务",httpMethod = "POST",notes = "")
+    @GetMapping("/{userId}/task")
+    public HttpResult getUserTask(){
+        return null;
+    }
+
+    /**
      * @param userSearch
      * @return
      * @author chen bo
