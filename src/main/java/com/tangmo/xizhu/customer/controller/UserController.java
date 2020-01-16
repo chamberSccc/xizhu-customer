@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 /**
  * @Author chen bo
  * @Date 2019/10/24
@@ -129,10 +131,10 @@ public class UserController extends BaseController {
      * 获取用户各种任务
      * @return
      */
-    @ApiOperation(value = "获取用户任务",httpMethod = "POST",notes = "")
+    @ApiOperation(value = "获取用户任务",httpMethod = "GET",notes = "")
     @GetMapping("/{userId}/task")
-    public HttpResult getUserTask(){
-        return null;
+    public HttpResult getUserTask(@PathVariable String userId){
+        return userService.getUserTask(userId);
     }
 
     /**

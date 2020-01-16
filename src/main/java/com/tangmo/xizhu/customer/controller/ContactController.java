@@ -4,6 +4,7 @@ import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContactController extends BaseController {
 
     @ApiOperation(value = "获取所有通讯录",httpMethod = "GET",notes = "")
-    @PostMapping("/all")
+    @GetMapping("/all")
     public HttpResult getAllContact(){
         return userService.getAllContact();
     }

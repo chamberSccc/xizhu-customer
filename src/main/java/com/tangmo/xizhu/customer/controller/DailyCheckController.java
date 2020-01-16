@@ -94,10 +94,16 @@ public class DailyCheckController extends BaseController {
         return dailyCheckService.addDailyPunch(dailyCheck);
     }
 
-    @ApiOperation(value = "获取每种考勤数量",httpMethod = "POST",notes = "")
+    @ApiOperation(value = "获取每种考勤数量",httpMethod = "GET",notes = "")
     @GetMapping("/user/monthCount")
     public HttpResult getMonthCount(){
         String userId = getUserId();
         return dailyCheckService.getMonthCount(userId);
+    }
+
+    @ApiOperation(value = "获取人员考勤历史记录",httpMethod = "GET",notes = "")
+    @GetMapping("/user/{userId}/history")
+    public HttpResult getUserCheckHistory(@PathVariable String userId){
+        return null;
     }
 }

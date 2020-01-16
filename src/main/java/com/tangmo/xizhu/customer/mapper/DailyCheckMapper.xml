@@ -89,7 +89,7 @@
 
     <select id="selectMonthCount" resultType="java.util.Map">
         select check_type,count(*) as sumCount from  s_daily_check where user_id = #{userId}
-        and yaer(created_time) = #{year} and month(created_time) = #{month}
+        and year(created_time) = #{year} and month(created_time) = #{month}
         group by check_type
     </select>
 
