@@ -127,15 +127,6 @@ public class UserController extends BaseController {
         return userService.getUserList(userSearch);
     }
 
-    /**
-     * 获取用户各种任务
-     * @return
-     */
-    @ApiOperation(value = "获取用户任务",httpMethod = "GET",notes = "")
-    @GetMapping("/{userId}/task")
-    public HttpResult getUserTask(@PathVariable String userId){
-        return userService.getUserTask(userId);
-    }
 
     /**
      * @param userSearch

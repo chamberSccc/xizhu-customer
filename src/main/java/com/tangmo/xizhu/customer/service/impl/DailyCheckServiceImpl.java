@@ -48,7 +48,6 @@ public class DailyCheckServiceImpl implements DailyCheckService {
         Map<String,Object> map = new HashMap<>();
         map.put("user",user);
         map.put("history",list);
-
         return HttpResult.success(map);
     }
 }

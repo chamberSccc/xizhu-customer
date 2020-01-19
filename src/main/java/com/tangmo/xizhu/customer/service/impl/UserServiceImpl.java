@@ -93,15 +93,6 @@ public class UserServiceImpl implements UserService {
         return HttpResult.success(page);
     }
 
-    @Override
-    public HttpResult getUserTask(String userId) {
-        List<Task> list1 = taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING);
-        List<Task> list2 = taskDao.selectByStatusAndUser(userId, TaskStatusConst.COMPLETE);
-        Map<String,Object> map = new HashMap<>();
-        map.put("dealing",list1);
-        map.put("complete",list2);
-        return HttpResult.success(map);
-    }
 
     @Override
     public HttpResult getCustomerList(UserSearch userSearch) {

@@ -79,13 +79,6 @@ public interface UserService {
     HttpResult getUserList(UserSearch userSearch);
 
     /**
-     * 获取用户任务
-     * @param userId
-     * @return
-     */
-    HttpResult getUserTask(String userId);
-
-    /**
      * @param userSearch
      * @return
      * @author chen bo

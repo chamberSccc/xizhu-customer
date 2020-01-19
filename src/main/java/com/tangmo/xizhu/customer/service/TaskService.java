@@ -146,4 +146,10 @@ public interface TaskService {
      * @description: 查询要显示的单子列表
      */
     HttpResult getFormList(String taskId,Byte userType);
+
+    /**
+     * 获取用户任务
+     * @return
+     */
+    HttpResult getTaskClassify();
 }

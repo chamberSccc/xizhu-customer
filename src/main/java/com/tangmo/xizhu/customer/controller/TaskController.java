@@ -367,4 +367,14 @@ public class TaskController extends BaseController {
     public HttpResult<EquipSurvey> geEquipSurvey(@PathVariable String taskId){
         return equipSurveyService.getByTaskId(taskId);
     }
+
+    /**
+     * 获取各种任务分类
+     * @return
+     */
+    @ApiOperation(value = "获取任务分类列表",httpMethod = "GET",notes = "")
+    @GetMapping("/classify")
+    public HttpResult getUserTask(){
+        return taskService.getTaskClassify();
+    }
 }

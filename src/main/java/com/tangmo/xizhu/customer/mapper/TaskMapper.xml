@@ -151,7 +151,7 @@
     </insert>
 
     <select id="selectByStatusAndUser" resultMap="TaskMap">
-        select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail FROM s_service_task task
+        select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail,task_no FROM s_service_task task
         left join s_user suser on task.created_by = suser.uuid
         where task.task_status = #{status}
         <if test="userId != null">

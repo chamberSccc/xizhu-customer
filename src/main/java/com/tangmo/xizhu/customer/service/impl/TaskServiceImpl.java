@@ -17,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author chen bo
@@ -206,5 +208,17 @@ public class TaskServiceImpl implements TaskService {
         ArrayList<TaskForm> list = TaskFormConst.getTaskForm(task.getTaskType(),userType, Byte.valueOf(strArr[0]));
         TaskFormConst.changeState(list,formState);
         return HttpResult.success(list);
+    }
+
+    @Override
+    public HttpResult getTaskClassify() {
+        List<Task> list1 = taskDao.selectByStatusAndUser(null, TaskStatusConst.DEALING);
+        List<Task> list2 = taskDao.selectByStatusAndUser(null, TaskStatusConst.COMPLETE);
+        List<Task> list3 = taskDao.selectByStatusAndUser(null, TaskStatusConst.INITIAL);
+        Map<String,Object> map = new HashMap<>();
+        map.put("dealing",list1);
+        map.put("complete",list2);
+        map.put("initial",list3);
+        return HttpResult.success(map);
     }
 }
