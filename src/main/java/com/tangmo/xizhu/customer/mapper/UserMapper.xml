@@ -38,7 +38,7 @@
     </select>
 
     <select id="selectByUserId" resultMap="UserMap">
-      SELECT uuid,mobile,user_name,user_type,dept_id,dept_name,avatar,created_by
+      SELECT uuid,mobile,user_name,user_type,dept_id,dept_name,avatar,created_by,address
         from s_user where uuid = #{userId}
     </select>
 
@@ -118,7 +118,7 @@
     </update>
 
    <select id="selectUser" resultMap="UserMap">
-       SELECT suser.uuid,suser.mobile,suser.user_name,suser.user_type,dept.dept_name,suer.address,suser.created_time  from s_user suser
+       SELECT suser.uuid,suser.mobile,suser.user_name,suser.user_type,dept.dept_name,suser.address,suser.created_time  from s_user suser
        left join s_department dept on suser.dept_id = dept.uuid
        where suser.status = 0 and suser.user_type != 0
    </select>

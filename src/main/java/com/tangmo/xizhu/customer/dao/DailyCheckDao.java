@@ -33,4 +33,11 @@ public interface DailyCheckDao {
      * @description: 按月查询各类型统计数量
      */
     List<Map<String,Integer>> selectMonthCount(@Param("userId") String userId,@Param("year") Integer year,@Param("month") Integer month);
+
+    /**
+     * 查询人员打卡记录
+     * @param userId
+     * @return
+     */
+    List<DailyCheck> selectByUserId(String userId);
 }

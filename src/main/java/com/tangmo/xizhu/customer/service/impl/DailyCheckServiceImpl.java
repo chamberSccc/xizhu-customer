@@ -2,13 +2,18 @@ package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.dao.DailyCheckDao;
+import com.tangmo.xizhu.customer.dao.UserDao;
 import com.tangmo.xizhu.customer.entity.DailyCheck;
+import com.tangmo.xizhu.customer.entity.User;
 import com.tangmo.xizhu.customer.service.DailyCheckService;
 import com.tangmo.xizhu.customer.util.DateUtil;
 import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author chen bo
@@ -20,6 +25,8 @@ import javax.annotation.Resource;
 public class DailyCheckServiceImpl implements DailyCheckService {
     @Resource
     private DailyCheckDao dailyCheckDao;
+    @Resource
+    private UserDao userDao;
     @Override
     public HttpResult addDailyPunch(DailyCheck dailyCheck) {
         dailyCheck.setUuid(EncryptUtil.get32Uuid());
@@ -36,6 +43,12 @@ public class DailyCheckServiceImpl implements DailyCheckService {
 
     @Override
     public HttpResult getUserPunch(String uuid) {
-        return null;
+        User user = userDao.selectByUserId(uuid);
+        List<DailyCheck> list =dailyCheckDao.selectByUserId(uuid);
+        Map<String,Object> map = new HashMap<>();
+        map.put("user",user);
+        map.put("history",list);
+
+        return HttpResult.success(map);
     }
 }

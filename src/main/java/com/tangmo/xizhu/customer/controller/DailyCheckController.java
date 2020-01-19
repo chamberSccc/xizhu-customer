@@ -104,6 +104,6 @@ public class DailyCheckController extends BaseController {
     @ApiOperation(value = "获取人员考勤历史记录",httpMethod = "GET",notes = "")
     @GetMapping("/user/{userId}/history")
     public HttpResult getUserCheckHistory(@PathVariable String userId){
-        return null;
+        return dailyCheckService.getUserPunch(userId);
     }
 }

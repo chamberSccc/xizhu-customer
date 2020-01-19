@@ -93,4 +93,9 @@
         group by check_type
     </select>
 
+    <select id="selectByUserId" resultMap="TaskPunchMap">
+        SELECT uuid,start_date,end_date,check_type,longitude,latitude from s_daily_check where user_id = #{userId}
+        order by created_time desc
+    </select>
+
 </mapper>
