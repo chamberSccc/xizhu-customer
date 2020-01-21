@@ -32,4 +32,11 @@ public class User {
     private Byte status; //0 正常  1:删除
     private String createdBy;
     private Date createdTime;
+
+    public String getAddress() {
+        if(address == null){
+            return "";
+        }
+        return address;
+    }
 }

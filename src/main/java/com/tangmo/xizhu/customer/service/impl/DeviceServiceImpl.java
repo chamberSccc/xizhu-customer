@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.dao.DeviceDao;
 import com.tangmo.xizhu.customer.entity.DeviceInfo;
@@ -9,6 +10,7 @@ import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author chen bo
@@ -61,5 +63,16 @@ public class DeviceServiceImpl implements DeviceService {
         }
         deviceDao.updateDevice(deviceInfo);
         return HttpResult.success();
+    }
+
+    @Override
+    public HttpResult getDeviceList(Page page) {
+        if(page == null){
+            page = new Page();
+        }
+        page.startPage();
+        List<DeviceInfo> list = deviceDao.selectAllDevice();
+        page.setResult(list);
+        return HttpResult.success(page);
     }
 }

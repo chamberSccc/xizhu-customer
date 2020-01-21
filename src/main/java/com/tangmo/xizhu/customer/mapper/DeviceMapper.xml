@@ -7,6 +7,8 @@
         <result column="device_type" property="deviceType"/>
         <result column="company_name" property="companyName"/>
         <result column="contract_no" property="contractNo"/>
+        <result column="factory_no" property="factoryNo"/>
+        <result column="factory_date" property="factoryDate"/>
         <result column="mobile" property="mobile"/>
         <result column="user_id" property="userId"/>
         <result column="device_pid" property="devicePid"/>
@@ -14,6 +16,10 @@
 
     <select id="selectById" resultMap="DeviceMap">
       SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,device_pid from s_user_device where uuid = #{uuid}
+    </select>
+
+    <select id="selectAllDevice" resultMap="DeviceMap">
+        SELECT uuid,device_name,device_type,company_name,contract_no,mobile,user_id ,factory_no,factory_date from s_user_device
     </select>
 
     <select id="selectByUserId" resultMap="DeviceMap">

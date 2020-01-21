@@ -149,4 +149,17 @@ public interface TaskDao {
      * @description: 通过任务状态和类型查找任务
      */
     List<Task> selectByStatusAndType(@Param("status") Byte status,@Param("taskType") Byte taskType);
+
+    /**
+     * 查询系统需要的taskNo
+     * @return
+     */
+    Integer selectTaskNo();
+
+    /**
+     * 会写TaskNo
+     * @param taskNo
+     * @return
+     */
+    Integer updateTaskNo(Integer taskNo);
 }

@@ -214,4 +214,12 @@
          from s_service_task task left join s_user suser ON
         task.created_by = suser.uuid where task.uuid = #{uuid}
     </select>
+
+    <select id="selectTaskNo" resultType="java.lang.Integer">
+        select task_no from s_sys_param
+    </select>
+
+    <update id="updateTaskNo">
+        update s_sys_param set task_no = #{taskNo}
+    </update>
 </mapper>

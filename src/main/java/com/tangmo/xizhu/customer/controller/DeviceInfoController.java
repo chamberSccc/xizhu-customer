@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.controller;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.DeviceInfo;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
@@ -95,5 +96,16 @@ public class DeviceInfoController extends BaseController {
     @GetMapping("/{pid}/task")
     public HttpResult getDeviceTaskByPid(@PathVariable String pid, TaskSearch taskSearch){
         return taskService.getTaskListByPid(taskSearch,pid);
+    }
+
+    /**
+     * 查询设备列表
+     * @param page
+     * @return
+     */
+    @ApiOperation(value = "通过设备pid查询设备维修历史，分页",httpMethod = "POST",notes = "")
+    @PostMapping("/list")
+    public HttpResult getDeviceList(@RequestBody Page page){
+        return deviceService.getDeviceList(page);
     }
 }

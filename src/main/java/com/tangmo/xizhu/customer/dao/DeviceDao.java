@@ -67,4 +67,10 @@ public interface DeviceDao {
      * @description: 修改设备信息
      */
     Integer updateDevice(DeviceInfo deviceInfo);
+
+    /**
+     * 查询设备列表
+     * @return
+     */
+    List<DeviceInfo>  selectAllDevice();
 }

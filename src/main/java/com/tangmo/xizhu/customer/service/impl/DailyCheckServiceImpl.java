@@ -1,9 +1,11 @@
 package com.tangmo.xizhu.customer.service.impl;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.constant.FormNameConst;
 import com.tangmo.xizhu.customer.dao.DailyCheckDao;
 import com.tangmo.xizhu.customer.dao.UserDao;
 import com.tangmo.xizhu.customer.entity.DailyCheck;
+import com.tangmo.xizhu.customer.entity.TaskForm;
 import com.tangmo.xizhu.customer.entity.User;
 import com.tangmo.xizhu.customer.service.DailyCheckService;
 import com.tangmo.xizhu.customer.util.DateUtil;
@@ -11,6 +13,7 @@ import com.tangmo.xizhu.customer.util.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +41,28 @@ public class DailyCheckServiceImpl implements DailyCheckService {
     public HttpResult getMonthCount(String userId) {
         Integer year = DateUtil.getYear();
         Integer month = DateUtil.getMonth();
-        return HttpResult.success(dailyCheckDao.selectMonthCount(userId,year,month));
+        List<Map<String,Object>> list = dailyCheckDao.selectMonthCount(userId,year,month);
+        ArrayList<String> constList = new ArrayList<String>() {{
+            add("2");
+            add("3");
+            add("4");
+            add("5");
+        }};
+        for (int j = 0; j < list.size(); j++) {
+            Map<String,Object> map = list.get(j);
+            String value = map.get("check_type").toString();
+            if(constList.contains(value)){
+                constList.remove(constList.indexOf(value));
+                continue;
+            }
+        }
+        for (int i = 0; i < constList.size(); i++) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("check_type",Integer.valueOf(constList.get(i)));
+            map.put("sumCount",0);
+            list.add(map);
+        }
+        return HttpResult.success(list);
     }
 
     @Override

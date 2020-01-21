@@ -1,6 +1,7 @@
 package com.tangmo.xizhu.customer.service;
 
 import com.tangmo.xizhu.customer.common.HttpResult;
+import com.tangmo.xizhu.customer.common.Page;
 import com.tangmo.xizhu.customer.entity.DeviceInfo;
 
 /**
@@ -64,4 +65,11 @@ public interface DeviceService {
      * @description: 修改设备信息
      */
     HttpResult changeDevice(DeviceInfo deviceInfo);
+
+    /**
+     * 查询设备列表
+     * @param page
+     * @return
+     */
+    HttpResult getDeviceList(Page page);
 }

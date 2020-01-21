@@ -32,7 +32,7 @@ public interface DailyCheckDao {
      * @date 2020/1/15
      * @description: 按月查询各类型统计数量
      */
-    List<Map<String,Integer>> selectMonthCount(@Param("userId") String userId,@Param("year") Integer year,@Param("month") Integer month);
+    List<Map<String,Object>> selectMonthCount(@Param("userId") String userId,@Param("year") Integer year,@Param("month") Integer month);
 
     /**
      * 查询人员打卡记录

@@ -77,6 +77,13 @@ public class TaskServiceImpl implements TaskService {
         task.setTaskStatus(TaskStatusConst.DEALING);
         task.setTaskType(TaskTypeConst.FAST_SERVICE);
         task.setExecutor(task.getCreatedBy());
+        Integer taskNo = taskDao.selectTaskNo();
+        Integer length = taskNo.toString().length();
+        String temp = "";
+        for (int i = 0; i < 6 - length; i++) {
+            temp = temp + "0";
+        }
+        task.setTaskNo(temp + taskNo.toString());
 //        if(!task.getTaskAssignType().equals(String.valueOf(TaskTypeConst.EQUIPMENT))){
 //
 //        }else{
@@ -91,7 +98,7 @@ public class TaskServiceImpl implements TaskService {
         String requireId = EncryptUtil.get32Uuid();
         require.setUuid(requireId);
         require.setTaskId(uuid);
-        require.setTaskNo("001");
+        require.setTaskNo(temp + taskNo.toString());
         require.setCreatedBy(task.getCreatedBy());
         taskRequireDao.insertTaskRequire(require);
         //添加任务需求单图片附件
@@ -104,6 +111,7 @@ public class TaskServiceImpl implements TaskService {
         formStateService.addFormState(uuid);
         //添加任务流程
         optRecordService.addOptRecord(task,OptConst.CREATE_TASK);
+        taskDao.updateTaskNo(taskNo + 1);
         return HttpResult.success();
     }
 
