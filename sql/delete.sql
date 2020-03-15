@@ -16,3 +16,4 @@ delete from s_mtain_confide
 delete from s_safe_confide
 delete from s_task_attach
 delete from s_task_require
+delete from s_opt_record

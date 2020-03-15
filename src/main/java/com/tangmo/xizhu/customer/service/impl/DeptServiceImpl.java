@@ -28,7 +28,7 @@ public class DeptServiceImpl implements DeptService{
     @Override
     public HttpResult addDept(Department department) {
         department.setUuid(EncryptUtil.get32Uuid());
-        if(department == null || department.getDeptName() == null){
+        if(department == null || department.getDeptName() == null || department.getTaskType() == null){
             return HttpResult.fail(ResultCode.PARAM_ERROR);
         }
         deptDao.insertDept(department);

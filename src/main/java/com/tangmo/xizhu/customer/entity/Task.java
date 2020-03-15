@@ -37,6 +37,7 @@ public class Task {
     private Byte taskType;//任务类型
     @ApiModelProperty(value="设备地址",name="deviceAddress",example="")
     private String deviceAddress;
+    private Byte surveyStatus;//满意度调查状态
 
     private String createdBy;
     private String executor;

@@ -15,4 +15,8 @@ public class TaskTypeConst {
     public static final byte EQUIPMENT = 2;
     // 外购件安装
     public static final byte OUT_EQUIPMENT = 3;
+    // 信息接收
+    public static final byte INFO_REVEIVE = 4;
+    // 快速调查
+    public static final byte SURVEY = 5;
 }

@@ -45,6 +45,8 @@ public class TaskServiceImpl implements TaskService {
     private TaskPunchDao taskPunchDao;
     @Resource
     private FormStateService formStateService;
+    @Resource
+    private DeptDao deptDao;
 
     @Override
     @Transactional
@@ -74,9 +76,9 @@ public class TaskServiceImpl implements TaskService {
         //新增任务
         String uuid = EncryptUtil.get32Uuid();
         task.setUuid(uuid);
-        task.setTaskStatus(TaskStatusConst.DEALING);
+        task.setTaskStatus(TaskStatusConst.INITIAL);
         task.setTaskType(TaskTypeConst.FAST_SERVICE);
-        task.setExecutor(task.getCreatedBy());
+//        task.setExecutor(task.getCreatedBy());
         Integer taskNo = taskDao.selectTaskNo();
         Integer length = taskNo.toString().length();
         String temp = "";
@@ -139,9 +141,16 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public HttpResult getUndoTaskList(String userId, TaskSearch taskSearch) {
+        Department department = deptDao.selectByUserId(userId);
         Page page = taskSearch;
         page.startPage();
-        List<Task> list = taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING);
+        List<Task> list = new ArrayList<>();
+        if(department.getTaskType().equals(TaskTypeConst.SURVEY)){
+            list = taskDao.selectSurveyTask(userId,TaskSurveyConst.DEALING);
+        }else{
+            list = taskDao.selectByStatusAndUser(userId, TaskStatusConst.DEALING);
+        }
+
         page.setResult(list);
         return HttpResult.success(page);
     }
@@ -150,7 +159,7 @@ public class TaskServiceImpl implements TaskService {
     public HttpResult getDoneTaskList(String userId, TaskSearch taskSearch) {
         Page page = taskSearch;
         page.startPage();
-        List<Task> list = taskDao.selectByStatusAndUser(userId, TaskStatusConst.COMPLETE);
+        List<Task> list = taskDao.selectDoneTask(userId, TaskStatusConst.COMPLETE);
         page.setResult(list);
         return HttpResult.success(page);
     }
@@ -166,12 +175,23 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public HttpResult getUndoTaskCount(String userId) {
-        return HttpResult.success(taskDao.selectUndoCountByUser(userId));
+        Department department = deptDao.selectByUserId(userId);
+        if(department.getTaskType().equals(TaskTypeConst.SURVEY)){
+            return HttpResult.success(taskDao.selectUnSurveyByUser(userId));
+        }else{
+            return HttpResult.success(taskDao.selectUndoCountByUser(userId));
+        }
     }
 
     @Override
     public HttpResult getUnauditCount(String deptId) {
-        return HttpResult.success(taskDao.selectUnauditCountByDept(deptId));
+        Department department = deptDao.selectById(deptId);
+        if(department.getTaskType().equals(TaskTypeConst.SURVEY)){
+            return HttpResult.success(taskDao.selectUnauditSurveyCount());
+        }else{
+            return HttpResult.success(taskDao.selectUnauditCountByDept(deptId));
+        }
+
     }
 
     @Override
@@ -187,16 +207,23 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public HttpResult commitTask(String taskId,String userId) {
         Task task = taskDao.selectById(taskId);
+        Department department = deptDao.selectByUserId(userId);
         //判断是否打卡
-        if(!task.getTaskType().equals(TaskTypeConst.FAST_SERVICE)){
-            TaskPunch taskPunch = taskPunchDao.selectByUserAndType(taskId,userId,
-                    PunchTypeConst.OffDuty,task.getTaskType());
-            if(taskPunch == null){
-                return HttpResult.fail(ResultCode.END_PUNCH_MISS);
+        if(task.getTaskType().equals(TaskTypeConst.FIELD_SERVICE) || task.getTaskType().equals(TaskTypeConst.EQUIPMENT)){
+            if(!department.getTaskType().equals(TaskTypeConst.SURVEY)){
+                TaskPunch taskPunch = taskPunchDao.selectByUserAndType(taskId,userId,
+                        PunchTypeConst.OffDuty,task.getTaskType());
+                if(taskPunch == null){
+                    return HttpResult.fail(ResultCode.END_PUNCH_MISS);
+                }
             }
         }
         //修改任务状态为待审核
-        taskDao.updateStatus(taskId,TaskStatusConst.INITIAL);
+        if(department.getTaskType().equals(TaskTypeConst.SURVEY)){
+            taskDao.updateSurveyStatus(taskId,TaskSurveyConst.AUDIT_WAIT);
+        }else{
+            taskDao.updateStatus(taskId,TaskStatusConst.INITIAL);
+        }
         //添加审批流程
         auditTaskService.addAuditTask(taskId,userId,
                 task.getTaskType(), AuditOperateConst.TASK_COMPLETE);
@@ -205,15 +232,23 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public HttpResult getFormList(String taskId, Byte userType) {
+    public HttpResult getFormList(String userId,String taskId, Byte userType) {
         Task task = taskDao.selectById(taskId);
+        Byte taskType = null;
+        if(userType.equals(UserTypeConst.CUSTOMER)){
+            taskType = task.getTaskType();
+        }else{
+            Department department = deptDao.selectByUserId(userId);
+            taskType = department.getTaskType();
+        }
         String trouble = task.getTroubleType();
         if(trouble.substring(0,1).equals(",")){
             trouble = trouble.substring(1,trouble.length());
         }
         String [] strArr= trouble.split(",");
         FormState formState = (FormState) formStateService.getTaskState(taskId).getData();
-        ArrayList<TaskForm> list = TaskFormConst.getTaskForm(task.getTaskType(),userType, Byte.valueOf(strArr[0]));
+
+        ArrayList<TaskForm> list = TaskFormConst.getTaskForm(taskType,userType, Byte.valueOf(strArr[0]));
         TaskFormConst.changeState(list,formState);
         return HttpResult.success(list);
     }

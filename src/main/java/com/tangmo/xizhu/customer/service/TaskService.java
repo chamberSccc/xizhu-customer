@@ -145,7 +145,7 @@ public interface TaskService {
      * @date 2019/11/4
      * @description: 查询要显示的单子列表
      */
-    HttpResult getFormList(String taskId,Byte userType);
+    HttpResult getFormList(String userId,String taskId,Byte userType);
 
     /**
      * 获取用户任务

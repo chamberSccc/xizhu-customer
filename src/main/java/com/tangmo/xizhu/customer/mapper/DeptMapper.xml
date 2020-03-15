@@ -10,7 +10,7 @@
     </resultMap>
 
     <select id="selectById" resultMap="DeptMap">
-      SELECT uuid,dept_name  from s_department where uuid = #{deptId} and status = 0
+      SELECT uuid,dept_name,task_type  from s_department where uuid = #{deptId} and status = 0
     </select>
 
     <select id="selectByUserId" resultMap="DeptMap">

@@ -36,6 +36,13 @@ public interface TaskDao {
     void updateTask(Task task);
 
     /**
+     * 修改任务是否满意度调查
+     * @param taskId
+     * @param status
+     */
+    void updateSurveyStatus(@Param("taskId") String taskId,@Param("status") Byte status);
+
+    /**
      * @param taskId 任务id
      * @param userId 执行人
      * @param status 要修改的任务状态
@@ -78,6 +85,14 @@ public interface TaskDao {
     List<Task> selectByStatusAndUser(@Param("userId") String userId, @Param("status") Byte status);
 
     /**
+     * 查询已完成任务列表
+     * @param userId
+     * @param status
+     * @return
+     */
+    List<Task> selectDoneTask(@Param("userId") String userId, @Param("status") Byte status);
+
+    /**
      * @param userId
      * @return
      * @author chen bo
@@ -103,6 +118,19 @@ public interface TaskDao {
      * @description: 查询未完成任务数量
      */
     Integer selectUndoCountByUser(String userId);
+
+    /**
+     * 查询未完成满意度调查数量
+     * @param userId
+     * @return
+     */
+    Integer selectUnSurveyByUser(String userId);
+
+    /**
+     * 查询等待审核的满意度调查数量
+     * @return
+     */
+    Integer selectUnauditSurveyCount();
 
     /**
      * @param deptId
@@ -149,6 +177,14 @@ public interface TaskDao {
      * @description: 通过任务状态和类型查找任务
      */
     List<Task> selectByStatusAndType(@Param("status") Byte status,@Param("taskType") Byte taskType);
+
+    /**
+     * 查询满意度调查相关任务
+     * @param userId
+     * @param status
+     * @return
+     */
+    List<Task> selectSurveyTask(@Param("userId") String userId,@Param("status") Byte status);
 
     /**
      * 查询系统需要的taskNo

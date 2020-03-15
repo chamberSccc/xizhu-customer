@@ -23,7 +23,9 @@ public enum ResultCode {
     PID_EXIST("1012","设备pid已存在"),
     NOT_CHECK("1013","未填写设备验收表"),
     PID_ERROR("1014","设备标识码错误"),
-    END_PUNCH_MISS("1015","请先结束打卡");
+    END_PUNCH_MISS("1015","请先结束打卡"),
+    FIELD_TYPE_ERROR("1016","如需进驻现场,请填写现场I服务申请单"),
+    FAST_TYPE_ERROR("1017","任务不可退回快速响应,请标记完成,提交至满意度调查");
 
     private String errCode;
     private String errMsg;

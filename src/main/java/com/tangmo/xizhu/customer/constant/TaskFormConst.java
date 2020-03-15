@@ -157,6 +157,11 @@ public class TaskFormConst {
                 ArrayList<TaskForm> outList = adminOutEquipForm();
                 return outList;
             }
+            // 售后调查单子
+            if(taskType.equals(TaskTypeConst.SURVEY)){
+                ArrayList<TaskForm> outList = adminSurveyForm();
+                return outList;
+            }
         }
         if(userType.equals(UserTypeConst.SERVICE)){
             //快速服务单子
@@ -175,6 +180,11 @@ public class TaskFormConst {
             //外购件安装单子
             if(taskType.equals(TaskTypeConst.OUT_EQUIPMENT)){
                 ArrayList<TaskForm> outList = userOutEquipForm();
+                return outList;
+            }
+            //满意度调查单子
+            if(taskType.equals(TaskTypeConst.SURVEY)){
+                ArrayList<TaskForm> outList = userSurveyForm();
                 return outList;
             }
         }
@@ -215,7 +225,7 @@ public class TaskFormConst {
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
             add(new TaskForm(FormNameConst.REQUIRE,false,true));
             add(new TaskForm(FormNameConst.FAST_FB,false));
-            add(new TaskForm(FormNameConst.FAST_SURVEY,true));
+//            add(new TaskForm(FormNameConst.FAST_SURVEY,true));
         }};
         return list;
     }
@@ -230,9 +240,9 @@ public class TaskFormConst {
         ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
             add(new TaskForm(FormNameConst.REQUIRE,false,true));
             add(new TaskForm(FormNameConst.FIELD_APPLY,true));
-            add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
+//            add(new TaskForm(FormNameConst.FIELD_ASSIGN,true));
             add(new TaskForm(FormNameConst.FIELD_FB,true));
-            add(new TaskForm(FormNameConst.FIELD_SURVEY,true));
+//            add(new TaskForm(FormNameConst.FIELD_SURVEY,true));
         }};
         return list;
     }
@@ -260,7 +270,7 @@ public class TaskFormConst {
             list.add(new TaskForm(FormNameConst.MACH_RECORD,true));
         }
         list.add(new TaskForm(FormNameConst.MTAIN_CONFIDE,true));
-        list.add(new TaskForm(FormNameConst.EQUIP_SURVEY,true));
+//        list.add(new TaskForm(FormNameConst.EQUIP_SURVEY,true));
         return list;
     }
 
@@ -277,6 +287,19 @@ public class TaskFormConst {
             add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
             add(new TaskForm(FormNameConst.EQUIP_AUDIT,true));
             add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
+        }};
+        return list;
+    }
+
+    /**
+     * 审核人员可以看到的快速调查单子
+     * @return
+     */
+    public static ArrayList<TaskForm> adminSurveyForm(){
+        ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.REQUIRE,true,true));
+            add(new TaskForm(FormNameConst.FAST_SURVEY,true));
+            add(new TaskForm(FormNameConst.FIELD_SURVEY,true));
         }};
         return list;
     }
@@ -351,6 +374,19 @@ public class TaskFormConst {
             add(new TaskForm(FormNameConst.EQUIP_APPLY,true));
             add(new TaskForm(FormNameConst.EQUIP_AUDIT,true));
             add(new TaskForm(FormNameConst.EQUIP_CHECK,true));
+        }};
+        return list;
+    }
+
+    /**
+     * 服务人员可以看到的满意度调查
+     * @return
+     */
+    public static ArrayList<TaskForm> userSurveyForm(){
+        ArrayList<TaskForm> list = new ArrayList<TaskForm>() {{
+            add(new TaskForm(FormNameConst.REQUIRE,true,true));
+            add(new TaskForm(FormNameConst.FAST_SURVEY,true));
+            add(new TaskForm(FormNameConst.FIELD_SURVEY,true));
         }};
         return list;
     }

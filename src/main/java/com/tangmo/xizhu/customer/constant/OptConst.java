@@ -22,4 +22,5 @@ public class OptConst {
     public static final String EQUIP_AUDIT = "授权外购件安装";
     public static final String EQUIP_CHECK = "完成外购件验收";
     public static final String EQUIP_SURVEY = "完成满意度调查";
+    public static final String SURVEY ="指派满意度调查";
 }

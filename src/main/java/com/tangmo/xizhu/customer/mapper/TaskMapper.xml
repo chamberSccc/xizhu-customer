@@ -91,7 +91,7 @@
             <if test="deviceAddress != null">
                 device_address,
             </if>
-                created_time,
+                survey_status,created_time,
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -146,7 +146,7 @@
             <if test="deviceAddress != null">
                 #{deviceAddress},
             </if>
-                getDate()
+            0,getDate()
         </trim>
     </insert>
 
@@ -159,6 +159,30 @@
         </if>
         order by task.created_time desc
     </select>
+
+
+    <select id="selectSurveyTask" resultMap="TaskMap">
+        select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail,task_no FROM s_service_task task
+        left join s_user suser on task.created_by = suser.uuid
+        where task.survey_status = #{status} and task.task_status = 2
+        <if test="userId != null">
+            and task.executor = #{userId}
+        </if>
+        order by task.created_time desc
+    </select>
+
+    <select id="selectDoneTask" resultMap="TaskMap">
+        select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail,task_no FROM s_service_task task
+        left join s_user suser on task.created_by = suser.uuid
+        where task.task_status = #{status} AND
+        task.uuid in (select task_id from s_audit_task where created_by = #{userId} and operation = 2)
+        order by task.created_time desc
+    </select>
+
+    <update id="updateSurveyStatus">
+        update s_service_task set survey_status = #{status} where uuid = #{taskId}
+    </update>
+
 
     <select id="selectLaunchedTask" resultMap="TaskMap">
         select task.uuid,task.created_time,task.company_name,task.device_type,suser.user_name,task.detail FROM s_service_task task
@@ -203,8 +227,17 @@
         select count(*) from s_service_task where executor = #{userId} and task_status = 1
     </select>
 
+    <select id="selectUnSurveyByUser" resultType="java.lang.Integer">
+        select count(*) from s_service_task where executor = #{userId} and survey_status = 2
+    </select>
+
     <select id="selectUnauditCountByDept" resultType="java.lang.Integer">
-        select count(*) from s_service_task where  task_status = 0 and task_type = (select task_type from s_department where uuid = #{deptId})
+        select count(*) from s_service_task where  task_status = 0 and
+        task_type = (select task_type from s_department where uuid = #{deptId})
+    </select>
+
+    <select id="selectUnauditSurveyCount" resultType="java.lang.Integer">
+        select count(*) from s_service_task where  task_status = 2 and survey_status = 1
     </select>
 
     <select id="selectById" resultMap="TaskMap">

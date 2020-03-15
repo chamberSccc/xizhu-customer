@@ -3,6 +3,7 @@ package com.tangmo.xizhu.customer.controller;
 import com.tangmo.xizhu.customer.common.HttpResult;
 import com.tangmo.xizhu.customer.common.ResultCode;
 import com.tangmo.xizhu.customer.constant.PunchTypeConst;
+import com.tangmo.xizhu.customer.constant.TaskTypeConst;
 import com.tangmo.xizhu.customer.controller.base.BaseController;
 import com.tangmo.xizhu.customer.entity.*;
 import com.tangmo.xizhu.customer.entity.search.TaskSearch;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +85,7 @@ public class TaskController extends BaseController {
      */
     @GetMapping("/{taskId}/formList")
     public HttpResult getTaskFormFlow(@PathVariable String taskId){
-        return taskService.getFormList(taskId,getUserType());
+        return taskService.getFormList(getUserId(),taskId,getUserType());
     }
 
     /**

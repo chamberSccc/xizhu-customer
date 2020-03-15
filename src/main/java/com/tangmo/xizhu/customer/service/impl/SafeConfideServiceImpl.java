@@ -50,7 +50,7 @@ public class SafeConfideServiceImpl implements SafeConfideService {
         //操作记录
         optRecordService.addOptRecord(safeConfide.getTaskId(),safeConfide.getCreatedBy(), OptConst.SAFE_CONFIDE);
         //任务流程
-        formStateService.changeFormState(safeConfide.getTaskId(),"form09");
+        formStateService.changeFormState(safeConfide.getTaskId(),"form08");
         return HttpResult.success();
     }
 
