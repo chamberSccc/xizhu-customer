@@ -22,7 +22,7 @@
 	<properties>
 		<java.version>8</java.version>
 		<shiro>1.3.2</shiro>
-		<commons-io>2.5</commons-io>
+		<commons-io>2.7</commons-io>
 		<mybatis-generator>1.3.2</mybatis-generator>
 	</properties>
 
